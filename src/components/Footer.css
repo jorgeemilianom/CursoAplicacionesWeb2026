@@ -1,0 +1,77 @@
+.footer {
+  background: var(--color-dark);
+  color: #94a3b8;
+  padding: 60px 20px 0;
+}
+
+.footer__container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid #1e293b;
+}
+
+/* Marca */
+.footer__logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #fff;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.footer__logo span {
+  color: var(--color-primary);
+}
+
+.footer__brand p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #64748b;
+}
+
+/* Links */
+.footer__links h4 {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+.footer__links ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer__links a {
+  font-size: 0.9rem;
+  color: #64748b;
+  transition: color 0.2s;
+}
+
+.footer__links a:hover {
+  color: var(--color-primary);
+}
+
+/* Pie */
+.footer__bottom {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 20px 0;
+  font-size: 0.85rem;
+  text-align: center;
+  color: #475569;
+}
+
+@media (max-width: 768px) {
+  .footer__container {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}

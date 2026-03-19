@@ -1,0 +1,216 @@
+.hola-mundo {
+  min-height: calc(100vh - 64px);
+  background: var(--color-light);
+  padding: 48px 20px 80px;
+}
+
+.hola-mundo__container {
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+/* Link volver */
+.hola-mundo__volver {
+  display: inline-block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-gray);
+  margin-bottom: 32px;
+  transition: color 0.2s;
+}
+
+.hola-mundo__volver:hover {
+  color: var(--color-primary);
+}
+
+/* Header */
+.hola-mundo__header {
+  margin-bottom: 32px;
+}
+
+.hola-mundo__modulo {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+  padding: 3px 10px;
+  border-radius: 100px;
+  margin-bottom: 12px;
+}
+
+.hola-mundo__header h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-dark);
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.hola-mundo__header p {
+  color: var(--color-gray);
+  line-height: 1.6;
+}
+
+/* App interactiva */
+.hola-mundo__app {
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-light);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  margin-bottom: 28px;
+  box-shadow: var(--shadow-sm);
+}
+
+.hola-mundo__form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.hola-mundo__form label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-dark-2);
+}
+
+.hola-mundo__form input {
+  padding: 11px 14px;
+  border: 2px solid var(--color-gray-light);
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--color-dark-2);
+  outline: none;
+  transition: border-color 0.2s;
+  background: var(--color-white);
+}
+
+.hola-mundo__form input:focus {
+  border-color: var(--color-primary);
+}
+
+.hola-mundo__form input::placeholder {
+  color: #c4c9d4;
+}
+
+.hola-mundo__botones {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-saludar {
+  flex: 1;
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.btn-saludar:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-1px);
+}
+
+.btn-limpiar {
+  background: var(--color-light);
+  color: var(--color-gray);
+  border: 1px solid var(--color-gray-light);
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.btn-limpiar:hover {
+  background: var(--color-gray-light);
+}
+
+/* Saludo */
+.hola-mundo__saludo {
+  background: linear-gradient(135deg, #eef2ff, #f0fdf4);
+  border: 1px solid #a5b4fc;
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  line-height: 1.5;
+  animation: aparecer 0.3s ease;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Sección conceptos */
+.hola-mundo__conceptos {
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-light);
+  border-radius: var(--radius-md);
+  padding: 28px;
+}
+
+.hola-mundo__conceptos h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-dark-2);
+  margin-bottom: 16px;
+}
+
+.hola-mundo__conceptos ul {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hola-mundo__conceptos li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.9rem;
+}
+
+.hola-mundo__conceptos code {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.concepto-texto {
+  background: var(--color-light);
+  color: var(--color-dark-2);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+  border: 1px solid var(--color-gray-light);
+}
+
+.hola-mundo__conceptos li span:last-child {
+  color: var(--color-gray);
+  padding-top: 2px;
+}

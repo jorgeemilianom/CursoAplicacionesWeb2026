@@ -1,0 +1,196 @@
+@import '../apps-shared.css';
+
+.memorama {
+  min-height: calc(100vh - 64px);
+  background: var(--color-light);
+  padding: 48px 20px 80px;
+}
+
+.memorama__container {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+/* ── Stats ── */
+.memorama__stats {
+  display: flex;
+  gap: 0;
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-light);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.memorama__stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 12px;
+  gap: 2px;
+}
+
+.memorama__stat:not(:last-child) {
+  border-right: 1px solid var(--color-gray-light);
+}
+
+.memorama__stat strong {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--color-dark);
+  line-height: 1;
+}
+
+.memorama__stat span {
+  font-size: 0.75rem;
+  color: var(--color-gray);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ── Pantalla de victoria ── */
+.memorama__victoria {
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  border-radius: var(--radius-lg);
+  padding: 40px 24px;
+  text-align: center;
+  margin-bottom: 20px;
+  animation: aparecer 0.4s ease;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.memorama__victoria-emoji {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.memorama__victoria h2 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+/* ── Tablero ── */
+.memorama__grilla {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.memorama__grilla--opaca {
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+/* ── Carta con flip 3D ── */
+.carta {
+  aspect-ratio: 1;
+  perspective: 600px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  border-radius: var(--radius-md);
+}
+
+.carta:disabled {
+  cursor: default;
+}
+
+.carta__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.45s ease;
+  border-radius: var(--radius-md);
+}
+
+/* Al voltear, rota 180° sobre el eje Y */
+.carta--volteada .carta__inner {
+  transform: rotateY(180deg);
+}
+
+.carta__frente,
+.carta__dorso {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Esconde la cara trasera mientras no está volteada */
+  backface-visibility: hidden;
+}
+
+/* Cara de atrás: degradado azul con "?" */
+.carta__frente {
+  background: linear-gradient(135deg, #4f46e5, #6d28d9);
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 1.5rem;
+  font-weight: 900;
+  transition: background 0.2s;
+}
+
+.carta:not(:disabled):not(.carta--volteada):hover .carta__frente {
+  background: linear-gradient(135deg, #4338ca, #5b21b6);
+}
+
+/* Cara del frente: emoji */
+.carta__dorso {
+  background: var(--color-white);
+  border: 2px solid var(--color-gray-light);
+  font-size: 2rem;
+  /* La cara del frente empieza rotada 180° para que al voltear quede bien */
+  transform: rotateY(180deg);
+}
+
+/* Carta encontrada: se pone verde */
+.carta--encontrada .carta__frente {
+  background: linear-gradient(135deg, #059669, #10b981);
+}
+
+.carta--encontrada .carta__dorso {
+  background: #f0fdf4;
+  border-color: #6ee7b7;
+}
+
+/* ── Botones ── */
+.memorama__btn-reiniciar {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background: var(--color-white);
+  color: var(--color-gray);
+  border: 1px solid var(--color-gray-light);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+  margin-bottom: 0;
+}
+
+.memorama__btn-reiniciar:hover {
+  background: var(--color-gray-light);
+  color: var(--color-dark-2);
+}
+
+.memorama__btn-reiniciar--victoria {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+  font-weight: 600;
+}
+
+.memorama__btn-reiniciar--victoria:hover {
+  background: rgba(255, 255, 255, 0.3);
+  color: #fff;
+}

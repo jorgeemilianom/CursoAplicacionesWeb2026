@@ -1,0 +1,124 @@
+/* =============================================
+   Estilos compartidos por todas las apps de práctica
+   Importar desde cada app: @import '../apps-shared.css';
+   ============================================= */
+
+/* ── Wrapper principal ── */
+.app-wrapper {
+  min-height: calc(100vh - 64px);
+  background: var(--color-light);
+  padding: 48px 20px 80px;
+}
+
+/* ── Link "volver" ── */
+.app-volver {
+  display: inline-block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-gray);
+  margin-bottom: 32px;
+  transition: color 0.2s;
+}
+
+.app-volver:hover {
+  color: var(--color-primary);
+}
+
+/* ── Header de la app ── */
+.app-header {
+  margin-bottom: 32px;
+}
+
+.app-modulo {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+  padding: 3px 10px;
+  border-radius: 100px;
+  margin-bottom: 10px;
+}
+
+.app-header h1 {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: var(--color-dark);
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.app-header p {
+  color: var(--color-gray);
+  line-height: 1.6;
+}
+
+.app-header code {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.88em;
+}
+
+/* ── Sección de conceptos (pie de cada app) ── */
+.app-conceptos {
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-light);
+  border-radius: var(--radius-md);
+  padding: 28px;
+  margin-top: 32px;
+}
+
+.app-conceptos h2 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-dark-2);
+  margin-bottom: 16px;
+}
+
+.app-conceptos ul {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.app-conceptos li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.88rem;
+}
+
+.app-conceptos code {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.82rem;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.tag-neutro {
+  background: var(--color-light);
+  color: var(--color-dark-2);
+  border: 1px solid var(--color-gray-light);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.app-conceptos li span:last-child {
+  color: var(--color-gray);
+  padding-top: 2px;
+  line-height: 1.5;
+}
