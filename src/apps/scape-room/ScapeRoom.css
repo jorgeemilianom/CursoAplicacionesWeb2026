@@ -1,0 +1,391 @@
+@import '../apps-shared.css';
+
+.scape-room__container {
+  max-width: min(1320px, 100%);
+  margin: 0 auto;
+}
+
+.scape-room__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.9fr) minmax(280px, 360px);
+  gap: 24px;
+  align-items: start;
+}
+
+.scape-room__board,
+.scape-room__panel {
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.scape-room__board {
+  padding: 18px;
+}
+
+.scape-room__image-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: calc(var(--radius-md) - 4px);
+  background: #0f172a;
+}
+
+.scape-room__room-image,
+.scape-room__overlay-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.scape-room__hotspot,
+.scape-room__collect {
+  position: absolute;
+  border: 0;
+  background: transparent;
+  border-radius: 16px;
+  cursor: default;
+  transition: box-shadow 0.2s ease;
+}
+
+.scape-room__hotspot:focus-visible,
+.scape-room__collect:focus-visible {
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.7);
+}
+
+.scape-room__hotspot--desk {
+  top: 38%;
+  left: 41%;
+  width: 24%;
+  height: 18%;
+}
+
+.scape-room__hotspot--fridge {
+  top: 6%;
+  left: 58%;
+  width: 13%;
+  height: 43%;
+}
+
+.scape-room__hotspot--briefcase {
+  top: 58%;
+  left: 33%;
+  width: 8%;
+  height: 20%;
+  border-radius: 999px;
+}
+
+.scape-room__hotspot--safe {
+  top: 18%;
+  left: 3%;
+  width: 13%;
+  height: 29%;
+}
+
+.scape-room__hotspot--exit-door {
+  top: 10%;
+  left: 62%;
+  width: 22%;
+  height: 62%;
+}
+
+.scape-room__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.78);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+}
+
+.scape-room__overlay-card {
+  position: relative;
+  width: min(70%, 760px);
+  border-radius: 20px;
+  overflow: hidden;
+  background: #111827;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.45);
+}
+
+.scape-room__level-badge {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.78);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.scape-room__overlay-card--safe {
+  width: min(76%, 820px);
+}
+
+.scape-room__close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 3;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #0f172a;
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+.scape-room__collect--handle {
+  top: 48%;
+  left: 39%;
+  width: 22%;
+  height: 26%;
+}
+
+.scape-room__collect--key {
+  top: 44%;
+  left: 40%;
+  width: 24%;
+  height: 24%;
+}
+
+.scape-room__collect--knob {
+  top: 23%;
+  left: 22%;
+  width: 30%;
+  height: 38%;
+}
+
+.scape-room__safe-ui {
+  position: absolute;
+  inset: 0;
+}
+
+.scape-room__safe-display {
+  position: absolute;
+  top: 12%;
+  left: 9%;
+  min-width: 78px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.88);
+  color: #f8fafc;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-align: center;
+}
+
+.scape-room__safe-feedback {
+  position: absolute;
+  top: 22%;
+  left: 9%;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(127, 29, 29, 0.92);
+  color: #fee2e2;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.scape-room__digit,
+.scape-room__reset {
+  position: absolute;
+  border: 0;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.scape-room__digit {
+  width: 38px;
+  height: 38px;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  background: rgba(248, 250, 252, 0.92);
+  color: #111827;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.22);
+}
+
+.scape-room__digit:hover,
+.scape-room__digit:focus-visible {
+  background: #4f46e5;
+  color: #fff;
+}
+
+.scape-room__reset {
+  right: 8%;
+  bottom: 10%;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.92);
+  color: #fff;
+}
+
+.scape-room__sidebar {
+  display: grid;
+  gap: 18px;
+}
+
+.scape-room__panel {
+  padding: 22px;
+}
+
+.scape-room__panel h2 {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--color-dark);
+  margin-bottom: 10px;
+}
+
+.scape-room__panel p {
+  color: var(--color-gray);
+  line-height: 1.7;
+}
+
+.scape-room__restart-button {
+  width: 100%;
+  border: 0;
+  border-radius: 14px;
+  padding: 14px 18px;
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-size: 0.96rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.scape-room__restart-button:hover,
+.scape-room__restart-button:focus-visible {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+}
+
+.scape-room__inventory {
+  display: grid;
+  gap: 12px;
+}
+
+.scape-room__inventory-item {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  border-radius: 16px;
+  border: 1px solid var(--color-gray-light);
+  background: var(--color-light);
+  color: var(--color-dark);
+  text-align: left;
+}
+
+.scape-room__inventory-item img {
+  width: 72px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid var(--color-gray-light);
+  background: #fff;
+}
+
+.scape-room__inventory-item.is-empty {
+  grid-template-columns: 1fr;
+  justify-items: center;
+  padding: 18px;
+  color: var(--color-gray);
+}
+
+.scape-room__inventory-item.is-active {
+  cursor: pointer;
+}
+
+.scape-room__inventory-item.is-selected {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+.scape-room__progress {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.scape-room__progress span {
+  border-radius: 999px;
+  padding: 6px 10px;
+  background: var(--color-light);
+  color: var(--color-gray);
+  border: 1px solid var(--color-gray-light);
+  font-size: 0.85rem;
+}
+
+.scape-room__progress .is-done {
+  background: #ecfdf5;
+  color: #047857;
+  border-color: #a7f3d0;
+}
+
+.scape-room__victory {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.78);
+  color: #fff;
+}
+
+.scape-room__victory h2 {
+  font-size: 1.2rem;
+  margin-bottom: 6px;
+}
+
+.scape-room__victory p {
+  color: rgba(255, 255, 255, 0.86);
+  line-height: 1.6;
+}
+
+@media (max-width: 1080px) {
+  .scape-room__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .scape-room__overlay-card,
+  .scape-room__overlay-card--safe {
+    width: min(92%, 760px);
+  }
+}
+
+@media (max-width: 720px) {
+  .scape-room__board {
+    padding: 12px;
+  }
+
+  .scape-room__overlay {
+    padding: 16px;
+  }
+
+  .scape-room__digit {
+    width: 32px;
+    height: 32px;
+    font-size: 0.82rem;
+  }
+
+  .scape-room__inventory-item {
+    grid-template-columns: 60px 1fr;
+  }
+
+  .scape-room__inventory-item img {
+    width: 60px;
+    height: 48px;
+  }
+}

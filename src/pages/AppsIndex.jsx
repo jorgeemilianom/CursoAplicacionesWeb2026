@@ -30,6 +30,13 @@ const apps = [
     etiquetas: ['CRUD', 'localStorage', 'useEffect', 'Filtros'],
     modulo: '05',
   },
+  {
+    id: 'scape-room',
+    titulo: 'Scape-Room',
+    descripcion: 'Nueva miniapp del curso. Punto de partida para construir un juego por etapas en React.',
+    etiquetas: ['React', 'Juego', 'InteracciÃ³n'],
+    modulo: '05',
+  },
 ]
 
 function AppsIndex() {

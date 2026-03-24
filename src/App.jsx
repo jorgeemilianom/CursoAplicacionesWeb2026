@@ -6,6 +6,7 @@ import AppsIndex from './pages/AppsIndex.jsx'
 import HolaMundo from './apps/hola-mundo/HolaMundo.jsx'
 import Memorama from './apps/memorama/Memorama.jsx'
 import GestorTareas from './apps/gestor-tareas/GestorTareas.jsx'
+import ScapeRoom from './apps/scape-room/ScapeRoom.jsx'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/apps/hola-mundo" element={<HolaMundo />} />
           <Route path="/apps/memorama" element={<Memorama />} />
           <Route path="/apps/gestor-tareas" element={<GestorTareas />} />
+          <Route path="/apps/scape-room" element={<ScapeRoom />} />
         </Routes>
       </main>
       <Footer />
