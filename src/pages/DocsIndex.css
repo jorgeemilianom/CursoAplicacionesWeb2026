@@ -1,0 +1,141 @@
+.docs-index {
+  padding: 80px 20px 100px;
+  min-height: calc(100vh - 64px);
+  background: var(--color-light);
+}
+
+.docs-index__header {
+  max-width: var(--max-width);
+  margin: 0 auto 52px;
+  text-align: center;
+}
+
+.docs-index__badge {
+  display: inline-block;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 100px;
+  margin-bottom: 16px;
+}
+
+.docs-index__header h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--color-dark);
+  margin-bottom: 14px;
+  letter-spacing: -0.5px;
+}
+
+.docs-index__header p {
+  font-size: 1.05rem;
+  color: var(--color-gray);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* Grilla */
+.docs-index__grilla {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+/* Tarjeta */
+.doc-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-light);
+  border-radius: var(--radius-md);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+  color: inherit;
+}
+
+.doc-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+  border-color: #c7d2fe;
+}
+
+.doc-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.doc-card__icono {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.doc-card__tipo {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 3px 10px;
+  border-radius: 100px;
+}
+
+.doc-card__tipo--instalacion {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+.doc-card__tipo--guia {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.doc-card__tipo--referencia {
+  background: #fdf4ff;
+  color: #9333ea;
+}
+
+.doc-card__titulo {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-dark);
+  line-height: 1.3;
+}
+
+.doc-card__descripcion {
+  font-size: 0.9rem;
+  color: var(--color-gray);
+  line-height: 1.65;
+  flex: 1;
+}
+
+.doc-card__etiquetas {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.doc-card__etiqueta {
+  background: var(--color-light);
+  color: var(--color-gray);
+  border: 1px solid var(--color-gray-light);
+  padding: 2px 10px;
+  border-radius: 100px;
+  font-size: 0.73rem;
+  font-weight: 500;
+}
+
+.doc-card__ir {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-top: 4px;
+}

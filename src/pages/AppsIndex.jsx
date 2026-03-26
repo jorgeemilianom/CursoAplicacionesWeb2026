@@ -30,6 +30,13 @@ const apps = [
     etiquetas: ['CRUD', 'localStorage', 'useEffect', 'Filtros'],
     modulo: '05',
   },
+  {
+    id: 'pokedex',
+    titulo: 'Pokédex',
+    descripcion: 'Buscá cualquier pokémon por nombre o número usando la PokéAPI. Practicá fetch, async/await y manejo de estados de carga.',
+    etiquetas: ['fetch', 'async/await', 'try/catch', 'Estados UI'],
+    modulo: '04',
+  },
 ]
 
 function AppsIndex() {
