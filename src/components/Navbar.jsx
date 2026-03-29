@@ -22,6 +22,11 @@ function Navbar() {
           </NavLink>
           <a href="/#temario" onClick={cerrarMenu} className="navbar__link">Temario</a>
           <Link to="/apps" onClick={cerrarMenu} className="navbar__link">Aplicaciones</Link>
+          <NavLink to="/docs" onClick={cerrarMenu} className={({ isActive }) =>
+            isActive ? 'navbar__link navbar__link--activo' : 'navbar__link'
+          }>
+            Docs
+          </NavLink>
           <a href="/#inscribirse" onClick={cerrarMenu} className="navbar__cta">Inscribirse</a>
         </nav>
 
