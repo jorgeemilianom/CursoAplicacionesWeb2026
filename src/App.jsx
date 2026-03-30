@@ -14,6 +14,13 @@ import InstallarGit from './pages/docs/InstallarGit.jsx'
 import VSCodeSetup from './pages/docs/VSCodeSetup.jsx'
 import GitCheatsheet from './pages/docs/GitCheatsheet.jsx'
 import ReactHooks from './pages/docs/ReactHooks.jsx'
+import TeoriaHTML from './pages/teoria/TeoriaHTML.jsx'
+import TeoriaCSS from './pages/teoria/TeoriaCSS.jsx'
+import TeoriaJavaScript from './pages/teoria/TeoriaJavaScript.jsx'
+import TeoriaJSAvanzado from './pages/teoria/TeoriaJSAvanzado.jsx'
+import TeoriaReact from './pages/teoria/TeoriaReact.jsx'
+import TeoriaVueJS from './pages/teoria/TeoriaVueJS.jsx'
+import TeoriaTypeScript from './pages/teoria/TeoriaTypeScript.jsx'
 
 function App() {
   return (
@@ -34,6 +41,13 @@ function App() {
           <Route path="/docs/vscode-setup" element={<VSCodeSetup />} />
           <Route path="/docs/git-cheatsheet" element={<GitCheatsheet />} />
           <Route path="/docs/react-hooks" element={<ReactHooks />} />
+          <Route path="/docs/teoria-html" element={<TeoriaHTML />} />
+          <Route path="/docs/teoria-css" element={<TeoriaCSS />} />
+          <Route path="/docs/teoria-javascript" element={<TeoriaJavaScript />} />
+          <Route path="/docs/teoria-js-avanzado" element={<TeoriaJSAvanzado />} />
+          <Route path="/docs/teoria-react" element={<TeoriaReact />} />
+          <Route path="/docs/teoria-vuejs" element={<TeoriaVueJS />} />
+          <Route path="/docs/teoria-typescript" element={<TeoriaTypeScript />} />
         </Routes>
       </main>
       <Footer />

@@ -52,10 +52,91 @@ const docs = [
   },
 ]
 
+const teoria = [
+  {
+    id: 'teoria-html',
+    titulo: 'HTML5 Fundamentos',
+    descripcion: 'Estructura de documentos, etiquetas semánticas, formularios y atributos esenciales.',
+    etiquetas: ['HTML5', 'Semántica', 'Formularios', 'Trimestre 1'],
+    tipo: 'teoria',
+    icono: '🌐',
+  },
+  {
+    id: 'teoria-css',
+    titulo: 'CSS3 y Layouts',
+    descripcion: 'Box model, selectores, Flexbox, CSS Grid, responsive design y variables CSS.',
+    etiquetas: ['CSS3', 'Flexbox', 'Grid', 'Trimestre 1'],
+    tipo: 'teoria',
+    icono: '🎨',
+  },
+  {
+    id: 'teoria-javascript',
+    titulo: 'JavaScript Fundamentos',
+    descripcion: 'Variables, tipos de datos, funciones, arrays, objetos, DOM y manejo de eventos.',
+    etiquetas: ['JavaScript', 'DOM', 'Eventos', 'Trimestre 1'],
+    tipo: 'teoria',
+    icono: '🟡',
+  },
+  {
+    id: 'teoria-js-avanzado',
+    titulo: 'JavaScript ES6+',
+    descripcion: 'Destructuring, spread/rest, módulos, promesas, async/await y Fetch API.',
+    etiquetas: ['ES6+', 'async/await', 'Fetch', 'Trimestre 2'],
+    tipo: 'teoria',
+    icono: '⚡',
+  },
+  {
+    id: 'teoria-react',
+    titulo: 'React.js',
+    descripcion: 'Componentes, JSX, props, estado, efectos, React Router y Context API.',
+    etiquetas: ['React', 'Hooks', 'Router', 'Trimestre 2'],
+    tipo: 'teoria',
+    icono: '⚛️',
+  },
+  {
+    id: 'teoria-vuejs',
+    titulo: 'Vue.js',
+    descripcion: 'Composition API, directivas (v-if, v-for, v-model), componentes, props y watchers.',
+    etiquetas: ['Vue.js', 'Composition API', 'Directivas', 'Trimestre 3'],
+    tipo: 'teoria',
+    icono: '💚',
+  },
+  {
+    id: 'teoria-typescript',
+    titulo: 'TypeScript',
+    descripcion: 'Tipos básicos, interfaces, generics, utility types y TypeScript en React.',
+    etiquetas: ['TypeScript', 'Tipos', 'Interfaces', 'Trimestre 3'],
+    tipo: 'teoria',
+    icono: '🔷',
+  },
+]
+
 const tipoLabel = {
   instalacion: 'Instalación',
   guia: 'Guía',
   referencia: 'Referencia',
+  teoria: 'Teoría',
+}
+
+function DocCard({ doc }) {
+  return (
+    <Link key={doc.id} to={`/docs/${doc.id}`} className="doc-card">
+      <div className="doc-card__top">
+        <span className="doc-card__icono">{doc.icono}</span>
+        <span className={`doc-card__tipo doc-card__tipo--${doc.tipo}`}>
+          {tipoLabel[doc.tipo]}
+        </span>
+      </div>
+      <h2 className="doc-card__titulo">{doc.titulo}</h2>
+      <p className="doc-card__descripcion">{doc.descripcion}</p>
+      <div className="doc-card__etiquetas">
+        {doc.etiquetas.map((e) => (
+          <span key={e} className="doc-card__etiqueta">{e}</span>
+        ))}
+      </div>
+      <span className="doc-card__ir">Leer guía →</span>
+    </Link>
+  )
 }
 
 function DocsIndex() {
@@ -65,29 +146,28 @@ function DocsIndex() {
         <span className="docs-index__badge">Documentación</span>
         <h1>Guías y Referencias</h1>
         <p>
-          Instalaciones paso a paso, guías de configuración y referencias rápidas para tu entorno de desarrollo.
+          Instalaciones paso a paso, guías de configuración, referencias rápidas y teoría del curso.
         </p>
       </div>
 
-      <div className="docs-index__grilla">
-        {docs.map((doc) => (
-          <Link key={doc.id} to={`/docs/${doc.id}`} className="doc-card">
-            <div className="doc-card__top">
-              <span className="doc-card__icono">{doc.icono}</span>
-              <span className={`doc-card__tipo doc-card__tipo--${doc.tipo}`}>
-                {tipoLabel[doc.tipo]}
-              </span>
-            </div>
-            <h2 className="doc-card__titulo">{doc.titulo}</h2>
-            <p className="doc-card__descripcion">{doc.descripcion}</p>
-            <div className="doc-card__etiquetas">
-              {doc.etiquetas.map((e) => (
-                <span key={e} className="doc-card__etiqueta">{e}</span>
-              ))}
-            </div>
-            <span className="doc-card__ir">Leer guía →</span>
-          </Link>
-        ))}
+      <div className="docs-index__seccion">
+        <div className="docs-index__seccion-header">
+          <h2>Guías y Recursos</h2>
+          <p>Instalaciones, configuraciones y referencias rápidas para tu entorno de desarrollo.</p>
+        </div>
+        <div className="docs-index__grilla">
+          {docs.map((doc) => <DocCard key={doc.id} doc={doc} />)}
+        </div>
+      </div>
+
+      <div className="docs-index__seccion">
+        <div className="docs-index__seccion-header">
+          <h2>Teoría del Curso</h2>
+          <p>Conceptos teóricos ordenados según el temario, del Trimestre 1 al Trimestre 3.</p>
+        </div>
+        <div className="docs-index__grilla">
+          {teoria.map((doc) => <DocCard key={doc.id} doc={doc} />)}
+        </div>
       </div>
     </div>
   )
