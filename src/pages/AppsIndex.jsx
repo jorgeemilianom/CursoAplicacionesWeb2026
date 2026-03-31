@@ -30,6 +30,13 @@ const apps = [
     etiquetas: ['CRUD', 'localStorage', 'useEffect', 'Filtros'],
     modulo: '05',
   },
+  {
+    id: 'sopa-de-letras',
+    titulo: 'Sopa de Letras',
+    descripcion: 'Armá tu propia sopa, configurá el tiempo y encontrá todas las palabras antes de que termine el desafío.',
+    etiquetas: ['React', 'useState', 'Timers', 'Lógica de juego'],
+    modulo: '05',
+  },
 ]
 
 function AppsIndex() {

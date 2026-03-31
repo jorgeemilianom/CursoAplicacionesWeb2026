@@ -82,7 +82,7 @@ function Grid({ grid, words, onWordFound, gameActive }) {
       setFound((prev) => [...prev, selected]);
       setFoundWords((prev) => [...prev, matchedWord]);
 
-      onWordFound();
+      onWordFound(matchedWord);
     } else {
       console.log("❌ Incorrecta o repetida:", word);
     }

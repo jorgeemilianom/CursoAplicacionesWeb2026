@@ -1,0 +1,403 @@
+@import '../apps-shared.css';
+
+.sopa {
+  min-height: calc(100vh - 64px);
+  padding: 48px 20px 80px;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.sopa--dark {
+  background:
+    radial-gradient(circle at top, rgba(56, 189, 248, 0.18), transparent 32%),
+    linear-gradient(180deg, #020617 0%, #0f172a 100%);
+  color: #e2e8f0;
+}
+
+.sopa--light {
+  background:
+    radial-gradient(circle at top, rgba(79, 70, 229, 0.12), transparent 30%),
+    linear-gradient(180deg, #eef2ff 0%, #f8fafc 100%);
+  color: var(--color-dark-2);
+}
+
+.sopa__container {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.sopa .app-volver {
+  color: inherit;
+  opacity: 0.75;
+}
+
+.sopa__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.sopa .app-header h1,
+.sopa .app-header p,
+.sopa .app-conceptos h2,
+.sopa .app-conceptos li span:last-child {
+  color: inherit;
+}
+
+.sopa .app-modulo {
+  background: rgba(99, 102, 241, 0.18);
+  color: #c7d2fe;
+}
+
+.sopa__actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.sopa__btn {
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 12px 18px;
+  font-weight: 700;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.sopa__btn:hover {
+  transform: translateY(-1px);
+}
+
+.sopa__btn--secondary {
+  background: rgba(15, 23, 42, 0.18);
+  color: inherit;
+  border-color: rgba(148, 163, 184, 0.2);
+}
+
+.sopa--light .sopa__btn--secondary {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.sopa__btn--primary {
+  background: linear-gradient(135deg, #38bdf8 0%, #4f46e5 100%);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 16px 36px rgba(79, 70, 229, 0.28);
+  margin-top: 28px;
+}
+
+.sopa__progress {
+  width: 100%;
+  height: 12px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(148, 163, 184, 0.18);
+  margin-bottom: 24px;
+}
+
+.sopa__progress-bar {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #22c55e 0%, #38bdf8 100%);
+  transition: width 0.35s ease;
+}
+
+.sopa__stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.sopa__stat,
+.sopa__timer,
+.sopa__board,
+.sopa__words,
+.sopa__time-selector,
+.sopa__placeholder,
+.sopa .app-conceptos,
+.sopa__form form {
+  backdrop-filter: blur(14px);
+}
+
+.sopa__stat,
+.sopa__timer,
+.sopa__board,
+.sopa__words,
+.sopa__time-selector,
+.sopa__placeholder,
+.sopa .app-conceptos {
+  background: rgba(15, 23, 42, 0.48);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  box-shadow: 0 14px 30px rgba(2, 6, 23, 0.16);
+}
+
+.sopa--light .sopa__stat,
+.sopa--light .sopa__timer,
+.sopa--light .sopa__board,
+.sopa--light .sopa__words,
+.sopa--light .sopa__time-selector,
+.sopa--light .sopa__placeholder,
+.sopa--light .sopa .app-conceptos {
+  background: rgba(255, 255, 255, 0.86);
+}
+
+.sopa__stat,
+.sopa__timer {
+  border-radius: 22px;
+  padding: 18px 22px;
+  text-align: center;
+}
+
+.sopa__stat span {
+  display: block;
+  font-size: 0.84rem;
+  opacity: 0.75;
+  margin-bottom: 6px;
+}
+
+.sopa__stat strong,
+.sopa__timer {
+  font-size: 1.55rem;
+  font-weight: 800;
+}
+
+.sopa__timer--critical {
+  color: #f87171;
+}
+
+.sopa__time-selector {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: 18px;
+  margin-bottom: 14px;
+}
+
+.sopa__time-selector input {
+  width: 96px;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: rgba(15, 23, 42, 0.18);
+  color: inherit;
+}
+
+.sopa--light .sopa__time-selector input {
+  background: #fff;
+}
+
+.sopa__form {
+  margin: 18px 0 24px;
+}
+
+.sopa__form .input-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.sopa__form .input-group input,
+.sopa__form .input-group button,
+.sopa__words li,
+.sopa__words li button {
+  border-radius: 14px;
+}
+
+.sopa__form .input-group input {
+  flex: 1;
+  min-width: 220px;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  padding: 14px 16px;
+  background: rgba(15, 23, 42, 0.18);
+  color: inherit;
+}
+
+.sopa--light .sopa__form .input-group input {
+  background: #fff;
+}
+
+.sopa__form .input-group button {
+  border: none;
+  padding: 14px 22px;
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  color: #fff;
+  font-weight: 700;
+}
+
+.sopa__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 24px;
+  align-items: start;
+}
+
+.sopa__board,
+.sopa__words {
+  border-radius: 28px;
+  padding: 24px;
+}
+
+.sopa__placeholder {
+  border-radius: 20px;
+  padding: 52px 24px;
+  text-align: center;
+}
+
+.sopa__placeholder h2 {
+  margin-bottom: 10px;
+  font-size: 1.35rem;
+}
+
+.sopa__placeholder p {
+  opacity: 0.78;
+  line-height: 1.6;
+}
+
+.sopa__words ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sopa__words li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  background: rgba(148, 163, 184, 0.12);
+}
+
+.sopa__words li button {
+  border: none;
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+  padding: 8px 10px;
+}
+
+.sopa .grid-main {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+}
+
+.sopa .grid-row {
+  display: flex;
+  gap: 6px;
+}
+
+.sopa .cell {
+  width: clamp(28px, 4vw, 40px);
+  height: clamp(28px, 4vw, 40px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-weight: 800;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: rgba(15, 23, 42, 0.4);
+  user-select: none;
+}
+
+.sopa--light .cell {
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.sopa .cell.selected {
+  background: #facc15;
+  color: #111827;
+  transform: scale(1.06);
+}
+
+.sopa .cell.found {
+  background: linear-gradient(135deg, #22c55e 0%, #14b8a6 100%);
+  color: #fff;
+  border-color: transparent;
+}
+
+.sopa .app-conceptos {
+  margin-top: 32px;
+}
+
+.sopa__overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.7);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 120;
+}
+
+.sopa__celebration,
+.sopa__result {
+  width: min(420px, 100%);
+  border-radius: 28px;
+  padding: 28px;
+  text-align: center;
+  background: #fff;
+  color: var(--color-dark);
+  box-shadow: 0 30px 60px rgba(15, 23, 42, 0.28);
+}
+
+.sopa__celebration-image {
+  width: min(220px, 60%);
+  margin: 0 auto 18px;
+}
+
+.sopa__celebration h3,
+.sopa__result h2 {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+}
+
+.sopa__celebration p,
+.sopa__result p {
+  color: var(--color-gray);
+  line-height: 1.6;
+}
+
+@media (max-width: 960px) {
+  .sopa__header,
+  .sopa__layout {
+    grid-template-columns: 1fr;
+    display: grid;
+  }
+
+  .sopa__header {
+    align-items: stretch;
+  }
+
+  .sopa__actions {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 720px) {
+  .sopa {
+    padding-inline: 16px;
+  }
+
+  .sopa__stats {
+    grid-template-columns: 1fr;
+  }
+
+  .sopa__form .input-group {
+    flex-direction: column;
+  }
+
+  .sopa__form .input-group button,
+  .sopa__btn--primary {
+    width: 100%;
+  }
+
+  .sopa__board,
+  .sopa__words {
+    padding: 18px;
+  }
+}
