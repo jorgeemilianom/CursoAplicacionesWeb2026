@@ -8,15 +8,15 @@
 
 .sopa--dark {
   background:
-    radial-gradient(circle at top, rgba(56, 189, 248, 0.18), transparent 32%),
-    linear-gradient(180deg, #020617 0%, #0f172a 100%);
+    radial-gradient(circle at top, rgba(79, 70, 229, 0.18), transparent 30%),
+    linear-gradient(180deg, #0f172a 0%, #111827 100%);
   color: #e2e8f0;
 }
 
 .sopa--light {
   background:
-    radial-gradient(circle at top, rgba(79, 70, 229, 0.12), transparent 30%),
-    linear-gradient(180deg, #eef2ff 0%, #f8fafc 100%);
+    radial-gradient(circle at top, rgba(79, 70, 229, 0.1), transparent 26%),
+    linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
   color: var(--color-dark-2);
 }
 
@@ -35,7 +35,7 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 24px;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 .sopa .app-header h1,
@@ -54,6 +54,7 @@
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .sopa__btn {
@@ -69,13 +70,13 @@
 }
 
 .sopa__btn--secondary {
-  background: rgba(15, 23, 42, 0.18);
+  background: rgba(15, 23, 42, 0.22);
   color: inherit;
-  border-color: rgba(148, 163, 184, 0.2);
+  border-color: rgba(148, 163, 184, 0.26);
 }
 
 .sopa--light .sopa__btn--secondary {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
 }
 
 .sopa__btn--primary {
@@ -127,9 +128,9 @@
 .sopa__time-selector,
 .sopa__placeholder,
 .sopa .app-conceptos {
-  background: rgba(15, 23, 42, 0.48);
-  border: 1px solid rgba(148, 163, 184, 0.15);
-  box-shadow: 0 14px 30px rgba(2, 6, 23, 0.16);
+  background: rgba(15, 23, 42, 0.58);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  box-shadow: 0 14px 30px rgba(2, 6, 23, 0.2);
 }
 
 .sopa--light .sopa__stat,
@@ -167,8 +168,9 @@
 }
 
 .sopa__time-selector {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 12px;
   padding: 14px 18px;
   border-radius: 18px;
@@ -186,6 +188,11 @@
 
 .sopa--light .sopa__time-selector input {
   background: #fff;
+}
+
+.sopa__time-help {
+  font-size: 0.88rem;
+  opacity: 0.78;
 }
 
 .sopa__form {
@@ -239,6 +246,23 @@
   padding: 24px;
 }
 
+.sopa__section-header {
+  margin-bottom: 18px;
+}
+
+.sopa__section-header h2 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+  color: inherit;
+}
+
+.sopa__section-header p {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
 .sopa__placeholder {
   border-radius: 20px;
   padding: 52px 24px;
@@ -268,6 +292,7 @@
   gap: 12px;
   padding: 10px 12px;
   background: rgba(148, 163, 184, 0.12);
+  border: 1px solid rgba(148, 163, 184, 0.12);
 }
 
 .sopa__words li button {
@@ -298,8 +323,9 @@
   border-radius: 10px;
   font-weight: 800;
   border: 1px solid rgba(148, 163, 184, 0.18);
-  background: rgba(15, 23, 42, 0.4);
+  background: rgba(15, 23, 42, 0.38);
   user-select: none;
+  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
 }
 
 .sopa--light .cell {
@@ -320,6 +346,17 @@
 
 .sopa .app-conceptos {
   margin-top: 32px;
+}
+
+.sopa--dark .tag-neutro {
+  background: rgba(148, 163, 184, 0.12);
+  color: #e2e8f0;
+  border-color: rgba(148, 163, 184, 0.18);
+}
+
+.sopa--dark .app-conceptos code {
+  background: rgba(79, 70, 229, 0.18);
+  color: #c7d2fe;
 }
 
 .sopa__overlay {

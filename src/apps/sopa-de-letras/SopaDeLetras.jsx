@@ -24,6 +24,8 @@ function SopaDeLetras() {
     es: {
       title: 'Sopa de Letras Profesional',
       langBtn: 'English',
+      themeBtnDark: 'Modo oscuro',
+      themeBtnLight: 'Modo claro',
       statsWords: 'Total',
       statsFound: 'Encontradas',
       labelTime: 'Tiempo (seg)',
@@ -35,10 +37,17 @@ function SopaDeLetras() {
       modalRetry: 'Jugar de nuevo',
       celebText: 'Excelente',
       intro: 'Creá tu lista, generá el tablero y encontrá todas las palabras antes de que termine el tiempo.',
+      boardTitle: 'Tablero de juego',
+      boardText: 'Seleccioná letras en línea recta para marcar una palabra completa.',
+      listTitle: 'Palabras cargadas',
+      listText: 'Podés agregar, quitar y volver a generar la sopa cuando quieras.',
+      timerText: 'El tiempo corre cuando empieza la partida.',
     },
     en: {
       title: 'Word Search Pro',
       langBtn: 'Español',
+      themeBtnDark: 'Dark mode',
+      themeBtnLight: 'Light mode',
       statsWords: 'Total',
       statsFound: 'Found',
       labelTime: 'Time (sec)',
@@ -50,6 +59,11 @@ function SopaDeLetras() {
       modalRetry: 'Play again',
       celebText: 'Great job',
       intro: 'Build your own word list, generate the board and find every word before the timer ends.',
+      boardTitle: 'Game board',
+      boardText: 'Select letters in a straight line to mark a complete word.',
+      listTitle: 'Loaded words',
+      listText: 'You can add, remove and regenerate the puzzle whenever you want.',
+      timerText: 'The timer starts running when the match begins.',
     },
   }
 
@@ -146,7 +160,7 @@ function SopaDeLetras() {
               onClick={() => setDarkMode((prev) => !prev)}
               className="sopa__btn sopa__btn--secondary"
             >
-              {darkMode ? 'Modo claro' : 'Dark mode'}
+              {darkMode ? t.themeBtnLight : t.themeBtnDark}
             </button>
           </div>
         </header>
@@ -179,6 +193,7 @@ function SopaDeLetras() {
               value={initialTime}
               onChange={(e) => setInitialTime(Number(e.target.value) || 10)}
             />
+            <span className="sopa__time-help">{t.timerText}</span>
           </div>
         )}
 
@@ -195,6 +210,10 @@ function SopaDeLetras() {
 
         <div className="sopa__layout">
           <section className="sopa__board">
+            <div className="sopa__section-header">
+              <h2>{t.boardTitle}</h2>
+              <p>{t.boardText}</p>
+            </div>
             {grid.length > 0 ? (
               <Grid
                 grid={grid}
@@ -216,6 +235,10 @@ function SopaDeLetras() {
           </section>
 
           <aside className="sopa__words">
+            <div className="sopa__section-header">
+              <h2>{t.listTitle}</h2>
+              <p>{t.listText}</p>
+            </div>
             <WordList words={words} deleteWord={deleteWord} language={language} />
           </aside>
         </div>
