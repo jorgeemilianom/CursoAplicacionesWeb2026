@@ -43,7 +43,7 @@ function TeoriaVueJS() {
                   <tr><td><code>ref()</code> / <code>reactive()</code></td><td><code>useState()</code></td></tr>
                   <tr><td><code>computed()</code></td><td><code>useMemo()</code></td></tr>
                   <tr><td><code>watch()</code></td><td><code>useEffect()</code></td></tr>
-                  <tr><td><code>onMounted()</code></td><td><code>useEffect(() => {}, [])</code></td></tr>
+                  <tr><td><code>onMounted()</code></td><td><code>{'useEffect(() => {}, [])'}</code></td></tr>
                   <tr><td><code>v-if</code> / <code>v-for</code></td><td>JSX con <code>&&</code> / <code>.map()</code></td></tr>
                   <tr><td>Pinia / Vuex</td><td>Context API / Redux / Zustand</td></tr>
                 </tbody>

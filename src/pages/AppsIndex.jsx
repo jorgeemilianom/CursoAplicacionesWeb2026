@@ -1,4 +1,4 @@
-﻿import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './AppsIndex.css'
 
 /*
@@ -44,6 +44,13 @@ const apps = [
     etiquetas: ['fetch', 'async/await', 'try/catch', 'Estados UI'],
     modulo: '04',
   },
+  {
+    id: 'sopa-de-letras',
+    titulo: 'Sopa de Letras',
+    descripcion: 'Armá tu propia sopa, configurá el tiempo y encontrá todas las palabras antes de que termine el desafío.',
+    etiquetas: ['React', 'useState', 'Timers', 'Lógica de juego'],
+    modulo: '05',
+  },
 ]
 
 function AppsIndex() {
@@ -72,7 +79,6 @@ function AppsIndex() {
           </Link>
         ))}
 
-        {/* Placeholder para apps futuras */}
         <div className="app-card app-card--proximamente">
           <div className="app-card__modulo">Proximamente</div>
           <h2 className="app-card__titulo">Mas apps en camino...</h2>
@@ -86,4 +92,3 @@ function AppsIndex() {
 }
 
 export default AppsIndex
-

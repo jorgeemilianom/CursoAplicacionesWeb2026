@@ -1,33 +1,35 @@
-import { Routes, Route } from 'react-router-dom'
-import Navbar from './components/Navbar.jsx'
-import Footer from './components/Footer.jsx'
-import Landing from './pages/Landing.jsx'
-import AppsIndex from './pages/AppsIndex.jsx'
-import HolaMundo from './apps/hola-mundo/HolaMundo.jsx'
-import Memorama from './apps/memorama/Memorama.jsx'
-import GestorTareas from './apps/gestor-tareas/GestorTareas.jsx'
-import ScapeRoom from './apps/scape-room/ScapeRoom.jsx'
-import Pokedex from './apps/pokedex/Pokedex.jsx'
-import DocsIndex from './pages/DocsIndex.jsx'
-import InstallarOllama from './pages/docs/InstallarOllama.jsx'
-import InstallarNode from './pages/docs/InstallarNode.jsx'
-import InstallarGit from './pages/docs/InstallarGit.jsx'
-import VSCodeSetup from './pages/docs/VSCodeSetup.jsx'
-import GitCheatsheet from './pages/docs/GitCheatsheet.jsx'
-import ReactHooks from './pages/docs/ReactHooks.jsx'
-import TeoriaHTML from './pages/teoria/TeoriaHTML.jsx'
-import TeoriaCSS from './pages/teoria/TeoriaCSS.jsx'
-import TeoriaJavaScript from './pages/teoria/TeoriaJavaScript.jsx'
-import TeoriaJSAvanzado from './pages/teoria/TeoriaJSAvanzado.jsx'
-import TeoriaReact from './pages/teoria/TeoriaReact.jsx'
-import TeoriaVueJS from './pages/teoria/TeoriaVueJS.jsx'
-import TeoriaTypeScript from './pages/teoria/TeoriaTypeScript.jsx'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
+import Landing from './pages/Landing'
+import AppsIndex from './pages/AppsIndex'
+import HolaMundo from './apps/hola-mundo/HolaMundo'
+import Memorama from './apps/memorama/Memorama'
+import GestorTareas from './apps/gestor-tareas/GestorTareas'
+import ScapeRoom from './apps/scape-room/ScapeRoom'
+import Pokedex from './apps/pokedex/Pokedex'
+import SopaDeLetras from './apps/sopa-de-letras/SopaDeLetras'
+import DocsIndex from './pages/DocsIndex'
+import InstallarOllama from './pages/docs/InstallarOllama'
+import InstallarNode from './pages/docs/InstallarNode'
+import InstallarGit from './pages/docs/InstallarGit'
+import VSCodeSetup from './pages/docs/VSCodeSetup'
+import GitCheatsheet from './pages/docs/GitCheatsheet'
+import ReactHooks from './pages/docs/ReactHooks'
+import TeoriaHTML from './pages/teoria/TeoriaHTML'
+import TeoriaCSS from './pages/teoria/TeoriaCSS'
+import TeoriaJavaScript from './pages/teoria/TeoriaJavaScript'
+import TeoriaJSAvanzado from './pages/teoria/TeoriaJSAvanzado'
+import TeoriaReact from './pages/teoria/TeoriaReact'
+import TeoriaVueJS from './pages/teoria/TeoriaVueJS'
+import TeoriaTypeScript from './pages/teoria/TeoriaTypeScript'
+import './App.css'
 
 function App() {
   return (
-    <>
+    <div className="site-shell">
       <Navbar />
-      <main>
+      <main className="site-main">
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/apps" element={<AppsIndex />} />
@@ -36,6 +38,7 @@ function App() {
           <Route path="/apps/gestor-tareas" element={<GestorTareas />} />
           <Route path="/apps/scape-room" element={<ScapeRoom />} />
           <Route path="/apps/pokedex" element={<Pokedex />} />
+          <Route path="/apps/sopa-de-letras" element={<SopaDeLetras />} />
           <Route path="/docs" element={<DocsIndex />} />
           <Route path="/docs/instalar-ollama" element={<InstallarOllama />} />
           <Route path="/docs/instalar-node" element={<InstallarNode />} />
@@ -50,10 +53,11 @@ function App() {
           <Route path="/docs/teoria-react" element={<TeoriaReact />} />
           <Route path="/docs/teoria-vuejs" element={<TeoriaVueJS />} />
           <Route path="/docs/teoria-typescript" element={<TeoriaTypeScript />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
       <Footer />
-    </>
+    </div>
   )
 }
 

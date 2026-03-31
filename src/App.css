@@ -1,6 +1,10 @@
-/* Estilos globales de la aplicación */
-
-main {
-  padding-top: 64px; /* altura del navbar fijo */
+.site-shell {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-main {
+  flex: 1;
+  padding-top: 64px;
 }
