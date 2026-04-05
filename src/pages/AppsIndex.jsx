@@ -45,10 +45,17 @@ const apps = [
     modulo: '04',
   },
   {
+    id: 'supermercado-de-colores',
+    titulo: 'Supermercado de Colores',
+    descripcion: 'Juego para ninos: identifica productos por color dentro de un mini supermercado pensado para practicar interaccion y estado en React.',
+    etiquetas: ['React', 'Juego', 'Ninos'],
+    modulo: '05',
+  },
+  {
     id: 'sopa-de-letras',
     titulo: 'Sopa de Letras',
-    descripcion: 'Arm√° tu propia sopa, configur√° el tiempo y encontr√° todas las palabras antes de que termine el desaf√≠o.',
-    etiquetas: ['React', 'useState', 'Timers', 'L√≥gica de juego'],
+    descripcion: 'Arm· tu propia sopa, configur· el tiempo y encontr· todas las palabras antes de que termine el desafÌo.',
+    etiquetas: ['React', 'useState', 'Timers', 'LÛgica de juego'],
     modulo: '05',
   },
 ]
