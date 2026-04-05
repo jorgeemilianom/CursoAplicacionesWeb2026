@@ -1,58 +1,16 @@
-# Curso de Aplicaciones Web Frontend 2026 — Eprenda
+# React + Vite
 
-Landing page del curso y repositorio de aplicaciones de práctica.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Tecnologías del proyecto
+Currently, two official plugins are available:
 
-- [React 19](https://react.dev/) — biblioteca de UI
-- [Vite 8](https://vite.dev/) — bundler y servidor de desarrollo
-- [React Router v7](https://reactrouter.com/) — navegación entre páginas y apps
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## Estructura del proyecto
+## React Compiler
 
-```
-src/
-├── main.jsx              # Punto de entrada (monta BrowserRouter)
-├── App.jsx               # Rutas principales
-├── index.css             # Reset CSS y variables globales
-├── App.css               # Estilos de la capa principal
-│
-├── components/           # Componentes reutilizables
-│   ├── Navbar.jsx / .css
-│   └── Footer.jsx / .css
-│
-├── pages/                # Páginas de la aplicación
-│   ├── Landing.jsx / .css    → /
-│   └── AppsIndex.jsx / .css  → /apps
-│
-└── apps/                 # Aplicaciones de práctica (una por carpeta)
-    └── hola-mundo/
-        ├── HolaMundo.jsx
-        └── HolaMundo.css
-```
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Rutas disponibles
+## Expanding the ESLint configuration
 
-| Ruta | Descripción |
-|------|-------------|
-| `/` | Landing page del curso |
-| `/apps` | Índice de todas las apps de práctica |
-| `/apps/hola-mundo` | App 01 — Hola Mundo (useState, eventos) |
-
-## Iniciar el servidor de desarrollo
-
-```bash
-npm run dev
-```
-
-## Agregar una nueva app de práctica
-
-1. Crear la carpeta `src/apps/nombre-app/`
-2. Crear el componente `NombreApp.jsx` y su `NombreApp.css`
-3. Registrar la ruta en `src/App.jsx`:
-   ```jsx
-   import NombreApp from './apps/nombre-app/NombreApp.jsx'
-   // ...
-   <Route path="/apps/nombre-app" element={<NombreApp />} />
-   ```
-4. Agregar la app al array `apps` en `src/pages/AppsIndex.jsx`
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
