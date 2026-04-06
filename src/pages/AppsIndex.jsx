@@ -51,6 +51,13 @@ const apps = [
     etiquetas: ['React', 'useState', 'Timers', 'Lógica de juego'],
     modulo: '05',
   },
+  {
+    id: '4-imagenes-1-palabra',
+    titulo: '4 Imagenes 1 Palabra',
+    descripcion: 'Adivina la palabra correcta según la imagen antes de que se termine el tiempo.',
+    etiquetas: ['React', 'Estado', 'Temporizador', 'Accesibilidad'],
+    modulo: '05',
+  },
 ]
 
 function AppsIndex() {

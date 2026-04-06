@@ -12,7 +12,9 @@ function Grid({ grid, words, onWordFound, gameActive }) {
       const audio = new Audio("/click.mp3");
       audio.volume = 0.3;
       audio.play();
-    } catch {}
+    } catch {
+      // Ignore audio errors (browser policy/device without audio support).
+    }
   };
 
   // 📳 vibración mobile

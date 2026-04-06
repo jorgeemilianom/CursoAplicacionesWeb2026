@@ -1,16 +1,16 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react'
 
-const TableroJuego = ({ datosNivel, tiempo, entrada, alCambiar, error, totalNiveles }) => {
-  const inputRef = useRef(null);
+function TableroJuego({ datosNivel, tiempo, entrada, alCambiar, error, totalNiveles }) {
+  const inputRef = useRef(null)
 
-  const letrasEscritas = entrada.toUpperCase().split('');
-  const longitudPalabra = datosNivel.palabra.length;
+  const letrasEscritas = entrada.toUpperCase().split('')
+  const longitudPalabra = datosNivel.palabra.length
 
   useEffect(() => {
-    inputRef.current?.focus();
-  }, [datosNivel.id]);
+    inputRef.current?.focus()
+  }, [datosNivel.id])
 
-  const porcentajeTiempo = (tiempo / datosNivel.tiempo) * 100;
+  const porcentajeTiempo = (tiempo / datosNivel.tiempo) * 100
 
   return (
     <section className="juego-tablero" role="region" aria-label={`Nivel ${datosNivel.id}`}>
@@ -74,7 +74,7 @@ const TableroJuego = ({ datosNivel, tiempo, entrada, alCambiar, error, totalNive
         )}
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default TableroJuego;
+export default TableroJuego
