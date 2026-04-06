@@ -1,0 +1,60 @@
+.supermercado-juego {
+  min-height: calc(100vh - 64px);
+  padding: 40px 18px 72px;
+  background:
+    radial-gradient(circle at top left, rgba(255, 240, 189, 0.85), transparent 30%),
+    radial-gradient(circle at top right, rgba(191, 219, 254, 0.9), transparent 28%),
+    linear-gradient(180deg, #fffef6 0%, #eefbf4 100%);
+  transition: filter 0.25s ease;
+}
+
+.supermercado-juego.is-acierto { filter: saturate(1.06); }
+.supermercado-juego.is-error { filter: contrast(1.02); }
+
+.supermercado-juego__escena {
+  width: min(1080px, 100%);
+  margin: 0 auto;
+  display: grid;
+  gap: 22px;
+}
+
+.supermercado-juego__volver {
+  width: fit-content;
+  color: #64748b;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.supermercado-juego__hero { text-align: center; padding: 10px 8px 0; }
+.supermercado-juego__hero h1 { margin: 0; font-size: clamp(2rem, 4vw, 3.2rem); color: #0f172a; }
+.supermercado-juego__hero p { margin: 10px auto 0; max-width: 620px; color: #475569; line-height: 1.6; }
+.supermercado-juego__eyebrow { font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 800; color: #2563eb; }
+
+.supermercado-juego__cestas { display: grid; grid-template-columns: repeat(3, minmax(180px, 1fr)); gap: 18px; }
+
+.supermercado-juego__final {
+  background: rgba(255, 255, 255, 0.94);
+  border: 2px solid #86efac;
+  border-radius: 32px;
+  padding: 32px 24px;
+  text-align: center;
+  box-shadow: 0 22px 36px rgba(15, 23, 42, 0.12);
+}
+
+.supermercado-juego__final-imagen {
+  width: min(100%, 320px);
+  height: auto;
+  display: block;
+  margin: 0 auto 18px;
+}
+
+.supermercado-juego__final h2 { margin: 0; color: #166534; font-size: clamp(1.8rem, 4vw, 2.5rem); }
+.supermercado-juego__final p { margin: 12px auto 0; max-width: 560px; color: #475569; line-height: 1.6; }
+.supermercado-juego__final button {
+  margin-top: 18px; border: 0; border-radius: 999px; padding: 14px 22px;
+  background: #16a34a; color: #fff; font-weight: 800; cursor: pointer;
+}
+
+@media (max-width: 760px) {
+  .supermercado-juego__cestas { grid-template-columns: 1fr; }
+}
