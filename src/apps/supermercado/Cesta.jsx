@@ -1,9 +1,9 @@
 import './Cesta.css'
 
 const imagenesCanasta = {
-  rojo: new URL('../../../ImgSuperColor/Canasta-Roja.png', import.meta.url).href,
-  amarillo: new URL('../../../ImgSuperColor/Canasta-Amarilla.png', import.meta.url).href,
-  morado: new URL('../../../ImgSuperColor/Canasta-Morada.png', import.meta.url).href,
+  rojo: new URL('./ImgSuperColor/Canasta-Roja.png', import.meta.url).href,
+  amarillo: new URL('./ImgSuperColor/Canasta-Amarilla.png', import.meta.url).href,
+  morado: new URL('./ImgSuperColor/Canasta-Morada.png', import.meta.url).href,
 }
 
 function Cesta({ color, tono, titulo, dragActivo, estado, feedbackColor, onSoltar }) {

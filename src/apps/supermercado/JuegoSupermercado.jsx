@@ -5,7 +5,7 @@ import BandaTransportadora from './BandaTransportadora'
 import Cesta from './Cesta'
 import './JuegoSupermercado.css'
 
-const imagenFinal = new URL('../../../ImgSuperColor/Fin-del-juego.png', import.meta.url).href
+const imagenFinal = new URL('./ImgSuperColor/Fin-del-juego.png', import.meta.url).href
 
 const PRODUCTOS = [
   { id: 1, nombre: 'Manzana', color: 'rojo', colorTexto: 'roja', icono: 'MAN', tono: '#ef4444', articulo: 'La' },

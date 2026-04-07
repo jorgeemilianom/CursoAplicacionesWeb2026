@@ -1,7 +1,7 @@
 import Producto from './Producto'
 import './BandaTransportadora.css'
 
-const imagenBanda = new URL('../../../ImgSuperColor/Banda-Transportadora.png', import.meta.url).href
+const imagenBanda = new URL('./ImgSuperColor/Banda-Transportadora.png', import.meta.url).href
 
 function BandaTransportadora({ producto, dragActivo, onDragChange }) {
   const iniciar = (event) => {

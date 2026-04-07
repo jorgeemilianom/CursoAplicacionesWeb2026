@@ -1,11 +1,11 @@
 import './Producto.css'
 
 const imagenesFruta = {
-  manzana: new URL('../../../ImgSuperColor/Manzana.png', import.meta.url).href,
-  platano: new URL('../../../ImgSuperColor/Banana.png', import.meta.url).href,
-  uva: new URL('../../../ImgSuperColor/Uva.png', import.meta.url).href,
-  frutilla: new URL('../../../ImgSuperColor/Frutilla.png', import.meta.url).href,
-  limon: new URL('../../../ImgSuperColor/Limon.png', import.meta.url).href,
+  manzana: new URL('./ImgSuperColor/Manzana.png', import.meta.url).href,
+  platano: new URL('./ImgSuperColor/Banana.png', import.meta.url).href,
+  uva: new URL('./ImgSuperColor/Uva.png', import.meta.url).href,
+  frutilla: new URL('./ImgSuperColor/Frutilla.png', import.meta.url).href,
+  limon: new URL('./ImgSuperColor/Limon.png', import.meta.url).href,
 }
 
 function Producto({ producto }) {
