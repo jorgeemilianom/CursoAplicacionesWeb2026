@@ -121,34 +121,31 @@ function CuatroImagenesUnaPalabra() {
   }
 
   return (
-    <main className="juego-page" ref={mainRef} tabIndex="-1" aria-live="polite">
-      <section className="juego-shell" aria-labelledby="titulo-juego">
-        <header className="juego-header">
-          <div>
-            <h1 id="titulo-juego" className="juego-titulo">4 Imagenes 1 Palabra</h1>
-            <p className="juego-subtitulo">Adivina la palabra a partir de la imagen antes de que termine el tiempo.</p>
-          </div>
+    <main className="img1p app-wrapper" ref={mainRef} tabIndex="-1" aria-live="polite">
+      <div className="img1p__container">
+        <Link to="/apps" className="app-volver">← Volver a aplicaciones</Link>
 
-          <Link to="/apps" className="juego-boton-secundario juego-link-volver" aria-label="Volver al panel principal">
-            Volver
-          </Link>
+        <header className="app-header img1p__header">
+          <span className="app-modulo">Modulo 05 - React.js</span>
+          <h1 id="titulo-juego">4 Imagenes 1 Palabra</h1>
+          <p>Adivina la palabra a partir de la imagen antes de que termine el tiempo.</p>
         </header>
 
-        <section className="juego-contenido">
+        <section className="img1p__panel" aria-labelledby="titulo-juego">
           {!juegoIniciado && <PantallaInicio alEmpezar={iniciarJuego} />}
 
           {juegoIniciado && celebrando && (
-            <section role="alert" className="juego-estado">
+            <section role="alert" className="img1p__estado">
               <h2>Correcto</h2>
-              <img src={imagenCelebracion} alt="Ilustracion festiva por acertar la palabra" className="imagen-celebracion" />
+              <img src={imagenCelebracion} alt="Ilustracion festiva por acertar la palabra" className="img1p__celebracion" />
             </section>
           )}
 
           {juegoIniciado && !celebrando && (juegoTerminado || nivelActual >= NIVELES.length) && (
-            <section role="alert" className="juego-estado">
+            <section role="alert" className="img1p__estado">
               <h2>{nivelActual >= NIVELES.length ? 'Felicitaciones, completaste el juego' : 'Tiempo agotado'}</h2>
 
-              <button onClick={reiniciarJuego} aria-label="Reiniciar el juego desde el principio">
+              <button className="img1p__btn img1p__btn--primary" onClick={reiniciarJuego} aria-label="Reiniciar el juego desde el principio">
                 Reintentar
               </button>
             </section>
@@ -165,7 +162,7 @@ function CuatroImagenesUnaPalabra() {
             />
           )}
         </section>
-      </section>
+      </div>
     </main>
   )
 }

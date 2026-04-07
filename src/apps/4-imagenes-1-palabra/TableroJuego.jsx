@@ -13,14 +13,14 @@ function TableroJuego({ datosNivel, tiempo, entrada, alCambiar, error, totalNive
   const porcentajeTiempo = (tiempo / datosNivel.tiempo) * 100
 
   return (
-    <section className="juego-tablero" role="region" aria-label={`Nivel ${datosNivel.id}`}>
-      <div className="info-superior">
+    <section className="img1p__tablero" role="region" aria-label={`Nivel ${datosNivel.id}`}>
+      <div className="img1p__info-superior">
         <span aria-label={`Nivel ${datosNivel.id} de ${totalNiveles}`}>
           Nivel: {datosNivel.id} / {totalNiveles}
         </span>
 
         <span
-          className={`temporizador ${tiempo < 10 ? 'tiempo-critico' : ''}`}
+          className={`img1p__temporizador ${tiempo < 10 ? 'img1p__temporizador--critico' : ''}`}
           aria-live={tiempo <= 5 ? 'assertive' : 'off'}
           aria-label={`${tiempo} segundos restantes`}
         >
@@ -28,24 +28,24 @@ function TableroJuego({ datosNivel, tiempo, entrada, alCambiar, error, totalNive
         </span>
       </div>
 
-      <div className="barra-tiempo" aria-hidden="true">
-        <div className="progreso-tiempo" style={{ width: `${porcentajeTiempo}%` }} />
+      <div className="img1p__barra-tiempo" aria-hidden="true">
+        <div className="img1p__progreso-tiempo" style={{ width: `${porcentajeTiempo}%` }} />
       </div>
 
-      <div className="contenedor-imagen-principal">
-        <img src={datosNivel.imagen} alt={datosNivel.alt || 'Imagen de pista'} className="imagen-pistas" />
+      <div className="img1p__contenedor-imagen-principal">
+        <img src={datosNivel.imagen} alt={datosNivel.alt || 'Imagen de pista'} className="img1p__imagen-pistas" />
       </div>
 
-      <div className="contenedor-espacios" aria-label={`Palabra de ${longitudPalabra} letras`} role="status">
+      <div className="img1p__contenedor-espacios" aria-label={`Palabra de ${longitudPalabra} letras`} role="status">
         {datosNivel.palabra.split('').map((_, i) => (
-          <span key={i} className={`espacio-letra ${letrasEscritas[i] ? 'lleno' : ''}`} aria-hidden="true">
+          <span key={i} className={`img1p__espacio-letra ${letrasEscritas[i] ? 'img1p__espacio-letra--lleno' : ''}`} aria-hidden="true">
             {letrasEscritas[i] || '_'}
           </span>
         ))}
       </div>
 
-      <div className="contenedor-entrada">
-        <label htmlFor="input-palabra" className="sr-only">
+      <div className="img1p__contenedor-entrada">
+        <label htmlFor="input-palabra" className="img1p__sr-only">
           Escribe tu respuesta aqui
         </label>
 
@@ -56,7 +56,7 @@ function TableroJuego({ datosNivel, tiempo, entrada, alCambiar, error, totalNive
           value={entrada}
           onChange={alCambiar}
           placeholder="Escribe la palabra"
-          className={`entrada-palabra ${error ? 'entrada-error' : ''}`}
+          className={`img1p__entrada-palabra ${error ? 'img1p__entrada-palabra--error' : ''}`}
           aria-invalid={error}
           aria-describedby={error ? 'error-mensaje' : undefined}
           autoComplete="off"
@@ -65,9 +65,9 @@ function TableroJuego({ datosNivel, tiempo, entrada, alCambiar, error, totalNive
 
         {error && (
           <>
-            <p className="mensaje-error">Incorrecto</p>
+            <p className="img1p__mensaje-error">Incorrecto</p>
 
-            <span id="error-mensaje" className="sr-only" role="alert">
+            <span id="error-mensaje" className="img1p__sr-only" role="alert">
               Palabra incorrecta, intenta de nuevo.
             </span>
           </>

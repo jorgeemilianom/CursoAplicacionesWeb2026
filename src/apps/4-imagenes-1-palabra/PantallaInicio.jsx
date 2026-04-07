@@ -8,10 +8,15 @@ function PantallaInicio({ alEmpezar }) {
   }, [])
 
   return (
-    <section className="inicio-screen" role="region" aria-label="Pantalla inicial del juego">
-      <p className="descripcion">Escribe la palabra correcta para avanzar de nivel.</p>
+    <section className="img1p__inicio" role="region" aria-label="Pantalla inicial del juego">
+      <p className="img1p__descripcion">Escribe la palabra correcta para avanzar de nivel.</p>
 
-      <button ref={botonRef} className="boton-empezar" onClick={alEmpezar} aria-label="Comenzar juego">
+      <button
+        ref={botonRef}
+        className="img1p__btn img1p__btn--primary"
+        onClick={alEmpezar}
+        aria-label="Comenzar juego"
+      >
         Comenzar juego
       </button>
     </section>
