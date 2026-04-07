@@ -51,8 +51,8 @@ Construir un juego tipo escape room dividido en 3 niveles. Cada nivel presenta u
 
 Las imagenes del juego estan almacenadas en:
 
-- `src/apps/scape-room/ImgScapeRoom/`
-- `src/apps/scape-room/ImgScapeRoom/Nivel 2/`
+- `Imganes/`
+- `Imganes/Nivel 2/`
 
 ## Como probar la app
 
