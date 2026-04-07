@@ -1,0 +1,52 @@
+.banda {
+  background: linear-gradient(180deg, #dbeafe 0%, #bfdbfe 100%);
+  border: 2px solid #93c5fd;
+  border-radius: 34px;
+  padding: 22px;
+  box-shadow: inset 0 -10px 24px rgba(255, 255, 255, 0.35);
+}
+
+.banda__cartel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  color: #1e3a8a;
+  font-weight: 700;
+}
+
+.banda__pista {
+  position: relative;
+  padding: 28px 18px;
+  border-radius: 28px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #334155 0%, #1e293b 100%);
+}
+
+.banda__pista.is-dragging { box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.55); }
+
+.banda__cinta {
+  position: absolute;
+  inset: 0;
+  background-position: 0 0;
+  background-repeat: repeat-x;
+  background-size: auto 100%;
+  animation: cinta-mover 6s linear infinite;
+  opacity: 0.95;
+}
+
+.banda__producto {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  cursor: grab;
+}
+
+.banda__producto:active { cursor: grabbing; }
+
+@keyframes cinta-mover {
+  from { background-position: 0 0; }
+  to { background-position: 100% 0; }
+}
