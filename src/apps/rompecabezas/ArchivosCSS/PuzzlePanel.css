@@ -1,0 +1,90 @@
+.puzzle-panel {
+  padding: 24px;
+  margin-bottom: 28px;
+}
+
+.puzzle-difficulty {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.puzzle-difficulty button,
+.puzzle-btn {
+  border: 0;
+  border-radius: 18px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.puzzle-difficulty button {
+  text-align: left;
+  padding: 16px;
+  background: #edf2ff;
+  color: #24335f;
+}
+
+.puzzle-difficulty button span,
+.puzzle-panel__stats span {
+  display: block;
+  color: #5d6c98;
+  font-size: 0.92rem;
+}
+
+.puzzle-difficulty .is-active {
+  background: linear-gradient(135deg, #203a85, #2f62d8);
+  color: #fff;
+  box-shadow: 0 14px 30px rgba(47, 98, 216, 0.28);
+}
+
+.puzzle-difficulty .is-active span {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.puzzle-panel__stats,
+.puzzle-panel__actions,
+.puzzle-win__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.puzzle-panel__stats > div,
+.puzzle-timer {
+  flex: 1 1 160px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: #f7f9ff;
+}
+
+.puzzle-panel__stats strong,
+.puzzle-timer strong,
+.puzzle-win__stats span {
+  font-size: 1.35rem;
+  color: #172445;
+}
+
+.puzzle-timer--on {
+  background: linear-gradient(135deg, #fff3cc, #ffe18a);
+}
+
+.puzzle-btn {
+  padding: 13px 18px;
+  font-weight: 700;
+}
+
+.puzzle-btn:hover,
+.puzzle-difficulty button:hover {
+  transform: translateY(-2px);
+}
+
+.puzzle-btn--primary {
+  background: linear-gradient(135deg, #ff8a3d, #ffb84d);
+  color: #172445;
+}
+
+.puzzle-btn--ghost {
+  background: #e9efff;
+  color: #203a85;
+}

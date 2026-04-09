@@ -12,6 +12,7 @@ import SopaDeLetras from './apps/sopa-de-letras/SopaDeLetras'
 import CuatroImagenesUnaPalabra from './apps/4-imagenes-1-palabra/CuatroImagenesUnaPalabra'
 import BombaLoca from './apps/bomba-loca/BombaLoca'
 import JuegoSupermercado from './apps/supermercado/JuegoSupermercado'
+import PuzzleRaiz from './apps/rompecabezas/ArchivosJSX/PuzzleRaiz'
 import ContextAPI from './apps/context-api/ContextAPI'
 import DocsIndex from './pages/DocsIndex'
 import InstallarOllama from './pages/docs/InstallarOllama'
@@ -45,6 +46,7 @@ function App() {
           <Route path="/apps/pokedex" element={<Pokedex />} />
           <Route path="/apps/supermercado-de-colores" element={<JuegoSupermercado />} />
           <Route path="/apps/sopa-de-letras" element={<SopaDeLetras />} />
+          <Route path="/apps/rompecabezas" element={<PuzzleRaiz />} />
           <Route path="/apps/4-imagenes-1-palabra" element={<CuatroImagenesUnaPalabra />} />
           <Route path="/apps/bomba-loca" element={<BombaLoca />} />
           <Route path="/apps/context-api" element={<ContextAPI />} />

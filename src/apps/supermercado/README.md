@@ -32,7 +32,7 @@ El jugador debe identificar el color de la fruta mostrada en la banda transporta
 
 ## Recursos visuales
 
-Las imagenes del juego estan en la carpeta `ImgSuperColor` del proyecto:
+Las imagenes del juego estan en la carpeta `src/apps/supermercado/ImgSuperColor`:
 
 - frutas
 - canastas
