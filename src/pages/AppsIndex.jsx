@@ -63,6 +63,22 @@ const apps = [
     titulo: '4 Imagenes 1 Palabra',
     descripcion: 'Adivina la palabra correcta segun la imagen antes de que se termine el tiempo.',
     etiquetas: ['React', 'Estado', 'Temporizador', 'Accesibilidad'],
+    descripcion: 'Arm� tu propia sopa, configur� el tiempo y encontr� todas las palabras antes de que termine el desaf�o.',
+    etiquetas: ['React', 'useState', 'Timers', 'L�gica de juego'],
+    modulo: '05',
+  },
+  {
+    id: 'bomba-loca',
+    titulo: 'Bomba Loca',
+    descripcion: 'Juego de reflejos para pasar la bomba antes de la explosion, con IA y dificultad configurable.',
+    etiquetas: ['React', 'Juego', 'IA'],
+    modulo: '05',
+  },
+  {
+    id: 'context-api',
+    titulo: 'Context API',
+    descripcion: 'Librería con carrito de compras y cambio de tema. Practicá createContext, Provider, useContext y custom hooks sin prop drilling.',
+    etiquetas: ['Context API', 'createContext', 'useContext', 'Custom Hook'],
     modulo: '05',
   },
 ]
