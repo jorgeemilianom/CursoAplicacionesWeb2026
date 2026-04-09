@@ -2,31 +2,31 @@
 import { Link } from 'react-router-dom'
 import './ScapeRoom.css'
 
-const roomImage = new URL('../../../Imganes/Nivel 1.1.png', import.meta.url).href
-const deskImage = new URL('../../../Imganes/Nivel 1.2.png', import.meta.url).href
-const handleImage = new URL('../../../Imganes/Nivel 1.2 manija.png', import.meta.url).href
-const fridgeImage = new URL('../../../Imganes/Nivel 1.3.png', import.meta.url).href
-const keyImage = new URL('../../../Imganes/Nivel 1.3 llave.png', import.meta.url).href
-const briefcaseImage = new URL('../../../Imganes/Nivel 1.4.png', import.meta.url).href
-const knobImage = new URL('../../../Imganes/Nivel 1.4 perilla.png', import.meta.url).href
-const safeImage = new URL('../../../Imganes/Nivel 1.5.png', import.meta.url).href
-const exitImage = new URL('../../../Imganes/Nivel 1.6.png', import.meta.url).href
-const levelTwoImage = new URL('../../../Imganes/Nivel2.png', import.meta.url).href
-const levelThreeImage = new URL('../../../Imganes/Nivel3.jpg', import.meta.url).href
+const roomImage = new URL('./ImgScapeRoom/Nivel 1.1.png', import.meta.url).href
+const deskImage = new URL('./ImgScapeRoom/Nivel 1.2.png', import.meta.url).href
+const handleImage = new URL('./ImgScapeRoom/Nivel 1.2 manija.png', import.meta.url).href
+const fridgeImage = new URL('./ImgScapeRoom/Nivel 1.3.png', import.meta.url).href
+const keyImage = new URL('./ImgScapeRoom/Nivel 1.3 llave.png', import.meta.url).href
+const briefcaseImage = new URL('./ImgScapeRoom/Nivel 1.4.png', import.meta.url).href
+const knobImage = new URL('./ImgScapeRoom/Nivel 1.4 perilla.png', import.meta.url).href
+const safeImage = new URL('./ImgScapeRoom/Nivel 1.5.png', import.meta.url).href
+const exitImage = new URL('./ImgScapeRoom/Nivel 1.6.png', import.meta.url).href
+const levelTwoImage = new URL('./ImgScapeRoom/Nivel2.png', import.meta.url).href
+const levelThreeImage = new URL('./ImgScapeRoom/Nivel3.jpg', import.meta.url).href
 
-const levelTwoPlantImage = new URL('../../../Imganes/Nivel 2/Nivel 2.1 a.png', import.meta.url).href
-const levelTwoOpenerImage = new URL('../../../Imganes/Nivel 2/Nivel 2.1 destapador.png', import.meta.url).href
-const levelTwoTableClosedImage = new URL('../../../Imganes/Nivel 2/Nivel 2.2 a.png', import.meta.url).href
-const levelTwoTableOpenImage = new URL('../../../Imganes/Nivel 2/Nivel 2.2 mesa.png', import.meta.url).href
-const levelTwoPaperImage = new URL('../../../Imganes/Nivel 2/Nivel 2.2 papel (overlay).png', import.meta.url).href
-const levelTwoChestImage = new URL('../../../Imganes/Nivel 2/Nivel 2.3 cofre.png', import.meta.url).href
-const levelTwoChestOpenImage = new URL('../../../Imganes/Nivel 2/Nivel 2.3 cofre_teneza.png', import.meta.url).href
-const levelTwoPliersImage = new URL('../../../Imganes/Nivel 2/Nivel 2.3 tenaza.png', import.meta.url).href
-const levelTwoLockImage = new URL('../../../Imganes/Nivel 2/Nivel 2.4 a.png', import.meta.url).href
-const levelTwoUnlockedLockImage = new URL('../../../Imganes/Nivel 2/Nivel 2.4 candado.png', import.meta.url).href
-const levelTwoBookImage = new URL('../../../Imganes/Nivel 2/Nivel 2.4 libro (overlay).png', import.meta.url).href
-const levelTwoShelfImage = new URL('../../../Imganes/Nivel 2/Nivel 2.5 pon el libro.png', import.meta.url).href
-const levelTwoFinalImage = new URL('../../../Imganes/Nivel 2/Nivel 2.6 final.png', import.meta.url).href
+const levelTwoPlantImage = new URL('./ImgScapeRoom/Nivel 2/Nivel 2.1 a.png', import.meta.url).href
+const levelTwoOpenerImage = new URL('./ImgScapeRoom/Nivel 2/Nivel 2.1 destapador.png', import.meta.url).href
+const levelTwoTableClosedImage = new URL('./ImgScapeRoom/Nivel 2/Nivel 2.2 a.png', import.meta.url).href
+const levelTwoTableOpenImage = new URL('./ImgScapeRoom/Nivel 2/Nivel 2.2 mesa.png', import.meta.url).href
+const levelTwoPaperImage = new URL('./ImgScapeRoom/Nivel 2/Nivel 2.2 papel (overlay).png', import.meta.url).href
+const levelTwoChestImage = new URL('./ImgScapeRoom/Nivel 2/Nivel 2.3 cofre.png', import.meta.url).href
+const levelTwoChestOpenImage = new URL('./ImgScapeRoom/Nivel 2/Nivel 2.3 cofre_teneza.png', import.meta.url).href
+const levelTwoPliersImage = new URL('./ImgScapeRoom/Nivel 2/Nivel 2.3 tenaza.png', import.meta.url).href
+const levelTwoLockImage = new URL('./ImgScapeRoom/Nivel 2/Nivel 2.4 a.png', import.meta.url).href
+const levelTwoUnlockedLockImage = new URL('./ImgScapeRoom/Nivel 2/Nivel 2.4 candado.png', import.meta.url).href
+const levelTwoBookImage = new URL('./ImgScapeRoom/Nivel 2/Nivel 2.4 libro (overlay).png', import.meta.url).href
+const levelTwoShelfImage = new URL('./ImgScapeRoom/Nivel 2/Nivel 2.5 pon el libro.png', import.meta.url).href
+const levelTwoFinalImage = new URL('./ImgScapeRoom/Nivel 2/Nivel 2.6 final.png', import.meta.url).href
 
 const inventoryConfig = {
   handle: {

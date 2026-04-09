@@ -109,6 +109,14 @@ const teoria = [
     tipo: 'teoria',
     icono: '🔷',
   },
+  {
+    id: 'teoria-context-api',
+    titulo: 'Context API — Estado Global',
+    descripcion: 'Prop drilling, createContext, Provider, useContext y el patrón de custom hooks para estado global en React.',
+    etiquetas: ['React', 'Context API', 'Estado Global', 'Trimestre 2'],
+    tipo: 'teoria',
+    icono: '🔄',
+  },
 ]
 
 const tipoLabel = {

@@ -65,6 +65,13 @@ const apps = [
     etiquetas: ['React', 'Juego', 'IA'],
     modulo: '05',
   },
+  {
+    id: 'context-api',
+    titulo: 'Context API',
+    descripcion: 'Librería con carrito de compras y cambio de tema. Practicá createContext, Provider, useContext y custom hooks sin prop drilling.',
+    etiquetas: ['Context API', 'createContext', 'useContext', 'Custom Hook'],
+    modulo: '05',
+  },
 ]
 
 function AppsIndex() {
