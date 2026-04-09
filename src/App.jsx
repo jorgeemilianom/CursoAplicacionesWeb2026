@@ -10,6 +10,7 @@ import ScapeRoom from './apps/scape-room/ScapeRoom'
 import Pokedex from './apps/pokedex/Pokedex'
 import SopaDeLetras from './apps/sopa-de-letras/SopaDeLetras'
 import JuegoSupermercado from './apps/supermercado/JuegoSupermercado'
+import ContextAPI from './apps/context-api/ContextAPI'
 import DocsIndex from './pages/DocsIndex'
 import InstallarOllama from './pages/docs/InstallarOllama'
 import InstallarNode from './pages/docs/InstallarNode'
@@ -24,6 +25,7 @@ import TeoriaJSAvanzado from './pages/teoria/TeoriaJSAvanzado'
 import TeoriaReact from './pages/teoria/TeoriaReact'
 import TeoriaVueJS from './pages/teoria/TeoriaVueJS'
 import TeoriaTypeScript from './pages/teoria/TeoriaTypeScript'
+import TeoriaContextAPI from './pages/teoria/TeoriaContextAPI'
 import './App.css'
 
 function App() {
@@ -41,6 +43,7 @@ function App() {
           <Route path="/apps/pokedex" element={<Pokedex />} />
           <Route path="/apps/supermercado-de-colores" element={<JuegoSupermercado />} />
           <Route path="/apps/sopa-de-letras" element={<SopaDeLetras />} />
+          <Route path="/apps/context-api" element={<ContextAPI />} />
           <Route path="/docs" element={<DocsIndex />} />
           <Route path="/docs/instalar-ollama" element={<InstallarOllama />} />
           <Route path="/docs/instalar-node" element={<InstallarNode />} />
@@ -55,6 +58,7 @@ function App() {
           <Route path="/docs/teoria-react" element={<TeoriaReact />} />
           <Route path="/docs/teoria-vuejs" element={<TeoriaVueJS />} />
           <Route path="/docs/teoria-typescript" element={<TeoriaTypeScript />} />
+          <Route path="/docs/teoria-context-api" element={<TeoriaContextAPI />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
