@@ -1,4 +1,5 @@
 import { useContext, useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { GameContext } from "./GameContext";
 import "./Game.css";
 
@@ -8,6 +9,7 @@ const DIRECCION_IZQUIERDA = -1;
 
 function Game() {
   const { dificultad, setPantalla } = useContext(GameContext);
+  const navigate = useNavigate();
 
   const [jugadores] = useState(jugadoresIniciales);
   const [bombaIndex, setBombaIndex] = useState(0);
@@ -289,6 +291,10 @@ function Game() {
     iniciarRonda();
   };
 
+  const volverAApps = () => {
+    navigate("/apps");
+  };
+
   // ⏱ tiempo restante
   const tiempoRestante = tiempo - (Date.now() - inicio);
   const enPeligro = tiempoRestante < 2000;
@@ -297,6 +303,10 @@ function Game() {
     <div className="game-shell">
       <div className="game-overlay" />
       <div className="container">
+        <button className="volver-apps volver-apps--game" onClick={volverAApps}>
+          ← Volver a Apps
+        </button>
+
         <header className="game-hud">
           <h2 className="game-title">Bomba en Cadena</h2>
           <p className="game-turno">

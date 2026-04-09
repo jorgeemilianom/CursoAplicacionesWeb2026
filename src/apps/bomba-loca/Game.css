@@ -241,3 +241,26 @@
     font-size: 0.9rem;
   }
 }
+
+.volver-apps {
+  margin: 0 0 14px;
+  padding: 8px 12px;
+  min-width: unset;
+  width: fit-content;
+  background: rgba(15, 23, 42, 0.45);
+  color: #bfdbfe;
+  border: 1px solid rgba(147, 197, 253, 0.45);
+  box-shadow: none;
+}
+
+.volver-apps:hover {
+  color: #eff6ff;
+  border-color: rgba(147, 197, 253, 0.8);
+  box-shadow: none;
+}
+
+.volver-apps--game {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

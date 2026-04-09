@@ -1,10 +1,12 @@
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { GameContext } from "./GameContext";
 import "./Menu.css";
 
 function Menu() {
   const { setPantalla, setDificultad, dificultad } = useContext(GameContext);
   const [mostrarAyuda, setMostrarAyuda] = useState(false);
+  const navigate = useNavigate();
 
   const seleccionar = (nivel) => {
     setDificultad(nivel);
@@ -14,10 +16,17 @@ function Menu() {
     setPantalla("game");
   };
 
+  const volverAApps = () => {
+    navigate("/apps");
+  };
+
   return (
     <div className="menu-shell">
       <div className="menu-overlay" />
       <div className="menu">
+        <button className="volver-apps" onClick={volverAApps}>
+          ← Volver a Apps
+        </button>
         <h1 className="menu-title">💣 Bomba Loca</h1>
         <p className="menu-subtitle">Elegí la dificultad para empezar la ronda</p>
         <button className="ayuda" onClick={() => setMostrarAyuda(true)}>
