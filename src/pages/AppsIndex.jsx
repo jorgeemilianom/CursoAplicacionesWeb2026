@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+Ôªøimport { Link } from 'react-router-dom'
 import './AppsIndex.css'
 
 /*
@@ -54,8 +54,15 @@ const apps = [
   {
     id: 'sopa-de-letras',
     titulo: 'Sopa de Letras',
-    descripcion: 'Arm· tu propia sopa, configur· el tiempo y encontr· todas las palabras antes de que termine el desafÌo.',
-    etiquetas: ['React', 'useState', 'Timers', 'LÛgica de juego'],
+    descripcion: 'Arm√° tu propia sopa, configur√° el tiempo y encontr√° todas las palabras antes de que termine el desaf√≠o.',
+    etiquetas: ['React', 'useState', 'Timers', 'L√≥gica de juego'],
+    modulo: '05',
+  },
+  {
+    id: 'rompecabezas',
+    titulo: 'Rompecabezas',
+    descripcion: 'Arm√° la imagen pieza por pieza, eleg√≠ la dificultad y complet√° el puzzle antes de perder el ritmo.',
+    etiquetas: ['React', 'Juego', 'Drag & Drop'],
     modulo: '05',
   },
 ]
@@ -73,29 +80,36 @@ function AppsIndex() {
 
       <div className="apps-index__grilla">
         {apps.map((app) => (
-          <Link key={app.id} to={`/apps/${app.id}`} className="app-card">
-            <div className="app-card__modulo">Modulo {app.modulo}</div>
-            <h2 className="app-card__titulo">{app.titulo}</h2>
-            <p className="app-card__descripcion">{app.descripcion}</p>
-            <div className="app-card__etiquetas">
-              {app.etiquetas.map((e) => (
-                <span key={e} className="app-card__etiqueta">{e}</span>
-              ))}
+          app.disponible === false ? (
+            <div key={app.id} className="app-card app-card--proximamente">
+              <div className="app-card__modulo">Proximamente</div>
+              <h2 className="app-card__titulo">{app.titulo}</h2>
+              <p className="app-card__descripcion">{app.descripcion}</p>
+              <div className="app-card__etiquetas">
+                {app.etiquetas.map((e) => (
+                  <span key={e} className="app-card__etiqueta">{e}</span>
+                ))}
+              </div>
+              <span className="app-card__ir">Disponible pronto</span>
             </div>
-            <span className="app-card__ir">Ver aplicacion -&gt;</span>
-          </Link>
+          ) : (
+            <Link key={app.id} to={`/apps/${app.id}`} className="app-card">
+              <div className="app-card__modulo">Modulo {app.modulo}</div>
+              <h2 className="app-card__titulo">{app.titulo}</h2>
+              <p className="app-card__descripcion">{app.descripcion}</p>
+              <div className="app-card__etiquetas">
+                {app.etiquetas.map((e) => (
+                  <span key={e} className="app-card__etiqueta">{e}</span>
+                ))}
+              </div>
+              <span className="app-card__ir">Ver aplicacion -&gt;</span>
+            </Link>
+          )
         ))}
-
-        <div className="app-card app-card--proximamente">
-          <div className="app-card__modulo">Proximamente</div>
-          <h2 className="app-card__titulo">Mas apps en camino...</h2>
-          <p className="app-card__descripcion">
-            Se iran sumando nuevas aplicaciones a medida que avancemos en el curso.
-          </p>
-        </div>
       </div>
     </div>
   )
 }
 
 export default AppsIndex
+

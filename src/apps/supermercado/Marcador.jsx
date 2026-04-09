@@ -1,22 +1,25 @@
-import './Marcador.css'
+import React from 'react';
 
-function Marcador({ puntos, mensaje, meta, estado }) {
+const Marcador = ({ puntos, mensaje }) => {
   return (
-    <section className={`marcador is-${estado}`}>
-      <div className="marcador__panel">
-        <span>Aciertos</span>
-        <strong>{puntos}</strong>
+    <div style={estilos.contenedor}>
+      <div style={estilos.puntos}>
+        ⭐ Puntos: {puntos}
       </div>
-      <div className="marcador__panel">
-        <span>Meta</span>
-        <strong>{puntos}/{meta}</strong>
+      <div style={{
+        ...estilos.mensaje, 
+        color: mensaje.includes('¡Muy bien!') ? '#2ECC40' : '#FF4136'
+      }}>
+        {mensaje}
       </div>
-      <div className="marcador__mensaje">
-        <span>Pista</span>
-        <p>{mensaje}</p>
-      </div>
-    </section>
-  )
-}
+    </div>
+  );
+};
 
-export default Marcador
+const estilos = {
+  contenedor: { marginBottom: '20px' },
+  puntos: { fontSize: '2rem', fontWeight: 'bold', color: '#FF851B' },
+  mensaje: { fontSize: '1.5rem', marginTop: '10px', height: '30px' }
+};
+
+export default Marcador;

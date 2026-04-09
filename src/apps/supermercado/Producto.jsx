@@ -1,24 +1,23 @@
-import './Producto.css'
+import React from 'react';
 
-const imagenesFruta = {
-  manzana: new URL('./ImgSuperColor/Manzana.png', import.meta.url).href,
-  platano: new URL('./ImgSuperColor/Banana.png', import.meta.url).href,
-  uva: new URL('./ImgSuperColor/Uva.png', import.meta.url).href,
-  frutilla: new URL('./ImgSuperColor/Frutilla.png', import.meta.url).href,
-  limon: new URL('./ImgSuperColor/Limon.png', import.meta.url).href,
-}
-
-function Producto({ producto }) {
-  const claseFruta = producto.nombre.toLowerCase()
-
+const Producto = ({ emoji, nombre }) => {
   return (
-    <article className={`producto producto--${producto.color} producto--${claseFruta}`}>
-      <img className="producto__imagen" src={imagenesFruta[claseFruta]} alt={producto.nombre} />
-      <div className="producto__texto">
-        <h3>{producto.nombre}</h3>
-      </div>
-    </article>
-  )
-}
+    <div style={estilos.producto}>
+      <span style={estilos.emoji}>{emoji}</span>
+      <p style={estilos.texto}>{nombre}</p>
+    </div>
+  );
+};
 
-export default Producto
+const estilos = {
+  producto: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    animation: 'bounce 2s infinite' // Podrías agregar un keyframe en CSS luego
+  },
+  emoji: { fontSize: '80px', margin: 0 },
+  texto: { fontSize: '1.2rem', fontWeight: 'bold', color: '#555' }
+};
+
+export default Producto;

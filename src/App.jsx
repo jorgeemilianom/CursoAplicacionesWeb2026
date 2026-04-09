@@ -10,6 +10,7 @@ import ScapeRoom from './apps/scape-room/ScapeRoom'
 import Pokedex from './apps/pokedex/Pokedex'
 import SopaDeLetras from './apps/sopa-de-letras/SopaDeLetras'
 import JuegoSupermercado from './apps/supermercado/JuegoSupermercado'
+import PuzzleRaiz from './apps/rompecabezas/ArchivosJSX/PuzzleRaiz'
 import DocsIndex from './pages/DocsIndex'
 import InstallarOllama from './pages/docs/InstallarOllama'
 import InstallarNode from './pages/docs/InstallarNode'
@@ -41,6 +42,7 @@ function App() {
           <Route path="/apps/pokedex" element={<Pokedex />} />
           <Route path="/apps/supermercado-de-colores" element={<JuegoSupermercado />} />
           <Route path="/apps/sopa-de-letras" element={<SopaDeLetras />} />
+          <Route path="/apps/rompecabezas" element={<PuzzleRaiz />} />
           <Route path="/docs" element={<DocsIndex />} />
           <Route path="/docs/instalar-ollama" element={<InstallarOllama />} />
           <Route path="/docs/instalar-node" element={<InstallarNode />} />
