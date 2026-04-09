@@ -51,8 +51,15 @@
   font-size: 1rem;
 }
 
-.ayuda {
+.acciones-menu {
   margin-top: 14px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ayuda {
   padding: 8px 12px;
   background: transparent;
   color: #93c5fd;
@@ -67,6 +74,30 @@
   transform: translateY(-1px);
   color: #dbeafe;
   border-color: rgba(147, 197, 253, 0.8);
+}
+
+.contraste-btn {
+  padding: 8px 12px;
+  background: rgba(15, 23, 42, 0.45);
+  color: #f8fafc;
+  border: 1px solid rgba(248, 250, 252, 0.36);
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contraste-btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(248, 250, 252, 0.8);
+  box-shadow: 0 8px 16px rgba(2, 6, 23, 0.35);
+}
+
+.contraste-btn.activo {
+  background: #fde047;
+  color: #111827;
+  border-color: #111827;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.75) inset;
 }
 
 .botones {
@@ -177,6 +208,58 @@
   filter: brightness(1.1);
 }
 
+.menu-shell.alto-contraste {
+  background:
+    radial-gradient(circle at 8% 12%, rgba(255, 255, 0, 0.2), transparent 45%),
+    radial-gradient(circle at 90% 5%, rgba(0, 255, 255, 0.2), transparent 40%),
+    linear-gradient(180deg, #000000 0%, #090909 100%);
+}
+
+.menu-shell.alto-contraste .menu {
+  background: rgba(0, 0, 0, 0.95);
+  border: 2px solid #ffffff;
+}
+
+.menu-shell.alto-contraste .menu-title,
+.menu-shell.alto-contraste .menu-subtitle {
+  color: #ffffff;
+}
+
+.menu-shell.alto-contraste .ayuda,
+.menu-shell.alto-contraste .volver-apps {
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.menu-shell.alto-contraste .botones button {
+  background: #121212;
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+.menu-shell.alto-contraste .botones .activo {
+  background: #ffff00;
+  border-color: #ffffff;
+  color: #000000;
+}
+
+.menu-shell.alto-contraste .jugar {
+  background: #00d1ff;
+  color: #000000;
+  border-color: #ffffff;
+}
+
+.menu-shell.alto-contraste .modal-ayuda {
+  background: #000000;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+}
+
+.menu-shell.alto-contraste .modal-ayuda h2,
+.menu-shell.alto-contraste .modal-ayuda strong {
+  color: #ffff00;
+}
+
 @media (max-width: 700px) {
   .menu-shell {
     padding: 16px 10px;
@@ -189,6 +272,10 @@
 
   .menu-subtitle {
     font-size: 0.94rem;
+  }
+
+  .acciones-menu {
+    flex-direction: column;
   }
 
   .botones {

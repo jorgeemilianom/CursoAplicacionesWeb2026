@@ -4,7 +4,8 @@ import { GameContext } from "./GameContext";
 import "./Menu.css";
 
 function Menu() {
-  const { setPantalla, setDificultad, dificultad } = useContext(GameContext);
+  const { setPantalla, setDificultad, dificultad, altoContraste, setAltoContraste } =
+    useContext(GameContext);
   const [mostrarAyuda, setMostrarAyuda] = useState(false);
   const navigate = useNavigate();
 
@@ -21,7 +22,7 @@ function Menu() {
   };
 
   return (
-    <div className="menu-shell">
+    <div className={`menu-shell ${altoContraste ? "alto-contraste" : ""}`}>
       <div className="menu-overlay" />
       <div className="menu">
         <button className="volver-apps" onClick={volverAApps}>
@@ -29,9 +30,18 @@ function Menu() {
         </button>
         <h1 className="menu-title">💣 Bomba Loca</h1>
         <p className="menu-subtitle">Elegí la dificultad para empezar la ronda</p>
-        <button className="ayuda" onClick={() => setMostrarAyuda(true)}>
-          ¿Cómo se juega?
-        </button>
+        <div className="acciones-menu">
+          <button className="ayuda" onClick={() => setMostrarAyuda(true)}>
+            ¿Cómo se juega?
+          </button>
+          <button
+            className={`contraste-btn ${altoContraste ? "activo" : ""}`}
+            onClick={() => setAltoContraste((prev) => !prev)}
+            aria-pressed={altoContraste}
+          >
+            {altoContraste ? "Alto contraste: ON" : "Alto contraste: OFF"}
+          </button>
+        </div>
 
         <div className="botones">
           <button

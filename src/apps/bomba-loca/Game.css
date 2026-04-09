@@ -109,6 +109,7 @@
 }
 
 .player {
+  position: relative;
   min-height: 84px;
   background: rgba(71, 85, 105, 0.28);
   border: 1px solid rgba(148, 163, 184, 0.24);
@@ -120,19 +121,42 @@
   transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
 }
 
+.player-avatar {
+  line-height: 1;
+}
+
 .player:hover {
   transform: translateY(-2px);
 }
 
 .activo {
-  background: linear-gradient(160deg, rgba(251, 191, 36, 0.35), rgba(249, 115, 22, 0.28));
-  border-color: rgba(251, 191, 36, 0.75);
-  box-shadow: 0 10px 24px rgba(251, 146, 60, 0.24);
+  background: linear-gradient(165deg, rgba(255, 224, 102, 0.5), rgba(251, 146, 60, 0.42));
+  border: 2px solid #fde047;
+  box-shadow:
+    0 0 0 3px rgba(0, 0, 0, 0.75) inset,
+    0 10px 24px rgba(251, 146, 60, 0.35);
   transform: scale(1.04);
 }
 
+.bomb-indicator {
+  position: absolute;
+  left: 50%;
+  bottom: 6px;
+  transform: translateX(-50%);
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #fde047;
+  color: #111827;
+  border: 2px solid #111827;
+  font-size: 0.66rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 2px 0 #111827;
+}
+
 .peligro {
-  animation: peligroAnim 0.45s infinite;
+  animation: peligroAnim 0.52s infinite;
 }
 
 .acciones {
@@ -179,18 +203,82 @@
   animation: boom 0.5s ease-in-out infinite alternate;
 }
 
+.game-shell.alto-contraste {
+  background:
+    radial-gradient(circle at 8% 12%, rgba(255, 255, 0, 0.2), transparent 45%),
+    radial-gradient(circle at 90% 5%, rgba(0, 255, 255, 0.2), transparent 40%),
+    linear-gradient(180deg, #000000 0%, #090909 100%);
+}
+
+.game-shell.alto-contraste .container {
+  background: rgba(0, 0, 0, 0.95);
+  border: 2px solid #ffffff;
+}
+
+.game-shell.alto-contraste .game-title,
+.game-shell.alto-contraste .game-turno,
+.game-shell.alto-contraste .badge,
+.game-shell.alto-contraste .pensando {
+  color: #ffffff;
+}
+
+.game-shell.alto-contraste .badge {
+  background: #111111;
+  border-color: #ffffff;
+}
+
+.game-shell.alto-contraste .player {
+  background: #101010;
+  border-color: #ffffff;
+}
+
+.game-shell.alto-contraste .activo {
+  background: #ffff00;
+  border-color: #ffffff;
+  box-shadow:
+    0 0 0 3px #000000 inset,
+    0 0 0 5px #ffffff;
+}
+
+.game-shell.alto-contraste .bomb-indicator {
+  background: #ff2d2d;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.game-shell.alto-contraste .container button {
+  background: #00d1ff;
+  color: #000000;
+  border-color: #ffffff;
+}
+
+.game-shell.alto-contraste .volver-apps {
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.game-shell.alto-contraste .explosion {
+  color: #ff8c00;
+}
+
 @keyframes peligroAnim {
   0% {
-    box-shadow: 0 0 0 rgba(248, 113, 113, 0);
-    border-color: rgba(248, 113, 113, 0.3);
+    box-shadow:
+      0 0 0 rgba(248, 113, 113, 0),
+      0 0 0 2px rgba(0, 0, 0, 0.7) inset;
+    border-color: rgba(248, 113, 113, 0.6);
   }
   50% {
-    box-shadow: 0 0 0 10px rgba(248, 113, 113, 0.15);
-    border-color: rgba(248, 113, 113, 0.9);
+    box-shadow:
+      0 0 0 14px rgba(248, 113, 113, 0.24),
+      0 0 0 2px rgba(0, 0, 0, 0.7) inset;
+    border-color: rgba(248, 113, 113, 1);
   }
   100% {
-    box-shadow: 0 0 0 rgba(248, 113, 113, 0);
-    border-color: rgba(248, 113, 113, 0.3);
+    box-shadow:
+      0 0 0 rgba(248, 113, 113, 0),
+      0 0 0 2px rgba(0, 0, 0, 0.7) inset;
+    border-color: rgba(248, 113, 113, 0.6);
   }
 }
 
@@ -233,6 +321,12 @@
     min-height: 68px;
     font-size: 1.7rem;
     border-radius: 12px;
+  }
+
+  .bomb-indicator {
+    bottom: 4px;
+    font-size: 0.6rem;
+    padding: 2px 6px;
   }
 
   .container button {

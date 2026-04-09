@@ -5,6 +5,7 @@ export const GameContext = createContext();
 export function GameProvider({ children }) {
   const [pantalla, setPantalla] = useState("menu");
   const [dificultad, setDificultad] = useState("medio");
+  const [altoContraste, setAltoContraste] = useState(false);
 
   return (
     <GameContext.Provider
@@ -13,6 +14,8 @@ export function GameProvider({ children }) {
         setPantalla,
         dificultad,
         setDificultad,
+        altoContraste,
+        setAltoContraste,
       }}
     >
       {children}

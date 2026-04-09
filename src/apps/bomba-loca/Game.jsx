@@ -8,7 +8,7 @@ const DIRECCION_DERECHA = 1;
 const DIRECCION_IZQUIERDA = -1;
 
 function Game() {
-  const { dificultad, setPantalla } = useContext(GameContext);
+  const { dificultad, setPantalla, altoContraste } = useContext(GameContext);
   const navigate = useNavigate();
 
   const [jugadores] = useState(jugadoresIniciales);
@@ -300,7 +300,7 @@ function Game() {
   const enPeligro = tiempoRestante < 2000;
 
   return (
-    <div className="game-shell">
+    <div className={`game-shell ${altoContraste ? "alto-contraste" : ""}`}>
       <div className="game-overlay" />
       <div className="container">
         <button className="volver-apps volver-apps--game" onClick={volverAApps}>
@@ -330,7 +330,12 @@ function Game() {
               ${i === bombaIndex && enPeligro ? "peligro" : ""}
             `}
             >
-              {j}
+              <span className="player-avatar">{j}</span>
+              {i === bombaIndex && (
+                <span className="bomb-indicator" aria-label="Bomba activa">
+                  B O M B A
+                </span>
+              )}
             </div>
           ))}
         </div>
