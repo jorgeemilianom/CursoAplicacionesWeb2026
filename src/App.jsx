@@ -9,8 +9,11 @@ import GestorTareas from './apps/gestor-tareas/GestorTareas'
 import ScapeRoom from './apps/scape-room/ScapeRoom'
 import Pokedex from './apps/pokedex/Pokedex'
 import SopaDeLetras from './apps/sopa-de-letras/SopaDeLetras'
+import CuatroImagenesUnaPalabra from './apps/4-imagenes-1-palabra/CuatroImagenesUnaPalabra'
+import BombaLoca from './apps/bomba-loca/BombaLoca'
 import JuegoSupermercado from './apps/supermercado/JuegoSupermercado'
 import PuzzleRaiz from './apps/rompecabezas/ArchivosJSX/PuzzleRaiz'
+import ContextAPI from './apps/context-api/ContextAPI'
 import DocsIndex from './pages/DocsIndex'
 import InstallarOllama from './pages/docs/InstallarOllama'
 import InstallarNode from './pages/docs/InstallarNode'
@@ -25,6 +28,7 @@ import TeoriaJSAvanzado from './pages/teoria/TeoriaJSAvanzado'
 import TeoriaReact from './pages/teoria/TeoriaReact'
 import TeoriaVueJS from './pages/teoria/TeoriaVueJS'
 import TeoriaTypeScript from './pages/teoria/TeoriaTypeScript'
+import TeoriaContextAPI from './pages/teoria/TeoriaContextAPI'
 import './App.css'
 
 function App() {
@@ -43,6 +47,9 @@ function App() {
           <Route path="/apps/supermercado-de-colores" element={<JuegoSupermercado />} />
           <Route path="/apps/sopa-de-letras" element={<SopaDeLetras />} />
           <Route path="/apps/rompecabezas" element={<PuzzleRaiz />} />
+          <Route path="/apps/4-imagenes-1-palabra" element={<CuatroImagenesUnaPalabra />} />
+          <Route path="/apps/bomba-loca" element={<BombaLoca />} />
+          <Route path="/apps/context-api" element={<ContextAPI />} />
           <Route path="/docs" element={<DocsIndex />} />
           <Route path="/docs/instalar-ollama" element={<InstallarOllama />} />
           <Route path="/docs/instalar-node" element={<InstallarNode />} />
@@ -57,6 +64,7 @@ function App() {
           <Route path="/docs/teoria-react" element={<TeoriaReact />} />
           <Route path="/docs/teoria-vuejs" element={<TeoriaVueJS />} />
           <Route path="/docs/teoria-typescript" element={<TeoriaTypeScript />} />
+          <Route path="/docs/teoria-context-api" element={<TeoriaContextAPI />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
