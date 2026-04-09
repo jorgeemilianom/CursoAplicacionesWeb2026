@@ -54,6 +54,15 @@ const apps = [
   {
     id: 'sopa-de-letras',
     titulo: 'Sopa de Letras',
+    descripcion: 'Arma tu propia sopa, configura el tiempo y encontra todas las palabras antes de que termine el desafio.',
+    etiquetas: ['React', 'useState', 'Timers', 'Logica de juego'],
+    modulo: '05',
+  },
+  {
+    id: '4-imagenes-1-palabra',
+    titulo: '4 Imagenes 1 Palabra',
+    descripcion: 'Adivina la palabra correcta segun la imagen antes de que se termine el tiempo.',
+    etiquetas: ['React', 'Estado', 'Temporizador', 'Accesibilidad'],
     descripcion: 'Arm� tu propia sopa, configur� el tiempo y encontr� todas las palabras antes de que termine el desaf�o.',
     etiquetas: ['React', 'useState', 'Timers', 'L�gica de juego'],
     modulo: '05',

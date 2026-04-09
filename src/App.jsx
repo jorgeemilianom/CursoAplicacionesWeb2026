@@ -9,6 +9,7 @@ import GestorTareas from './apps/gestor-tareas/GestorTareas'
 import ScapeRoom from './apps/scape-room/ScapeRoom'
 import Pokedex from './apps/pokedex/Pokedex'
 import SopaDeLetras from './apps/sopa-de-letras/SopaDeLetras'
+import CuatroImagenesUnaPalabra from './apps/4-imagenes-1-palabra/CuatroImagenesUnaPalabra'
 import BombaLoca from './apps/bomba-loca/BombaLoca'
 import JuegoSupermercado from './apps/supermercado/JuegoSupermercado'
 import ContextAPI from './apps/context-api/ContextAPI'
@@ -44,6 +45,7 @@ function App() {
           <Route path="/apps/pokedex" element={<Pokedex />} />
           <Route path="/apps/supermercado-de-colores" element={<JuegoSupermercado />} />
           <Route path="/apps/sopa-de-letras" element={<SopaDeLetras />} />
+          <Route path="/apps/4-imagenes-1-palabra" element={<CuatroImagenesUnaPalabra />} />
           <Route path="/apps/bomba-loca" element={<BombaLoca />} />
           <Route path="/apps/context-api" element={<ContextAPI />} />
           <Route path="/docs" element={<DocsIndex />} />
