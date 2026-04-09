@@ -54,8 +54,15 @@ const apps = [
   {
     id: 'sopa-de-letras',
     titulo: 'Sopa de Letras',
-    descripcion: 'Armá tu propia sopa, configurá el tiempo y encontrá todas las palabras antes de que termine el desafío.',
-    etiquetas: ['React', 'useState', 'Timers', 'Lógica de juego'],
+    descripcion: 'Armï¿½ tu propia sopa, configurï¿½ el tiempo y encontrï¿½ todas las palabras antes de que termine el desafï¿½o.',
+    etiquetas: ['React', 'useState', 'Timers', 'Lï¿½gica de juego'],
+    modulo: '05',
+  },
+  {
+    id: 'bomba-loca',
+    titulo: 'Bomba Loca',
+    descripcion: 'Juego de reflejos para pasar la bomba antes de la explosion, con IA y dificultad configurable.',
+    etiquetas: ['React', 'Juego', 'IA'],
     modulo: '05',
   },
 ]
