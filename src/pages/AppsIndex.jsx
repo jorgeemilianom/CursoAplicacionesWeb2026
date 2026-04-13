@@ -63,8 +63,6 @@ const apps = [
     titulo: 'Rompecabezas',
     descripcion: 'Armá la imagen pieza por pieza, elegí la dificultad y completá el puzzle antes de perder el ritmo.',
     etiquetas: ['React', 'Juego', 'Drag & Drop'],
-    descripcion: 'Arma tu propia sopa, configura el tiempo y encontra todas las palabras antes de que termine el desafio.',
-    etiquetas: ['React', 'useState', 'Timers', 'Logica de juego'],
     modulo: '05',
   },
   {
@@ -72,8 +70,6 @@ const apps = [
     titulo: '4 Imagenes 1 Palabra',
     descripcion: 'Adivina la palabra correcta segun la imagen antes de que se termine el tiempo.',
     etiquetas: ['React', 'Estado', 'Temporizador', 'Accesibilidad'],
-    descripcion: 'Arm� tu propia sopa, configur� el tiempo y encontr� todas las palabras antes de que termine el desaf�o.',
-    etiquetas: ['React', 'useState', 'Timers', 'L�gica de juego'],
     modulo: '05',
   },
   {
@@ -81,6 +77,13 @@ const apps = [
     titulo: 'Bomba Loca',
     descripcion: 'Juego de reflejos para pasar la bomba antes de la explosion, con IA y dificultad configurable.',
     etiquetas: ['React', 'Juego', 'IA'],
+    modulo: '05',
+  },
+  {
+    id: 'monopoly-santafe',
+    titulo: 'Monopoly Santa Fe',
+    descripcion: 'Juego de mesa estilo Monopoly con ciudades de Santa Fe. Comprá propiedades, construí casas y hoteles, y llevá a todos a la bancarrota.',
+    etiquetas: ['React', 'useState', 'Lógica de juego', 'Multijugador'],
     modulo: '05',
   },
   {

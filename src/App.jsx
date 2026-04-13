@@ -14,7 +14,10 @@ import BombaLoca from './apps/bomba-loca/BombaLoca'
 import JuegoSupermercado from './apps/supermercado/JuegoSupermercado'
 import PuzzleRaiz from './apps/rompecabezas/ArchivosJSX/PuzzleRaiz'
 import ContextAPI from './apps/context-api/ContextAPI'
+import MonopolySantaFe from './apps/monopoly-santafe/MonopolySantaFe'
 import DocsIndex from './pages/DocsIndex'
+import InstallarDocker from './pages/docs/InstallarDocker'
+import OllamaDocker from './pages/docs/OllamaDocker'
 import InstallarOllama from './pages/docs/InstallarOllama'
 import InstallarNode from './pages/docs/InstallarNode'
 import InstallarGit from './pages/docs/InstallarGit'
@@ -50,7 +53,10 @@ function App() {
           <Route path="/apps/4-imagenes-1-palabra" element={<CuatroImagenesUnaPalabra />} />
           <Route path="/apps/bomba-loca" element={<BombaLoca />} />
           <Route path="/apps/context-api" element={<ContextAPI />} />
+          <Route path="/apps/monopoly-santafe" element={<MonopolySantaFe />} />
           <Route path="/docs" element={<DocsIndex />} />
+          <Route path="/docs/instalar-docker" element={<InstallarDocker />} />
+          <Route path="/docs/ollama-docker" element={<OllamaDocker />} />
           <Route path="/docs/instalar-ollama" element={<InstallarOllama />} />
           <Route path="/docs/instalar-node" element={<InstallarNode />} />
           <Route path="/docs/instalar-git" element={<InstallarGit />} />

@@ -3,6 +3,22 @@ import './DocsIndex.css'
 
 const docs = [
   {
+    id: 'instalar-docker',
+    titulo: 'Instalar Docker',
+    descripcion: 'Instalá Docker Desktop en Windows, macOS y Linux. Incluye configuración de WSL 2 y comandos esenciales.',
+    etiquetas: ['Docker', 'Contenedores', 'DevOps'],
+    tipo: 'instalacion',
+    icono: '🐳',
+  },
+  {
+    id: 'ollama-docker',
+    titulo: 'Ollama con Docker Compose',
+    descripcion: 'Levantá Ollama y Open WebUI con un solo comando usando el docker-compose del proyecto.',
+    etiquetas: ['Docker', 'Ollama', 'IA', 'LLM'],
+    tipo: 'guia',
+    icono: '🦙',
+  },
+  {
     id: 'instalar-ollama',
     titulo: 'Instalar Ollama (IA Local)',
     descripcion: 'Ejecutá modelos de IA como Llama 3, Mistral y Gemma directamente en tu computadora, sin internet ni API keys.',
