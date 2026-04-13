@@ -3,14 +3,14 @@
    ========================================== */
 .game-shell {
   width: 100%;
-  min-height: 100vh;
+  /* Restamos el alto aproximado del header del profe */
+  min-height: calc(100vh - 70px); 
   display: flex;
   justify-content: center;
   align-items: center;
   background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
-  padding: 20px;
+  padding: 10px; /* Un poco menos de padding para que entre en notebooks */
 }
-
 .container {
   width: 100%;
   max-width: 800px;
@@ -35,14 +35,14 @@
    ========================================== */
 .circle-container {
   position: relative;
-  width: min(340px, 80vw);
-  height: min(340px, 80vw);
-  margin: 50px auto;
+  /* Bajamos de 340px a 300px para que sea más compacto */
+  width: min(300px, 70vw);
+  height: min(300px, 70vw);
+  margin: 30px auto; /* Menos margen arriba/abajo */
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 /* El círculo ahora recorta las fotos de los personajes y usa var(--x) */
 .player-circular {
   position: absolute;
