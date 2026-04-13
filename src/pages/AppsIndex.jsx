@@ -93,6 +93,13 @@ const apps = [
     etiquetas: ['Context API', 'createContext', 'useContext', 'Custom Hook'],
     modulo: '05',
   },
+  {
+    id: 'react-router-demo',
+    titulo: 'React Router — Navegación',
+    descripcion: 'Explorador de destinos con rutas dinámicas, filtros por query string, navegación programática y página 404.',
+    etiquetas: ['React Router', 'useParams', 'useNavigate', 'useSearchParams', 'NavLink'],
+    modulo: '06',
+  },
 ]
 
 function AppsIndex() {

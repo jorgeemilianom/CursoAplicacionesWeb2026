@@ -32,6 +32,8 @@ import TeoriaReact from './pages/teoria/TeoriaReact'
 import TeoriaVueJS from './pages/teoria/TeoriaVueJS'
 import TeoriaTypeScript from './pages/teoria/TeoriaTypeScript'
 import TeoriaContextAPI from './pages/teoria/TeoriaContextAPI'
+import TeoriaReactRouter from './pages/teoria/TeoriaReactRouter'
+import ReactRouterDemo from './apps/react-router-demo/ReactRouterDemo'
 import './App.css'
 
 function App() {
@@ -54,6 +56,7 @@ function App() {
           <Route path="/apps/bomba-loca" element={<BombaLoca />} />
           <Route path="/apps/context-api" element={<ContextAPI />} />
           <Route path="/apps/monopoly-santafe" element={<MonopolySantaFe />} />
+          <Route path="/apps/react-router-demo/*" element={<ReactRouterDemo />} />
           <Route path="/docs" element={<DocsIndex />} />
           <Route path="/docs/instalar-docker" element={<InstallarDocker />} />
           <Route path="/docs/ollama-docker" element={<OllamaDocker />} />
@@ -71,6 +74,7 @@ function App() {
           <Route path="/docs/teoria-vuejs" element={<TeoriaVueJS />} />
           <Route path="/docs/teoria-typescript" element={<TeoriaTypeScript />} />
           <Route path="/docs/teoria-context-api" element={<TeoriaContextAPI />} />
+          <Route path="/docs/teoria-react-router" element={<TeoriaReactRouter />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>

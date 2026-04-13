@@ -1,0 +1,587 @@
+/* ═══════════════════════════════════════════════
+   App: React Router Demo — Explorador de Destinos
+   ═══════════════════════════════════════════════ */
+
+.rrd-shell {
+  min-height: calc(100vh - 64px);
+  background: var(--color-light);
+  padding: 48px 20px 80px;
+}
+
+.rrd-container {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+/* ── Volver a apps ── */
+.rrd-volver-apps {
+  display: inline-block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-gray);
+  margin-bottom: 32px;
+  transition: color 0.2s;
+}
+
+.rrd-volver-apps:hover {
+  color: var(--color-primary);
+}
+
+/* ── Header ── */
+.rrd-header {
+  margin-bottom: 28px;
+}
+
+.rrd-modulo {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+  padding: 3px 10px;
+  border-radius: 100px;
+  margin-bottom: 10px;
+}
+
+.rrd-header h1 {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: var(--color-dark);
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.rrd-header p {
+  color: var(--color-gray);
+  line-height: 1.6;
+  max-width: 620px;
+}
+
+/* ════════════════════════════════════════════════
+   Demo container
+   ════════════════════════════════════════════════ */
+.rrd-demo {
+  border: 1px solid var(--color-gray-light);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: 28px;
+  background: #fff;
+}
+
+/* ── Navbar interna ── */
+.rrd-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 16px;
+  background: #0f172a;
+  border-bottom: 1px solid #1e293b;
+}
+
+.rrd-nav__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #94a3b8;
+  transition: background 0.15s, color 0.15s;
+}
+
+.rrd-nav__link:hover {
+  background: #1e293b;
+  color: #e2e8f0;
+}
+
+/* La clase activa que aplica NavLink */
+.rrd-nav__link--activo {
+  background: var(--color-primary);
+  color: #fff !important;
+  font-weight: 600;
+}
+
+/* ── Contenido de la página ── */
+.rrd-contenido {
+  padding: 28px;
+  min-height: 320px;
+}
+
+/* ════════════════════════════════════════════════
+   Páginas
+   ════════════════════════════════════════════════ */
+.rrd-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: rrdEntrar 0.2s ease;
+}
+
+.rrd-page h2 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--color-dark);
+}
+
+.rrd-page p {
+  color: var(--color-gray);
+  line-height: 1.65;
+  font-size: 0.95rem;
+}
+
+/* Badge de ruta actual */
+.rrd-page__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-family: ui-monospace, Consolas, monospace;
+  background: #f1f5f9;
+  color: #475569;
+  padding: 5px 12px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  width: fit-content;
+}
+
+.rrd-page__badge strong {
+  color: var(--color-primary);
+}
+
+/* ── Página Inicio ── */
+.rrd-inicio__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+@media (max-width: 560px) {
+  .rrd-inicio__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.rrd-concepto-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px;
+  background: var(--color-light);
+  border: 1px solid var(--color-gray-light);
+  border-radius: var(--radius-md);
+}
+
+.rrd-concepto-card__icono {
+  font-size: 1.5rem;
+}
+
+.rrd-concepto-card h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-dark);
+}
+
+.rrd-concepto-card p {
+  font-size: 0.83rem;
+  color: var(--color-gray);
+  line-height: 1.55;
+  flex: 1;
+}
+
+.rrd-concepto-card code {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.82em;
+}
+
+.rrd-badge-demo {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+  padding: 5px 10px;
+  border-radius: 6px;
+  margin-top: auto;
+}
+
+/* ── Botones ── */
+.rrd-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s;
+  text-decoration: none;
+  width: fit-content;
+  margin-top: auto;
+}
+
+.rrd-btn--primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.rrd-btn--primary:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-1px);
+}
+
+.rrd-btn--secondary {
+  background: var(--color-light);
+  color: var(--color-dark-2);
+  border: 1px solid var(--color-gray-light);
+}
+
+.rrd-btn--secondary:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.rrd-btn--danger {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.rrd-btn--danger:hover {
+  background: #fee2e2;
+}
+
+/* ── Filtros (useSearchParams) ── */
+.rrd-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.rrd-filtros__label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-gray);
+}
+
+.rrd-filtros__botones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.rrd-filtro-btn {
+  padding: 5px 12px;
+  border-radius: 100px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--color-gray-light);
+  background: var(--color-light);
+  color: var(--color-gray);
+  transition: all 0.15s;
+}
+
+.rrd-filtro-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.rrd-filtro-btn--activo {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+}
+
+/* ── Grid de destinos ── */
+.rrd-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rrd-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--color-light);
+  border: 1px solid var(--color-gray-light);
+  border-radius: var(--radius-sm);
+  transition: border-color 0.15s, transform 0.15s, background 0.15s;
+}
+
+.rrd-card:hover {
+  border-color: var(--color-primary);
+  background: #fff;
+  transform: translateX(3px);
+}
+
+.rrd-card__emoji {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+  width: 40px;
+  text-align: center;
+}
+
+.rrd-card__info {
+  flex: 1;
+}
+
+.rrd-card__info h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-dark);
+  margin-bottom: 2px;
+}
+
+.rrd-card__info p {
+  font-size: 0.8rem;
+  color: var(--color-gray);
+  margin: 0;
+}
+
+.rrd-card__arrow {
+  font-size: 1rem;
+  color: var(--color-primary);
+  opacity: 0;
+  transition: opacity 0.15s;
+  flex-shrink: 0;
+}
+
+.rrd-card:hover .rrd-card__arrow {
+  opacity: 1;
+}
+
+.rrd-vacio {
+  text-align: center;
+  color: var(--color-gray);
+  font-style: italic;
+  padding: 20px 0;
+}
+
+/* ── Página Detalle (useParams) ── */
+.rrd-btn-volver {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-gray);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.15s;
+}
+
+.rrd-btn-volver:hover {
+  color: var(--color-primary);
+}
+
+.rrd-detalle {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: var(--color-light);
+  border: 1px solid var(--color-gray-light);
+  border-radius: var(--radius-md);
+  padding: 24px;
+}
+
+.rrd-detalle__encabezado {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.rrd-detalle__emoji {
+  font-size: 3rem;
+}
+
+.rrd-detalle__encabezado h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--color-dark);
+  margin-bottom: 4px;
+}
+
+.rrd-detalle__pais {
+  font-size: 0.85rem;
+  color: var(--color-gray);
+  margin: 0;
+}
+
+.rrd-detalle__descripcion {
+  font-size: 0.93rem;
+  color: var(--color-gray);
+  line-height: 1.7;
+}
+
+.rrd-detalle__datos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+@media (max-width: 520px) {
+  .rrd-detalle__datos {
+    grid-template-columns: 1fr;
+  }
+}
+
+.rrd-dato {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid var(--color-gray-light);
+  border-radius: var(--radius-sm);
+}
+
+.rrd-dato__label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-gray);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.rrd-dato__valor {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-dark);
+}
+
+.rrd-detalle__nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+/* ── Página 404 ── */
+.rrd-page--404 {
+  align-items: center;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.rrd-404__numero {
+  font-size: 5rem;
+  font-weight: 900;
+  color: #e2e8f0;
+  line-height: 1;
+  letter-spacing: -4px;
+}
+
+.rrd-page--404 h2 {
+  color: var(--color-dark);
+}
+
+.rrd-page--404 p {
+  max-width: 400px;
+  font-size: 0.9rem;
+}
+
+.rrd-page--404 code {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.9em;
+}
+
+.rrd-404__acciones {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ════════════════════════════════════════════════
+   Sección de conceptos
+   ════════════════════════════════════════════════ */
+.rrd-conceptos {
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-light);
+  border-radius: var(--radius-md);
+  padding: 28px;
+}
+
+.rrd-conceptos h2 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-dark-2);
+  margin-bottom: 16px;
+}
+
+.rrd-conceptos ul {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+}
+
+.rrd-conceptos li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.88rem;
+}
+
+.rrd-conceptos code {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.82rem;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.rrd-conceptos .concepto-texto {
+  background: var(--color-light);
+  color: var(--color-dark-2);
+  border: 1px solid var(--color-gray-light);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.rrd-conceptos li span:last-child {
+  color: var(--color-gray);
+  padding-top: 2px;
+  line-height: 1.5;
+}
+
+/* ── Animación de entrada de páginas ── */
+@keyframes rrdEntrar {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

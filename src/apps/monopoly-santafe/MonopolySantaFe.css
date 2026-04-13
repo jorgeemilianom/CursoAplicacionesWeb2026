@@ -124,11 +124,13 @@
 /* ─── JUEGO ─────────────────────────────────────────────────────────────────── */
 .msf-game {
   display: flex;
-  gap: 1rem;
-  padding: 1rem;
+  flex-direction: row;
+  gap: 0.75rem;
+  padding: 0.75rem;
   min-height: 100vh;
   background: #1a1a2e;
   align-items: flex-start;
+  box-sizing: border-box;
 }
 
 /* ─── TABLERO ────────────────────────────────────────────────────────────────── */
@@ -138,9 +140,11 @@
 }
 
 .msf-board {
+  --msf-corner: clamp(48px, min(calc((100vw - 300px) / 8.5), 9vh), 138px);
+  --msf-cell:   clamp(35px, min(calc((100vw - 300px) / 11.77), 6.5vh), 100px);
   display: grid;
-  grid-template-columns: 72px repeat(9, 52px) 72px;
-  grid-template-rows: 72px repeat(9, 52px) 72px;
+  grid-template-columns: var(--msf-corner) repeat(9, var(--msf-cell)) var(--msf-corner);
+  grid-template-rows:    var(--msf-corner) repeat(9, var(--msf-cell)) var(--msf-corner);
   width: fit-content;
   border: 3px solid #2c3e50;
   background: #d4edda;
@@ -159,22 +163,22 @@
   border: 2px solid #adb5bd;
 }
 
-.msf-board__center-logo { font-size: 3.5rem; }
+.msf-board__center-logo { font-size: clamp(2rem, 5vh, 6rem); }
 .msf-board__center-title {
-  font-size: 2rem;
+  font-size: clamp(1.2rem, 2.8vh, 3.5rem);
   font-weight: 900;
   color: #1a1a2e;
   letter-spacing: 2px;
 }
 .msf-board__center-sub {
-  font-size: 1.1rem;
+  font-size: clamp(0.65rem, 1.3vh, 1.6rem);
   font-weight: 700;
   color: #0f3460;
   letter-spacing: 4px;
 }
 .msf-board__pot {
   margin-top: 0.5rem;
-  font-size: 0.85rem;
+  font-size: clamp(0.6rem, 0.9vh, 1rem);
   color: #e74c3c;
   font-weight: 600;
 }
@@ -187,7 +191,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  font-size: 0.42rem;
+  font-size: clamp(0.38rem, 0.52vh, 0.62rem);
   text-align: center;
   overflow: hidden;
   background: #fff;
@@ -199,18 +203,18 @@
 
 .msf-sq__color-bar {
   width: 100%;
-  height: 10px;
+  height: clamp(8px, 1.1vh, 15px);
   flex-shrink: 0;
 }
 
 .msf-sq__icon {
-  font-size: 1.1rem;
+  font-size: clamp(0.85rem, 1.5vh, 2rem);
   margin-top: 2px;
 }
 
 .msf-sq__name {
   font-weight: 700;
-  font-size: 0.44rem;
+  font-size: clamp(0.42rem, 0.62vh, 0.8rem);
   padding: 1px 2px;
   line-height: 1.2;
   word-break: break-word;
@@ -219,15 +223,15 @@
 
 .msf-sq__price {
   color: #555;
-  font-size: 0.4rem;
+  font-size: clamp(0.38rem, 0.52vh, 0.68rem);
 }
 
 .msf-sq__owner-dot {
   position: absolute;
   bottom: 2px;
   right: 2px;
-  width: 6px;
-  height: 6px;
+  width: clamp(5px, 0.8vh, 11px);
+  height: clamp(5px, 0.8vh, 11px);
   border-radius: 50%;
   border: 1px solid rgba(0,0,0,0.3);
 }
@@ -242,19 +246,47 @@
 }
 
 .msf-token {
-  width: 12px;
-  height: 12px;
+  width: clamp(11px, 1.6vh, 22px);
+  height: clamp(11px, 1.6vh, 22px);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.5rem;
+  font-size: clamp(0.4rem, 0.75vh, 0.9rem);
   border: 1px solid rgba(0,0,0,0.3);
+  transition: transform 0.15s;
+  z-index: 2;
 }
 
-.msf-houses { font-size: 0.5rem; }
+.msf-token--walking {
+  animation: msf-token-step 0.12s ease-in-out;
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.7), 0 4px 12px rgba(0,0,0,0.4);
+  transform: scale(1.4);
+  z-index: 10;
+}
+
+@keyframes msf-token-step {
+  0%   { transform: scale(1) translateY(0); }
+  40%  { transform: scale(1.5) translateY(-4px); }
+  100% { transform: scale(1.4) translateY(0); }
+}
+
+.msf-token--moving {
+  animation: msf-token-bounce 0.8s ease;
+}
+
+@keyframes msf-token-bounce {
+  0%   { transform: scale(1) translateY(0); }
+  20%  { transform: scale(1.6) translateY(-5px); }
+  45%  { transform: scale(1.2) translateY(-2px); }
+  65%  { transform: scale(1.4) translateY(-4px); }
+  80%  { transform: scale(1.1) translateY(-1px); }
+  100% { transform: scale(1) translateY(0); }
+}
+
+.msf-houses { font-size: clamp(0.4rem, 0.8vw, 1rem); }
 .msf-hotel  {
-  font-size: 0.5rem;
+  font-size: clamp(0.4rem, 0.8vw, 1rem);
   color: #e74c3c;
   font-weight: 900;
 }
@@ -265,13 +297,13 @@
 .msf-sq--left   { writing-mode: vertical-lr; transform: rotate(180deg); }
 
 .msf-sq--corner {
-  font-size: 0.55rem;
+  font-size: clamp(0.5rem, 0.8vw, 0.95rem);
   font-weight: 700;
   justify-content: center;
 }
 
-.msf-sq--corner .msf-sq__icon { font-size: 1.6rem; }
-.msf-sq--corner .msf-sq__name { font-size: 0.5rem; }
+.msf-sq--corner .msf-sq__icon { font-size: clamp(1.3rem, 2.5vh, 3rem); }
+.msf-sq--corner .msf-sq__name { font-size: clamp(0.45rem, 0.68vh, 0.85rem); }
 
 /* ─── PANEL LATERAL ──────────────────────────────────────────────────────────── */
 .msf-panel {
@@ -279,8 +311,8 @@
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  min-width: 240px;
-  max-width: 300px;
+  min-width: 220px;
+  max-width: 290px;
 }
 
 /* Tarjetas de jugadores */
@@ -392,34 +424,54 @@
 }
 
 .msf-die {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 3rem;
+  height: 3rem;
   background: #fff;
-  border-radius: 0.4rem;
+  border-radius: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.4rem;
-  font-weight: 900;
+  font-size: 1.9rem;
   color: #1a1a2e;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.35);
   transition: transform 0.2s;
+  user-select: none;
 }
 
-.msf-die--rolled {
-  animation: msf-roll 0.3s ease;
+.msf-die--rolling {
+  animation: msf-shake 0.08s linear infinite;
+  background: #fff9e6;
+  box-shadow: 0 3px 14px rgba(243,156,18,0.5);
 }
 
-@keyframes msf-roll {
-  0%   { transform: rotate(0deg) scale(1.3); }
-  50%  { transform: rotate(180deg) scale(0.8); }
-  100% { transform: rotate(360deg) scale(1); }
+.msf-die--settled {
+  animation: msf-settle 0.35s ease;
+}
+
+@keyframes msf-shake {
+  0%   { transform: rotate(-12deg) scale(1.12); }
+  50%  { transform: rotate(12deg) scale(1.12); }
+  100% { transform: rotate(-12deg) scale(1.12); }
+}
+
+@keyframes msf-settle {
+  0%   { transform: scale(1.5); }
+  55%  { transform: scale(0.88); }
+  80%  { transform: scale(1.08); }
+  100% { transform: scale(1); }
 }
 
 .msf-doubles {
   font-size: 0.75rem;
   color: #f39c12;
   font-weight: 700;
+  animation: msf-flash 0.5s ease;
+}
+
+@keyframes msf-flash {
+  0%   { opacity: 0; transform: scale(0.5); }
+  60%  { opacity: 1; transform: scale(1.2); }
+  100% { transform: scale(1); }
 }
 
 /* Botones de acción */
@@ -590,7 +642,7 @@
 }
 
 /* ─── RESPONSIVE ─────────────────────────────────────────────────────────────── */
-@media (max-width: 900px) {
+@media (max-width: 800px) {
   .msf-game {
     flex-direction: column;
     align-items: center;
@@ -600,7 +652,7 @@
     width: 100%;
   }
   .msf-board {
-    grid-template-columns: 60px repeat(9, 44px) 60px;
-    grid-template-rows: 60px repeat(9, 44px) 60px;
+    --msf-corner: clamp(40px, 10.5vw, 70px);
+    --msf-cell:   clamp(29px, 7.6vw,  52px);
   }
 }

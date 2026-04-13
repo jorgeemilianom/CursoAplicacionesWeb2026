@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import {
   BOARD, COLOR_GROUPS, RAILROAD_IDS, UTILITY_IDS,
@@ -96,10 +96,22 @@ export default function MonopolySantaFe() {
   const [commDeck, setCommDeck]         = useState(() => shuffle(COMMUNITY_CARDS))
   const [winner, setWinner] = useState(null)
   const [parkingPot, setParkingPot] = useState(0) // dinero acumulado en estacionamiento
+  const [diceRolling, setDiceRolling] = useState(false)
+  const [visualDice, setVisualDice] = useState([1, 1])
+  const rollIntervalRef = useRef(null)
+  const [walkingState, setWalkingState] = useState(null) // { pidx, pos }
+  const walkIntervalRef = useRef(null)
 
   // ─── helpers de log ────────────────────────────────────────────────────────
   const addLog = useCallback((msg) => {
     setLog(prev => [msg, ...prev].slice(0, 30))
+  }, [])
+
+  useEffect(() => {
+    return () => {
+      clearInterval(rollIntervalRef.current)
+      clearInterval(walkIntervalRef.current)
+    }
   }, [])
 
   // ─── INICIO ────────────────────────────────────────────────────────────────
@@ -140,30 +152,65 @@ export default function MonopolySantaFe() {
 
   // ─── LANZAR DADOS ──────────────────────────────────────────────────────────
   function handleRoll() {
-    if (rolled) return
+    if (rolled || diceRolling) return
+    setDiceRolling(true)
+
     const d1 = rollDie(), d2 = rollDie()
-    setDice([d1, d2])
+    let count = 0
+
+    rollIntervalRef.current = setInterval(() => {
+      count++
+      if (count < 8) {
+        setVisualDice([rollDie(), rollDie()])
+      } else {
+        clearInterval(rollIntervalRef.current)
+        setVisualDice([d1, d2])
+        setDice([d1, d2])
+        setDiceRolling(false)
+        processRoll(d1, d2)
+      }
+    }, 80)
+  }
+
+  function animateWalk(pidx, startPos, steps, onComplete) {
+    let step = 0
+    setWalkingState({ pidx, pos: startPos })
+    walkIntervalRef.current = setInterval(() => {
+      step++
+      const pos = (startPos + step) % 40
+      setWalkingState({ pidx, pos })
+      if (step >= steps) {
+        clearInterval(walkIntervalRef.current)
+        setTimeout(() => {
+          setWalkingState(null)
+          onComplete()
+        }, 250)
+      }
+    }, 120)
+  }
+
+  function processRoll(d1, d2) {
     const isDouble = d1 === d2
     const sum = d1 + d2
-
     let snap = [...players]
     const p = snap[currentIdx]
 
-    // Cárcel
+    // ── Cárcel ─────────────────────────────────────────────────────────────
     if (p.inJail) {
       if (isDouble) {
         snap = snap.map((pl, i) => i === currentIdx
           ? { ...pl, inJail: false, jailTurns: 0, doublesCount: 0 }
           : pl)
         addLog(`${p.name} sacó dobles y salió de la cárcel.`)
+        // cae a movimiento normal
       } else {
         const newTurns = p.jailTurns + 1
         if (newTurns >= 3) {
-          // obligado a pagar
           snap = snap.map((pl, i) => i === currentIdx
             ? { ...pl, inJail: false, jailTurns: 0, money: pl.money - 50 }
             : pl)
           addLog(`${p.name} pagó $50 y salió de la cárcel.`)
+          // cae a movimiento normal
         } else {
           snap = snap.map((pl, i) => i === currentIdx
             ? { ...pl, jailTurns: newTurns }
@@ -175,15 +222,21 @@ export default function MonopolySantaFe() {
         }
       }
     } else {
-      // Dobles: contar racha
+      // ── Dobles triple → ir a la cárcel ──────────────────────────────────
       const newDoubles = isDouble ? p.doublesCount + 1 : 0
       if (newDoubles >= 3) {
-        snap = snap.map((pl, i) => i === currentIdx
-          ? { ...pl, inJail: true, jailTurns: 0, doublesCount: 0, position: 10 }
-          : pl)
         addLog(`${p.name} sacó dobles 3 veces. ¡Va a la cárcel!`)
-        setPlayers(snap)
-        setRolled(true)
+        const startPos = snap[currentIdx].position
+        const snapBeforeJail = snap.map((pl, i) => i === currentIdx
+          ? { ...pl, doublesCount: 0 }
+          : pl)
+        animateWalk(currentIdx, startPos, (10 - startPos + 40) % 40 || 40, () => {
+          const jailed = snapBeforeJail.map((pl, i) => i === currentIdx
+            ? { ...pl, inJail: true, jailTurns: 0, doublesCount: 0, position: 10 }
+            : pl)
+          setPlayers(jailed)
+          setRolled(true)
+        })
         return
       }
       snap = snap.map((pl, i) => i === currentIdx
@@ -191,16 +244,27 @@ export default function MonopolySantaFe() {
         : pl)
     }
 
-    // Mover
-    const { updated, newPos } = movePlayer(snap, currentIdx, sum)
-    snap = updated
-    addLog(`${snap[currentIdx].name} tiró ${d1}+${d2}=${sum} → ${BOARD[newPos].name}`)
+    // ── Movimiento paso a paso ───────────────────────────────────────────
+    const startPos = snap[currentIdx].position
+    const newPos = (startPos + sum) % 40
+    const passedGo = newPos < startPos
 
-    // Aplicar casilla
-    snap = applySquare(snap, currentIdx, newPos, sum, isDouble)
-    setPlayers(snap)
-    setRolled(!isDouble) // si saca dobles, puede volver a tirar
-    checkBankruptcyAndWin(snap)
+    // Hacemos una copia de snap para el closure del callback
+    const snapAtRoll = snap
+
+    animateWalk(currentIdx, startPos, sum, () => {
+      // Aplicar posición final y cobro de salida
+      let finalSnap = snapAtRoll.map((pl, i) => i === currentIdx
+        ? { ...pl, position: newPos, money: pl.money + (passedGo ? 200 : 0) }
+        : pl)
+      if (passedGo) addLog(`${p.name} pasó por la Salida. Cobró $200.`)
+      addLog(`${p.name} tiró ${d1}+${d2}=${sum} → ${BOARD[newPos].name}`)
+
+      finalSnap = applySquare(finalSnap, currentIdx, newPos, sum, isDouble)
+      setPlayers(finalSnap)
+      setRolled(!isDouble)
+      checkBankruptcyAndWin(finalSnap)
+    })
   }
 
   // ─── APLICAR EFECTO DE CASILLA ─────────────────────────────────────────────
@@ -474,7 +538,11 @@ export default function MonopolySantaFe() {
   }
 
   function playersOnSquare(id) {
-    return players.filter(p => !p.bankrupt && p.position === id)
+    return players.filter(p => {
+      if (p.bankrupt) return false
+      if (walkingState && walkingState.pidx === p.id) return walkingState.pos === id
+      return p.position === id
+    })
   }
 
   function buildingDisplay(id) {
@@ -586,7 +654,12 @@ export default function MonopolySantaFe() {
                 {onSquare.length > 0 && (
                   <div className="msf-sq__tokens">
                     {onSquare.map(p => (
-                      <span key={p.id} className="msf-token" style={{ background: p.color }} title={p.name}>
+                      <span
+                        key={p.id}
+                        className={`msf-token ${walkingState && walkingState.pidx === p.id ? 'msf-token--walking' : ''}`}
+                        style={{ background: p.color }}
+                        title={p.name}
+                      >
                         {p.token}
                       </span>
                     ))}
@@ -643,9 +716,13 @@ export default function MonopolySantaFe() {
 
           {/* Dados */}
           <div className="msf-dice-row">
-            <div className={`msf-die ${rolled ? 'msf-die--rolled' : ''}`}>{dice[0]}</div>
-            <div className={`msf-die ${rolled ? 'msf-die--rolled' : ''}`}>{dice[1]}</div>
-            {dice[0] === dice[1] && rolled && (
+            <div className={`msf-die ${diceRolling ? 'msf-die--rolling' : rolled ? 'msf-die--settled' : ''}`}>
+              {['','⚀','⚁','⚂','⚃','⚄','⚅'][visualDice[0]]}
+            </div>
+            <div className={`msf-die ${diceRolling ? 'msf-die--rolling' : rolled ? 'msf-die--settled' : ''}`}>
+              {['','⚀','⚁','⚂','⚃','⚄','⚅'][visualDice[1]]}
+            </div>
+            {dice[0] === dice[1] && rolled && !diceRolling && (
               <span className="msf-doubles">¡Dobles!</span>
             )}
           </div>
@@ -668,13 +745,13 @@ export default function MonopolySantaFe() {
 
             {/* Tirar dados */}
             {!rolled && (
-              <button className="msf-btn msf-btn--primary" onClick={handleRoll}>
-                🎲 Tirar dados
+              <button className="msf-btn msf-btn--primary" onClick={handleRoll} disabled={diceRolling || walkingState !== null}>
+                {diceRolling ? '🎲 Tirando...' : walkingState ? '🎲 Moviendo...' : '🎲 Tirar dados'}
               </button>
             )}
 
             {/* Construir */}
-            {rolled && (
+            {rolled && !walkingState && (
               <button
                 className="msf-btn msf-btn--build"
                 onClick={() => setModal({ type: 'build' })}
@@ -684,7 +761,7 @@ export default function MonopolySantaFe() {
             )}
 
             {/* Terminar turno */}
-            {rolled && (
+            {rolled && !walkingState && (
               <button className="msf-btn msf-btn--end" onClick={handleEndTurn}>
                 Terminar turno →
               </button>

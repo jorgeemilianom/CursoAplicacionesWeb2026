@@ -133,6 +133,14 @@ const teoria = [
     tipo: 'teoria',
     icono: '🔄',
   },
+  {
+    id: 'teoria-react-router',
+    titulo: 'React Router — Navegación',
+    descripcion: 'Routes, Link, NavLink, useNavigate, useParams, useSearchParams, rutas anidadas y rutas protegidas.',
+    etiquetas: ['React', 'React Router', 'Navegación', 'Trimestre 2'],
+    tipo: 'teoria',
+    icono: '🧭',
+  },
 ]
 
 const tipoLabel = {
