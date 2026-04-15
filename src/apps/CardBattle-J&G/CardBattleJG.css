@@ -1,0 +1,27 @@
+@import '../apps-shared.css';
+
+.card-battle__container {
+  width: min(920px, 100%);
+  margin: 0 auto;
+}
+
+.card-battle__placeholder {
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-light);
+  border-radius: var(--radius-md);
+  padding: 32px;
+  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.06);
+}
+
+.card-battle__placeholder h2 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--color-dark);
+  margin-bottom: 12px;
+}
+
+.card-battle__placeholder p {
+  color: var(--color-gray);
+  line-height: 1.7;
+  max-width: 60ch;
+}

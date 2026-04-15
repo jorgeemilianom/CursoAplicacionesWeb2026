@@ -15,6 +15,7 @@ import JuegoSupermercado from './apps/supermercado/JuegoSupermercado'
 import PuzzleRaiz from './apps/rompecabezas/ArchivosJSX/PuzzleRaiz'
 import ContextAPI from './apps/context-api/ContextAPI'
 import MonopolySantaFe from './apps/monopoly-santafe/MonopolySantaFe'
+import CardBattleJG from './apps/CardBattle-J&G/CardBattleJG'
 import DocsIndex from './pages/DocsIndex'
 import InstallarDocker from './pages/docs/InstallarDocker'
 import OllamaDocker from './pages/docs/OllamaDocker'
@@ -56,6 +57,7 @@ function App() {
           <Route path="/apps/bomba-loca" element={<BombaLoca />} />
           <Route path="/apps/context-api" element={<ContextAPI />} />
           <Route path="/apps/monopoly-santafe" element={<MonopolySantaFe />} />
+          <Route path="/apps/CardBattle-J&G" element={<CardBattleJG />} />
           <Route path="/apps/react-router-demo/*" element={<ReactRouterDemo />} />
           <Route path="/docs" element={<DocsIndex />} />
           <Route path="/docs/instalar-docker" element={<InstallarDocker />} />
