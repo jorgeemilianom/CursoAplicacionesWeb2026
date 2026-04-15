@@ -1,27 +1,101 @@
 @import '../apps-shared.css';
 
-.card-battle__container {
-  width: min(920px, 100%);
-  margin: 0 auto;
+/* ==================== CARD BATTLE - ESTILOS PRINCIPALES ==================== */
+
+.card-battle {
+  --card-battle-bg: #0a0a1a;
+  --card-battle-primary: #ffd700;
+  --card-battle-secondary: #4ecdc4;
+  --card-battle-danger: #ff6b6b;
+
+  min-height: 100vh;
+  background: var(--card-battle-bg);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.card-battle__placeholder {
-  background: var(--color-white);
-  border: 1px solid var(--color-gray-light);
-  border-radius: var(--radius-md);
-  padding: 32px;
-  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.06);
+.card-battle__nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 15px 20px;
+  background: rgba(0, 0, 0, 0.8);
+  border-bottom: 1px solid #333;
+  z-index: 100;
 }
 
-.card-battle__placeholder h2 {
-  font-size: 1.2rem;
-  font-weight: 800;
-  color: var(--color-dark);
-  margin-bottom: 12px;
+.card-battle__nav .app-volver {
+  color: #888;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
 }
 
-.card-battle__placeholder p {
-  color: var(--color-gray);
-  line-height: 1.7;
-  max-width: 60ch;
+.card-battle__nav .app-volver:hover {
+  color: #fff;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+  .battle-board {
+    flex-direction: column;
+  }
+
+  .battle-board__sidebar {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-right: none;
+    border-bottom: 2px solid #333;
+  }
+
+  .battle-board__sidebar > * {
+    flex: 1;
+    min-width: 150px;
+  }
+
+  .battle-field {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .menu-screen__title {
+    font-size: 32px;
+  }
+
+  .result-screen__stats {
+    flex-direction: column;
+  }
+}
+
+/* ==================== ANIMACIONES GLOBALES ==================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
