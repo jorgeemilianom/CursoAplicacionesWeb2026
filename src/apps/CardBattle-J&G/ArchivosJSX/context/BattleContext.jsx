@@ -5,35 +5,25 @@ import { useGame } from './GameContext'
 const BattleContext = createContext(null)
 
 export function BattleProvider({ children }) {
-  // Consumimos DeckContext para acceder al mazo
-  const { shuffledDeck, createShuffledDeck, dealInitialHand, drawCard } = useDeck()
-  // Consumimos GameContext para verificar turno y aplicar efectos
-  const { currentTurn, applyDamage, healPlayer, endTurn } = useGame()
+  const { createShuffledDeck, dealInitialHand, drawCard } = useDeck()
+  const { currentTurn, turnPhase, applyDamage, healPlayer, endTurn, setTurnPhase } = useGame()
 
-  // Manos de cada jugador
   const [player1Hand, setPlayer1Hand] = useState([])
   const [player2Hand, setPlayer2Hand] = useState([])
-
-  // Cartas en el campo (slot de cada jugador)
   const [fieldCards, setFieldCards] = useState({
     player1: null,
     player2: null
   })
-
-  // Efecto activo (para mostrar notificación)
   const [activeEffect, setActiveEffect] = useState(null)
-
-  // Historial de acciones (para el log de batalla)
   const [battleLog, setBattleLog] = useState([])
-
-  // Mazo restante
   const [remainingDeck, setRemainingDeck] = useState([])
-
-  // Escudos activos de cada jugador
   const [player1Shield, setPlayer1Shield] = useState(0)
   const [player2Shield, setPlayer2Shield] = useState(0)
 
-  // Iniciar una nueva batalla
+  const addLog = useCallback((message) => {
+    setBattleLog((prev) => [...prev, message])
+  }, [])
+
   const startBattle = useCallback(() => {
     const deck = createShuffledDeck()
     const { player1Hand: p1, player2Hand: p2, remainingDeck: remaining } = dealInitialHand(deck, 5)
@@ -42,29 +32,31 @@ export function BattleProvider({ children }) {
     setPlayer2Hand(p2)
     setRemainingDeck(remaining)
     setFieldCards({ player1: null, player2: null })
-    setBattleLog(['¡La batalla ha comenzado!'])
+    setBattleLog(['La batalla ha comenzado'])
     setPlayer1Shield(0)
     setPlayer2Shield(0)
     setActiveEffect(null)
-  }, [createShuffledDeck, dealInitialHand])
+    setTurnPhase('draw')
+  }, [createShuffledDeck, dealInitialHand, setTurnPhase])
 
-  // Jugar una carta al campo
   const playCard = useCallback((cardUniqueKey, playerId) => {
-    // Verificar que es el turno del jugador
     if (currentTurn !== playerId) {
       console.warn('No es tu turno')
       return false
     }
 
-    // Verificar que el slot está libre
+    if (turnPhase !== 'play') {
+      console.warn('Debes estar en fase de juego para bajar una carta')
+      return false
+    }
+
     if (fieldCards[playerId]) {
       console.warn('Ya tienes una carta en el campo')
       return false
     }
 
-    // Obtener la carta de la mano
     const hand = playerId === 'player1' ? player1Hand : player2Hand
-    const cardIndex = hand.findIndex(c => c.uniqueId === cardUniqueKey)
+    const cardIndex = hand.findIndex((card) => card.uniqueId === cardUniqueKey)
 
     if (cardIndex === -1) {
       console.warn('Carta no encontrada en la mano')
@@ -72,8 +64,6 @@ export function BattleProvider({ children }) {
     }
 
     const card = hand[cardIndex]
-
-    // Remover carta de la mano
     const newHand = [...hand]
     newHand.splice(cardIndex, 1)
 
@@ -83,19 +73,70 @@ export function BattleProvider({ children }) {
       setPlayer2Hand(newHand)
     }
 
-    // Poner carta en el campo
-    setFieldCards(prev => ({
-      ...prev,
+    const nextFieldCards = {
+      ...fieldCards,
       [playerId]: card
-    }))
+    }
 
-    // Agregar al log
-    addLog(`${playerId === 'player1' ? 'Jugador 1' : 'Jugador 2'} jugó ${card.name}`)
+    setFieldCards(nextFieldCards)
+    addLog(`${playerId === 'player1' ? 'Jugador 1' : 'Jugador 2'} jugo ${card.name}`)
+
+    if (nextFieldCards.player1 && nextFieldCards.player2) {
+      setTurnPhase('resolve')
+    } else {
+      endTurn()
+    }
 
     return true
-  }, [currentTurn, fieldCards, player1Hand, player2Hand])
+  }, [currentTurn, turnPhase, fieldCards, player1Hand, player2Hand, addLog, endTurn, setTurnPhase])
 
-  // Resolver el combate cuando ambos tienen carta en campo
+  const applyCardEffect = useCallback((card, playerId) => {
+    const { effectType, effectValue } = card
+    let effectMessage = ''
+
+    switch (effectType) {
+      case 'damage': {
+        const opponent = playerId === 'player1' ? 'player2' : 'player1'
+        applyDamage(opponent, effectValue)
+        effectMessage = `${card.name} infligio ${effectValue} de dano extra`
+        break
+      }
+      case 'heal':
+        healPlayer(playerId, effectValue)
+        effectMessage = `${card.name} curo ${effectValue} puntos de vida`
+        break
+      case 'shield':
+        if (playerId === 'player1') {
+          setPlayer1Shield((prev) => prev + effectValue)
+        } else {
+          setPlayer2Shield((prev) => prev + effectValue)
+        }
+        effectMessage = `${card.name} otorgo ${effectValue} de escudo`
+        break
+      case 'draw': {
+        const { drawn, remaining } = drawCard(remainingDeck, effectValue)
+        if (drawn.length > 0) {
+          if (playerId === 'player1') {
+            setPlayer1Hand((prev) => [...prev, ...drawn])
+          } else {
+            setPlayer2Hand((prev) => [...prev, ...drawn])
+          }
+          setRemainingDeck(remaining)
+          effectMessage = `${card.name} permitio robar ${drawn.length} carta(s)`
+        }
+        break
+      }
+      default:
+        break
+    }
+
+    if (!effectMessage) return
+
+    setActiveEffect({ card, message: effectMessage })
+    addLog(effectMessage)
+    setTimeout(() => setActiveEffect(null), 2000)
+  }, [applyDamage, healPlayer, drawCard, remainingDeck, addLog])
+
   const resolveCombat = useCallback(() => {
     const { player1: card1, player2: card2 } = fieldCards
 
@@ -104,98 +145,54 @@ export function BattleProvider({ children }) {
       return
     }
 
-    // Calcular daño
+    if (turnPhase !== 'resolve') {
+      console.warn('El combate solo puede resolverse en la fase resolve')
+      return
+    }
+
     let damage1to2 = Math.max(0, card1.attack - card2.defense)
     let damage2to1 = Math.max(0, card2.attack - card1.defense)
 
-    // Aplicar escudos
     if (player2Shield > 0) {
       const blocked = Math.min(player2Shield, damage1to2)
       damage1to2 -= blocked
-      setPlayer2Shield(prev => prev - blocked)
-      if (blocked > 0) addLog(`Escudo bloqueó ${blocked} de daño`)
+      setPlayer2Shield((prev) => prev - blocked)
+      if (blocked > 0) addLog(`Escudo bloqueo ${blocked} de dano`)
     }
 
     if (player1Shield > 0) {
       const blocked = Math.min(player1Shield, damage2to1)
       damage2to1 -= blocked
-      setPlayer1Shield(prev => prev - blocked)
-      if (blocked > 0) addLog(`Escudo bloqueó ${blocked} de daño`)
+      setPlayer1Shield((prev) => prev - blocked)
+      if (blocked > 0) addLog(`Escudo bloqueo ${blocked} de dano`)
     }
 
-    // Aplicar daño
     if (damage1to2 > 0) {
       applyDamage('player2', damage1to2)
-      addLog(`${card1.name} infligió ${damage1to2} de daño`)
-    }
-    if (damage2to1 > 0) {
-      applyDamage('player1', damage2to1)
-      addLog(`${card2.name} infligió ${damage2to1} de daño`)
+      addLog(`${card1.name} infligio ${damage1to2} de dano`)
     }
 
-    // Aplicar efectos de las cartas
+    if (damage2to1 > 0) {
+      applyDamage('player1', damage2to1)
+      addLog(`${card2.name} infligio ${damage2to1} de dano`)
+    }
+
     applyCardEffect(card1, 'player1')
     applyCardEffect(card2, 'player2')
 
-    // Limpiar campo después del combate
     setFieldCards({ player1: null, player2: null })
-
-    // Cambiar turno
     endTurn()
-  }, [fieldCards, player1Shield, player2Shield, applyDamage, endTurn])
+  }, [fieldCards, turnPhase, player1Shield, player2Shield, applyDamage, applyCardEffect, addLog, endTurn])
 
-  // Aplicar efecto especial de una carta
-  const applyCardEffect = useCallback((card, playerId) => {
-    const { effectType, effectValue } = card
-    let effectMessage = ''
-
-    switch (effectType) {
-      case 'damage':
-        const opponent = playerId === 'player1' ? 'player2' : 'player1'
-        applyDamage(opponent, effectValue)
-        effectMessage = `${card.name} infligió ${effectValue} de daño extra`
-        break
-
-      case 'heal':
-        healPlayer(playerId, effectValue)
-        effectMessage = `${card.name} curó ${effectValue} puntos de vida`
-        break
-
-      case 'shield':
-        if (playerId === 'player1') {
-          setPlayer1Shield(prev => prev + effectValue)
-        } else {
-          setPlayer2Shield(prev => prev + effectValue)
-        }
-        effectMessage = `${card.name} otorgó ${effectValue} de escudo`
-        break
-
-      case 'draw':
-        const { drawn, remaining } = drawCard(remainingDeck, effectValue)
-        if (drawn.length > 0) {
-          if (playerId === 'player1') {
-            setPlayer1Hand(prev => [...prev, ...drawn])
-          } else {
-            setPlayer2Hand(prev => [...prev, ...drawn])
-          }
-          setRemainingDeck(remaining)
-          effectMessage = `${card.name} permitió robar ${drawn.length} carta(s)`
-        }
-        break
+  const drawCardForPlayer = useCallback((playerId) => {
+    if (turnPhase !== 'draw') {
+      console.warn('Solo puedes robar en la fase draw')
+      return null
     }
 
-    // Mostrar notificación del efecto
-    setActiveEffect({ card, message: effectMessage })
-    addLog(effectMessage)
-
-    // Limpiar notificación después de 2 segundos
-    setTimeout(() => setActiveEffect(null), 2000)
-  }, [applyDamage, healPlayer, drawCard, remainingDeck])
-
-  // Robar carta al inicio del turno
-  const drawCardForPlayer = useCallback((playerId) => {
     if (remainingDeck.length === 0) {
-      addLog('¡No quedan cartas en el mazo!')
+      addLog('No quedan cartas en el mazo')
+      setTurnPhase('play')
       return null
     }
 
@@ -203,21 +200,16 @@ export function BattleProvider({ children }) {
     setRemainingDeck(remaining)
 
     if (playerId === 'player1') {
-      setPlayer1Hand(prev => [...prev, ...drawn])
+      setPlayer1Hand((prev) => [...prev, ...drawn])
     } else {
-      setPlayer2Hand(prev => [...prev, ...drawn])
+      setPlayer2Hand((prev) => [...prev, ...drawn])
     }
 
-    addLog(`${playerId === 'player1' ? 'Jugador 1' : 'Jugador 2'} robó una carta`)
+    addLog(`${playerId === 'player1' ? 'Jugador 1' : 'Jugador 2'} robo una carta`)
+    setTurnPhase('play')
     return drawn[0]
-  }, [remainingDeck, drawCard])
+  }, [turnPhase, remainingDeck, drawCard, addLog, setTurnPhase])
 
-  // Agregar mensaje al log
-  const addLog = useCallback((message) => {
-    setBattleLog(prev => [...prev, message])
-  }, [])
-
-  // Reiniciar batalla
   const resetBattle = useCallback(() => {
     setPlayer1Hand([])
     setPlayer2Hand([])
@@ -230,7 +222,6 @@ export function BattleProvider({ children }) {
   }, [])
 
   const value = {
-    // Estado
     player1Hand,
     player2Hand,
     fieldCards,
@@ -239,7 +230,6 @@ export function BattleProvider({ children }) {
     remainingDeck,
     player1Shield,
     player2Shield,
-    // Acciones
     startBattle,
     playCard,
     resolveCombat,

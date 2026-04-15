@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { useGame } from '../context/GameContext'
-import { useBattle } from '../context/BattleContext'
+import useCardGame from '../../ArchivosJS/useCardGame'
 import PlayerZone from './PlayerZone'
 import BattleField from './BattleField'
 import DeckPile from '../hand/DeckPile'
@@ -13,8 +12,11 @@ import './Battle.css'
  * BattleBoard - Tablero principal del juego
  */
 function BattleBoard() {
-  const { player1HP, player2HP, currentTurn } = useGame()
   const {
+    player1HP,
+    player2HP,
+    currentTurn,
+    turnPhase,
     player1Hand,
     player2Hand,
     fieldCards,
@@ -23,10 +25,12 @@ function BattleBoard() {
     activeEffect,
     player1Shield,
     player2Shield,
-    playCard,
-    resolveCombat,
-    drawCardForPlayer
-  } = useBattle()
+    canDraw,
+    canResolve,
+    handleDrawCard,
+    handlePlayCard,
+    handleResolveCombat
+  } = useCardGame()
 
   const [selectedCard, setSelectedCard] = useState(null)
 
@@ -36,20 +40,12 @@ function BattleBoard() {
 
   const handleSlotClick = (playerId) => {
     if (selectedCard && playerId === currentTurn) {
-      const success = playCard(selectedCard.uniqueId, playerId)
+      const success = handlePlayCard(selectedCard.uniqueId, playerId)
       if (success) {
         setSelectedCard(null)
       }
     }
   }
-
-  const handleDrawCard = () => {
-    if (remainingDeck.length > 0) {
-      drawCardForPlayer(currentTurn)
-    }
-  }
-
-  const canResolve = fieldCards.player1 && fieldCards.player2
 
   // Datos de cada jugador para PlayerZone
   const player1Data = {
@@ -69,8 +65,8 @@ function BattleBoard() {
       <EffectNotification effect={activeEffect} />
 
       <div className="battle-board__sidebar battle-board__sidebar--left">
-        <TurnIndicator currentTurn={currentTurn} />
-        <DeckPile count={remainingDeck.length} onClick={handleDrawCard} />
+        <TurnIndicator currentTurn={currentTurn} turnPhase={turnPhase} />
+        <DeckPile count={remainingDeck.length} onClick={canDraw ? handleDrawCard : undefined} />
         <GameLog logs={battleLog} />
       </div>
 
@@ -89,7 +85,7 @@ function BattleBoard() {
           player1Card={fieldCards.player1}
           player2Card={fieldCards.player2}
           canResolve={canResolve}
-          onResolve={resolveCombat}
+          onResolve={handleResolveCombat}
         />
 
         <PlayerZone
