@@ -12,7 +12,10 @@ function GameScreen() {
   const { resetBattle } = useBattle()
 
   useEffect(() => {
-    if (player1HP <= 0) {
+    if (player1HP <= 0 && player2HP <= 0) {
+      endGame('draw')
+      resetBattle()
+    } else if (player1HP <= 0) {
       endGame('player2')
       resetBattle()
     } else if (player2HP <= 0) {

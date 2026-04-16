@@ -6,7 +6,17 @@ const BattleContext = createContext(null)
 
 export function BattleProvider({ children }) {
   const { createShuffledDeck, dealInitialHand, drawCard } = useDeck()
-  const { currentTurn, turnPhase, applyDamage, healPlayer, endTurn, setTurnPhase } = useGame()
+  const {
+    currentTurn,
+    turnPhase,
+    player1HP,
+    player2HP,
+    applyDamage,
+    healPlayer,
+    endTurn,
+    endGame,
+    setTurnPhase
+  } = useGame()
 
   const [player1Hand, setPlayer1Hand] = useState([])
   const [player2Hand, setPlayer2Hand] = useState([])
@@ -23,6 +33,18 @@ export function BattleProvider({ children }) {
   const addLog = useCallback((message) => {
     setBattleLog((prev) => [...prev, message])
   }, [])
+
+  const finishBattleByHealth = useCallback(() => {
+    if (player1HP === player2HP) {
+      addLog('La batalla termino en empate por falta de cartas')
+      endGame('draw')
+      return
+    }
+
+    const winnerId = player1HP > player2HP ? 'player1' : 'player2'
+    addLog('La batalla termino por falta de cartas')
+    endGame(winnerId)
+  }, [player1HP, player2HP, addLog, endGame])
 
   const startBattle = useCallback(() => {
     const deck = createShuffledDeck()
@@ -191,7 +213,15 @@ export function BattleProvider({ children }) {
     }
 
     if (remainingDeck.length === 0) {
+      const currentHand = playerId === 'player1' ? player1Hand : player2Hand
+
       addLog('No quedan cartas en el mazo')
+
+      if (currentHand.length === 0) {
+        finishBattleByHealth()
+        return null
+      }
+
       setTurnPhase('play')
       return null
     }
@@ -208,7 +238,7 @@ export function BattleProvider({ children }) {
     addLog(`${playerId === 'player1' ? 'Jugador 1' : 'Jugador 2'} robo una carta`)
     setTurnPhase('play')
     return drawn[0]
-  }, [turnPhase, remainingDeck, drawCard, addLog, setTurnPhase])
+  }, [turnPhase, remainingDeck, drawCard, player1Hand, player2Hand, addLog, finishBattleByHealth, setTurnPhase])
 
   const resetBattle = useCallback(() => {
     setPlayer1Hand([])

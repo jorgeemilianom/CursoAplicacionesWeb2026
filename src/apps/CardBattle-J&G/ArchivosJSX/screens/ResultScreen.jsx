@@ -9,8 +9,9 @@ function ResultScreen() {
   const { winner, player1HP, player2HP, resetGame, startGame } = useGame()
   const { resetBattle, startBattle } = useBattle()
 
+  const isDraw = winner === 'draw'
   const winnerName = winner === 'player1' ? 'Jugador 1' : 'Jugador 2'
-  const winnerEmoji = winner === 'player1' ? '🏆' : '👑'
+  const winnerEmoji = winner === 'player1' ? '🏆' : winner === 'player2' ? '👑' : '🤝'
 
   const handleNewGame = () => {
     resetBattle()
@@ -31,32 +32,32 @@ function ResultScreen() {
         </div>
 
         <h1 className="result-screen__title">
-          ¡Victoria!
+          {isDraw ? '¡Empate!' : '¡Victoria!'}
         </h1>
 
         <p className="result-screen__winner">
-          {winnerName} ha ganado la batalla
+          {isDraw ? 'La batalla termino sin un ganador' : `${winnerName} ha ganado la batalla`}
         </p>
 
         <div className="result-screen__stats">
-          <div className="result-screen__stat result-screen__stat--winner">
-            <span className="result-screen__stat-label">{winnerName}</span>
+          <div className={`result-screen__stat ${isDraw ? '' : 'result-screen__stat--winner'}`}>
+            <span className="result-screen__stat-label">{isDraw ? 'Jugador 1' : winnerName}</span>
             <span className="result-screen__stat-value">
-              {winner === 'player1' ? player1HP : player2HP} HP
+              {isDraw ? player1HP : winner === 'player1' ? player1HP : player2HP} HP
             </span>
-            <span className="result-screen__stat-badge">GANADOR</span>
+            <span className="result-screen__stat-badge">{isDraw ? 'EMPATE' : 'GANADOR'}</span>
           </div>
 
           <div className="result-screen__vs">VS</div>
 
-          <div className="result-screen__stat result-screen__stat--loser">
+          <div className={`result-screen__stat ${isDraw ? '' : 'result-screen__stat--loser'}`}>
             <span className="result-screen__stat-label">
-              {winner === 'player1' ? 'Jugador 2' : 'Jugador 1'}
+              {isDraw ? 'Jugador 2' : winner === 'player1' ? 'Jugador 2' : 'Jugador 1'}
             </span>
             <span className="result-screen__stat-value">
-              {winner === 'player1' ? player2HP : player1HP} HP
+              {isDraw ? player2HP : winner === 'player1' ? player2HP : player1HP} HP
             </span>
-            <span className="result-screen__stat-badge">DERROTADO</span>
+            <span className="result-screen__stat-badge">{isDraw ? 'EMPATE' : 'DERROTADO'}</span>
           </div>
         </div>
 
