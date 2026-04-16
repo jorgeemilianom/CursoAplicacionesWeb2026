@@ -1,5 +1,7 @@
 /* ==========================================
    PANTALLA DE SELECCIÓN DE PERSONAJE
+   Todos los selectores están bajo .selector-container
+   para no pisar estilos de otras apps.
    ========================================== */
 .selector-container {
   text-align: center;
@@ -8,81 +10,77 @@
   margin: 0 auto;
 }
 
-.selector-header {
+.selector-container .selector-header {
   margin-bottom: 40px;
 }
 
-.selector-title {
+.selector-container .selector-title {
   font-size: clamp(2rem, 4vw, 3rem);
-  /* 1. Pasamos a un blanco puro */
-  color: #ffffff; 
-  /* 2. Cambiamos la sombra blanca por una NEGRA que le dé profundidad */
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8); 
-  /* 3. Un poquito de grosor extra si querés que pese más */
+  color: #ffffff;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
   font-weight: 800;
   margin-bottom: 10px;
-  /* 4. Por si el profe tiene un estilo global que lo aclara */
-  opacity: 1 !important;
 }
-.selector-subtitle {
+
+.selector-container .selector-subtitle {
   color: #cbd5e1;
   font-size: 1.1rem;
 }
 
-.opciones-grid {
+.selector-container .opciones-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 25px;
   margin-bottom: 50px;
 }
 
-/* EFECTO VIDRIO PARA LAS TARJETAS */
-.avatar-card {
-  background: rgba(15, 23, 42, 0.6); 
+/* Tarjeta de personaje */
+.selector-container .avatar-card {
+  background: rgba(15, 23, 42, 0.6);
   border: 1px solid rgba(148, 163, 184, 0.2);
   border-radius: 20px;
   padding: 20px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  backdrop-filter: blur(10px); 
+  backdrop-filter: blur(10px);
   display: flex;
   flex-direction: column;
   align-items: center;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-.avatar-card:hover {
+.selector-container .avatar-card:hover {
   transform: translateY(-10px) scale(1.03);
   background: rgba(30, 41, 59, 0.8);
-  border-color: #fde047; 
+  border-color: #fde047;
   box-shadow: 0 20px 40px rgba(253, 224, 71, 0.2);
 }
 
-/* EL MARCO REDONDO PARA LA FOTO */
-.avatar-frame {
+/* Marco redondo para la foto */
+.selector-container .avatar-frame {
   width: 110px;
   height: 110px;
   border-radius: 50%;
-  overflow: hidden; /* Corta la imagen en círculo */
+  overflow: hidden;
   border: 3px solid rgba(255, 255, 255, 0.1);
   margin-bottom: 15px;
-  background: #1e293b; 
+  background: #1e293b;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.avatar-img {
-  width: 100%; 
+.selector-container .avatar-img {
+  width: 100%;
   height: 100%;
-  object-fit: cover; /* Ajusta la foto sin deformar */
+  object-fit: cover;
 }
 
-.avatar-info {
+.selector-container .avatar-info {
   text-align: center;
 }
 
-.avatar-name {
+.selector-container .avatar-name {
   color: #fff;
   font-weight: 800;
   font-size: 1.2rem;
@@ -90,15 +88,15 @@
   margin-bottom: 5px;
 }
 
-.avatar-frase {
+.selector-container .avatar-frase {
   color: #94a3b8;
   font-size: 0.85rem;
   font-style: italic;
   margin: 0;
 }
 
-/* BOTÓN VOLVER */
-.btn-sub {
+/* Botón Volver */
+.selector-container .btn-sub {
   padding: 12px 24px;
   background: rgba(71, 85, 105, 0.4);
   color: #f8fafc;
@@ -109,7 +107,7 @@
   transition: all 0.2s ease;
 }
 
-.btn-sub:hover {
+.selector-container .btn-sub:hover {
   background: rgba(100, 116, 139, 0.6);
   border-color: #f8fafc;
 }

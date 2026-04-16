@@ -63,20 +63,24 @@ function Game() {
   useEffect(() => {
     if (gameOver || !juegoIniciado || bombaIndex === 0) return;
 
+    const total = jugadores.length;
     const tiempoRestante = tiempo - (Date.now() - inicio);
     const esFinal = tiempoRestante < 3000;
     const delay = esFinal ? 400 : 1000;
 
     const iaTimer = setTimeout(() => {
+      setAvisoCambio(""); // limpiar mensaje anterior antes de actuar
       if (esFinal && Math.random() < 0.6) {
         setAvisoCambio("🎯 ¡COMPLOT! Te apuntaron directo");
         setBombaIndex(0);
         return;
       }
-      const vDer = (bombaIndex + 1) % 8;
-      const vIzq = (bombaIndex - 1 + 8) % 8;
-      let dirIA = (0 - bombaIndex + 8) % 8 < (bombaIndex - 0 + 8) % 8 ? DIRECCION_DERECHA : DIRECCION_IZQUIERDA;
-      
+      const vDer = (bombaIndex + 1) % total;
+      const vIzq = (bombaIndex - 1 + total) % total;
+      const dirIA = (0 - bombaIndex + total) % total < (bombaIndex - 0 + total) % total
+        ? DIRECCION_DERECHA
+        : DIRECCION_IZQUIERDA;
+
       setAvisoCambio("🤖 Pasando...");
       setBombaIndex(dirIA === DIRECCION_DERECHA ? vDer : vIzq);
     }, delay);
@@ -86,8 +90,9 @@ function Game() {
 
   const pasarBomba = (dir) => {
     if (gameOver || !juegoIniciado || bombaIndex !== 0) return;
+    setAvisoCambio("");
     setPasesRealizados(p => p + 1);
-    setBombaIndex(prev => (prev + dir + 8) % 8);
+    setBombaIndex(prev => (prev + dir + jugadores.length) % jugadores.length);
   };
 
   // 👇 NUEVA FUNCIÓN: Reinicia todo a cero para volver a jugar
@@ -129,10 +134,11 @@ function Game() {
 
         <div className="circle-container">
           {jugadores.map((j, i) => {
-            const angulo = (i / 8) * (2 * Math.PI) - Math.PI / 2;
+            const total = jugadores.length;
+            const angulo = (i / total) * (2 * Math.PI) - Math.PI / 2;
             const x = Math.cos(angulo) * 140;
             const y = Math.sin(angulo) * 140;
-            const esVecino = (bombaIndex === 0 && (i === 1 || i === 7));
+            const esVecino = (bombaIndex === 0 && (i === 1 || i === total - 1));
 
             return (
               <div

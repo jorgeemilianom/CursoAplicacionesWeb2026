@@ -3,17 +3,19 @@
    ========================================== */
 .game-shell {
   width: 100%;
-  /* Restamos el alto aproximado del header del profe */
-  min-height: calc(100vh - 70px); 
+  min-height: calc(100vh - 70px);
   display: flex;
   justify-content: center;
   align-items: center;
   background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
-  padding: 10px; /* Un poco menos de padding para que entre en notebooks */
+  padding: 10px;
 }
-.container {
+
+/* Scoped: .container solo aplica dentro de .game-shell */
+.game-shell .container {
   width: 100%;
   max-width: 800px;
+  position: relative;
   background: rgba(15, 23, 42, 0.7);
   border: 1px solid rgba(148, 163, 184, 0.2);
   border-radius: 20px;
@@ -22,7 +24,7 @@
   backdrop-filter: blur(10px);
 }
 
-.game-title {
+.game-shell .game-title {
   text-align: center;
   font-size: 2.5rem;
   color: #f8fafc;
@@ -31,90 +33,104 @@
 }
 
 /* ==========================================
-   NUEVA ESTRUCTURA CIRCULAR (Con variables React)
+   ESTRUCTURA CIRCULAR
    ========================================== */
-.circle-container {
+.game-shell .circle-container {
   position: relative;
-  /* Bajamos de 340px a 300px para que sea más compacto */
   width: min(300px, 70vw);
   height: min(300px, 70vw);
-  margin: 30px auto; /* Menos margen arriba/abajo */
+  margin: 30px auto;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-/* El círculo ahora recorta las fotos de los personajes y usa var(--x) */
-.player-circular {
-  position: absolute;
-  width: 80px; 
-  height: 80px;
-  background: #1e293b;
-  border: 3px solid rgba(148, 163, 184, 0.4);
-  border-radius: 50%;
-  overflow: hidden; /* CLAVE: recorta a Messi y Freddy en redondo */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
-              box-shadow 0.22s ease, 
-              border-color 0.22s ease;
-  cursor: default;
-  
-  /* CLAVE: Usa las variables de React para posicionarse */
-  transform: translate(var(--x), var(--y)) scale(1);
 }
 
-/* La imagen dentro del círculo */
-.player-photo {
+/* Contenedor del jugador: overflow visible para que la bomba flote afuera */
+.game-shell .player-circular {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  transform: translate(var(--x), var(--y)) scale(1);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Marco redondo que recorta la foto */
+.game-shell .photo-frame {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Evita que las caras se deformen */
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid rgba(148, 163, 184, 0.4);
+  background: #1e293b;
+  transition: border-color 0.22s ease, box-shadow 0.22s ease;
 }
 
-/* Efecto para los vecinos a los que podés pasarle la bomba */
-.player-circular.vecino-clicable {
+/* Foto dentro del frame */
+.game-shell .player-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Vecinos clicables (a quienes podés pasarle la bomba) */
+.game-shell .player-circular.vecino-clicable {
   cursor: pointer;
+}
+
+.game-shell .player-circular.vecino-clicable .photo-frame {
   border: 3px dashed rgba(255, 255, 255, 0.6);
 }
 
-.player-circular.vecino-clicable:hover {
-  /* Mantiene la posición matemática, pero se agranda un poco */
+.game-shell .player-circular.vecino-clicable:hover {
   transform: translate(var(--x), var(--y)) scale(1.15) !important;
+}
+
+.game-shell .player-circular.vecino-clicable:hover .photo-frame {
   border-color: #3b82f6;
   box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
 }
 
 /* El que tiene la bomba */
-.player-circular.activo {
-  /* Mantiene la posición matemática y se agranda más */
+.game-shell .player-circular.activo {
   transform: translate(var(--x), var(--y)) scale(1.2) !important;
-  border: 4px solid #fde047;
-  box-shadow: 0 0 25px rgba(253, 224, 71, 0.6);
   z-index: 10;
 }
 
-.player-circular.activo .player-photo {
+.game-shell .player-circular.activo .photo-frame {
+  border: 4px solid #fde047;
+  box-shadow: 0 0 25px rgba(253, 224, 71, 0.6);
+}
+
+.game-shell .player-circular.activo .player-photo {
   filter: brightness(1.2);
 }
 
-.bomb-emoji {
+/* La bomba flota encima del avatar */
+.game-shell .bomb-emoji {
   position: absolute;
-  top: -20px;
+  top: -25px;
   font-size: 2rem;
   filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.8));
-  animation: bounceBomb 0.6s infinite alternate;
+  animation: bl-bounceBomb 0.6s infinite alternate;
   z-index: 20;
+  /* Aseguramos que no quede recortada por ningún padre */
+  pointer-events: none;
 }
 
-@keyframes bounceBomb {
+@keyframes bl-bounceBomb {
   from { transform: translateY(0) scale(1); }
-  to { transform: translateY(-8px) scale(1.1); }
+  to   { transform: translateY(-8px) scale(1.1); }
 }
 
 /* ==========================================
-   CARTELES DE AYUDA (Para tus amigos)
+   CARTELES DE AYUDA
    ========================================== */
-.cartel-tutorial {
+.game-shell .cartel-tutorial {
   color: white;
   padding: 10px 20px;
   border-radius: 10px;
@@ -124,40 +140,40 @@
   border: 2px solid #ffffff;
   max-width: 90%;
   text-align: center;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
-.cartel-tutorial.inicio {
-  background: #3b82f6; 
-  animation: pulseTutorial 1.5s infinite alternate;
+.game-shell .cartel-tutorial.inicio {
+  background: #3b82f6;
+  animation: bl-pulseTutorial 1.5s infinite alternate;
 }
 
-.cartel-tutorial.warning {
+.game-shell .cartel-tutorial.warning {
   background: #ef4444;
-  animation: shakeTutorial 0.4s ease-in-out;
+  animation: bl-shakeTutorial 0.4s ease-in-out;
 }
 
-@keyframes pulseTutorial {
-  from { transform: scale(1); box-shadow: 0 0 10px rgba(59, 130, 246, 0.5); }
-  to { transform: scale(1.05); box-shadow: 0 0 20px rgba(59, 130, 246, 0.9); }
+@keyframes bl-pulseTutorial {
+  from { transform: scale(1);    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5); }
+  to   { transform: scale(1.05); box-shadow: 0 0 20px rgba(59, 130, 246, 0.9); }
 }
 
-@keyframes shakeTutorial {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  50% { transform: translateX(5px); }
-  75% { transform: translateX(-5px); }
+@keyframes bl-shakeTutorial {
+  0%   { transform: translateX(0); }
+  25%  { transform: translateX(-5px); }
+  50%  { transform: translateX(5px); }
+  75%  { transform: translateX(-5px); }
   100% { transform: translateX(0); }
 }
 
 /* ==========================================
    TEXTOS Y CONTADOR
    ========================================== */
-.contador-box {
+.game-shell .contador-box {
   text-align: center;
 }
 
-.countdown {
+.game-shell .countdown {
   font-size: 5rem;
   font-weight: 900;
   margin: 10px 0;
@@ -165,7 +181,7 @@
   text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
 }
 
-.game-turno {
+.game-shell .game-turno {
   text-align: center;
   font-size: 1.5rem;
   font-weight: bold;
@@ -173,7 +189,7 @@
   margin: 10px 0;
 }
 
-.aviso-ia {
+.game-shell .aviso-ia {
   color: #fda4af;
   font-weight: 700;
   text-align: center;
@@ -182,141 +198,24 @@
   min-height: 24px;
 }
 
-.explosion-text {
+.game-shell .explosion-text {
   font-size: 3rem;
   font-weight: 900;
   color: #ef4444;
   text-align: center;
   margin-bottom: 20px;
-  animation: boom 0.5s ease-in-out infinite alternate;
+  animation: bl-boom 0.5s ease-in-out infinite alternate;
 }
 
-@keyframes boom {
-  from { transform: scale(1); opacity: 1; }
-  to { transform: scale(1.1); opacity: 0.8; }
-}
-
-.btn-main {
-  display: block;
-  width: 100%;
-  padding: 15px;
-  background: #3b82f6;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.btn-main:hover {
-  background: #2563eb;
+@keyframes bl-boom {
+  from { transform: scale(1);   opacity: 1; }
+  to   { transform: scale(1.1); opacity: 0.8; }
 }
 
 /* ==========================================
-   ALTO CONTRASTE (Accesibilidad Extrema)
+   BOTONES
    ========================================== */
-.game-shell.alto-contraste {
-  background: #000000 !important;
-}
-
-.game-shell.alto-contraste .container {
-  background: #000000 !important;
-  border: 4px solid #ffffff !important;
-  box-shadow: none !important;
-}
-
-.game-shell.alto-contraste .player-circular {
-  border: 3px solid #ffffff !important;
-  background: #000 !important;
-}
-
-.game-shell.alto-contraste .player-photo {
-  filter: grayscale(100%) contrast(200%) !important;
-}
-
-.game-shell.alto-contraste .player-circular.activo {
-  border-color: #ffff00 !important;
-  box-shadow: 0 0 0 5px #000, 0 0 0 10px #ffff00 !important;
-}
-
-.game-shell.alto-contraste .game-title, 
-.game-shell.alto-contraste .game-turno,
-.game-shell.alto-contraste .countdown {
-  color: #ffffff !important;
-  text-shadow: none !important;
-}
-
-.game-shell.alto-contraste .cartel-tutorial {
-  background: #000 !important;
-  border: 3px solid #ffff00 !important;
-  color: #ffff00 !important;
-  animation: none !important;
-}
-
-/* ==========================================
-   RESPONSIVE (Móviles)
-   ========================================== */
-@media (max-width: 500px) {
-  .circle-container {
-    width: 280px;
-    height: 280px;
-  }
-  .player-circular {
-    width: 65px;
-    height: 65px;
-  }
-  .countdown {
-    font-size: 4rem;
-  }
-}
-/* src/Game.css (fragmentos clave) */
-
-/* Contenedor principal del jugador: NO RECORTA */
-.player-circular {
-  position: absolute;
-  width: 80px; 
-  height: 80px;
-  /* 👇 CLAVE 1: Permitimos que los hijos (como la bomba) salgan */
-  overflow: visible !important; 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: translate(var(--x), var(--y)) scale(1);
-  transition: transform 0.4s ease;
-}
-
-/* 👇 NUEVO: Este es el círculo que recorta la FOTO */
-.photo-frame {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%; /* Lo hacemos redondo */
-  overflow: hidden;    /* 👇 CLAVE 2: Recortamos SOLO la foto */
-  border: 3px solid rgba(148, 163, 184, 0.4);
-  background: #1e293b;
-  position: relative;
-}
-
-/* La foto dentro del frame */
-.player-photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* 👇 La Bomba: Flota afuera */
-.bomb-emoji {
-  position: absolute;
-  top: -25px; /* 👇 CLAVE 3: La movemos hacia arriba, fuera del photo-frame */
-  font-size: 2rem;
-  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.8));
-  z-index: 10; /* Aseguramos que esté por encima de todo */
-}
-/* ==========================================
-   BOTONES NUEVOS (Volver y Otra vez)
-   ========================================== */
-.btn-volver {
+.game-shell .btn-volver {
   position: absolute;
   top: 15px;
   left: 15px;
@@ -332,35 +231,94 @@
   z-index: 50;
 }
 
-.btn-volver:hover {
+.game-shell .btn-volver:hover {
   background: rgba(239, 68, 68, 0.8);
   color: white;
   border-color: #fca5a5;
 }
 
-.botones-final {
+.game-shell .botones-final {
   display: flex;
   gap: 15px;
   justify-content: center;
 }
 
-.btn-main.reiniciar {
-  background: #10b981; /* Verde para jugar de nuevo */
+.game-shell .btn-main {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
 }
 
-.btn-main.reiniciar:hover {
+.game-shell .btn-main:hover {
+  background: #2563eb;
+}
+
+.game-shell .btn-main.reiniciar {
+  background: #10b981;
+}
+
+.game-shell .btn-main.reiniciar:hover {
   background: #059669;
 }
 
-.btn-main.menu {
-  background: #475569; /* Gris para volver al menú */
+.game-shell .btn-main.menu {
+  background: #475569;
 }
 
-.btn-main.menu:hover {
+.game-shell .btn-main.menu:hover {
   background: #334155;
 }
 
-/* Alto Contraste para la flecha */
+/* ==========================================
+   ALTO CONTRASTE (Accesibilidad)
+   ========================================== */
+.game-shell.alto-contraste {
+  background: #000000 !important;
+}
+
+.game-shell.alto-contraste .container {
+  background: #000000 !important;
+  border: 4px solid #ffffff !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+.game-shell.alto-contraste .photo-frame {
+  border: 3px solid #ffffff !important;
+  background: #000 !important;
+}
+
+.game-shell.alto-contraste .player-photo {
+  filter: grayscale(100%) contrast(200%) !important;
+}
+
+.game-shell.alto-contraste .player-circular.activo .photo-frame {
+  border-color: #ffff00 !important;
+  box-shadow: 0 0 0 5px #000, 0 0 0 10px #ffff00 !important;
+}
+
+.game-shell.alto-contraste .game-title,
+.game-shell.alto-contraste .game-turno,
+.game-shell.alto-contraste .countdown {
+  color: #ffffff !important;
+  text-shadow: none !important;
+}
+
+.game-shell.alto-contraste .cartel-tutorial {
+  background: #000 !important;
+  border: 3px solid #ffff00 !important;
+  color: #ffff00 !important;
+  animation: none !important;
+}
+
 .game-shell.alto-contraste .btn-volver {
   background: #000 !important;
   border: 2px solid #fff !important;
@@ -370,4 +328,23 @@
 .game-shell.alto-contraste .btn-volver:hover {
   color: #ff0 !important;
   border-color: #ff0 !important;
+}
+
+/* ==========================================
+   RESPONSIVE (Móviles)
+   ========================================== */
+@media (max-width: 500px) {
+  .game-shell .circle-container {
+    width: 280px;
+    height: 280px;
+  }
+
+  .game-shell .player-circular {
+    width: 65px;
+    height: 65px;
+  }
+
+  .game-shell .countdown {
+    font-size: 4rem;
+  }
 }
