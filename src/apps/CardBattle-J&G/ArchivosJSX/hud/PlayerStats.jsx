@@ -22,13 +22,13 @@ function PlayerStats({ playerName, hp, shield = 0, handCount = 0, isCurrentTurn 
       <div className="player-stats__extras">
         {shield > 0 && (
           <div className="player-stats__shield">
-            <span className="shield-icon">🛡️</span>
-            <span className="shield-value">{shield}</span>
+            <span className="player-stats__shield-icon">🛡️</span>
+            <span className="player-stats__shield-value">{shield}</span>
           </div>
         )}
         <div className="player-stats__hand">
-          <span className="hand-icon">🃏</span>
-          <span className="hand-value">{handCount}</span>
+          <span className="player-stats__hand-icon">🃏</span>
+          <span className="player-stats__hand-value">{handCount}</span>
         </div>
       </div>
     </div>

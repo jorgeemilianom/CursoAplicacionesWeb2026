@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import CardFront from './CardFront'
 import CardBack from './CardBack'
 import './Card.css'
@@ -20,11 +19,10 @@ function Card({
   selected = false,
   size = 'medium'
 }) {
-  const [isFlipped, setIsFlipped] = useState(!faceDown)
+  const isFlipped = !faceDown
 
   const handleClick = () => {
     if (clickable) {
-      setIsFlipped(prev => !prev)
       onClick?.(card)
     }
   }

@@ -1,20 +1,19 @@
-/* ==================== MENU SCREEN ==================== */
-.menu-screen {
+.card-battle .menu-screen {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  min-height: calc(100vh - 64px);
   background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3a 50%, #0a1a1a 100%);
   color: #fff;
   padding: 20px;
 }
 
-.menu-screen__content {
+.card-battle .menu-screen__content {
   text-align: center;
   max-width: 500px;
 }
 
-.menu-screen__title {
+.card-battle .menu-screen__title {
   font-size: 48px;
   font-weight: 900;
   margin-bottom: 10px;
@@ -28,18 +27,18 @@
   gap: 15px;
 }
 
-.menu-screen__title-icon {
+.card-battle .menu-screen__title-icon {
   font-size: 40px;
   -webkit-text-fill-color: initial;
 }
 
-.menu-screen__subtitle {
+.card-battle .menu-screen__subtitle {
   font-size: 16px;
   color: #888;
   margin-bottom: 40px;
 }
 
-.menu-screen__rules {
+.card-battle .menu-screen__rules {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid #333;
   border-radius: 12px;
@@ -48,32 +47,32 @@
   text-align: left;
 }
 
-.menu-screen__rules h3 {
-  margin: 0 0 15px 0;
+.card-battle .menu-screen__rules h3 {
+  margin: 0 0 15px;
   color: #ffd700;
   font-size: 16px;
 }
 
-.menu-screen__rules ul {
+.card-battle .menu-screen__rules ul {
   margin: 0;
   padding-left: 20px;
   list-style: disc;
 }
 
-.menu-screen__rules li {
+.card-battle .menu-screen__rules li {
   margin-bottom: 8px;
   font-size: 14px;
   color: #ccc;
 }
 
-.menu-screen__rules strong {
+.card-battle .menu-screen__rules strong {
   color: #4ecdc4;
 }
 
-.menu-screen__start-btn {
+.card-battle .menu-screen__start-btn {
   padding: 15px 50px;
   font-size: 20px;
-  font-weight: bold;
+  font-weight: 700;
   color: #000;
   background: linear-gradient(135deg, #ffd700, #ffaa00);
   border: none;
@@ -83,12 +82,12 @@
   box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
 }
 
-.menu-screen__start-btn:hover {
+.card-battle .menu-screen__start-btn:hover {
   transform: translateY(-5px) scale(1.05);
   box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5);
 }
 
-.menu-screen__credits {
+.card-battle .menu-screen__credits {
   margin-top: 40px;
   font-size: 12px;
   color: #666;
@@ -97,24 +96,22 @@
   gap: 10px;
 }
 
-/* ==================== GAME SCREEN ==================== */
-.game-screen {
-  min-height: 100vh;
+.card-battle__game-screen {
+  min-height: calc(100vh - 64px);
   background: #0a0a1a;
 }
 
-/* ==================== RESULT SCREEN ==================== */
-.result-screen {
+.card-battle .result-screen {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  min-height: calc(100vh - 64px);
   background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2a 100%);
   color: #fff;
   padding: 20px;
 }
 
-.result-screen__content {
+.card-battle .result-screen__content {
   text-align: center;
   animation: resultFadeIn 0.5s ease;
 }
@@ -130,17 +127,22 @@
   }
 }
 
-.result-screen__trophy {
+.card-battle .result-screen__trophy {
   font-size: 80px;
   animation: trophyBounce 1s ease infinite;
 }
 
 @keyframes trophyBounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
 }
 
-.result-screen__title {
+.card-battle .result-screen__title {
   font-size: 56px;
   font-weight: 900;
   margin: 20px 0;
@@ -150,13 +152,13 @@
   background-clip: text;
 }
 
-.result-screen__winner {
+.card-battle .result-screen__winner {
   font-size: 24px;
   color: #fff;
   margin-bottom: 40px;
 }
 
-.result-screen__stats {
+.card-battle .result-screen__stats {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -164,7 +166,7 @@
   margin-bottom: 40px;
 }
 
-.result-screen__stat {
+.card-battle .result-screen__stat {
   background: rgba(255, 255, 255, 0.05);
   border: 2px solid #333;
   border-radius: 15px;
@@ -174,86 +176,86 @@
   gap: 5px;
 }
 
-.result-screen__stat--winner {
+.card-battle .result-screen__stat--winner {
   border-color: #ffd700;
   box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
 }
 
-.result-screen__stat--loser {
+.card-battle .result-screen__stat--loser {
   border-color: #ff6b6b;
   opacity: 0.6;
 }
 
-.result-screen__stat-label {
+.card-battle .result-screen__stat-label {
   font-size: 14px;
   color: #888;
 }
 
-.result-screen__stat-value {
+.card-battle .result-screen__stat-value {
   font-size: 28px;
-  font-weight: bold;
+  font-weight: 700;
   color: #fff;
 }
 
-.result-screen__stat-badge {
+.card-battle .result-screen__stat-badge {
   font-size: 10px;
-  font-weight: bold;
+  font-weight: 700;
   padding: 3px 8px;
   border-radius: 10px;
   margin-top: 5px;
 }
 
-.result-screen__stat--winner .result-screen__stat-badge {
+.card-battle .result-screen__stat--winner .result-screen__stat-badge {
   background: #ffd700;
   color: #000;
 }
 
-.result-screen__stat--loser .result-screen__stat-badge {
+.card-battle .result-screen__stat--loser .result-screen__stat-badge {
   background: #ff6b6b;
   color: #000;
 }
 
-.result-screen__vs {
+.card-battle .result-screen__vs {
   font-size: 24px;
-  font-weight: bold;
+  font-weight: 700;
   color: #666;
 }
 
-.result-screen__actions {
+.card-battle .result-screen__actions {
   display: flex;
   gap: 15px;
   justify-content: center;
 }
 
-.result-screen__btn {
+.card-battle .result-screen__btn {
   padding: 12px 30px;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 700;
   border: none;
   border-radius: 25px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-.result-screen__btn--primary {
+.card-battle .result-screen__btn--primary {
   background: linear-gradient(135deg, #ffd700, #ffaa00);
   color: #000;
 }
 
-.result-screen__btn--secondary {
+.card-battle .result-screen__btn--secondary {
   background: transparent;
   border: 2px solid #666;
   color: #fff;
 }
 
-.result-screen__btn:hover {
+.card-battle .result-screen__btn:hover {
   transform: translateY(-3px);
 }
 
-.result-screen__btn--primary:hover {
+.card-battle .result-screen__btn--primary:hover {
   box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
 }
 
-.result-screen__btn--secondary:hover {
+.card-battle .result-screen__btn--secondary:hover {
   border-color: #fff;
 }

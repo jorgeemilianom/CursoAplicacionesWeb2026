@@ -1,14 +1,15 @@
-/* ==================== PLAYER HAND (ABANICO) ==================== */
-.player-hand {
+.card-battle .player-hand {
   display: flex;
-  justify-content: center;
-  align-items: flex-end;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 10px;
   padding: 10px;
-  min-height: 180px;
+  min-height: 220px;
   position: relative;
 }
 
-.player-hand--empty {
+.card-battle .player-hand--empty {
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.1);
@@ -16,26 +17,38 @@
   border: 2px dashed #333;
 }
 
-.player-hand__empty-text {
+.card-battle .player-hand__empty-text {
   color: #666;
   font-size: 14px;
 }
 
-.player-hand__card-wrapper {
+.card-battle .player-hand__card-wrapper {
   position: relative;
-  transform-origin: bottom center;
-  transform: rotate(var(--rotation, 0deg));
-  margin: 0 -15px;
-  transition: transform 0.3s ease, margin 0.3s ease;
-  z-index: calc(1 + var(--index, 0));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
 }
 
-.player-hand__card-wrapper:hover {
-  z-index: 100;
+.card-battle .player-hand__play-btn {
+  margin-top: 8px;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 6px 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #111827;
+  background: linear-gradient(135deg, #facc15, #f59e0b);
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
 }
 
-/* ==================== DECK PILE (APILADO) ==================== */
-.deck-pile {
+.card-battle .player-hand__play-btn:hover {
+  transform: translateY(-1px);
+}
+
+.card-battle .deck-pile {
   position: relative;
   width: 80px;
   height: 120px;
@@ -45,38 +58,38 @@
   justify-content: center;
 }
 
-.deck-pile--empty {
+.card-battle .deck-pile--empty {
   background: rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   border: 2px dashed #333;
 }
 
-.deck-pile--clickable {
+.card-battle .deck-pile--clickable {
   cursor: pointer;
 }
 
-.deck-pile--clickable:hover {
+.card-battle .deck-pile--clickable:hover {
   transform: scale(1.05);
 }
 
-.deck-pile__layers {
+.card-battle .deck-pile__layers {
   position: relative;
   width: 100%;
   height: 100%;
 }
 
-.deck-pile__layer {
+.card-battle .deck-pile__layer {
   position: absolute;
   top: 0;
   left: 0;
   transition: transform 0.2s ease;
 }
 
-.deck-pile--clickable:hover .deck-pile__layer {
+.card-battle .deck-pile--clickable:hover .deck-pile__layer {
   transform: translateY(-5px);
 }
 
-.deck-pile__count {
+.card-battle .deck-pile__count {
   position: absolute;
   bottom: -20px;
   left: 50%;
@@ -84,19 +97,18 @@
   background: #1a1a2a;
   color: #fff;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 700;
   padding: 2px 8px;
   border-radius: 10px;
   border: 1px solid #333;
 }
 
-.deck-pile__empty-text {
+.card-battle .deck-pile__empty-text {
   color: #666;
   font-size: 12px;
 }
 
-/* ==================== DISCARD PILE ==================== */
-.discard-pile {
+.card-battle .discard-pile {
   position: relative;
   width: 80px;
   height: 120px;
@@ -106,13 +118,13 @@
   justify-content: center;
 }
 
-.discard-pile--empty {
+.card-battle .discard-pile--empty {
   background: rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   border: 2px dashed #333;
 }
 
-.discard-pile__count {
+.card-battle .discard-pile__count {
   position: absolute;
   bottom: -20px;
   left: 50%;
@@ -120,13 +132,13 @@
   background: #1a1a2a;
   color: #fff;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 700;
   padding: 2px 8px;
   border-radius: 10px;
   border: 1px solid #333;
 }
 
-.discard-pile__empty-text {
+.card-battle .discard-pile__empty-text {
   color: #666;
   font-size: 11px;
   text-align: center;

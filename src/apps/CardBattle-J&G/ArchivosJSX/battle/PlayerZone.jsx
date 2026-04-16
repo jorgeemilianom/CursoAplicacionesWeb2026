@@ -4,14 +4,7 @@ import SlotCard from './SlotCard'
 import './Battle.css'
 
 /**
- * PlayerZone - Zona completa de un jugador
- * @param {string} playerId - 'player1' | 'player2'
- * @param {Object} player - Datos del jugador { hp, shield, hand }
- * @param {Object} fieldCard - Carta en el campo
- * @param {boolean} isCurrentTurn - Si es su turno
- * @param {string} selectedCardId - Carta seleccionada en mano
- * @param {function} onCardSelect - Callback al seleccionar carta
- * @param {function} onSlotClick - Callback al hacer click en slot
+ * PlayerZone - Zona completa de un jugador con soporte para Glassmorphism
  */
 function PlayerZone({
   playerId,
@@ -19,13 +12,21 @@ function PlayerZone({
   fieldCard,
   isCurrentTurn,
   selectedCardId,
+  canPlay = false,
+  showHand = false,
   onCardSelect,
-  onSlotClick
+  onCardDragStart,
+  onPlayCard,
+  onSlotClick,
+  onSlotDrop
 }) {
   const isPlayer1 = playerId === 'player1'
 
   return (
-    <div className={`player-zone ${isPlayer1 ? 'player-zone--bottom' : 'player-zone--top'}`}>
+    <div
+      className={`player-zone ${isPlayer1 ? 'player-zone--bottom' : 'player-zone--top'}`}
+      data-active={isCurrentTurn}
+    >
       <div className="player-zone__stats">
         <PlayerStats
           playerName={isPlayer1 ? 'Jugador 1' : 'Jugador 2'}
@@ -41,17 +42,22 @@ function PlayerZone({
           card={fieldCard}
           playerId={playerId}
           onClick={() => onSlotClick?.(playerId)}
-          isActive={isCurrentTurn && !fieldCard}
+          onDropCard={onSlotDrop}
+          isActive={canPlay && !fieldCard}
+          canDrop={canPlay && !fieldCard}
         />
       </div>
 
-      {isPlayer1 && (
+      {showHand && (
         <div className="player-zone__hand">
           <PlayerHand
             hand={player.hand}
+            playerId={playerId}
             onCardClick={onCardSelect}
+            onCardDragStart={onCardDragStart}
+            onPlayCard={onPlayCard}
             selectedCardId={selectedCardId}
-            canPlay={isCurrentTurn}
+            canPlay={canPlay}
           />
         </div>
       )}

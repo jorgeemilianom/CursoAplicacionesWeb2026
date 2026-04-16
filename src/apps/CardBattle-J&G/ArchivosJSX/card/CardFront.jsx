@@ -7,7 +7,7 @@ import './Card.css'
 function CardFront({ card }) {
   if (!card) return null
 
-  const rarityClass = `card--${card.rarity}`
+  const rarityClass = `card-front--${card.rarity}`
   const effectIcon = {
     damage: '⚔️',
     heal: '💚',
@@ -32,17 +32,17 @@ function CardFront({ card }) {
 
       <div className="card-front__stats">
         <div className="card-front__stat card-front__stat--attack">
-          <span className="stat-icon">⚔️</span>
-          <span className="stat-value">{card.attack}</span>
+          <span className="card-front__stat-icon">⚔️</span>
+          <span className="card-front__stat-value">{card.attack}</span>
         </div>
         <div className="card-front__stat card-front__stat--defense">
-          <span className="stat-icon">🛡️</span>
-          <span className="stat-value">{card.defense}</span>
+          <span className="card-front__stat-icon">🛡️</span>
+          <span className="card-front__stat-value">{card.defense}</span>
         </div>
       </div>
 
       <div className="card-front__effect">
-        <span className="effect-badge">
+        <span className="card-front__effect-badge">
           +{card.effectValue} {effectIcon[card.effectType]}
         </span>
       </div>

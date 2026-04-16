@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Landing from './pages/Landing'
@@ -38,10 +38,13 @@ import ReactRouterDemo from './apps/react-router-demo/ReactRouterDemo'
 import './App.css'
 
 function App() {
+  const location = useLocation()
+  const isCardBattleRoute = location.pathname.startsWith('/apps/CardBattle-J&G')
+
   return (
     <div className="site-shell">
-      <Navbar />
-      <main className="site-main">
+      {!isCardBattleRoute && <Navbar />}
+      <main className={`site-main ${isCardBattleRoute ? 'site-main--fullscreen' : ''}`}>
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/apps" element={<AppsIndex />} />
@@ -80,7 +83,7 @@ function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
-      <Footer />
+      {!isCardBattleRoute && <Footer />}
     </div>
   )
 }

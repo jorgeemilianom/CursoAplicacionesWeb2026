@@ -1,5 +1,4 @@
-/* ==================== CARD BASE ==================== */
-.card {
+.card-battle .card {
   --card-width: 140px;
   --card-height: 200px;
   perspective: 1000px;
@@ -7,22 +6,22 @@
   transition: transform 0.3s ease, z-index 0s;
 }
 
-.card--small {
+.card-battle .card--small {
   --card-width: 80px;
   --card-height: 120px;
 }
 
-.card--medium {
+.card-battle .card--medium {
   --card-width: 120px;
   --card-height: 170px;
 }
 
-.card--large {
+.card-battle .card--large {
   --card-width: 160px;
   --card-height: 230px;
 }
 
-.card__inner {
+.card-battle .card__inner {
   position: relative;
   width: var(--card-width);
   height: var(--card-height);
@@ -30,11 +29,11 @@
   transition: transform 0.6s ease;
 }
 
-.card--flipped .card__inner {
+.card-battle .card--flipped .card__inner {
   transform: rotateY(180deg);
 }
 
-.card__face {
+.card-battle .card__face {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -43,28 +42,26 @@
   overflow: hidden;
 }
 
-.card__face--front {
+.card-battle .card__face--front {
   transform: rotateY(180deg);
 }
 
-/* ==================== CARD HOVER & SELECTION ==================== */
-.card--clickable:hover {
+.card-battle .card--clickable:hover {
   transform: translateY(-30px) scale(1.1);
   z-index: 100;
 }
 
-.card--selected {
+.card-battle .card--selected {
   transform: translateY(-40px) scale(1.15);
   z-index: 200;
   box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
 }
 
-.card--selected .card__inner {
+.card-battle .card--selected .card__inner {
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
 }
 
-/* ==================== CARD FRONT ==================== */
-.card-front {
+.card-battle .card-front {
   width: 100%;
   height: 100%;
   background: linear-gradient(145deg, #2a2a3a, #1a1a2a);
@@ -74,40 +71,39 @@
   flex-direction: column;
   padding: 8px;
   box-sizing: border-box;
-  color: white;
+  color: #fff;
 }
 
-/* Rarity colors */
-.card-front--common {
+.card-battle .card-front--common {
   border-color: #666;
   background: linear-gradient(145deg, #3a3a4a, #2a2a3a);
 }
 
-.card-front--rare {
+.card-battle .card-front--rare {
   border-color: #4a90d9;
   background: linear-gradient(145deg, #2a3a5a, #1a2a4a);
 }
 
-.card-front--legendary {
+.card-battle .card-front--legendary {
   border-color: #ffd700;
   background: linear-gradient(145deg, #4a3a1a, #3a2a0a);
   box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
 }
 
-.card-front__header {
+.card-battle .card-front__header {
   display: flex;
   align-items: center;
   gap: 6px;
   margin-bottom: 4px;
 }
 
-.card-front__rarity {
+.card-battle .card-front__rarity {
   font-size: 12px;
 }
 
-.card-front__name {
+.card-battle .card-front__name {
   font-size: 11px;
-  font-weight: bold;
+  font-weight: 700;
   margin: 0;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -115,7 +111,7 @@
   flex: 1;
 }
 
-.card-front__image {
+.card-battle .card-front__image {
   flex: 1;
   display: flex;
   align-items: center;
@@ -125,15 +121,15 @@
   margin: 4px 0;
 }
 
-.card-front__effect-icon {
+.card-battle .card-front__effect-icon {
   font-size: 32px;
 }
 
-.card--small .card-front__effect-icon {
+.card-battle .card--small .card-front__effect-icon {
   font-size: 20px;
 }
 
-.card-front__stats {
+.card-battle .card-front__stats {
   display: flex;
   justify-content: space-between;
   padding: 4px 0;
@@ -141,42 +137,42 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.card-front__stat {
+.card-battle .card-front__stat {
   display: flex;
   align-items: center;
   gap: 4px;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 700;
 }
 
-.card-front__stat--attack {
+.card-battle .card-front__stat--attack {
   color: #ff6b6b;
 }
 
-.card-front__stat--defense {
+.card-battle .card-front__stat--defense {
   color: #4ecdc4;
 }
 
-.stat-icon {
+.card-battle .card-front__stat-icon {
   font-size: 10px;
 }
 
-.card-front__effect {
+.card-battle .card-front__effect {
   padding: 4px 0;
   text-align: center;
 }
 
-.effect-badge {
+.card-battle .card-front__effect-badge {
   background: rgba(255, 255, 255, 0.1);
   padding: 2px 8px;
   border-radius: 10px;
   font-size: 10px;
 }
 
-.card-front__description {
+.card-battle .card-front__description {
   font-size: 8px;
   color: #aaa;
-  margin: 4px 0 0 0;
+  margin: 4px 0 0;
   text-align: center;
   line-height: 1.2;
   display: -webkit-box;
@@ -185,12 +181,11 @@
   overflow: hidden;
 }
 
-.card--small .card-front__description {
+.card-battle .card--small .card-front__description {
   display: none;
 }
 
-/* ==================== CARD BACK ==================== */
-.card-back {
+.card-battle .card-back {
   width: 100%;
   height: 100%;
   background: linear-gradient(145deg, #1a3a2a, #0a2a1a);
@@ -201,7 +196,7 @@
   justify-content: center;
 }
 
-.card-back__pattern {
+.card-battle .card-back__pattern {
   width: 90%;
   height: 90%;
   border: 2px dashed rgba(255, 255, 255, 0.2);
@@ -211,34 +206,33 @@
   justify-content: center;
 }
 
-.card-back__inner {
+.card-battle .card-back__inner {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
 }
 
-.card-back__symbol {
+.card-battle .card-back__symbol {
   font-size: 24px;
 }
 
-.card--small .card-back__symbol {
+.card-battle .card--small .card-back__symbol {
   font-size: 16px;
 }
 
-.card-back__text {
+.card-battle .card-back__text {
   font-size: 8px;
   color: rgba(255, 255, 255, 0.5);
-  font-weight: bold;
+  font-weight: 700;
   letter-spacing: 1px;
 }
 
-.card--small .card-back__text {
+.card-battle .card--small .card-back__text {
   font-size: 6px;
 }
 
-/* ==================== CARD EFFECT ==================== */
-.card-effect {
+.card-battle .card-effect {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -269,34 +263,11 @@
   }
 }
 
-.card-effect__content {
+.card-battle .card-effect__content {
   background: linear-gradient(145deg, #1a1a2a, #0a0a1a);
   border: 3px solid var(--effect-color, #fff);
   border-radius: 15px;
   padding: 20px 40px;
   text-align: center;
   box-shadow: 0 0 30px var(--effect-color, #fff);
-}
-
-.card-effect__icon {
-  font-size: 48px;
-  margin-bottom: 10px;
-  animation: effectPulse 0.5s ease-in-out infinite;
-}
-
-@keyframes effectPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-}
-
-.card-effect__card-name {
-  font-size: 18px;
-  font-weight: bold;
-  color: var(--effect-color, #fff);
-  margin-bottom: 8px;
-}
-
-.card-effect__message {
-  font-size: 14px;
-  color: #fff;
 }

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { GameProvider, useGame } from './ArchivosJSX/context/GameContext'
 import { DeckProvider } from './ArchivosJSX/context/DeckContext'
-import { BattleProvider } from './ArchivosJSX/context/BattleContext'
+import { BattleProvider, useBattle } from './ArchivosJSX/context/BattleContext'
 import MenuScreen from './ArchivosJSX/screens/MenuScreen'
 import GameScreen from './ArchivosJSX/screens/GameScreen'
 import ResultScreen from './ArchivosJSX/screens/ResultScreen'
@@ -25,6 +25,35 @@ function GameRouter() {
   }
 }
 
+function QuickStartControl() {
+  const { gameStatus, startGame, resetGame } = useGame()
+  const { startBattle, resetBattle } = useBattle()
+
+  const handleStart = () => {
+    resetBattle()
+    startGame()
+    startBattle()
+  }
+
+  const handleMenu = () => {
+    resetBattle()
+    resetGame()
+  }
+
+  return (
+    <div className="card-battle__quick-actions">
+      <button type="button" className="card-battle__quick-btn card-battle__quick-btn--primary" onClick={handleStart}>
+        Comenzar batalla
+      </button>
+      {gameStatus !== 'menu' && (
+        <button type="button" className="card-battle__quick-btn card-battle__quick-btn--ghost" onClick={handleMenu}>
+          Ir al menu
+        </button>
+      )}
+    </div>
+  )
+}
+
 /**
  * CardBattleJG - Componente principal del juego Card Battle
  * Estructura de Providers: GameProvider -> DeckProvider -> BattleProvider
@@ -39,6 +68,7 @@ function CardBattleJG() {
       <GameProvider>
         <DeckProvider>
           <BattleProvider>
+            <QuickStartControl />
             <GameRouter />
           </BattleProvider>
         </DeckProvider>
