@@ -104,3 +104,29 @@
     padding: 7px 10px;
   }
 }
+
+/* Modo estatico: sin animaciones ni transiciones en todo CardBattle */
+.card-battle,
+.card-battle * ,
+.card-battle *::before,
+.card-battle *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+.card-battle .battle-board__main {
+  scroll-behavior: auto !important;
+}
+
+.card-battle .slot-card--empty:hover,
+.card-battle .slot-card--drag-over,
+.card-battle .battle-field__resolve-btn:hover,
+.card-battle .deck-pile--clickable:hover,
+.card-battle .deck-pile--clickable:hover .deck-pile__layer,
+.card-battle .menu-screen__start-btn:hover,
+.card-battle .result-screen__btn:hover,
+.card-battle .player-hand__action-btn:hover,
+.card-battle .player-hand__play-btn:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}

@@ -28,11 +28,20 @@
   flex-direction: column;
   align-items: center;
   gap: 6px;
+  width: 124px;
+  min-height: 248px;
 }
 
+.card-battle .player-hand__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+}
+
+.card-battle .player-hand__action-btn,
 .card-battle .player-hand__play-btn {
-  margin-top: 8px;
-  width: 100%;
+  width: 108px;
   border: none;
   border-radius: 10px;
   padding: 6px 8px;
@@ -41,11 +50,31 @@
   color: #111827;
   background: linear-gradient(135deg, #facc15, #f59e0b);
   cursor: pointer;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+  box-shadow: none;
+  transition: none;
 }
 
+.card-battle .player-hand__action-btn {
+  background: #1f2937;
+  color: #f9fafb;
+}
+
+.card-battle .player-hand__action-btn.is-selected {
+  background: #065f46;
+}
+
+.card-battle .player-hand__action-btn:hover,
 .card-battle .player-hand__play-btn:hover {
-  transform: translateY(-1px);
+  transform: none;
+}
+
+.card-battle .player-hand__play-btn.is-hidden {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.card-battle .player-hand__play-btn.is-visible {
+  visibility: visible;
 }
 
 .card-battle .deck-pile {

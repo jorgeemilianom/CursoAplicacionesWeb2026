@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import useCardGame from '../../ArchivosJS/useCardGame'
 import PlayerZone from './PlayerZone'
 import BattleField from './BattleField'
@@ -18,22 +18,6 @@ function BattleBoard() {
 
   const [selectedCard, setSelectedCard] = useState(null)
 
-  const player1ZoneRef = useRef(null)
-  const player2ZoneRef = useRef(null)
-  const battleFieldRef = useRef(null)
-
-  useEffect(() => {
-    const shouldFocusCombat = turnPhase === 'resolve'
-
-    if (shouldFocusCombat) {
-      battleFieldRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
-      return
-    }
-
-    const turnRef = currentTurn === 'player1' ? player1ZoneRef : player2ZoneRef
-    turnRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
-  }, [currentTurn, turnPhase])
-
   useEffect(() => {
     setSelectedCard(null)
   }, [currentTurn, turnPhase])
@@ -43,14 +27,15 @@ function BattleBoard() {
     handleDrawCard()
   }, [turnPhase, handleDrawCard])
 
+  useEffect(() => {
+    // Jugador 2 (slot superior) juega automatico para que el usuario se enfoque en slot 1.
+    if (currentTurn !== 'player2' || turnPhase !== 'play') return
+    if (fieldCards.player2 || player2Hand.length === 0) return
+    handlePlayCard(player2Hand[0].uniqueId, 'player2')
+  }, [currentTurn, turnPhase, fieldCards.player2, player2Hand, handlePlayCard])
+
   const handleCardSelect = (card, playerId) => {
     if (playerId !== currentTurn || turnPhase !== 'play') return
-
-    const success = handlePlayCard(card.uniqueId, playerId)
-    if (success) {
-      setSelectedCard(null)
-      return
-    }
 
     if (
       selectedCard?.ownerId === playerId &&
@@ -61,10 +46,6 @@ function BattleBoard() {
     }
 
     setSelectedCard({ ownerId: playerId, card })
-
-    setTimeout(() => {
-      battleFieldRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
-    }, 250)
   }
 
   const handleCardDragStart = (card, playerId) => {
@@ -74,7 +55,10 @@ function BattleBoard() {
 
   const handleCardPlayFromButton = (playerId, cardUniqueId) => {
     if (playerId !== currentTurn || turnPhase !== 'play') return
-    const success = handlePlayCard(cardUniqueId, playerId)
+    const targetCardId = cardUniqueId ?? selectedCard?.card?.uniqueId
+    if (!targetCardId) return
+
+    const success = handlePlayCard(targetCardId, playerId)
     if (success) {
       setSelectedCard(null)
     }
@@ -116,15 +100,15 @@ function BattleBoard() {
       </div>
 
       <div className="battle-board__main">
-        <div ref={player2ZoneRef}>
+        <div>
           <PlayerZone
             playerId="player2"
             player={player2Data}
             fieldCard={fieldCards.player2}
             isCurrentTurn={currentTurn === 'player2'}
             selectedCardId={selectedCard?.ownerId === 'player2' ? selectedCard.card.uniqueId : null}
-            canPlay={currentTurn === 'player2' && turnPhase === 'play' && !fieldCards.player2}
-            showHand
+            canPlay={false}
+            showHand={false}
             onCardSelect={(card) => handleCardSelect(card, 'player2')}
             onCardDragStart={(card) => handleCardDragStart(card, 'player2')}
             onPlayCard={(cardUniqueId) => handleCardPlayFromButton('player2', cardUniqueId)}
@@ -133,7 +117,7 @@ function BattleBoard() {
           />
         </div>
 
-        <div ref={battleFieldRef}>
+        <div>
           <BattleField
             player1Card={fieldCards.player1}
             player2Card={fieldCards.player2}
@@ -142,7 +126,7 @@ function BattleBoard() {
           />
         </div>
 
-        <div ref={player1ZoneRef}>
+        <div>
           <PlayerZone
             playerId="player1"
             player={player1Data}

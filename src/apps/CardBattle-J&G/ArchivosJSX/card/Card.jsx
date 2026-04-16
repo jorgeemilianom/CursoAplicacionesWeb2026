@@ -35,17 +35,12 @@ function Card({
 
   return (
     <div
-      className={`card card--${size} ${isFlipped ? 'card--flipped' : ''} ${selected ? 'card--selected' : ''} ${clickable ? 'card--clickable' : ''}`}
+      className={`card card--${size} ${selected ? 'card--selected' : ''} ${clickable ? 'card--clickable' : ''}`}
       onClick={handleClick}
       onDoubleClick={handleDoubleClick}
     >
-      <div className="card__inner">
-        <div className="card__face card__face--front">
-          <CardFront card={card} />
-        </div>
-        <div className="card__face card__face--back">
-          <CardBack />
-        </div>
+      <div className="card__inner card__inner--static">
+        {isFlipped ? <CardFront card={card} /> : <CardBack />}
       </div>
     </div>
   )

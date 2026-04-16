@@ -1,4 +1,5 @@
 import { useGame } from '../context/GameContext'
+import { useBattle } from '../context/BattleContext'
 import './Screens.css'
 
 /**
@@ -6,6 +7,13 @@ import './Screens.css'
  */
 function MenuScreen() {
   const { startGame } = useGame()
+  const { resetBattle, startBattle } = useBattle()
+
+  const handleStart = () => {
+    resetBattle()
+    startGame()
+    startBattle()
+  }
 
   return (
     <div className="menu-screen">
@@ -28,7 +36,7 @@ function MenuScreen() {
           </ul>
         </div>
 
-        <button className="menu-screen__start-btn" onClick={startGame}>
+        <button className="menu-screen__start-btn" onClick={handleStart}>
           ¡Comenzar Batalla!
         </button>
 

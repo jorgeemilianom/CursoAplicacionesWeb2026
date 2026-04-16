@@ -20,7 +20,7 @@ function PlayerHand({ hand, onCardClick, onCardDragStart, onPlayCard, selectedCa
     )
   }
 
-  const canDrag = false
+  const canDrag = canPlay
 
   return (
     <div className="player-hand">
@@ -32,7 +32,6 @@ function PlayerHand({ hand, onCardClick, onCardDragStart, onPlayCard, selectedCa
             key={card.uniqueId}
             className="player-hand__card-wrapper"
             style={{ '--index': index }}
-            onClick={() => canPlay && onPlayCard?.(card.uniqueId)}
             draggable={canDrag}
             onDragStart={(event) => {
               if (!canDrag) return
@@ -49,21 +48,32 @@ function PlayerHand({ hand, onCardClick, onCardDragStart, onPlayCard, selectedCa
             <Card
               card={card}
               faceDown={false}
-              clickable={false}
+              clickable={canPlay}
+              onClick={onCardClick}
               selected={isSelected}
               size="medium"
             />
             {canPlay && (
-              <button
-                type="button"
-                className="player-hand__play-btn"
-                onClick={(event) => {
-                  event.stopPropagation()
-                  onPlayCard?.(card.uniqueId)
-                }}
-              >
-                Jugar
-              </button>
+              <div className="player-hand__actions">
+                <button
+                  type="button"
+                  className={`player-hand__action-btn ${isSelected ? 'is-selected' : ''}`}
+                  onClick={() => onCardClick?.(card)}
+                >
+                  {isSelected ? 'Seleccionada' : 'Seleccionar'}
+                </button>
+                <button
+                  type="button"
+                  className={`player-hand__play-btn ${isSelected ? 'is-visible' : 'is-hidden'}`}
+                  disabled={!isSelected}
+                  onClick={(event) => {
+                    event.stopPropagation()
+                    onPlayCard?.(card.uniqueId)
+                  }}
+                >
+                  Jugar
+                </button>
+              </div>
             )}
           </div>
         )

@@ -9,11 +9,7 @@ import './Screens.css'
  */
 function GameScreen() {
   const { player1HP, player2HP, endGame } = useGame()
-  const { startBattle, resetBattle } = useBattle()
-
-  useEffect(() => {
-    startBattle()
-  }, [startBattle])
+  const { resetBattle } = useBattle()
 
   useEffect(() => {
     if (player1HP <= 0) {

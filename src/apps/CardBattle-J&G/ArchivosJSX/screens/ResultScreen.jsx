@@ -1,14 +1,27 @@
 import { useGame } from '../context/GameContext'
+import { useBattle } from '../context/BattleContext'
 import './Screens.css'
 
 /**
  * ResultScreen - Pantalla de resultado al finalizar la partida
  */
 function ResultScreen() {
-  const { winner, player1HP, player2HP, resetGame } = useGame()
+  const { winner, player1HP, player2HP, resetGame, startGame } = useGame()
+  const { resetBattle, startBattle } = useBattle()
 
   const winnerName = winner === 'player1' ? 'Jugador 1' : 'Jugador 2'
   const winnerEmoji = winner === 'player1' ? '🏆' : '👑'
+
+  const handleNewGame = () => {
+    resetBattle()
+    startGame()
+    startBattle()
+  }
+
+  const handleBackToMenu = () => {
+    resetBattle()
+    resetGame()
+  }
 
   return (
     <div className="result-screen">
@@ -48,10 +61,10 @@ function ResultScreen() {
         </div>
 
         <div className="result-screen__actions">
-          <button className="result-screen__btn result-screen__btn--primary" onClick={resetGame}>
+          <button className="result-screen__btn result-screen__btn--primary" onClick={handleNewGame}>
             🔄 Nueva Partida
           </button>
-          <button className="result-screen__btn result-screen__btn--secondary" onClick={resetGame}>
+          <button className="result-screen__btn result-screen__btn--secondary" onClick={handleBackToMenu}>
             🏠 Volver al Menú
           </button>
         </div>
