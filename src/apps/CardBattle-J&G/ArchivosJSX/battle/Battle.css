@@ -1,13 +1,17 @@
+/* ===== FIX: height:100% para ocupar exactamente el espacio del game-screen ===== */
 .card-battle .battle-board {
   display: flex;
   width: 100%;
-  min-height: calc(100vh - 64px);
+  height: 100%;
   color: #fff;
   background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
 }
 
+/* ===== FIX: height:100% + overflow-y:auto para que el log scrollee internamente ===== */
 .card-battle .battle-board__sidebar {
   width: 260px;
+  height: 100%;
+  overflow-y: auto;
   padding: 16px 12px;
   background: rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(10px);
@@ -19,9 +23,10 @@
   gap: 14px;
 }
 
+/* ===== FIX: min-height:0 es el truco clave — sin esto flex ignora el límite del padre ===== */
 .card-battle .battle-board__main {
   flex: 1;
-  max-height: calc(100vh - 64px);
+  min-height: 0;
   overflow-y: auto;
   scroll-behavior: smooth;
   padding: 20px;
@@ -30,13 +35,14 @@
   gap: 28px;
 }
 
+/* ===== FIX: 370px × 2 zonas desbordaba solo — reducido a 200px ===== */
 .card-battle .player-zone {
   width: 100%;
   padding: 24px;
   background: rgba(255, 255, 255, 0.04);
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  min-height: 370px;
+  min-height: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -174,6 +180,7 @@
 
   .card-battle .battle-board__sidebar {
     width: 100%;
+    height: auto;
     border-right: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     flex-direction: row;
@@ -197,7 +204,7 @@
   }
 
   .card-battle .player-zone {
-    min-height: 320px;
+    min-height: 200px;
     padding: 16px;
   }
 
@@ -206,3 +213,4 @@
     height: 190px;
   }
 }
+

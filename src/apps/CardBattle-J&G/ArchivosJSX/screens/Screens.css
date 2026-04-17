@@ -96,8 +96,12 @@
   gap: 10px;
 }
 
+/* ===== FIX: height fijo para que el juego no desborde el viewport ===== */
 .card-battle__game-screen {
-  min-height: calc(100vh - 64px);
+  height: calc(100vh - 64px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
   background: #0a0a1a;
 }
 
@@ -259,3 +263,4 @@
 .card-battle .result-screen__btn--secondary:hover {
   border-color: #fff;
 }
+
