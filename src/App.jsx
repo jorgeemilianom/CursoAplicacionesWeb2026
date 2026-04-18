@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Landing from './pages/Landing'
@@ -15,6 +15,7 @@ import JuegoSupermercado from './apps/supermercado/JuegoSupermercado'
 import PuzzleRaiz from './apps/rompecabezas/ArchivosJSX/PuzzleRaiz'
 import ContextAPI from './apps/context-api/ContextAPI'
 import MonopolySantaFe from './apps/monopoly-santafe/MonopolySantaFe'
+import CardBattleJG from './apps/CardBattle-J&G/CardBattleJG'
 import DocsIndex from './pages/DocsIndex'
 import InstallarDocker from './pages/docs/InstallarDocker'
 import OllamaDocker from './pages/docs/OllamaDocker'
@@ -37,10 +38,13 @@ import ReactRouterDemo from './apps/react-router-demo/ReactRouterDemo'
 import './App.css'
 
 function App() {
+  const location = useLocation()
+  const isCardBattleRoute = location.pathname.startsWith('/apps/CardBattle-J&G')
+
   return (
     <div className="site-shell">
-      <Navbar />
-      <main className="site-main">
+      {!isCardBattleRoute && <Navbar />}
+      <main className={`site-main ${isCardBattleRoute ? 'site-main--fullscreen' : ''}`}>
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/apps" element={<AppsIndex />} />
@@ -56,6 +60,7 @@ function App() {
           <Route path="/apps/bomba-loca" element={<BombaLoca />} />
           <Route path="/apps/context-api" element={<ContextAPI />} />
           <Route path="/apps/monopoly-santafe" element={<MonopolySantaFe />} />
+          <Route path="/apps/CardBattle-J&G" element={<CardBattleJG />} />
           <Route path="/apps/react-router-demo/*" element={<ReactRouterDemo />} />
           <Route path="/docs" element={<DocsIndex />} />
           <Route path="/docs/instalar-docker" element={<InstallarDocker />} />
@@ -78,7 +83,7 @@ function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
-      <Footer />
+      {!isCardBattleRoute && <Footer />}
     </div>
   )
 }

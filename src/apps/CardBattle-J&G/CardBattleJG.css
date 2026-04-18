@@ -1,0 +1,132 @@
+@import '../apps-shared.css';
+
+.card-battle {
+  --card-battle-bg: #0a0a1a;
+
+  min-height: 100vh;
+  background: var(--card-battle-bg);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 64px 0 0;
+}
+
+.card-battle__nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 15px 20px;
+  background: rgba(0, 0, 0, 0.85);
+  border-bottom: 1px solid #333;
+  z-index: 100;
+}
+
+.card-battle__nav .app-volver {
+  color: #aaa;
+  text-decoration: none;
+  font-size: 14px;
+  margin: 0;
+  transition: color 0.2s ease;
+}
+
+.card-battle__nav .app-volver:hover {
+  color: #fff;
+}
+
+.card-battle__quick-actions {
+  position: fixed;
+  top: 10px;
+  right: 16px;
+  z-index: 120;
+  display: flex;
+  gap: 8px;
+}
+
+.card-battle__quick-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.card-battle__quick-btn--primary {
+  color: #111;
+  background: linear-gradient(135deg, #facc15, #f59e0b);
+}
+
+.card-battle__quick-btn--ghost {
+  color: #e5e7eb;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(17, 24, 39, 0.65);
+}
+
+@media (max-width: 1024px) {
+  .card-battle {
+    padding-top: 58px;
+  }
+
+  .card-battle .menu-screen__title {
+    font-size: 38px;
+  }
+
+  .card-battle .result-screen__stats {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .card-battle__quick-actions {
+    right: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .card-battle {
+    padding-top: 54px;
+  }
+
+  .card-battle .menu-screen__title {
+    font-size: 32px;
+  }
+
+  .card-battle .menu-screen__rules {
+    padding: 16px 18px;
+  }
+
+  .card-battle__quick-actions {
+    top: 8px;
+    right: 8px;
+    gap: 6px;
+  }
+
+  .card-battle__quick-btn {
+    font-size: 11px;
+    padding: 7px 10px;
+  }
+}
+
+/* Modo estatico: sin animaciones ni transiciones en todo CardBattle */
+.card-battle,
+.card-battle * ,
+.card-battle *::before,
+.card-battle *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+.card-battle .battle-board__main {
+  scroll-behavior: auto !important;
+}
+
+.card-battle .slot-card--empty:hover,
+.card-battle .slot-card--drag-over,
+.card-battle .battle-field__resolve-btn:hover,
+.card-battle .deck-pile--clickable:hover,
+.card-battle .deck-pile--clickable:hover .deck-pile__layer,
+.card-battle .menu-screen__start-btn:hover,
+.card-battle .result-screen__btn:hover,
+.card-battle .player-hand__action-btn:hover,
+.card-battle .player-hand__play-btn:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
