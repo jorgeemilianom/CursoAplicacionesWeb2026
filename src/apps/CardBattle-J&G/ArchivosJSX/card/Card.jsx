@@ -2,15 +2,6 @@ import CardFront from './CardFront'
 import CardBack from './CardBack'
 import './Card.css'
 
-/**
- * Card - Componente principal de carta con efecto de volteo 3D
- * @param {Object} card - Datos de la carta
- * @param {boolean} faceDown - Si está boca abajo
- * @param {boolean} clickable - Si se puede clickear
- * @param {function} onClick - Callback al hacer click
- * @param {boolean} selected - Si está seleccionada
- * @param {string} size - Tamaño: 'small' | 'medium' | 'large'
- */
 function Card({
   card,
   faceDown = false,
@@ -34,13 +25,15 @@ function Card({
   }
 
   return (
-    <div
-      className={`card card--${size} ${selected ? 'card--selected' : ''} ${clickable ? 'card--clickable' : ''}`}
-      onClick={handleClick}
-      onDoubleClick={handleDoubleClick}
-    >
-      <div className="card__inner card__inner--static">
-        {isFlipped ? <CardFront card={card} /> : <CardBack />}
+    <div className="card-view">
+      <div
+        className={`card card--${size} ${selected ? 'card--selected' : ''} ${clickable ? 'card--clickable' : ''}`}
+        onClick={handleClick}
+        onDoubleClick={handleDoubleClick}
+      >
+        <div className="card__inner card__inner--static">
+          {isFlipped ? <CardFront card={card} /> : <CardBack />}
+        </div>
       </div>
     </div>
   )

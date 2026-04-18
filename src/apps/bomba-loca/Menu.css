@@ -203,63 +203,75 @@
   transition: transform 0.2s ease, filter 0.2s ease;
 }
 
-.cerrar-ayuda:hover {
-  transform: translateY(-1px);
-  filter: brightness(1.1);
-}
-
+/* ==========================================
+   ALTO CONTRASTE EXTREMO (Corregido)
+   ========================================== */
 .menu-shell.alto-contraste {
-  background:
-    radial-gradient(circle at 8% 12%, rgba(255, 255, 0, 0.2), transparent 45%),
-    radial-gradient(circle at 90% 5%, rgba(0, 255, 255, 0.2), transparent 40%),
-    linear-gradient(180deg, #000000 0%, #090909 100%);
+  background: #000000 !important;
+  background-image: none !important;
 }
 
 .menu-shell.alto-contraste .menu {
-  background: rgba(0, 0, 0, 0.95);
-  border: 2px solid #ffffff;
+  background: #000000 !important;
+  border: 4px solid #ffffff !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
 }
 
 .menu-shell.alto-contraste .menu-title,
-.menu-shell.alto-contraste .menu-subtitle {
-  color: #ffffff;
-}
-
-.menu-shell.alto-contraste .ayuda,
-.menu-shell.alto-contraste .volver-apps {
-  color: #ffffff;
-  border-color: #ffffff;
+.menu-shell.alto-contraste .menu-subtitle,
+.menu-shell.alto-contraste .ayuda {
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+  text-shadow: none !important;
 }
 
 .menu-shell.alto-contraste .botones button {
-  background: #121212;
-  border-color: #ffffff;
-  color: #ffffff;
+  background: #000000 !important;
+  border: 2px solid #ffffff !important;
+  color: #ffffff !important;
 }
 
 .menu-shell.alto-contraste .botones .activo {
-  background: #ffff00;
-  border-color: #ffffff;
-  color: #000000;
+  background: #ffff00 !important;
+  border-color: #ffff00 !important;
+  color: #000000 !important;
 }
 
 .menu-shell.alto-contraste .jugar {
-  background: #00d1ff;
-  color: #000000;
-  border-color: #ffffff;
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 4px solid #ffff00 !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+}
+
+.menu-shell.alto-contraste .modal-backdrop {
+  background: rgba(0, 0, 0, 0.95) !important;
+  backdrop-filter: none !important;
 }
 
 .menu-shell.alto-contraste .modal-ayuda {
-  background: #000000;
-  border: 2px solid #ffffff;
-  color: #ffffff;
+  background: #000000 !important;
+  border: 4px solid #ffffff !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
 }
 
 .menu-shell.alto-contraste .modal-ayuda h2,
 .menu-shell.alto-contraste .modal-ayuda strong {
-  color: #ffff00;
+  color: #ffff00 !important;
 }
 
+.menu-shell.alto-contraste .cerrar-ayuda {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #ffffff !important;
+}
+
+/* ==========================================
+   RESPONSIVE (Móviles)
+   ========================================== */
 @media (max-width: 700px) {
   .menu-shell {
     padding: 16px 10px;
@@ -291,23 +303,4 @@
     padding: 16px;
     border-radius: 14px;
   }
-}
-
-.volver-apps {
-  align-self: flex-start;
-  margin-bottom: 10px;
-  padding: 8px 12px;
-  background: rgba(15, 23, 42, 0.45);
-  color: #bfdbfe;
-  border: 1px solid rgba(147, 197, 253, 0.45);
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 700;
-  transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-}
-
-.volver-apps:hover {
-  transform: translateY(-1px);
-  color: #eff6ff;
-  border-color: rgba(147, 197, 253, 0.8);
 }

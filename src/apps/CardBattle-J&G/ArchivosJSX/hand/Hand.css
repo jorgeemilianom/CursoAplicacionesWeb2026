@@ -28,8 +28,8 @@
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  width: 124px;
-  min-height: 248px;
+  width: 142px;
+  min-height: 276px;
 }
 
 .card-battle .player-hand__actions {
@@ -41,7 +41,7 @@
 
 .card-battle .player-hand__action-btn,
 .card-battle .player-hand__play-btn {
-  width: 108px;
+  width: 124px;
   border: none;
   border-radius: 10px;
   padding: 6px 8px;

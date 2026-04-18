@@ -1,373 +1,176 @@
 import { useContext, useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
 import { GameContext } from "./GameContext";
 import "./Game.css";
 
-const jugadoresIniciales = ["🧑", "🤖", "🤖", "🤖", "🤖", "🤖", "🤖", "🤖"];
 const DIRECCION_DERECHA = 1;
 const DIRECCION_IZQUIERDA = -1;
 
 function Game() {
-  const { dificultad, setPantalla, altoContraste } = useContext(GameContext);
-  const navigate = useNavigate();
+  const { dificultad, setPantalla, altoContraste, personaje } = useContext(GameContext);
 
-  const [jugadores] = useState(jugadoresIniciales);
+  // Armamos la mesa
+  const [jugadores] = useState([
+    { nombre: personaje.nombre, foto: personaje.foto, isHuman: true },
+    { nombre: "Freddy", foto: "/freddys_fridays.png" },
+    { nombre: "Terminator", foto: "/terminator.png" },
+    { nombre: "Robot", foto: "/robot_comun.png" },
+    { nombre: "Freddy 2", foto: "/freddys_fridays.png" },
+    { nombre: "Terminator 2", foto: "/terminator.png" },
+    { nombre: "Robot 2", foto: "/robot_comun.png" },
+    { nombre: "Robot 3", foto: "/robot_comun.png" },
+  ]);
+
   const [bombaIndex, setBombaIndex] = useState(0);
-  const [direccion, setDireccion] = useState(DIRECCION_DERECHA);
   const [gameOver, setGameOver] = useState(false);
   const [tiempo, setTiempo] = useState(0);
-  const [inicio, setInicio] = useState(Date.now());
+  const [inicio, setInicio] = useState(null); 
   const [avisoCambio, setAvisoCambio] = useState("");
-  const [tickDuracionMs, setTickDuracionMs] = useState(650);
-  const historialJugadorRef = useRef({
-    izquierda: 0,
-    derecha: 0,
-    racha: 0,
-    ultima: null,
-  });
+  const [cuentaRegresiva, setCuentaRegresiva] = useState(5);
+  const [juegoIniciado, setJuegoIniciado] = useState(false);
+  const [pasesRealizados, setPasesRealizados] = useState(0);
+
   const tickAudioRef = useRef(null);
   const explosionAudioRef = useRef(null);
-  const direccionOpuesta = (dir) =>
-    dir === DIRECCION_DERECHA ? DIRECCION_IZQUIERDA : DIRECCION_DERECHA;
-  const cortarTick = () => {
-    if (!tickAudioRef.current) return;
-    tickAudioRef.current.pause();
-    tickAudioRef.current.currentTime = 0;
-  };
 
-  const registrarMovimientoJugador = (dir) => {
-    const historial = historialJugadorRef.current;
+  // Iniciar audio
+  useEffect(() => {
+    tickAudioRef.current = new Audio("/tick.mp3");
+    explosionAudioRef.current = new Audio("/explosion.mp3");
+  }, []);
 
-    if (dir === DIRECCION_DERECHA) {
-      historial.derecha += 1;
-    } else {
-      historial.izquierda += 1;
+  // Lógica de inicio y explosión
+  useEffect(() => {
+    if (cuentaRegresiva > 0) {
+      const t = setTimeout(() => setCuentaRegresiva(cuentaRegresiva - 1), 1000);
+      return () => clearTimeout(t);
+    } else if (!juegoIniciado && !gameOver) {
+      setTiempo(8000 + Math.random() * 5000);
+      setInicio(Date.now());
+      setJuegoIniciado(true);
     }
+  }, [cuentaRegresiva, juegoIniciado, gameOver]);
 
-    if (historial.ultima === dir) {
-      historial.racha += 1;
-    } else {
-      historial.racha = 1;
-      historial.ultima = dir;
-    }
-  };
+  useEffect(() => {
+    if (!juegoIniciado || gameOver || !inicio) return;
+    const t = setTimeout(() => {
+      explosionAudioRef.current?.play().catch(() => {});
+      setGameOver(true);
+    }, tiempo - (Date.now() - inicio));
+    return () => clearTimeout(t);
+  }, [juegoIniciado, gameOver, inicio, tiempo]);
 
-  const leerPerfilJugador = () => {
-    const { izquierda, derecha, racha, ultima } = historialJugadorRef.current;
-    const total = izquierda + derecha;
+  // IA con MODO COMPLOT
+  useEffect(() => {
+    if (gameOver || !juegoIniciado || bombaIndex === 0) return;
 
-    if (total < 3) {
-      return { tienePatron: false };
-    }
+    const total = jugadores.length;
+    const tiempoRestante = tiempo - (Date.now() - inicio);
+    const esFinal = tiempoRestante < 3000;
+    const delay = esFinal ? 400 : 1000;
 
-    const dirPreferida =
-      derecha === izquierda
-        ? ultima ?? DIRECCION_DERECHA
-        : derecha > izquierda
+    const iaTimer = setTimeout(() => {
+      setAvisoCambio(""); // limpiar mensaje anterior antes de actuar
+      if (esFinal && Math.random() < 0.6) {
+        setAvisoCambio("🎯 ¡COMPLOT! Te apuntaron directo");
+        setBombaIndex(0);
+        return;
+      }
+      const vDer = (bombaIndex + 1) % total;
+      const vIzq = (bombaIndex - 1 + total) % total;
+      const dirIA = (0 - bombaIndex + total) % total < (bombaIndex - 0 + total) % total
         ? DIRECCION_DERECHA
         : DIRECCION_IZQUIERDA;
 
-    const diferencia = Math.abs(derecha - izquierda);
-    const confianza = diferencia / total;
-    const tienePatron = confianza >= 0.2 || racha >= 2;
+      setAvisoCambio("🤖 Pasando...");
+      setBombaIndex(dirIA === DIRECCION_DERECHA ? vDer : vIzq);
+    }, delay);
 
-    return {
-      tienePatron,
-      dirPreferida,
-      confianza,
-      racha,
-    };
-  };
+    return () => clearTimeout(iaTimer);
+  }, [bombaIndex, juegoIniciado, gameOver]);
 
-  // 🎯 definir tiempo según dificultad
-  const getTiempoRandom = () => {
-    let min, max;
-
-    if (dificultad === "facil") {
-      min = 9000;
-      max = 13000;
-    } else if (dificultad === "medio") {
-      min = 8000;
-      max = 11000;
-    } else {
-      min = 7000;
-      max = 9000;
-    }
-
-    return Math.random() * (max - min) + min;
-  };
-
-  // 🚀 iniciar ronda
-  const iniciarRonda = () => {
-    const tiempoRandom = getTiempoRandom();
-    setTiempo(tiempoRandom);
-    setInicio(Date.now());
-    setGameOver(false);
-    setDireccion(DIRECCION_DERECHA);
+  const pasarBomba = (dir) => {
+    if (gameOver || !juegoIniciado || bombaIndex !== 0) return;
     setAvisoCambio("");
+    setPasesRealizados(p => p + 1);
+    setBombaIndex(prev => (prev + dir + jugadores.length) % jugadores.length);
   };
 
-  useEffect(() => {
-    iniciarRonda();
-  }, []);
-
-  // 🔊 precargar sonidos
-  useEffect(() => {
-    tickAudioRef.current = new Audio("/tick.mp3");
-    tickAudioRef.current.volume = 0.35;
-    tickAudioRef.current.loop = false;
-    tickAudioRef.current.preload = "auto";
-    const onMetaData = () => {
-      if (!tickAudioRef.current?.duration) return;
-      const duracion = Math.round(tickAudioRef.current.duration * 1000);
-      if (duracion > 0) {
-        setTickDuracionMs(duracion);
-      }
-    };
-    tickAudioRef.current.addEventListener("loadedmetadata", onMetaData);
-    explosionAudioRef.current = new Audio("/explosion.mp3");
-
-    return () => {
-      tickAudioRef.current?.removeEventListener("loadedmetadata", onMetaData);
-      cortarTick();
-      explosionAudioRef.current?.pause();
-    };
-  }, []);
-
-  // 💣 explosión con sonido (mantiene el tiempo real de la ronda)
-  useEffect(() => {
-    if (gameOver) return;
-
-    const restante = tiempo - (Date.now() - inicio);
-    if (restante <= 0) {
-      cortarTick();
-      explosionAudioRef.current?.play().catch(() => {});
-      setGameOver(true);
-      return;
-    }
-
-    const timer = setTimeout(() => {
-      cortarTick();
-      explosionAudioRef.current?.play().catch(() => {});
-      setGameOver(true);
-    }, restante);
-
-    return () => clearTimeout(timer);
-  }, [tiempo, inicio, gameOver]);
-
-  // ⏱ tick de bomba durante la ronda
-  useEffect(() => {
-    if (gameOver) return;
-
-    let tickTimer;
-
-    const reproducirTick = () => {
-      const restante = tiempo - (Date.now() - inicio);
-      if (restante <= 0) return;
-
-      if (tickAudioRef.current) {
-        tickAudioRef.current.currentTime = 0;
-        tickAudioRef.current.play().catch(() => {});
-      }
-
-      // Ajusta la frecuencia al audio real: suena natural aunque cambies tick.mp3
-      const progreso = 1 - restante / tiempo;
-      const intervaloBase = Math.max(420, tickDuracionMs * 0.95);
-      const intervaloMin = Math.max(150, tickDuracionMs * 0.35);
-      const intervalo = Math.max(
-        intervaloMin,
-        intervaloBase - progreso * (intervaloBase - intervaloMin),
-      );
-
-      tickTimer = setTimeout(reproducirTick, intervalo);
-    };
-
-    reproducirTick();
-
-    return () => {
-      clearTimeout(tickTimer);
-      cortarTick();
-    };
-  }, [tiempo, inicio, gameOver, tickDuracionMs]);
-
-  // Corta cualquier cola de tick al terminar la ronda
-  useEffect(() => {
-    if (gameOver) {
-      cortarTick();
-    }
-  }, [gameOver]);
-
-  // 🤖 IA enemigos
-  useEffect(() => {
-    if (gameOver) return;
-
-    const esJugador = bombaIndex === 0;
-
-    if (!esJugador) {
-      let tiempoIA =
-        dificultad === "facil"
-          ? Math.random() * 2000 + 1000
-          : dificultad === "medio"
-          ? Math.random() * 1500 + 500
-          : Math.random() * 800 + 200;
-
-      const iaTimer = setTimeout(() => {
-        const pasosDerecha = (0 - bombaIndex + jugadores.length) % jugadores.length;
-        const pasosIzquierda = (bombaIndex - 0 + jugadores.length) % jugadores.length;
-        const direccionHaciaJugador =
-          pasosDerecha < pasosIzquierda
-            ? DIRECCION_DERECHA
-            : pasosIzquierda < pasosDerecha
-            ? DIRECCION_IZQUIERDA
-            : Math.random() < 0.5
-            ? DIRECCION_DERECHA
-            : DIRECCION_IZQUIERDA;
-
-        const perfilJugador = leerPerfilJugador();
-        const probDesvio =
-          dificultad === "facil" ? 0.2 : dificultad === "medio" ? 0.16 : 0.12;
-        const probCambioSorpresa =
-          dificultad === "facil" ? 0.16 : dificultad === "medio" ? 0.22 : 0.28;
-        const probLecturaPatron =
-          dificultad === "facil"
-            ? 0.3
-            : dificultad === "medio"
-            ? 0.42
-            : 0.55;
-
-        let direccionIA = direccionHaciaJugador;
-        let mensajeAviso = "";
-
-        // Modo competitivo: si detecta patrón, intenta contrarrestarlo.
-        if (
-          perfilJugador.tienePatron &&
-          Math.random() < probLecturaPatron * Math.max(0.7, perfilJugador.confianza + 0.6)
-        ) {
-          direccionIA = direccionOpuesta(perfilJugador.dirPreferida);
-          mensajeAviso = "🧠 La IA leyó tu patrón";
-        }
-
-        // A veces se desvían para no ser totalmente predecibles.
-        if (Math.random() < probDesvio) {
-          direccionIA = direccionOpuesta(direccionIA);
-          if (!mensajeAviso) {
-            mensajeAviso = "🤖 El robot se desvió";
-          }
-        }
-
-        // Más caos: cambios sorpresivos durante la cadena.
-        if (Math.random() < probCambioSorpresa) {
-          direccionIA = direccionOpuesta(direccionIA);
-          mensajeAviso = "⚠️ ¡Cambio sorpresivo de sentido!";
-        }
-
-        setAvisoCambio(mensajeAviso);
-
-        pasarBomba(direccionIA);
-      }, tiempoIA);
-
-      return () => clearTimeout(iaTimer);
-    }
-  }, [bombaIndex, direccion, dificultad, gameOver]);
-
-  const moverIndice = (index, dir) =>
-    (index + dir + jugadores.length) % jugadores.length;
-
-  // 👉 pasar bomba (izquierda o derecha)
-  const pasarBomba = (dirElegida = direccion) => {
-    if (gameOver) return;
-
-    if (bombaIndex === 0) {
-      registrarMovimientoJugador(dirElegida);
-    }
-
-    setDireccion(dirElegida);
-    setBombaIndex((prev) => moverIndice(prev, dirElegida));
-  };
-
-  // 🔁 reiniciar
-  const reiniciar = () => {
+  // 👇 NUEVA FUNCIÓN: Reinicia todo a cero para volver a jugar
+  const reiniciarJuego = () => {
     setBombaIndex(0);
-    iniciarRonda();
+    setGameOver(false);
+    setTiempo(0);
+    setInicio(null);
+    setAvisoCambio("");
+    setCuentaRegresiva(5);
+    setJuegoIniciado(false);
+    setPasesRealizados(0);
   };
-
-  const volverAApps = () => {
-    navigate("/apps");
-  };
-
-  // ⏱ tiempo restante
-  const tiempoRestante = tiempo - (Date.now() - inicio);
-  const enPeligro = tiempoRestante < 2000;
 
   return (
     <div className={`game-shell ${altoContraste ? "alto-contraste" : ""}`}>
-      <div className="game-overlay" />
-      <div className="container">
-        <button className="volver-apps volver-apps--game" onClick={volverAApps}>
-          ← Volver a Apps
+      <div className="container" style={{ position: "relative" }}>
+        
+        {/* 👇 NUEVA FLECHA DE VOLVER */}
+        <button className="btn-volver" onClick={() => setPantalla("menu")}>
+          ⬅️ Volver
         </button>
 
         <header className="game-hud">
-          <h2 className="game-title">Bomba en Cadena</h2>
-          <p className="game-turno">
-            Turno: {jugadores[bombaIndex]} {bombaIndex === 0 && "(vos)"}
-          </p>
-
-          <div className="hud-row">
-            <p className="badge">
-              Dirección: {direccion === DIRECCION_DERECHA ? "➡️ derecha" : "⬅️ izquierda"}
-            </p>
-          </div>
-          {avisoCambio && <p className="aviso-cambio">{avisoCambio}</p>}
-        </header>
-
-        <div className="grid">
-          {jugadores.map((j, i) => (
-            <div
-              key={i}
-              className={`player 
-              ${i === bombaIndex ? "activo" : ""} 
-              ${i === bombaIndex && enPeligro ? "peligro" : ""}
-            `}
-            >
-              <span className="player-avatar">{j}</span>
-              {i === bombaIndex && (
-                <span className="bomb-indicator" aria-label="Bomba activa">
-                  B O M B A
-                </span>
+          {cuentaRegresiva > 0 ? (
+            <div className="contador-box">
+              <div className="cartel-tutorial inicio">👆 ¡Elegí quién empieza!</div>
+              <h1 className="countdown">{cuentaRegresiva}</h1>
+            </div>
+          ) : (
+            <div className="info-turno">
+              <p className="game-turno">{bombaIndex === 0 ? "¡PASALA!" : `Turno: ${jugadores[bombaIndex].nombre}`}</p>
+              {bombaIndex === 0 && !gameOver && pasesRealizados < 3 && (
+                <div className="cartel-tutorial warning">⚠️ ¡SOLO a los de al lado!</div>
               )}
             </div>
-          ))}
+          )}
+        </header>
+
+        <div className="circle-container">
+          {jugadores.map((j, i) => {
+            const total = jugadores.length;
+            const angulo = (i / total) * (2 * Math.PI) - Math.PI / 2;
+            const x = Math.cos(angulo) * 140;
+            const y = Math.sin(angulo) * 140;
+            const esVecino = (bombaIndex === 0 && (i === 1 || i === total - 1));
+
+            return (
+              <div
+                key={i}
+                onClick={() => {
+                   if(!juegoIniciado) setBombaIndex(i);
+                   if(esVecino) pasarBomba(i === 1 ? DIRECCION_DERECHA : DIRECCION_IZQUIERDA);
+                }}
+                className={`player-circular ${i === bombaIndex ? "activo" : ""} ${esVecino || !juegoIniciado ? "vecino-clicable" : ""}`}
+                style={{ "--x": `${x}px`, "--y": `${y}px` }}
+              >
+                <div className="photo-frame">
+                  <img src={j.foto} className="player-photo" alt={j.nombre} />
+                </div>
+                {i === bombaIndex && <span className="bomb-emoji">💣</span>}
+              </div>
+            );
+          })}
         </div>
 
-        {gameOver ? (
-          <>
-            <h1 className="explosion">
-              💥 Perdió {jugadores[bombaIndex]}
-            </h1>
+        <footer className="game-footer">
+          {gameOver ? (
             <div className="acciones">
-              <button onClick={reiniciar}>Reiniciar</button>
-              <button onClick={() => setPantalla("menu")}>
-                Volver al menú
-              </button>
-            </div>
-          </>
-        ) : (
-          <>
-            {bombaIndex === 0 ? (
-              <div className="acciones">
-                <button onClick={() => pasarBomba(DIRECCION_IZQUIERDA)}>
-                  Pasar a la izquierda
-                </button>
-                <button onClick={() => pasarBomba(DIRECCION_DERECHA)}>
-                  Pasar a la derecha
-                </button>
+              <h2 className="explosion-text">💥 ¡BOOM!</h2>
+              {/* 👇 NUEVOS BOTONES DE FINAL */}
+              <div className="botones-final">
+                <button className="btn-main reiniciar" onClick={reiniciarJuego}>🔄 Otra vez</button>
+                <button className="btn-main menu" onClick={() => setPantalla("menu")}>🏠 Menú</button>
               </div>
-            ) : (
-              <p className="pensando">🤖 Pensando...</p>
-            )}
-          </>
-        )}
+            </div>
+          ) : <p className="aviso-ia">{avisoCambio}</p>}
+        </footer>
       </div>
     </div>
   );
