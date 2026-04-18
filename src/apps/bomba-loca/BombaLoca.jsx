@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { GameContext, GameProvider } from './GameContext'
 import Game from './Game'
 import Menu from './Menu'
+import Selector from './Selector' // <--- 1. IMPORTAMOS EL SELECTOR
 
 function BombaLocoContent() {
   const { pantalla } = useContext(GameContext)
@@ -9,6 +10,7 @@ function BombaLocoContent() {
   return (
     <>
       {pantalla === 'menu' && <Menu />}
+      {pantalla === 'selector' && <Selector />} {/* <--- 2. AGREGAMOS ESTA LÍNEA */}
       {pantalla === 'game' && <Game />}
     </>
   )
@@ -16,9 +18,11 @@ function BombaLocoContent() {
 
 function BombaLoca() {
   return (
-    <GameProvider>
-      <BombaLocoContent />
-    </GameProvider>
+    <div style={{ paddingTop: '80px' }}> {/* <--- Este empujoncito */}
+      <GameProvider>
+        <BombaLocoContent />
+      </GameProvider>
+    </div>
   )
 }
 
