@@ -1,53 +1,67 @@
 import './Card.css'
 
-/**
- * CardFront - Muestra el frente de una carta con sus estadísticas
- * @param {Object} card - Datos de la carta (name, attack, defense, effectType, effectValue, description, rarity)
- */
 function CardFront({ card }) {
   if (!card) return null
 
   const rarityClass = `card-front--${card.rarity}`
-  const effectIcon = {
-    damage: '⚔️',
-    heal: '💚',
-    shield: '🛡️',
-    draw: '📚'
+  const elementClass = card.tipo ? `card-front--${card.tipo}` : ''
+  const elementName = card.tipo ? `${card.tipo.charAt(0).toUpperCase()}${card.tipo.slice(1)}` : 'Neutral'
+  
+  const elementIcons = {
+    fuego: '🔥', agua: '💧', tierra: '🌿', aire: '💨',
+    electrico: '⚡', vacio: '🕳️', psiquico: '🔮'
   }
 
+  const effectIcon = { damage: '⚔️', heal: '💚', shield: '🛡️', draw: '📚' }
+  const effectLabel = {
+    damage: 'Ataque',
+    heal: 'Curacion',
+    shield: 'Defensa',
+    draw: 'Robo'
+  }
+  const effectBadge = {
+    damage: 'ATQ',
+    heal: 'CUR',
+    shield: 'DEF',
+    draw: 'ROB'
+  }
+  const rarityBadge = {
+    common: 'COM',
+    rare: 'RAR',
+    legendary: 'LEG'
+  }
+  const displayIcon = card.tipo ? elementIcons[card.tipo] : effectIcon[card.effectType]
+
   return (
-    <div className={`card-front ${rarityClass}`}>
+    <div className={`card-front ${rarityClass} ${elementClass}`}>
+      <div className="card-front__frame" />
       <div className="card-front__header">
+        <h3 className="card-front__name">{card.name}</h3>
         <span className="card-front__rarity">
           {card.rarity === 'legendary' ? '⭐' : card.rarity === 'rare' ? '◆' : '○'}
         </span>
-        <h3 className="card-front__name">{card.name}</h3>
       </div>
 
       <div className="card-front__image">
-        <span className="card-front__effect-icon">
-          {effectIcon[card.effectType]}
+        <span className="card-front__element-chip">
+          <span className="card-front__element-icon">{displayIcon}</span>
+          <span className="card-front__element-name">{elementName}</span>
         </span>
-      </div>
-
-      <div className="card-front__stats">
-        <div className="card-front__stat card-front__stat--attack">
-          <span className="card-front__stat-icon">⚔️</span>
-          <span className="card-front__stat-value">{card.attack}</span>
+        <div className="card-front__image-badge">{displayIcon}</div>
+        <div className="card-front__effect-line">
+          <span className="card-front__effect-label">{effectLabel[card.effectType] || 'Efecto'}</span>
+          <span className="card-front__effect-value">+{card.effectValue ?? 0}</span>
         </div>
-        <div className="card-front__stat card-front__stat--defense">
-          <span className="card-front__stat-icon">🛡️</span>
-          <span className="card-front__stat-value">{card.defense}</span>
-        </div>
-      </div>
-
-      <div className="card-front__effect">
-        <span className="card-front__effect-badge">
-          +{card.effectValue} {effectIcon[card.effectType]}
-        </span>
       </div>
 
       <p className="card-front__description">{card.description}</p>
+
+      <div className="card-front__stats-line">
+        <span className="card-front__footer-rarity">{rarityBadge[card.rarity] || 'COM'}</span>
+        <span className="card-front__stats-inline">ATK/{card.attack}</span>
+        <span className="card-front__stats-inline">DEF/{card.defense}</span>
+        <span className="card-front__footer-type">{effectBadge[card.effectType] || 'EFX'}</span>
+      </div>
     </div>
   )
 }
