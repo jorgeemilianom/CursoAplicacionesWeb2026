@@ -3,9 +3,9 @@
   justify-content: flex-start;
   align-items: stretch;
   flex-wrap: wrap;
-  gap: 10px;
-  padding: 10px;
-  min-height: 220px;
+  gap: 8px;
+  padding: 8px;
+  min-height: 196px;
   position: relative;
 }
 
@@ -27,9 +27,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  width: 142px;
-  min-height: 276px;
+  gap: 5px;
+  width: 126px;
+  min-height: 234px;
 }
 
 .card-battle .player-hand__actions {
@@ -41,11 +41,11 @@
 
 .card-battle .player-hand__action-btn,
 .card-battle .player-hand__play-btn {
-  width: 124px;
+  width: 112px;
   border: none;
   border-radius: 10px;
-  padding: 6px 8px;
-  font-size: 12px;
+  padding: 5px 7px;
+  font-size: 11px;
   font-weight: 700;
   color: #111827;
   background: linear-gradient(135deg, #facc15, #f59e0b);

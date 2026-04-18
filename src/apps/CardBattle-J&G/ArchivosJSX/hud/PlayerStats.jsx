@@ -10,11 +10,13 @@ import './HUD.css'
  * @param {boolean} isCurrentTurn - Si es su turno
  */
 function PlayerStats({ playerName, hp, shield = 0, handCount = 0, isCurrentTurn = false }) {
+  const turnLabel = playerName === 'Jugador 1' ? 'TU TURNO' : 'EN TURNO'
+
   return (
     <div className={`player-stats ${isCurrentTurn ? 'player-stats--active' : ''}`}>
       <div className="player-stats__header">
         <span className="player-stats__name">{playerName}</span>
-        {isCurrentTurn && <span className="player-stats__turn-badge">TU TURNO</span>}
+        {isCurrentTurn && <span className="player-stats__turn-badge">{turnLabel}</span>}
       </div>
 
       <HealthBar current={hp} max={20} />

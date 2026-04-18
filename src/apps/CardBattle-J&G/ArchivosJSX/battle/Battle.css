@@ -7,8 +7,8 @@
 }
 
 .card-battle .battle-board__sidebar {
-  width: 260px;
-  padding: 16px 12px;
+  width: 232px;
+  padding: 12px 10px;
   background: rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(10px);
   border-right: 1px solid rgba(255, 255, 255, 0.1);
@@ -16,7 +16,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
 }
 
 .card-battle .battle-board__main {
@@ -24,53 +24,58 @@
   max-height: calc(100vh - 64px);
   overflow-y: auto;
   scroll-behavior: smooth;
-  padding: 20px;
+  padding: 14px;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 16px;
 }
 
 .card-battle .player-zone {
   width: 100%;
-  padding: 24px;
+  padding: 12px 16px;
   background: rgba(255, 255, 255, 0.04);
-  border-radius: 20px;
+  border-radius: 18px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  min-height: 370px;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 8px;
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card-battle .player-zone__main-row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .card-battle .player-zone[data-active='true'] {
   border-color: rgba(255, 215, 0, 0.6);
-  box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.18), 0 18px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.14), 0 10px 18px rgba(0, 0, 0, 0.16);
 }
 
 .card-battle .player-zone__stats {
   width: 100%;
-  max-width: 560px;
+  max-width: 620px;
 }
 
-.card-battle .player-zone__slot {
-  display: flex;
-  justify-content: center;
-  width: 100%;
+.card-battle .player-zone--compact {
+  padding: 12px 16px;
 }
 
 .card-battle .player-zone__hand {
   width: 100%;
   display: flex;
   justify-content: center;
-  padding-bottom: 12px;
+  padding-bottom: 4px;
+  margin-top: 0;
 }
 
 .card-battle .slot-card {
-  width: 160px;
-  height: 230px;
-  border-radius: 14px;
+  width: 126px;
+  height: 182px;
+  border-radius: 12px;
   border: 2px dashed rgba(255, 255, 255, 0.22);
   background: rgba(0, 0, 0, 0.18);
   cursor: pointer;
@@ -105,33 +110,36 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   color: rgba(255, 255, 255, 0.7);
 }
 
 .card-battle .slot-card__icon {
-  font-size: 26px;
+  font-size: 22px;
   font-weight: 700;
 }
 
 .card-battle .slot-card__text {
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .card-battle .battle-field {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: 1fr;
+  justify-items: center;
   align-items: center;
-  gap: 20px;
-  padding: 18px;
-  border-radius: 16px;
+  gap: 14px;
+  padding: 22px 12px;
+  border-radius: 14px;
   background: rgba(9, 18, 36, 0.78);
   border: 1px solid rgba(255, 255, 255, 0.08);
+  min-height: 388px;
 }
 
 .card-battle .battle-field__zone {
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 
 .card-battle .battle-field__vs {
@@ -139,22 +147,23 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  min-width: 140px;
+  gap: 8px;
+  min-width: 108px;
+  margin: 8px 0;
 }
 
 .card-battle .battle-field__vs-text {
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 800;
   letter-spacing: 0.12em;
   color: rgba(255, 255, 255, 0.85);
 }
 
 .card-battle .battle-field__resolve-btn {
-  padding: 10px 16px;
+  padding: 8px 12px;
   border: none;
   border-radius: 999px;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 700;
   background: linear-gradient(135deg, #ffd700, #ffae00);
   color: #111;
@@ -185,24 +194,33 @@
     max-height: none;
     min-height: 0;
   }
+
+  .card-battle .player-zone__main-row,
+  .card-battle .player-zone--compact .player-zone__main-row {
+    display: flex;
+    justify-content: center;
+  }
+
+  .card-battle .player-zone__stats {
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 768px) {
   .card-battle .battle-field {
-    grid-template-columns: 1fr;
-  }
-
-  .card-battle .battle-field__vs {
-    order: -1;
+    min-height: 300px;
   }
 
   .card-battle .player-zone {
-    min-height: 320px;
-    padding: 16px;
+    padding: 12px;
+  }
+
+  .card-battle .player-zone--compact {
+    padding: 10px 12px;
   }
 
   .card-battle .slot-card {
-    width: 130px;
-    height: 190px;
+    width: 112px;
+    height: 160px;
   }
 }

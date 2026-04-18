@@ -1,6 +1,5 @@
 import PlayerStats from '../hud/PlayerStats'
 import PlayerHand from '../hand/PlayerHand'
-import SlotCard from './SlotCard'
 import './Battle.css'
 
 /**
@@ -9,43 +8,31 @@ import './Battle.css'
 function PlayerZone({
   playerId,
   player,
-  fieldCard,
   isCurrentTurn,
   selectedCardId,
   canPlay = false,
   showHand = false,
   onCardSelect,
   onCardDragStart,
-  onPlayCard,
-  onSlotClick,
-  onSlotDrop
+  onPlayCard
 }) {
   const isPlayer1 = playerId === 'player1'
 
   return (
     <div
-      className={`player-zone ${isPlayer1 ? 'player-zone--bottom' : 'player-zone--top'}`}
+      className={`player-zone ${isPlayer1 ? 'player-zone--bottom' : 'player-zone--top'} ${showHand ? 'player-zone--with-hand' : 'player-zone--compact'}`}
       data-active={isCurrentTurn}
     >
-      <div className="player-zone__stats">
-        <PlayerStats
-          playerName={isPlayer1 ? 'Jugador 1' : 'Jugador 2'}
-          hp={player.hp}
-          shield={player.shield}
-          handCount={player.hand?.length || 0}
-          isCurrentTurn={isCurrentTurn}
-        />
-      </div>
-
-      <div className="player-zone__slot">
-        <SlotCard
-          card={fieldCard}
-          playerId={playerId}
-          onClick={() => onSlotClick?.(playerId)}
-          onDropCard={onSlotDrop}
-          isActive={canPlay && !fieldCard}
-          canDrop={canPlay && !fieldCard}
-        />
+      <div className="player-zone__main-row">
+        <div className="player-zone__stats">
+          <PlayerStats
+            playerName={isPlayer1 ? 'Jugador 1' : 'Jugador 2'}
+            hp={player.hp}
+            shield={player.shield}
+            handCount={player.hand?.length || 0}
+            isCurrentTurn={isCurrentTurn}
+          />
+        </div>
       </div>
 
       {showHand && (

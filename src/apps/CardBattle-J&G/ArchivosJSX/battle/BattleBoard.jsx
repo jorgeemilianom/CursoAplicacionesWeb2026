@@ -254,48 +254,36 @@ function BattleBoard() {
       </div>
 
       <div className="battle-board__main">
-        <div>
-          <PlayerZone
-            playerId="player2"
-            player={player2Data}
-            fieldCard={fieldCards.player2}
-            isCurrentTurn={currentTurn === 'player2'}
-            selectedCardId={selectedCard?.ownerId === 'player2' ? selectedCard.card.uniqueId : null}
-            canPlay={false}
-            showHand={false}
-            onCardSelect={(card) => handleCardSelect(card, 'player2')}
-            onCardDragStart={(card) => handleCardDragStart(card, 'player2')}
-            onPlayCard={(cardUniqueId) => handleCardPlayFromButton('player2', cardUniqueId)}
-            onSlotClick={handleSlotClick}
-            onSlotDrop={handleSlotDrop}
-          />
-        </div>
+        <PlayerZone
+          playerId="player2"
+          player={player2Data}
+          isCurrentTurn={currentTurn === 'player2'}
+          selectedCardId={selectedCard?.ownerId === 'player2' ? selectedCard.card.uniqueId : null}
+          canPlay={false}
+          showHand={false}
+          onCardSelect={(card) => handleCardSelect(card, 'player2')}
+          onCardDragStart={(card) => handleCardDragStart(card, 'player2')}
+          onPlayCard={(cardUniqueId) => handleCardPlayFromButton('player2', cardUniqueId)}
+        />
 
-        <div>
-          <BattleField
-            player1Card={fieldCards.player1}
-            player2Card={fieldCards.player2}
-            canResolve={canResolve}
-            onResolve={handleResolveCombat}
-          />
-        </div>
+        <BattleField
+          player1Card={fieldCards.player1}
+          player2Card={fieldCards.player2}
+          canResolve={canResolve}
+          onResolve={handleResolveCombat}
+        />
 
-        <div>
-          <PlayerZone
-            playerId="player1"
-            player={player1Data}
-            fieldCard={fieldCards.player1}
-            isCurrentTurn={currentTurn === 'player1'}
-            selectedCardId={selectedCard?.ownerId === 'player1' ? selectedCard.card.uniqueId : null}
-            canPlay={currentTurn === 'player1' && turnPhase === 'play' && !fieldCards.player1}
-            showHand
-            onCardSelect={(card) => handleCardSelect(card, 'player1')}
-            onCardDragStart={(card) => handleCardDragStart(card, 'player1')}
-            onPlayCard={(cardUniqueId) => handleCardPlayFromButton('player1', cardUniqueId)}
-            onSlotClick={handleSlotClick}
-            onSlotDrop={handleSlotDrop}
-          />
-        </div>
+        <PlayerZone
+          playerId="player1"
+          player={player1Data}
+          isCurrentTurn={currentTurn === 'player1'}
+          selectedCardId={selectedCard?.ownerId === 'player1' ? selectedCard.card.uniqueId : null}
+          canPlay={currentTurn === 'player1' && turnPhase === 'play' && !fieldCards.player1}
+          showHand
+          onCardSelect={(card) => handleCardSelect(card, 'player1')}
+          onCardDragStart={(card) => handleCardDragStart(card, 'player1')}
+          onPlayCard={(cardUniqueId) => handleCardPlayFromButton('player1', cardUniqueId)}
+        />
       </div>
     </div>
   )
