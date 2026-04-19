@@ -1,13 +1,12 @@
+import { useState } from 'react'
 import { useGame } from '../context/GameContext'
 import { useBattle } from '../context/BattleContext'
-import './Screens.css'
 
-/**
- * MenuScreen - Pantalla de inicio del juego
- */
 function MenuScreen() {
   const { startGame } = useGame()
-  const { resetBattle, startBattle } = useBattle()
+  const { startBattle, resetBattle } = useBattle()
+
+  const [name, setName] = useState('')
 
   const handleStart = () => {
     resetBattle()
@@ -18,33 +17,40 @@ function MenuScreen() {
   return (
     <div className="menu-screen">
       <div className="menu-screen__content">
+
         <h1 className="menu-screen__title">
           <span className="menu-screen__title-icon">⚔️</span>
           Card Battle
-          <span className="menu-screen__title-icon">🛡️</span>
         </h1>
-        <p className="menu-screen__subtitle">Juego de Cartas - Duelo entre Jugadores</p>
+
+        <p className="menu-screen__subtitle">
+          Enfrenta tus cartas y gana la batalla
+        </p>
+
+        <input
+          type="text"
+          placeholder="Tu nombre..."
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="menu-screen__input"
+        />
 
         <div className="menu-screen__rules">
-          <h3>Cómo jugar:</h3>
+          <h3>📜 Reglas del juego</h3>
           <ul>
-            <li>Cada jugador comienza con <strong>20 puntos de vida</strong></li>
-            <li>En tu turno, selecciona una carta de tu mano</li>
-            <li>Haz click en tu slot para colocar la carta</li>
-            <li>Cuando ambos tienen carta, ¡combate!</li>
-            <li>El objetivo: reducir la vida del oponente a 0</li>
+            <li>Arrastrá cartas al campo de batalla</li>
+            <li>El ataque se resuelve al presionar "Combatir"</li>
+            <li>El primero en quedarse sin vida pierde</li>
           </ul>
         </div>
 
-        <button className="menu-screen__start-btn" onClick={handleStart}>
-          ¡Comenzar Batalla!
+        <button
+          className="menu-screen__start-btn"
+          onClick={handleStart}
+        >
+          Comenzar batalla
         </button>
 
-        <div className="menu-screen__credits">
-          <span>Jugador 1 vs Jugador 2</span>
-          <span>•</span>
-          <span>Mazo compartido</span>
-        </div>
       </div>
     </div>
   )

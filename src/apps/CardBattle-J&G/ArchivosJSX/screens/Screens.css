@@ -98,11 +98,12 @@
 
 /* ===== FIX: height fijo para que el juego no desborde el viewport ===== */
 .card-battle__game-screen {
-  height: calc(100vh - 64px);
+  min-height: calc(100vh - 64px); /* cambio clave */
   overflow: hidden;
   display: flex;
   flex-direction: column;
   background: #0a0a1a;
+  padding: 10px 0; /* mejora visual */
 }
 
 .card-battle .result-screen {
@@ -264,3 +265,21 @@
   border-color: #fff;
 }
 
+.card-battle .battle-board__main {
+  justify-content: space-between;
+}
+
+.card-battle .battle-field {
+  margin: 20px 0;
+}
+.menu-screen__input {
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: 1px solid #444;
+  background: #111;
+  color: #fff;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 250px;
+  text-align: center;
+}
