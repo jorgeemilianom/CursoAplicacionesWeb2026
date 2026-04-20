@@ -8,3 +8,7 @@
   flex: 1;
   padding-top: 64px;
 }
+
+.site-main--fullscreen {
+  padding-top: 0;
+}

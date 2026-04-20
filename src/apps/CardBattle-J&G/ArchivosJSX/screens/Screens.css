@@ -1,0 +1,351 @@
+.card-battle .menu-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 64px);
+  background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3a 50%, #0a1a1a 100%);
+  color: #fff;
+  padding: 20px;
+}
+
+.card-battle .menu-screen__content {
+  text-align: center;
+  width: min(100%, 980px);
+}
+
+.card-battle .menu-screen__title {
+  font-size: 48px;
+  font-weight: 900;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, #ffd700, #ff6b6b, #4ecdc4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.card-battle .menu-screen__title-icon {
+  font-size: 40px;
+  -webkit-text-fill-color: initial;
+}
+
+.card-battle .menu-screen__subtitle {
+  font-size: 16px;
+  color: #888;
+  margin-bottom: 40px;
+}
+
+.card-battle .menu-screen__rules {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #333;
+  border-radius: 18px;
+  padding: 22px 24px;
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+.card-battle .menu-screen__rules h3 {
+  margin: 0 0 18px;
+  color: #ffd700;
+  font-size: 20px;
+}
+
+.card-battle .menu-screen__guide-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.card-battle .menu-screen__guide-card {
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: rgba(12, 18, 31, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.card-battle .menu-screen__guide-card h4,
+.card-battle .menu-screen__tips h4 {
+  margin: 0 0 10px;
+  font-size: 15px;
+  color: #fff;
+}
+
+.card-battle .menu-screen__guide-card p,
+.card-battle .menu-screen__guide-card li,
+.card-battle .menu-screen__tips li {
+  font-size: 14px;
+  color: #ccc;
+  line-height: 1.45;
+}
+
+.card-battle .menu-screen__guide-card ul,
+.card-battle .menu-screen__tips ul {
+  margin: 0;
+  padding-left: 18px;
+  list-style: disc;
+}
+
+.card-battle .menu-screen__guide-card li + li,
+.card-battle .menu-screen__tips li + li {
+  margin-top: 6px;
+}
+
+.card-battle .menu-screen__guide-card strong,
+.card-battle .menu-screen__tips strong {
+  color: #4ecdc4;
+}
+
+.card-battle .menu-screen__guide-card p {
+  margin: 0;
+}
+
+.card-battle .menu-screen__tips {
+  margin-top: 14px;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: rgba(255, 215, 0, 0.06);
+  border: 1px solid rgba(255, 215, 0, 0.14);
+}
+
+.card-battle .menu-screen__start-btn {
+  padding: 15px 50px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #000;
+  background: linear-gradient(135deg, #ffd700, #ffaa00);
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
+}
+
+.card-battle .menu-screen__start-btn:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5);
+}
+
+.card-battle .menu-screen__credits {
+  margin-top: 40px;
+  font-size: 12px;
+  color: #666;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* ===== FIX: height fijo para que el juego no desborde el viewport ===== */
+.card-battle__game-screen {
+  min-height: calc(100vh - 64px); /* cambio clave */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: #0a0a1a;
+  padding: 10px 0; /* mejora visual */
+}
+
+.card-battle .result-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 64px);
+  background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2a 100%);
+  color: #fff;
+  padding: 20px;
+}
+
+.card-battle .result-screen__content {
+  text-align: center;
+  animation: resultFadeIn 0.5s ease;
+}
+
+@keyframes resultFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card-battle .result-screen__trophy {
+  font-size: 80px;
+  animation: trophyBounce 1s ease infinite;
+}
+
+@keyframes trophyBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.card-battle .result-screen__title {
+  font-size: 56px;
+  font-weight: 900;
+  margin: 20px 0;
+  background: linear-gradient(135deg, #ffd700, #ffaa00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.card-battle .result-screen__winner {
+  font-size: 24px;
+  color: #fff;
+  margin-bottom: 40px;
+}
+
+.card-battle .result-screen__stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.card-battle .result-screen__stat {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid #333;
+  border-radius: 15px;
+  padding: 20px 30px;
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.card-battle .result-screen__stat--winner {
+  border-color: #ffd700;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+}
+
+.card-battle .result-screen__stat--loser {
+  border-color: #ff6b6b;
+  opacity: 0.6;
+}
+
+.card-battle .result-screen__stat-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #f3e8c2;
+}
+
+.card-battle .result-screen__stat-caption {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #a7abc2;
+}
+
+.card-battle .result-screen__stat-value {
+  font-size: 2.4rem;
+  line-height: 1;
+  font-weight: 900;
+  color: #fff;
+}
+
+.card-battle .result-screen__stat-max {
+  font-size: 0.88rem;
+  color: #c5c9da;
+}
+
+.card-battle .result-screen__stat-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 10px;
+  margin-top: 5px;
+}
+
+.card-battle .result-screen__stat--winner .result-screen__stat-badge {
+  background: #ffd700;
+  color: #000;
+}
+
+.card-battle .result-screen__stat--loser .result-screen__stat-badge {
+  background: #ff6b6b;
+  color: #000;
+}
+
+.card-battle .result-screen__vs {
+  font-size: 24px;
+  font-weight: 700;
+  color: #666;
+}
+
+.card-battle .result-screen__actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.card-battle .result-screen__btn {
+  padding: 12px 30px;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.card-battle .result-screen__btn--primary {
+  background: linear-gradient(135deg, #ffd700, #ffaa00);
+  color: #000;
+}
+
+.card-battle .result-screen__btn--secondary {
+  background: transparent;
+  border: 2px solid #666;
+  color: #fff;
+}
+
+.card-battle .result-screen__btn:hover {
+  transform: translateY(-3px);
+}
+
+.card-battle .result-screen__btn--primary:hover {
+  box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+}
+
+.card-battle .result-screen__btn--secondary:hover {
+  border-color: #fff;
+}
+
+.card-battle .battle-board__main {
+  justify-content: center;
+}
+
+.card-battle .battle-field {
+  margin: 0;
+}
+.menu-screen__input {
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: 1px solid #444;
+  background: #111;
+  color: #fff;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 250px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .card-battle .menu-screen__guide-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-battle .menu-screen__rules {
+    padding: 18px 16px;
+  }
+}

@@ -100,6 +100,13 @@ const apps = [
     etiquetas: ['React Router', 'useParams', 'useNavigate', 'useSearchParams', 'NavLink'],
     modulo: '06',
   },
+  {
+    id: 'CardBattle-J&G',
+    titulo: 'CardBattle-J&G',
+    descripcion: 'Nuevo juego de cartas para practicar componentes, estado e interacciones dentro de una app React.',
+    etiquetas: ['React', 'Juego', 'Cartas'],
+    modulo: '06',
+  },
 ]
 
 function AppsIndex() {
