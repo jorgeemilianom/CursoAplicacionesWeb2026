@@ -23,6 +23,11 @@
   --card-height: 120px;
 }
 
+.card-battle .card--slot {
+  --card-width: 138px;
+  --card-height: 200px;
+}
+
 .card-battle .card--large {
   --card-width: 160px;
   --card-height: 230px;
@@ -349,6 +354,87 @@
 .card-battle .card--medium .card-front__footer-type,
 .card-battle .card--medium .card-front__stats-inline {
   padding: 2px 4px;
+}
+
+/* ===== SLOT SIZE (para banda horizontal) ===== */
+.card-battle .card--slot .card-front {
+  padding: 6px;
+  border-width: 2px;
+  border-radius: 12px;
+}
+
+.card-battle .card--slot .card-front__frame {
+  inset: 4px;
+  border-radius: 10px;
+}
+
+.card-battle .card--slot .card-front__header {
+  margin-bottom: 4px;
+}
+
+.card-battle .card--slot .card-front__name {
+  padding: 3px 5px;
+  font-size: 0.58rem;
+}
+
+.card-battle .card--slot .card-front__rarity {
+  width: 18px;
+  height: 18px;
+  font-size: 10px;
+}
+
+.card-battle .card--slot .card-front__image {
+  margin-bottom: 4px;
+  padding: 16px 4px 6px;
+  gap: 4px;
+  border-width: 1px;
+}
+
+.card-battle .card--slot .card-front__element-chip {
+  top: 4px;
+  left: 4px;
+  padding: 1px 4px;
+  font-size: 0.4rem;
+}
+
+.card-battle .card--slot .card-front__image-badge {
+  width: 36px;
+  height: 36px;
+  font-size: 1.4rem;
+}
+
+.card-battle .card--slot .card-front__effect-line {
+  padding: 3px 4px;
+  gap: 4px;
+}
+
+.card-battle .card--slot .card-front__effect-label {
+  font-size: 0.42rem;
+}
+
+.card-battle .card--slot .card-front__effect-value {
+  font-size: 0.56rem;
+}
+
+.card-battle .card--slot .card-front__description {
+  min-height: 2em;
+  padding: 3px 4px;
+  font-size: 0.42rem;
+  line-height: 1.1;
+  -webkit-line-clamp: 2;
+}
+
+.card-battle .card--slot .card-front__stats-line {
+  margin-top: 3px;
+  gap: 2px;
+  font-size: 0.34rem;
+  letter-spacing: 0.02em;
+}
+
+.card-battle .card--slot .card-front__footer-rarity,
+.card-battle .card--slot .card-front__footer-type,
+.card-battle .card--slot .card-front__stats-inline {
+  padding: 1px 3px;
 }
 
 .card-battle .card--small .card-front {

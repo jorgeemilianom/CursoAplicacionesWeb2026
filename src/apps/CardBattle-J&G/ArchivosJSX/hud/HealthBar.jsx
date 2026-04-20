@@ -5,8 +5,9 @@ import './HUD.css'
  * @param {number} current - Vida actual
  * @param {number} max - Vida máxima (default 20)
  * @param {string} label - Etiqueta del jugador
+ * @param {boolean} compact - Modo compacto para la banda de BattleField
  */
-function HealthBar({ current, max = 20, label }) {
+function HealthBar({ current, max = 20, label, compact = false }) {
   const percentage = (current / max) * 100
 
   // Color según nivel de vida
@@ -17,7 +18,7 @@ function HealthBar({ current, max = 20, label }) {
   }
 
   return (
-    <div className="health-bar">
+    <div className={`health-bar ${compact ? 'health-bar--compact' : ''}`}>
       {label && <span className="health-bar__label">{label}</span>}
       <div className="health-bar__container">
         <div

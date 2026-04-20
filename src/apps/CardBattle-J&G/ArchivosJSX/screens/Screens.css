@@ -266,11 +266,11 @@
 }
 
 .card-battle .battle-board__main {
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .card-battle .battle-field {
-  margin: 20px 0;
+  margin: 0;
 }
 .menu-screen__input {
   padding: 10px 15px;

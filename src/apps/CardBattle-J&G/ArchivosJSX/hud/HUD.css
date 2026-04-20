@@ -62,6 +62,85 @@
   color: #fff;
 }
 
+/* ===== PLAYER STATS COMPACTO (para banda de BattleField) ===== */
+.card-battle .player-stats--compact {
+  min-width: 170px;
+  max-width: 200px;
+  padding: 9px 11px 10px;
+  border-radius: 16px;
+  border-width: 1px;
+  background: rgba(10, 14, 24, 0.58);
+  border-color: rgba(255, 255, 255, 0.82);
+  box-shadow: none;
+}
+
+.card-battle .player-stats--compact .player-stats__header {
+  margin-bottom: 7px;
+  justify-content: flex-start;
+}
+
+.card-battle .player-stats--compact .player-stats__name {
+  font-size: 12px;
+  line-height: 1.2;
+  position: relative;
+  display: inline-flex;
+  padding-bottom: 5px;
+}
+
+.card-battle .player-stats--compact .player-stats__name::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-bottom: 2px dashed rgba(255, 255, 255, 0.55);
+}
+
+.card-battle .player-stats--compact .player-stats__extras {
+  margin-top: 6px;
+  padding-top: 0;
+  gap: 8px;
+  border-top: none;
+}
+
+.card-battle .player-stats--compact .player-stats__shield,
+.card-battle .player-stats--compact .player-stats__hand {
+  font-size: 11px;
+}
+
+.card-battle .player-stats--compact .player-stats__shield-icon,
+.card-battle .player-stats--compact .player-stats__hand-icon {
+  font-size: 12px;
+}
+
+/* ===== HEALTH BAR COMPACTO ===== */
+.card-battle .health-bar--compact {
+  gap: 5px;
+  align-items: center;
+}
+
+.card-battle .health-bar--compact .health-bar__label {
+  font-size: 10px;
+  min-width: 40px;
+}
+
+.card-battle .health-bar--compact .health-bar__container {
+  height: 7px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card-battle .health-bar--compact .health-bar__fill {
+  border-radius: 4px;
+}
+
+.card-battle .health-bar--compact .health-bar__value {
+  font-size: 9px;
+  min-width: 28px;
+  color: rgba(255, 255, 255, 0.82);
+}
+
 .card-battle .player-stats__turn-badge {
   background: linear-gradient(135deg, #ffd700, #ffaa00);
   color: #000;

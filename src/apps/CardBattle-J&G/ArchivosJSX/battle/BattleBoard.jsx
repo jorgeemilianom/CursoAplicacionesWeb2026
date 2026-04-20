@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import useCardGame from '../../ArchivosJS/useCardGame'
-import PlayerZone from './PlayerZone'
 import BattleField from './BattleField'
+import PlayerHand from '../hand/PlayerHand'
 import DeckPile from '../hand/DeckPile'
 import GameLog from '../hud/GameLog'
 import TurnIndicator from '../hud/TurnIndicator'
@@ -254,46 +254,32 @@ function BattleBoard() {
       </div>
 
       <div className="battle-board__main">
-        <div>
-          <PlayerZone
-            playerId="player2"
-            player={player2Data}
-            fieldCard={fieldCards.player2}
-            isCurrentTurn={currentTurn === 'player2'}
-            selectedCardId={selectedCard?.ownerId === 'player2' ? selectedCard.card.uniqueId : null}
-            canPlay={false}
-            showHand={false}
-            onCardSelect={(card) => handleCardSelect(card, 'player2')}
-            onCardDragStart={(card) => handleCardDragStart(card, 'player2')}
-            onPlayCard={(cardUniqueId) => handleCardPlayFromButton('player2', cardUniqueId)}
-            onSlotClick={handleSlotClick}
-            onSlotDrop={handleSlotDrop}
-          />
-        </div>
+        {/* BANDA DE BATALLA: Stats + Slots integrados */}
+        <BattleField
+          player1Card={fieldCards.player1}
+          player2Card={fieldCards.player2}
+          player1Data={player1Data}
+          player2Data={player2Data}
+          player1Active={currentTurn === 'player1'}
+          player2Active={currentTurn === 'player2'}
+          canResolve={canResolve}
+          onResolve={handleResolveCombat}
+          onSlotClick={handleSlotClick}
+          onSlotDrop={handleSlotDrop}
+          canPlayP1={currentTurn === 'player1' && turnPhase === 'play' && !fieldCards.player1}
+          canPlayP2={false}
+        />
 
-        <div>
-          <BattleField
-            player1Card={fieldCards.player1}
-            player2Card={fieldCards.player2}
-            canResolve={canResolve}
-            onResolve={handleResolveCombat}
-          />
-        </div>
-
-        <div>
-          <PlayerZone
+        {/* MANO DEL JUGADOR (debajo de la banda) */}
+        <div className="battle-board__hand">
+          <PlayerHand
+            hand={player1Hand}
             playerId="player1"
-            player={player1Data}
-            fieldCard={fieldCards.player1}
-            isCurrentTurn={currentTurn === 'player1'}
-            selectedCardId={selectedCard?.ownerId === 'player1' ? selectedCard.card.uniqueId : null}
-            canPlay={currentTurn === 'player1' && turnPhase === 'play' && !fieldCards.player1}
-            showHand
-            onCardSelect={(card) => handleCardSelect(card, 'player1')}
+            onCardClick={(card) => handleCardSelect(card, 'player1')}
             onCardDragStart={(card) => handleCardDragStart(card, 'player1')}
             onPlayCard={(cardUniqueId) => handleCardPlayFromButton('player1', cardUniqueId)}
-            onSlotClick={handleSlotClick}
-            onSlotDrop={handleSlotDrop}
+            selectedCardId={selectedCard?.ownerId === 'player1' ? selectedCard.card.uniqueId : null}
+            canPlay={currentTurn === 'player1' && turnPhase === 'play' && !fieldCards.player1}
           />
         </div>
       </div>
