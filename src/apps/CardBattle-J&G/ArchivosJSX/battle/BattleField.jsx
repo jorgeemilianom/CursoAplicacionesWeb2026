@@ -7,6 +7,8 @@ function BattleField({
   player2Card,
   player1Data,
   player2Data,
+  player1Name = 'Jugador 1',
+  player2Name = 'Jugador 2',
   player1Active,
   player2Active,
   onResolve,
@@ -28,7 +30,7 @@ function BattleField({
 
         <div className="battle-field__stats battle-field__stats--left">
           <PlayerStats
-            playerName="Jugador 2 (bot)"
+            playerName={`${player2Name} (bot)`}
             hp={player2Data?.hp ?? 20}
             shield={player2Data?.shield ?? 0}
             handCount={player2Data?.hand?.length ?? 0}
@@ -52,7 +54,7 @@ function BattleField({
       <div className="battle-field__column battle-field__column--right">
         <div className="battle-field__stats battle-field__stats--right">
           <PlayerStats
-            playerName="Jugador 1 (tu)"
+            playerName={`${player1Name} (tu)`}
             hp={player1Data?.hp ?? 20}
             shield={player1Data?.shield ?? 0}
             handCount={player1Data?.hand?.length ?? 0}

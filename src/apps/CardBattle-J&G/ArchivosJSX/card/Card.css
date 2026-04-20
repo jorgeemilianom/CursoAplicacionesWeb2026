@@ -172,16 +172,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 9px;
   margin-bottom: 8px;
-  padding: 28px 8px 10px;
+  padding: 18px 4px 8px;
   background:
     radial-gradient(circle at 50% 28%, rgba(255, 216, 136, 0.2), transparent 32%),
     linear-gradient(180deg, rgba(132, 88, 45, 0.34), rgba(81, 54, 34, 0.62) 22%, rgba(17, 19, 28, 0.82));
   border: 2px solid rgba(204, 155, 83, 0.42);
   position: relative;
   z-index: 1;
+  overflow: hidden;
+}
+
+.card-front__image--with-art {
+  justify-content: space-between;
 }
 
 .card-front__image::before {
@@ -756,4 +761,17 @@
   background:
     radial-gradient(circle at 50% 25%, rgba(255, 158, 245, 0.24), transparent 32%),
     linear-gradient(180deg, rgba(154, 42, 131, 0.3), rgba(83, 19, 74, 0.6) 22%, rgba(20, 8, 19, 0.88));
+}
+.card-front__img {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  max-height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 8px;
+  margin: 0;
+  display: block;
+  position: relative;
+  z-index: 1;
 }

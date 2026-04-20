@@ -10,7 +10,7 @@ function MenuScreen() {
 
   const handleStart = () => {
     resetBattle()
-    startGame()
+    startGame(name)
     startBattle()
   }
 

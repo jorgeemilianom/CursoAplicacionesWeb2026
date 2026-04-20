@@ -129,7 +129,188 @@ export const cardData = [
     effectValue: 10,
     description: 'El escudo de los dioses. Absorbe 10 puntos de daño y protege completamente.',
     rarity: 'legendary'
-  }
+  },
+  {
+  id: 'dragon_rojo',
+  name: 'Dragón Rojo',
+  attack: 6,
+  defense: 4,
+  effectType: 'damage',
+  effectValue: 3,
+  description: 'Escupe fuego devastador.',
+  rarity: 'rare',
+  tipo: 'fuego',
+  image: '/cards/dragon_rojo.png'
+},
+  {
+  id: 'cocodrilo_bebe',
+  name: 'Cocodrilo Bebé',
+  attack: 3,
+  defense: 5,
+  effectType: 'shield',
+  effectValue: 2,
+  description: 'Resiste ataques con su piel dura.',
+  rarity: 'common',
+  tipo: 'agua',
+  image: '/cards/cocodrilo_bebe.png'
+},
+
+{
+  id: 'ballena_blanca',
+  name: 'Ballena Blanca',
+  attack: 5,
+  defense: 6,
+  effectType: 'heal',
+  effectValue: 3,
+  description: 'Cura con su energía marina.',
+  rarity: 'rare',
+  tipo: 'agua',
+  image: '/cards/ballena_blanca.png'
+},
+
+{
+  id: 'orca',
+  name: 'Orca Guerrera',
+  attack: 6,
+  defense: 5,
+  effectType: 'damage',
+  effectValue: 2,
+  description: 'Ataca con fuerza en el océano.',
+  rarity: 'rare',
+  tipo: 'agua',
+  image: '/cards/orca.png'
+},
+
+{
+  id: 'tortuga',
+  name: 'Tortuga Ancestral',
+  attack: 2,
+  defense: 8,
+  effectType: 'shield',
+  effectValue: 4,
+  description: 'Gran defensa impenetrable.',
+  rarity: 'common',
+  tipo: 'tierra',
+  image: '/cards/tortuga.png'
+},
+
+{
+  id: 'ave',
+  name: 'Ave Voladora',
+  attack: 4,
+  defense: 2,
+  effectType: 'damage',
+  effectValue: 2,
+  description: 'Ataque rápido desde el cielo.',
+  rarity: 'common',
+  tipo: 'aire',
+  image: '/cards/ave.png'
+},
+
+{
+  id: 'arquero',
+  name: 'Arquero',
+  attack: 5,
+  defense: 3,
+  effectType: 'damage',
+  effectValue: 2,
+  description: 'Dispara flechas precisas.',
+  rarity: 'common',
+  tipo: 'aire',
+  image: '/cards/arquero_comun.png'
+},
+
+{
+  id: 'espadachin',
+  name: 'Espadachín',
+  attack: 6,
+  defense: 4,
+  effectType: 'damage',
+  effectValue: 1,
+  description: 'Experto en combate cercano.',
+  rarity: 'common',
+  tipo: 'tierra',
+  image: '/cards/espadachin.png'
+},
+
+{
+  id: 'lancero',
+  name: 'Lancero',
+  attack: 5,
+  defense: 5,
+  effectType: 'damage',
+  effectValue: 2,
+  description: 'Ataca desde distancia media.',
+  rarity: 'common',
+  tipo: 'tierra',
+  image: '/cards/lancero.png'
+},
+
+{
+  id: 'elefante',
+  name: 'Elefante de Guerra',
+  attack: 7,
+  defense: 7,
+  effectType: 'damage',
+  effectValue: 3,
+  description: 'Carga devastadora.',
+  rarity: 'legendary',
+  tipo: 'tierra',
+  image: '/cards/elefante.png'
+},
+
+{
+  id: 'pirata',
+  name: 'Pirata',
+  attack: 5,
+  defense: 4,
+  effectType: 'draw',
+  effectValue: 1,
+  description: 'Roba recursos del enemigo.',
+  rarity: 'common',
+  tipo: 'agua',
+  image: '/cards/pirata.png'
+},
+
+{
+  id: 'pirata_doble',
+  name: 'Pirata Doble Espada',
+  attack: 7,
+  defense: 3,
+  effectType: 'damage',
+  effectValue: 3,
+  description: 'Ataques rápidos y agresivos.',
+  rarity: 'rare',
+  tipo: 'agua',
+  image: '/cards/pirata_espadas.png'
+},
+
+{
+  id: 'pirata_canon',
+  name: 'Pirata Cañonero',
+  attack: 8,
+  defense: 2,
+  effectType: 'damage',
+  effectValue: 4,
+  description: 'Dispara cañones devastadores.',
+  rarity: 'rare',
+  tipo: 'agua',
+  image: '/cards/pirata_boom.png'
+},
+
+{
+  id: 'chancla',
+  name: 'Chancla de Mamá',
+  attack: 10,
+  defense: 1,
+  effectType: 'damage',
+  effectValue: 5,
+  description: 'Ataque crítico inevitable.',
+  rarity: 'legendary',
+  tipo: 'vacio',
+  image: '/cards/chancla.png'
+},
+
 ]
 
 /**
@@ -140,6 +321,8 @@ export const cardData = [
 export const getCardsByRarity = (rarity) => {
   return cardData.filter(card => card.rarity === rarity)
 }
+
+  
 
 /**
  * Función auxiliar para obtener una carta por ID

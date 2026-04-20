@@ -11,6 +11,8 @@ export function BattleProvider({ children }) {
     turnPhase,
     player1HP,
     player2HP,
+    player1Name,
+    player2Name,
     applyDamage,
     healPlayer,
     endTurn,
@@ -101,7 +103,7 @@ export function BattleProvider({ children }) {
     }
 
     setFieldCards(nextFieldCards)
-    addLog(`${playerId === 'player1' ? 'Jugador 1' : 'Jugador 2'} jugo ${card.name}`)
+    addLog(`${playerId === 'player1' ? player1Name : player2Name} jugo ${card.name}`)
 
     if (nextFieldCards.player1 && nextFieldCards.player2) {
       setTurnPhase('resolve')
@@ -110,7 +112,7 @@ export function BattleProvider({ children }) {
     }
 
     return true
-  }, [currentTurn, turnPhase, fieldCards, player1Hand, player2Hand, addLog, endTurn, setTurnPhase])
+  }, [currentTurn, turnPhase, fieldCards, player1Hand, player2Hand, addLog, endTurn, player1Name, player2Name, setTurnPhase])
 
   const applyCardEffect = useCallback((card, playerId) => {
     const { effectType, effectValue } = card
@@ -235,10 +237,10 @@ export function BattleProvider({ children }) {
       setPlayer2Hand((prev) => [...prev, ...drawn])
     }
 
-    addLog(`${playerId === 'player1' ? 'Jugador 1' : 'Jugador 2'} robo una carta`)
+    addLog(`${playerId === 'player1' ? player1Name : player2Name} robo una carta`)
     setTurnPhase('play')
     return drawn[0]
-  }, [turnPhase, remainingDeck, drawCard, player1Hand, player2Hand, addLog, finishBattleByHealth, setTurnPhase])
+  }, [turnPhase, remainingDeck, drawCard, player1Hand, player2Hand, addLog, finishBattleByHealth, player1Name, player2Name, setTurnPhase])
 
   const resetBattle = useCallback(() => {
     setPlayer1Hand([])
