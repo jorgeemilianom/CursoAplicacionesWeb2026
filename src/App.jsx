@@ -34,7 +34,9 @@ import TeoriaVueJS from './pages/teoria/TeoriaVueJS'
 import TeoriaTypeScript from './pages/teoria/TeoriaTypeScript'
 import TeoriaContextAPI from './pages/teoria/TeoriaContextAPI'
 import TeoriaReactRouter from './pages/teoria/TeoriaReactRouter'
+import TeoriaCustomHooks from './pages/teoria/TeoriaCustomHooks'
 import ReactRouterDemo from './apps/react-router-demo/ReactRouterDemo'
+import CustomHooks from './apps/custom-hooks/CustomHooks'
 import './App.css'
 
 function App() {
@@ -62,6 +64,7 @@ function App() {
           <Route path="/apps/monopoly-santafe" element={<MonopolySantaFe />} />
           <Route path="/apps/CardBattle-J&G" element={<CardBattleJG />} />
           <Route path="/apps/react-router-demo/*" element={<ReactRouterDemo />} />
+          <Route path="/apps/custom-hooks" element={<CustomHooks />} />
           <Route path="/docs" element={<DocsIndex />} />
           <Route path="/docs/instalar-docker" element={<InstallarDocker />} />
           <Route path="/docs/ollama-docker" element={<OllamaDocker />} />
@@ -80,6 +83,7 @@ function App() {
           <Route path="/docs/teoria-typescript" element={<TeoriaTypeScript />} />
           <Route path="/docs/teoria-context-api" element={<TeoriaContextAPI />} />
           <Route path="/docs/teoria-react-router" element={<TeoriaReactRouter />} />
+          <Route path="/docs/teoria-custom-hooks" element={<TeoriaCustomHooks />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>

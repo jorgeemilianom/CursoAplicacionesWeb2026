@@ -105,7 +105,12 @@ const apps = [
     titulo: 'CardBattle-J&G',
     descripcion: 'Nuevo juego de cartas para practicar componentes, estado e interacciones dentro de una app React.',
     etiquetas: ['React', 'Juego', 'Cartas'],
-    modulo: '06',
+  },
+  {
+    id: 'custom-hooks',
+    titulo: 'Custom Hooks',
+    descripcion: 'Probá cuatro hooks en vivo: useCounter, useLocalStorage, useDebounce y useFetch. Cada uno muestra el código del hook junto al demo interactivo.',
+    etiquetas: ['Custom Hooks', 'useEffect', 'Composición', 'Buenas prácticas'],
   },
 ]
 
