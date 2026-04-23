@@ -1,0 +1,113 @@
+/* ==========================================
+   PANTALLA DE SELECCIÓN DE PERSONAJE
+   Todos los selectores están bajo .selector-container
+   para no pisar estilos de otras apps.
+   ========================================== */
+.selector-container {
+  text-align: center;
+  padding: 40px 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.selector-container .selector-header {
+  margin-bottom: 40px;
+}
+
+.selector-container .selector-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: #ffffff;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.selector-container .selector-subtitle {
+  color: #cbd5e1;
+  font-size: 1.1rem;
+}
+
+.selector-container .opciones-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 25px;
+  margin-bottom: 50px;
+}
+
+/* Tarjeta de personaje */
+.selector-container .avatar-card {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 20px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.selector-container .avatar-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  background: rgba(30, 41, 59, 0.8);
+  border-color: #fde047;
+  box-shadow: 0 20px 40px rgba(253, 224, 71, 0.2);
+}
+
+/* Marco redondo para la foto */
+.selector-container .avatar-frame {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 15px;
+  background: #1e293b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.selector-container .avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.selector-container .avatar-info {
+  text-align: center;
+}
+
+.selector-container .avatar-name {
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.2rem;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.selector-container .avatar-frase {
+  color: #94a3b8;
+  font-size: 0.85rem;
+  font-style: italic;
+  margin: 0;
+}
+
+/* Botón Volver */
+.selector-container .btn-sub {
+  padding: 12px 24px;
+  background: rgba(71, 85, 105, 0.4);
+  color: #f8fafc;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.selector-container .btn-sub:hover {
+  background: rgba(100, 116, 139, 0.6);
+  border-color: #f8fafc;
+}

@@ -1,0 +1,777 @@
+/* --- Estructura Base (Tu diseño original) coiado --- */
+.card-battle .card-view {
+  display: inline-block;
+}
+
+.card-battle .card {
+  --card-width: 140px;
+  --card-height: 200px;
+  width: var(--card-width);
+  height: var(--card-height);
+  perspective: 1000px;
+  position: relative;
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+
+.card-battle .card--medium {
+  --card-width: 138px;
+  --card-height: 200px;
+}
+
+.card-battle .card--small {
+  --card-width: 80px;
+  --card-height: 120px;
+}
+
+.card-battle .card--slot {
+  --card-width: 138px;
+  --card-height: 200px;
+}
+
+.card-battle .card--large {
+  --card-width: 160px;
+  --card-height: 230px;
+}
+
+.card-battle .card--clickable {
+  cursor: pointer;
+}
+
+.card-battle .card--clickable:hover {
+  transform: translateY(-4px);
+}
+
+.card-battle .card--selected {
+  filter: drop-shadow(0 0 14px rgba(255, 215, 84, 0.55));
+}
+
+.card-battle .card__inner {
+  width: 100%;
+  height: 100%;
+}
+
+.card-battle .card-front {
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 18%),
+    linear-gradient(160deg, #8c6031, #5f3f20 30%, #2f1f14 68%, #19110d);
+  border: 3px solid #b98945;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  box-sizing: border-box;
+  color: #fff7e6;
+  overflow: hidden;
+  position: relative;
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 227, 160, 0.24),
+    0 12px 24px rgba(0, 0, 0, 0.4);
+}
+
+.card-battle .card-front::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top, rgba(255, 238, 196, 0.18), transparent 28%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 34%);
+  pointer-events: none;
+}
+
+.card-front__frame {
+  position: absolute;
+  inset: 6px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 227, 160, 0.32);
+  pointer-events: none;
+}
+
+.card-front__header,
+.card-front__stats {
+  display: flex;
+  align-items: center;
+}
+
+.card-front__header {
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.card-front__element-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: linear-gradient(180deg, rgba(123, 74, 31, 0.9), rgba(79, 47, 20, 0.9));
+  border: 1px solid rgba(255, 220, 145, 0.22);
+  font-size: 0.54rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #ffe3a0;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 2;
+}
+
+.card-front__element-icon {
+  font-size: 0.72rem;
+}
+
+.card-front__element-name {
+  opacity: 0.95;
+}
+
+.card-front__rarity {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  background: radial-gradient(circle, #8a6329, #3d2411);
+  border: 1px solid rgba(255, 223, 154, 0.45);
+  flex-shrink: 0;
+  color: #ffe09c;
+  box-shadow: inset 0 1px 0 rgba(255, 244, 207, 0.15);
+}
+
+.card-front__name {
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+  padding: 6px 9px;
+  border-radius: 6px;
+  background: linear-gradient(180deg, rgba(123, 76, 33, 0.95), rgba(79, 45, 21, 0.95));
+  border: 1px solid rgba(255, 218, 141, 0.18);
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: none;
+  letter-spacing: 0.01em;
+  color: #fff5d8;
+}
+
+.card-front__image {
+  flex: 1;
+  min-height: 0;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 9px;
+  margin-bottom: 8px;
+  padding: 18px 4px 8px;
+  background:
+    radial-gradient(circle at 50% 28%, rgba(255, 216, 136, 0.2), transparent 32%),
+    linear-gradient(180deg, rgba(132, 88, 45, 0.34), rgba(81, 54, 34, 0.62) 22%, rgba(17, 19, 28, 0.82));
+  border: 2px solid rgba(204, 155, 83, 0.42);
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.card-front__image--with-art {
+  justify-content: space-between;
+}
+
+.card-front__image::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 232, 175, 0.12);
+  pointer-events: none;
+}
+
+.card-front__image-badge {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.4rem;
+  line-height: 1;
+  background:
+    radial-gradient(circle at 35% 30%, rgba(255, 246, 216, 0.28), transparent 32%),
+    linear-gradient(180deg, rgba(90, 52, 18, 0.92), rgba(38, 22, 10, 0.96));
+  border: 2px solid rgba(255, 225, 148, 0.36);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 249, 225, 0.14),
+    0 6px 14px rgba(0, 0, 0, 0.25);
+}
+
+.card-front__effect-line {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(110, 79, 46, 0.96), rgba(62, 43, 28, 0.96));
+  border: 1px solid rgba(255, 222, 153, 0.24);
+}
+
+.card-front__effect-label {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 236, 194, 0.75);
+}
+
+.card-front__effect-value {
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #ffe29a;
+}
+
+.card-front__description {
+  margin: 0;
+  font-size: 0.56rem;
+  line-height: 1.18;
+  color: rgba(255, 241, 214, 0.82);
+  min-height: 3em;
+  padding: 6px 7px;
+  border: 1px solid rgba(255, 223, 154, 0.16);
+  background: rgba(234, 221, 188, 0.82);
+  color: #2f190f;
+  border-radius: 4px;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.card-front__stats-line {
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.46rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 225, 159, 0.92);
+  position: relative;
+  z-index: 1;
+}
+
+.card-front__footer-rarity,
+.card-front__footer-type,
+.card-front__stats-inline {
+  padding: 2px 5px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 219, 144, 0.14);
+  white-space: nowrap;
+}
+
+.card-battle .card--medium .card-front {
+  padding: 8px;
+}
+
+.card-battle .card--medium .card-front__frame {
+  inset: 5px;
+}
+
+.card-battle .card--medium .card-front__header {
+  margin-bottom: 6px;
+}
+
+.card-battle .card--medium .card-front__name {
+  padding: 5px 7px;
+  font-size: 0.72rem;
+}
+
+.card-battle .card--medium .card-front__rarity {
+  width: 24px;
+  height: 24px;
+  font-size: 13px;
+}
+
+.card-battle .card--medium .card-front__image {
+  margin-bottom: 6px;
+  padding: 24px 6px 8px;
+  gap: 6px;
+}
+
+.card-battle .card--medium .card-front__element-chip {
+  top: 6px;
+  left: 6px;
+  padding: 2px 6px;
+  font-size: 0.46rem;
+}
+
+.card-battle .card--medium .card-front__image-badge {
+  width: 54px;
+  height: 54px;
+  font-size: 1.9rem;
+}
+
+.card-battle .card--medium .card-front__effect-line {
+  padding: 5px 6px;
+}
+
+.card-battle .card--medium .card-front__effect-label {
+  font-size: 0.5rem;
+}
+
+.card-battle .card--medium .card-front__effect-value {
+  font-size: 0.68rem;
+}
+
+.card-battle .card--medium .card-front__description {
+  min-height: 2.6em;
+  padding: 5px 6px;
+  font-size: 0.5rem;
+  line-height: 1.12;
+  -webkit-line-clamp: 2;
+}
+
+.card-battle .card--medium .card-front__stats-line {
+  margin-top: 4px;
+  gap: 3px;
+  font-size: 0.38rem;
+  letter-spacing: 0.03em;
+}
+
+.card-battle .card--medium .card-front__footer-rarity,
+.card-battle .card--medium .card-front__footer-type,
+.card-battle .card--medium .card-front__stats-inline {
+  padding: 2px 4px;
+}
+
+/* ===== SLOT SIZE (para banda horizontal) ===== */
+.card-battle .card--slot .card-front {
+  padding: 6px;
+  border-width: 2px;
+  border-radius: 12px;
+}
+
+.card-battle .card--slot .card-front__frame {
+  inset: 4px;
+  border-radius: 10px;
+}
+
+.card-battle .card--slot .card-front__header {
+  margin-bottom: 4px;
+}
+
+.card-battle .card--slot .card-front__name {
+  padding: 3px 5px;
+  font-size: 0.58rem;
+}
+
+.card-battle .card--slot .card-front__rarity {
+  width: 18px;
+  height: 18px;
+  font-size: 10px;
+}
+
+.card-battle .card--slot .card-front__image {
+  margin-bottom: 4px;
+  padding: 16px 4px 6px;
+  gap: 4px;
+  border-width: 1px;
+}
+
+.card-battle .card--slot .card-front__element-chip {
+  top: 4px;
+  left: 4px;
+  padding: 1px 4px;
+  font-size: 0.4rem;
+}
+
+.card-battle .card--slot .card-front__image-badge {
+  width: 36px;
+  height: 36px;
+  font-size: 1.4rem;
+}
+
+.card-battle .card--slot .card-front__effect-line {
+  padding: 3px 4px;
+  gap: 4px;
+}
+
+.card-battle .card--slot .card-front__effect-label {
+  font-size: 0.42rem;
+}
+
+.card-battle .card--slot .card-front__effect-value {
+  font-size: 0.56rem;
+}
+
+.card-battle .card--slot .card-front__description {
+  min-height: 2em;
+  padding: 3px 4px;
+  font-size: 0.42rem;
+  line-height: 1.1;
+  -webkit-line-clamp: 2;
+}
+
+.card-battle .card--slot .card-front__stats-line {
+  margin-top: 3px;
+  gap: 2px;
+  font-size: 0.34rem;
+  letter-spacing: 0.02em;
+}
+
+.card-battle .card--slot .card-front__footer-rarity,
+.card-battle .card--slot .card-front__footer-type,
+.card-battle .card--slot .card-front__stats-inline {
+  padding: 1px 3px;
+}
+
+.card-battle .card--small .card-front {
+  padding: 5px;
+  border-width: 2px;
+  border-radius: 10px;
+}
+
+.card-battle .card--small .card-front__frame,
+.card-battle .card--small .card-front__description,
+.card-battle .card--small .card-front__stats-line,
+.card-battle .card--small .card-front__effect-line,
+.card-battle .card--small .card-front__element-name {
+  display: none;
+}
+
+.card-battle .card--small .card-front__header {
+  margin-bottom: 4px;
+}
+
+.card-battle .card--small .card-front__name {
+  padding: 3px 5px;
+  font-size: 0.45rem;
+}
+
+.card-battle .card--small .card-front__rarity {
+  width: 16px;
+  height: 16px;
+  font-size: 10px;
+}
+
+.card-battle .card--small .card-front__image {
+  padding: 8px 4px 4px;
+  margin-bottom: 0;
+  border-width: 1px;
+}
+
+.card-battle .card--small .card-front__element-chip {
+  top: 4px;
+  left: 4px;
+  padding: 1px 4px;
+}
+
+.card-battle .card--small .card-front__image-badge {
+  width: 32px;
+  height: 32px;
+  font-size: 1.1rem;
+  border-width: 1px;
+}
+
+.card-back {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  padding: 8px;
+  box-sizing: border-box;
+  background: linear-gradient(145deg, #121726, #1d2941);
+  border: 2px solid #50617f;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+
+.card-back__pattern {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  box-sizing: border-box;
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent 60%),
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.04) 0,
+      rgba(255, 255, 255, 0.04) 10px,
+      rgba(0, 0, 0, 0.08) 10px,
+      rgba(0, 0, 0, 0.08) 20px
+    );
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.card-back__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  color: #f2f6ff;
+}
+
+.card-back__symbol {
+  font-size: 2rem;
+}
+
+.card-back__text {
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  font-weight: 700;
+}
+
+.card-effect {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(7, 10, 18, 0.45);
+  z-index: 1000;
+}
+
+.card-effect__content {
+  min-width: 220px;
+  max-width: 320px;
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+  color: #fff;
+  background: linear-gradient(160deg, rgba(17, 20, 32, 0.96), rgba(33, 39, 58, 0.92));
+  border: 2px solid var(--effect-color, #fff);
+  box-shadow: 0 0 20px var(--effect-color, #fff);
+}
+
+.card-effect__icon {
+  font-size: 2.4rem;
+  margin-bottom: 10px;
+}
+
+.card-effect__card-name {
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.card-effect__message {
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.card-front--common {
+  border-color: #a47f4b;
+}
+
+.card-front--rare {
+  border-color: #3f87d6;
+  box-shadow:
+    inset 0 0 0 2px rgba(167, 218, 255, 0.22),
+    0 12px 24px rgba(0, 0, 0, 0.4);
+}
+
+.card-front--epic {
+  border-color: #9b59b6;
+}
+
+.card-front--legendary {
+  border-color: #f1c40f;
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 239, 181, 0.3),
+    0 14px 28px rgba(0, 0, 0, 0.45);
+}
+
+/* --- Skins Elementales --- */
+.card-front--fuego {
+  border-color: #ff6a00 !important;
+  background:
+    linear-gradient(180deg, rgba(255, 219, 176, 0.14), transparent 18%),
+    linear-gradient(160deg, #8e3613, #5f200f 34%, #31130d 70%, #180b0a);
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 197, 132, 0.24),
+    0 12px 24px rgba(0, 0, 0, 0.4);
+}
+
+.card-front--agua {
+  border-color: #3ca6ff !important;
+  background:
+    linear-gradient(180deg, rgba(191, 232, 255, 0.14), transparent 18%),
+    linear-gradient(160deg, #184b7a, #103355 34%, #0d2038 70%, #09111d);
+  box-shadow:
+    inset 0 0 0 2px rgba(154, 217, 255, 0.22),
+    0 12px 24px rgba(0, 0, 0, 0.4);
+}
+
+.card-front--tierra {
+  border-color: #72b84b !important;
+  background:
+    linear-gradient(180deg, rgba(224, 247, 196, 0.12), transparent 18%),
+    linear-gradient(160deg, #5a4a20, #3c3119 34%, #241d11 70%, #120e08);
+  box-shadow:
+    inset 0 0 0 2px rgba(184, 224, 127, 0.2),
+    0 12px 24px rgba(0, 0, 0, 0.4);
+}
+
+.card-front--aire {
+  border-color: #d8edf7 !important;
+  background:
+    linear-gradient(180deg, rgba(243, 251, 255, 0.18), transparent 18%),
+    linear-gradient(160deg, #82939d, #5b6d77 34%, #37444e 70%, #1e242a);
+  box-shadow:
+    inset 0 0 0 2px rgba(235, 246, 252, 0.22),
+    0 12px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* --- Nuevos Skins Especiales --- */
+.card-front--electrico { 
+  border-color: #00f0ff !important;
+  background:
+    linear-gradient(180deg, rgba(220, 255, 255, 0.14), transparent 18%),
+    linear-gradient(160deg, #655000, #413300 34%, #201a08 70%, #100d06);
+  box-shadow:
+    inset 0 0 0 2px rgba(176, 255, 255, 0.24),
+    0 0 18px rgba(0, 255, 255, 0.28);
+}
+.card-front--vacio { 
+  border-color: #9b59b6 !important;
+  background:
+    radial-gradient(circle at 50% 10%, rgba(183, 116, 255, 0.16), transparent 24%),
+    linear-gradient(160deg, #28103d, #160920 40%, #08040d 78%, #020203) !important;
+  box-shadow:
+    inset 0 0 0 2px rgba(187, 134, 252, 0.18),
+    0 0 18px rgba(155, 89, 182, 0.28);
+}
+.card-front--psiquico { 
+  border-color: #ff4df3 !important;
+  background:
+    linear-gradient(180deg, rgba(255, 214, 248, 0.16), transparent 18%),
+    linear-gradient(160deg, #7b1d6a, #521246 34%, #2b0c26 70%, #140610);
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 166, 243, 0.18),
+    0 0 16px rgba(255, 77, 243, 0.24);
+}
+
+.card-front--fuego .card-front__name,
+.card-front--fuego .card-front__element-chip,
+.card-front--fuego .card-front__effect-line,
+.card-front--fuego .card-front__stats-line {
+  background: linear-gradient(180deg, rgba(144, 60, 19, 0.96), rgba(88, 29, 14, 0.96));
+}
+
+.card-front--agua .card-front__name,
+.card-front--agua .card-front__element-chip,
+.card-front--agua .card-front__effect-line,
+.card-front--agua .card-front__stats-line {
+  background: linear-gradient(180deg, rgba(30, 86, 136, 0.96), rgba(19, 54, 94, 0.96));
+}
+
+.card-front--tierra .card-front__name,
+.card-front--tierra .card-front__element-chip,
+.card-front--tierra .card-front__effect-line,
+.card-front--tierra .card-front__stats-line {
+  background: linear-gradient(180deg, rgba(96, 84, 32, 0.96), rgba(59, 50, 20, 0.96));
+}
+
+.card-front--aire .card-front__name,
+.card-front--aire .card-front__element-chip,
+.card-front--aire .card-front__effect-line,
+.card-front--aire .card-front__stats-line {
+  background: linear-gradient(180deg, rgba(126, 145, 156, 0.96), rgba(79, 95, 107, 0.96));
+  color: #f6fbff;
+}
+
+.card-front--electrico .card-front__name,
+.card-front--electrico .card-front__element-chip,
+.card-front--electrico .card-front__effect-line,
+.card-front--electrico .card-front__stats-line {
+  background: linear-gradient(180deg, rgba(125, 104, 18, 0.96), rgba(79, 64, 12, 0.96));
+}
+
+.card-front--vacio .card-front__name,
+.card-front--vacio .card-front__element-chip,
+.card-front--vacio .card-front__effect-line,
+.card-front--vacio .card-front__stats-line {
+  background: linear-gradient(180deg, rgba(63, 27, 94, 0.96), rgba(31, 12, 49, 0.96));
+}
+
+.card-front--psiquico .card-front__name,
+.card-front--psiquico .card-front__element-chip,
+.card-front--psiquico .card-front__effect-line,
+.card-front--psiquico .card-front__stats-line {
+  background: linear-gradient(180deg, rgba(129, 32, 113, 0.96), rgba(79, 17, 68, 0.96));
+}
+
+.card-front--fuego .card-front__image {
+  background:
+    radial-gradient(circle at 50% 25%, rgba(255, 187, 102, 0.28), transparent 32%),
+    linear-gradient(180deg, rgba(168, 79, 20, 0.34), rgba(82, 30, 18, 0.62) 22%, rgba(26, 11, 11, 0.84));
+}
+
+.card-front--agua .card-front__image {
+  background:
+    radial-gradient(circle at 50% 25%, rgba(162, 222, 255, 0.28), transparent 32%),
+    linear-gradient(180deg, rgba(41, 126, 191, 0.3), rgba(18, 73, 122, 0.58) 22%, rgba(10, 19, 34, 0.84));
+}
+
+.card-front--tierra .card-front__image {
+  background:
+    radial-gradient(circle at 50% 25%, rgba(193, 222, 117, 0.24), transparent 32%),
+    linear-gradient(180deg, rgba(122, 115, 42, 0.28), rgba(66, 72, 25, 0.58) 22%, rgba(18, 22, 12, 0.84));
+}
+
+.card-front--aire .card-front__image {
+  background:
+    radial-gradient(circle at 50% 25%, rgba(236, 247, 255, 0.26), transparent 32%),
+    linear-gradient(180deg, rgba(157, 181, 194, 0.28), rgba(92, 109, 122, 0.56) 22%, rgba(18, 24, 29, 0.82));
+}
+
+.card-front--electrico .card-front__image {
+  background:
+    radial-gradient(circle at 50% 25%, rgba(255, 238, 115, 0.28), transparent 32%),
+    linear-gradient(180deg, rgba(184, 150, 23, 0.28), rgba(90, 72, 14, 0.58) 22%, rgba(22, 18, 9, 0.84));
+}
+
+.card-front--vacio .card-front__image {
+  background:
+    radial-gradient(circle at 50% 25%, rgba(180, 121, 255, 0.24), transparent 32%),
+    linear-gradient(180deg, rgba(76, 33, 111, 0.3), rgba(34, 14, 53, 0.62) 22%, rgba(6, 6, 12, 0.9));
+}
+
+.card-front--psiquico .card-front__image {
+  background:
+    radial-gradient(circle at 50% 25%, rgba(255, 158, 245, 0.24), transparent 32%),
+    linear-gradient(180deg, rgba(154, 42, 131, 0.3), rgba(83, 19, 74, 0.6) 22%, rgba(20, 8, 19, 0.88));
+}
+.card-front__img {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  max-height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 8px;
+  margin: 0;
+  display: block;
+  position: relative;
+  z-index: 1;
+}

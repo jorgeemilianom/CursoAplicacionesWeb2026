@@ -1,58 +1,58 @@
-# Curso de Aplicaciones Web Frontend 2026 — Eprenda
+# 4 Imagenes 1 Palabra
 
-Landing page del curso y repositorio de aplicaciones de práctica.
+Juego web desarrollado con React + Vite en el que el usuario debe adivinar una palabra a partir de una imagen antes de que se termine el tiempo.
 
-## Tecnologías del proyecto
+## Caracteristicas
 
-- [React 19](https://react.dev/) — biblioteca de UI
-- [Vite 8](https://vite.dev/) — bundler y servidor de desarrollo
-- [React Router v7](https://reactrouter.com/) — navegación entre páginas y apps
+- Flujo de juego por niveles con palabras y tiempos definidos.
+- Temporizador por nivel con barra de progreso visual.
+- Validacion de respuesta en tiempo real.
+- Pantalla de acierto con celebracion y sonido de victoria.
+- Pantalla de fin de juego (ganaste o tiempo agotado) con opcion de reiniciar.
+- Diseno adaptado a formato de pagina para integracion en una SPA.
+- Componentes separados para una mejor mantenibilidad (`App`, `PantallaInicio`, `TableroJuego`).
 
-## Estructura del proyecto
+## Accesibilidad (ARIA)
 
-```
-src/
-├── main.jsx              # Punto de entrada (monta BrowserRouter)
-├── App.jsx               # Rutas principales
-├── index.css             # Reset CSS y variables globales
-├── App.css               # Estilos de la capa principal
-│
-├── components/           # Componentes reutilizables
-│   ├── Navbar.jsx / .css
-│   └── Footer.jsx / .css
-│
-├── pages/                # Páginas de la aplicación
-│   ├── Landing.jsx / .css    → /
-│   └── AppsIndex.jsx / .css  → /apps
-│
-└── apps/                 # Aplicaciones de práctica (una por carpeta)
-    └── hola-mundo/
-        ├── HolaMundo.jsx
-        └── HolaMundo.css
-```
+Este proyecto incluye practicas de accesibilidad para mejorar la experiencia con lector de pantalla y navegacion por teclado:
 
-## Rutas disponibles
+- Uso de etiquetas ARIA (`aria-label`, `aria-live`, `aria-invalid`, `aria-describedby`).
+- Regiones semanticas con `role="region"` y estados importantes con `role="alert"` / `role="status"`.
+- Manejo de foco automatico en inicio y cambio de nivel.
+- Mensajes de error compatibles con asistencia tecnologica.
+- Estilos de foco visibles en botones e inputs.
 
-| Ruta | Descripción |
-|------|-------------|
-| `/` | Landing page del curso |
-| `/apps` | Índice de todas las apps de práctica |
-| `/apps/hola-mundo` | App 01 — Hola Mundo (useState, eventos) |
+## Tecnologias
 
-## Iniciar el servidor de desarrollo
+- React
+- Vite
+- JavaScript (JSX)
+- CSS
+
+## Estructura principal
+
+- `src/App.jsx`: flujo principal del juego y estados globales.
+- `src/PantallaInicio.jsx`: pantalla inicial.
+- `src/TableroJuego.jsx`: UI del nivel en curso.
+- `src/App.css`: estilos del juego.
+
+## Requisitos
+
+- Node.js 18+ (recomendado)
+- npm
+
+## Instalacion y ejecucion
 
 ```bash
+npm install
 npm run dev
 ```
 
-## Agregar una nueva app de práctica
+## Scripts
 
-1. Crear la carpeta `src/apps/nombre-app/`
-2. Crear el componente `NombreApp.jsx` y su `NombreApp.css`
-3. Registrar la ruta en `src/App.jsx`:
-   ```jsx
-   import NombreApp from './apps/nombre-app/NombreApp.jsx'
-   // ...
-   <Route path="/apps/nombre-app" element={<NombreApp />} />
-   ```
-4. Agregar la app al array `apps` en `src/pages/AppsIndex.jsx`
+```bash
+npm run dev      # entorno de desarrollo
+npm run build    # build de produccion
+npm run preview  # previsualizar build
+npm run lint     # analizar codigo con ESLint
+```
