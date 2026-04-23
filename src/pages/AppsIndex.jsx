@@ -30,6 +30,13 @@ const apps = [
     etiquetas: ['CRUD', 'localStorage', 'useEffect', 'Filtros'],
     modulo: '05',
   },
+  {
+    id: 'pagina-ferreteria',
+    titulo: 'Página Ferretería',
+    descripcion: 'Landing con catálogo conectado a MockAPI, carrusel dinámico, carrito y chatbot para consultas rápidas.',
+    etiquetas: ['React', 'MockAPI', 'Fetch', 'Carrito'],
+    modulo: '05',
+  },
 ]
 
 function AppsIndex() {

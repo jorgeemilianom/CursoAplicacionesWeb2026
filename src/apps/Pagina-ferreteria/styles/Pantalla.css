@@ -1,0 +1,397 @@
+.ferreteria-app {
+  --ferreteria-color-bg: #f6f1e7;
+  --ferreteria-color-surface: #fffdf8;
+  --ferreteria-color-surface-strong: #ffffff;
+  --ferreteria-color-ink: #1f2937;
+  --ferreteria-color-muted: #6b7280;
+  --ferreteria-color-accent: #f59e0b;
+  --ferreteria-color-accent-strong: #d97706;
+  --ferreteria-color-accent-soft: rgba(245, 158, 11, 0.14);
+  --ferreteria-color-dark: #111827;
+  --ferreteria-color-line: rgba(148, 163, 184, 0.24);
+  --ferreteria-shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.08);
+  --ferreteria-shadow-card: 0 20px 45px rgba(15, 23, 42, 0.12);
+  --ferreteria-radius-lg: 28px;
+  --ferreteria-radius-md: 20px;
+  --ferreteria-radius-sm: 14px;
+  --ferreteria-layout-width: 1180px;
+  --ferreteria-layout-gutter: 16px;
+}
+
+.ferreteria-app__page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: var(--ferreteria-color-ink);
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(245, 158, 11, 0.16), transparent 20%),
+    linear-gradient(180deg, #fbf7ef 0%, #f3efe7 100%);
+}
+
+.ferreteria-app__header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 14px 0;
+  backdrop-filter: blur(14px);
+  background: rgba(17, 24, 39, 0.92);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ferreteria-app__header-container {
+  width: min(var(--ferreteria-layout-width), calc(100% - (var(--ferreteria-layout-gutter) * 2)));
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.ferreteria-app__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ferreteria-app__eyebrow {
+  color: rgba(252, 211, 77, 0.82);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ferreteria-app__logo {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(1.35rem, 2vw, 1.8rem);
+  line-height: 1;
+}
+
+.ferreteria-app__cart-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+}
+
+.ferreteria-app__cart-label {
+  font-weight: 700;
+}
+
+.ferreteria-app__cart-count {
+  min-width: 32px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--ferreteria-color-accent);
+  color: var(--ferreteria-color-dark);
+  font-weight: 800;
+  text-align: center;
+}
+
+.ferreteria-app__cart-total {
+  color: rgba(255, 255, 255, 0.78);
+  font-weight: 600;
+}
+
+.ferreteria-app__hero {
+  padding: 28px 0 8px;
+}
+
+.ferreteria-app__hero-content {
+  width: min(var(--ferreteria-layout-width), calc(100% - (var(--ferreteria-layout-gutter) * 2)));
+  margin: 0 auto;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(24px, 4vw, 42px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at right top, rgba(251, 191, 36, 0.14), transparent 24%),
+    linear-gradient(135deg, #1f2937 0%, #111827 60%, #0f172a 100%);
+  box-shadow: var(--ferreteria-shadow-card);
+  color: #f9fafb;
+}
+
+.ferreteria-app__hero-content::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(circle at right top, rgba(251, 191, 36, 0.24), transparent 24%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 30%);
+}
+
+.ferreteria-app__hero-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(320px, 1.05fr);
+  gap: 28px;
+  align-items: center;
+}
+
+.ferreteria-app__hero-copy {
+  position: relative;
+  z-index: 1;
+}
+
+.ferreteria-app__hero-media {
+  min-width: 0;
+}
+
+.ferreteria-app__hero-badge {
+  display: inline-flex;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(245, 158, 11, 0.16);
+  color: #fcd34d;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.ferreteria-app__hero-title {
+  max-width: 12ch;
+  margin: 14px 0 10px;
+  font-size: clamp(1.9rem, 4.2vw, 3.4rem);
+  line-height: 1;
+  color: #f9fafb;
+}
+
+.ferreteria-app__hero-subtitle {
+  max-width: 60ch;
+  margin: 0;
+  color: rgba(249, 250, 251, 0.78);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.ferreteria-app__hero-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.ferreteria-app__hero-metric {
+  min-width: 150px;
+  padding: 16px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.ferreteria-app__hero-metric-value {
+  display: block;
+  font-size: 1.65rem;
+  font-weight: 800;
+}
+
+.ferreteria-app__hero-metric-label {
+  color: rgba(249, 250, 251, 0.7);
+  font-size: 0.92rem;
+}
+
+.ferreteria-app__catalog {
+  width: min(var(--ferreteria-layout-width), calc(100% - (var(--ferreteria-layout-gutter) * 2)));
+  margin: 0 auto;
+  padding: 24px 0 60px;
+  flex: 1;
+}
+
+.ferreteria-app__catalog-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.ferreteria-app__catalog-kicker {
+  color: var(--ferreteria-color-accent-strong);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ferreteria-app__catalog-title {
+  margin: 0;
+  padding-left: 16px;
+  border-left: 5px solid var(--ferreteria-color-accent);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+}
+
+.ferreteria-app__catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  align-items: stretch;
+}
+
+.ferreteria-app__catalog-status {
+  padding: 54px 24px;
+  border: 1px dashed var(--ferreteria-color-line);
+  border-radius: var(--ferreteria-radius-md);
+  background: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  color: var(--ferreteria-color-muted);
+  font-size: 1.05rem;
+}
+
+.ferreteria-app__catalog-status--error {
+  color: #b91c1c;
+  background: rgba(254, 242, 242, 0.85);
+  border-color: rgba(220, 38, 38, 0.25);
+}
+
+.ferreteria-app__card {
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 24px;
+  background: linear-gradient(180deg, var(--ferreteria-color-surface-strong) 0%, var(--ferreteria-color-surface) 100%);
+  box-shadow: var(--ferreteria-shadow-soft);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.ferreteria-app__card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(245, 158, 11, 0.32);
+  box-shadow: var(--ferreteria-shadow-card);
+}
+
+.ferreteria-app__card-image {
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+  padding: 16px;
+  background:
+    radial-gradient(circle at top, rgba(245, 158, 11, 0.08), transparent 55%),
+    linear-gradient(135deg, #ffffff, #f8fafc);
+}
+
+.ferreteria-app__card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px;
+}
+
+.ferreteria-app__card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ferreteria-app__card-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--ferreteria-color-accent-soft);
+  color: var(--ferreteria-color-accent-strong);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.ferreteria-app__card-stock {
+  color: var(--ferreteria-color-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.ferreteria-app__card-product-name {
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.3;
+}
+
+.ferreteria-app__card-description {
+  margin: 0;
+  color: var(--ferreteria-color-muted);
+  line-height: 1.55;
+  min-height: 50px;
+}
+
+.ferreteria-app__card-price {
+  display: block;
+  font-size: 1.7rem;
+  font-weight: 800;
+}
+
+.ferreteria-app__card-price--highlight {
+  color: #2563eb;
+}
+
+.ferreteria-app__card-button {
+  width: 100%;
+  padding: 13px 16px;
+  border: none;
+  border-radius: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ferreteria-app__card-button--add {
+  background: linear-gradient(135deg, var(--ferreteria-color-accent) 0%, #fb923c 100%);
+  color: var(--ferreteria-color-dark);
+  box-shadow: 0 12px 24px rgba(245, 158, 11, 0.22);
+}
+
+.ferreteria-app__card-button--add:hover {
+  background: linear-gradient(135deg, var(--ferreteria-color-accent-strong) 0%, #ea580c 100%);
+  transform: translateY(-2px);
+}
+
+.ferreteria-app__footer {
+  padding: 28px 16px 40px;
+  color: #6b7280;
+  text-align: center;
+}
+
+@media (max-width: 720px) {
+  .ferreteria-app__header-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ferreteria-app__cart-button {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .ferreteria-app__hero-content {
+    border-radius: 24px;
+  }
+
+  .ferreteria-app__hero-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .ferreteria-app__hero-title {
+    max-width: none;
+  }
+
+  .ferreteria-app__hero-metrics {
+    gap: 12px;
+  }
+
+  .ferreteria-app__hero-metric {
+    width: 100%;
+  }
+
+  .ferreteria-app__card-meta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
