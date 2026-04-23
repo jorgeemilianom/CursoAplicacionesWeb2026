@@ -16,6 +16,7 @@ import PuzzleRaiz from './apps/rompecabezas/ArchivosJSX/PuzzleRaiz'
 import ContextAPI from './apps/context-api/ContextAPI'
 import MonopolySantaFe from './apps/monopoly-santafe/MonopolySantaFe'
 import CardBattleJG from './apps/CardBattle-J&G/CardBattleJG'
+import PaginaFerreteria from './apps/Pagina-ferreteria/Pagina'
 import DocsIndex from './pages/DocsIndex'
 import InstallarDocker from './pages/docs/InstallarDocker'
 import OllamaDocker from './pages/docs/OllamaDocker'
@@ -64,6 +65,7 @@ function App() {
           <Route path="/apps/context-api" element={<ContextAPI />} />
           <Route path="/apps/monopoly-santafe" element={<MonopolySantaFe />} />
           <Route path="/apps/CardBattle-J&G" element={<CardBattleJG />} />
+          <Route path="/apps/pagina-ferreteria" element={<PaginaFerreteria />} />
           <Route path="/apps/react-router-demo/*" element={<ReactRouterDemo />} />
           <Route path="/apps/custom-hooks" element={<CustomHooks />} />
           <Route path="/apps/contactos-bugueados" element={<ContactosBugueados />} />

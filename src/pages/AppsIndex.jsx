@@ -1,4 +1,4 @@
-﻿import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './AppsIndex.css'
 
 /*
@@ -94,6 +94,13 @@ const apps = [
     modulo: '05',
   },
   {
+    id: 'pagina-ferreteria',
+    titulo: 'Página Ferretería',
+    descripcion: 'Landing con catálogo conectado a MockAPI, carrusel dinámico, carrito y chatbot para consultas rápidas.',
+    etiquetas: ['React', 'MockAPI', 'Fetch', 'Carrito'],
+    modulo: '05',
+  },
+  {
     id: 'react-router-demo',
     titulo: 'React Router — Navegación',
     descripcion: 'Explorador de destinos con rutas dinámicas, filtros por query string, navegación programática y página 404.',
@@ -165,4 +172,3 @@ function AppsIndex() {
 }
 
 export default AppsIndex
-
