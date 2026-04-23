@@ -107,6 +107,13 @@ const apps = [
     etiquetas: ['React', 'Juego', 'Cartas'],
     modulo: '06',
   },
+  {
+    id: 'gabyapps',
+    titulo: 'GabyApps',
+    descripcion: 'Coleccion de apps personales con nuevas ideas y proyectos propios para expandir el laboratorio del curso.',
+    etiquetas: ['React', 'Proyectos', 'Portfolio'],
+    modulo: '06',
+  },
 ]
 
 function AppsIndex() {

@@ -1,0 +1,56 @@
+.petbook-hero {
+  min-height: calc(100vh - 64px);
+  padding: 72px 20px;
+  background:
+    radial-gradient(circle at top left, rgba(76, 111, 255, 0.12), transparent 28%),
+    linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
+}
+
+.petbook-hero__panel {
+  max-width: 820px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid #dbe4ff;
+  border-radius: 28px;
+  padding: 40px;
+  box-shadow: 0 20px 45px rgba(45, 76, 170, 0.08);
+}
+
+.petbook-hero__eyebrow {
+  display: inline-block;
+  margin-bottom: 16px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #e7edff;
+  color: #3d52d5;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.petbook-hero h1 {
+  margin: 0 0 14px;
+  color: #12213f;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 1.05;
+}
+
+.petbook-hero p {
+  margin: 0;
+  max-width: 56ch;
+  color: #4f628c;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 640px) {
+  .petbook-hero {
+    padding: 40px 16px;
+  }
+
+  .petbook-hero__panel {
+    padding: 28px 22px;
+    border-radius: 22px;
+  }
+}
