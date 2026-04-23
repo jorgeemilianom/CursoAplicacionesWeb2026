@@ -1,9 +1,11 @@
-import { Outlet, Route, Routes } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, Outlet, Route, Routes } from 'react-router-dom'
 import { useAlertas } from '../../ArchivosJS/hooks/useAlertas'
 import Footer from '../components/layout/Footer'
 import Navbar from '../components/layout/Navbar'
 import Sidebar from '../components/layout/Sidebar'
 import AlertaBanner from '../components/shared/AlertaBanner'
+import Modal from '../components/ui/Modal'
 import Home from '../pages/Home'
 import Login from '../pages/Login'
 import Registro from '../pages/Registro'
@@ -20,9 +22,13 @@ import AsistenteIA from '../pages/AsistenteIA'
 import Configuracion from '../pages/Configuracion'
 import NotFound from '../pages/NotFound'
 import PrivateRoute from './PrivateRoute'
+import { PETBOOK_BASE_PATH } from '../../ArchivosJS/utils/constants'
+import { formatearFechaCorta } from '../../ArchivosJS/utils/fechas'
 
 function PrivateLayout() {
-  const { alertas, marcarLeida } = useAlertas()
+  const { alertas, alertasNoLeidas, marcarLeida, descartarAlerta, marcarTodasLeidas } = useAlertas()
+  const [showAlertasModal, setShowAlertasModal] = useState(false)
+  const alertaPrincipal = alertasNoLeidas[0] || alertas[0] || null
 
   return (
     <div className="petbook-shell">
@@ -30,17 +36,56 @@ function PrivateLayout() {
       <div className="petbook-shell__body">
         <Sidebar />
         <div className="petbook-shell__content">
-          {alertas.length > 0 && (
+          {alertaPrincipal && (
             <section className="petbook-stack">
-              {alertas.slice(0, 3).map((alerta) => (
-                <AlertaBanner key={alerta.id} alerta={alerta} onRead={marcarLeida} />
-              ))}
+              <AlertaBanner
+                alerta={alertaPrincipal}
+                onRead={marcarLeida}
+                onDismiss={descartarAlerta}
+                onViewAll={() => setShowAlertasModal(true)}
+              />
             </section>
           )}
           <Outlet />
         </div>
       </div>
       <Footer />
+
+      <Modal isOpen={showAlertasModal} onClose={() => setShowAlertasModal(false)} title="Todas las alertas">
+        <div className="petbook-stack">
+          <div className="petbook-inline petbook-inline--stretch">
+            <button type="button" className="petbook-link-button" onClick={marcarTodasLeidas}>
+              Marcar todas como leidas
+            </button>
+          </div>
+          {alertas.length === 0 ? (
+            <p>No hay alertas activas.</p>
+          ) : (
+            <div className="petbook-notification-list">
+              {alertas.map((alerta) => (
+                <article key={alerta.id} className={`petbook-notification-item ${alerta.leida ? 'is-read' : ''}`}>
+                  <div className="petbook-stack">
+                    <strong>{alerta.mensaje}</strong>
+                    <span>
+                      {alerta.mascotaNombre} - {formatearFechaCorta(alerta.fecha)}
+                    </span>
+                  </div>
+                  <div className="petbook-inline">
+                    {!alerta.leida && (
+                      <button type="button" className="petbook-link-button" onClick={() => marcarLeida(alerta.id)}>
+                        Marcar leida
+                      </button>
+                    )}
+                    <Link className="petbook-link" to={`${PETBOOK_BASE_PATH}${alerta.destino || '/dashboard'}`}>
+                      Ir al evento
+                    </Link>
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
+        </div>
+      </Modal>
     </div>
   )
 }

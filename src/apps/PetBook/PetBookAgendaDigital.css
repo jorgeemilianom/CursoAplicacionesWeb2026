@@ -227,6 +227,19 @@
   padding: 24px;
 }
 
+.petbook-horizontal-list {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(260px, 320px);
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+.petbook-horizontal-list__item .petbook-card {
+  min-height: 100%;
+}
+
 .petbook-page {
   display: flex;
   flex-direction: column;
@@ -248,6 +261,11 @@
 
 .petbook-grid--dashboard {
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.petbook-grid--calendar {
+  grid-template-columns: minmax(0, 1.4fr) minmax(300px, 0.8fr);
+  align-items: start;
 }
 
 .petbook-stack {
@@ -324,6 +342,16 @@
   border: 1px solid rgba(130, 88, 40, 0.18);
 }
 
+.petbook-link-button {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--petbook-primary-dark);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 .petbook-alert,
 .petbook-banner,
 .petbook-loader {
@@ -352,6 +380,19 @@
 
 .petbook-banner--muted {
   opacity: 0.7;
+}
+
+.petbook-banner--priority-alta {
+  border-color: rgba(176, 73, 60, 0.34);
+  animation: petbook-pulse 1.8s ease-in-out infinite;
+}
+
+.petbook-banner--priority-media {
+  border-color: rgba(210, 161, 66, 0.3);
+}
+
+.petbook-banner--priority-baja {
+  border-color: rgba(84, 184, 216, 0.24);
 }
 
 .petbook-metrics {
@@ -389,6 +430,21 @@
 
 .petbook-badge--neutral {
   background: #f8e8d8;
+}
+
+.petbook-badge--info {
+  background: rgba(78, 137, 216, 0.14);
+  color: #2d6cb0;
+}
+
+.petbook-badge--accent {
+  background: rgba(139, 99, 216, 0.14);
+  color: #7446c0;
+}
+
+.petbook-badge--sky {
+  background: rgba(84, 184, 216, 0.16);
+  color: #238eb4;
 }
 
 .petbook-progress {
@@ -595,6 +651,232 @@
   cursor: pointer;
 }
 
+.petbook-quick-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.petbook-quick-actions__link {
+  padding: 18px;
+  border: 1px solid var(--petbook-border);
+  border-radius: 20px;
+  background: #fbf4ec;
+  color: var(--petbook-primary-dark);
+  text-decoration: none;
+  font-weight: 800;
+}
+
+.petbook-event-list {
+  display: grid;
+  gap: 12px;
+}
+
+.petbook-event-list__item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 14px;
+  align-items: start;
+  padding: 16px;
+  border-radius: 18px;
+  background: #fbf4ec;
+}
+
+.petbook-event-list__item.is-completed,
+.petbook-notification-item.is-read {
+  opacity: 0.68;
+}
+
+.petbook-event-dot {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: #ecd8c2;
+  color: #fffaf5;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.petbook-event-dot--vacuna {
+  background: #2f7d52;
+}
+
+.petbook-event-dot--desparasitacion {
+  background: #d2872f;
+}
+
+.petbook-event-dot--vencido {
+  background: #b0493c;
+}
+
+.petbook-event-dot--consulta {
+  background: #4e89d8;
+}
+
+.petbook-event-dot--gestacion {
+  background: #8b63d8;
+}
+
+.petbook-event-dot--recordatorio {
+  background: #54b8d8;
+}
+
+.petbook-calendar-filters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.petbook-calendar-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  margin-bottom: 18px;
+}
+
+.petbook-calendar-legend__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--petbook-muted);
+  font-size: 0.92rem;
+}
+
+.petbook-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.petbook-calendar-grid__weekday {
+  padding: 0 4px 8px;
+  color: var(--petbook-muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.petbook-calendar-day {
+  min-height: 92px;
+  padding: 12px;
+  border: 1px solid rgba(130, 88, 40, 0.14);
+  border-radius: 18px;
+  background: #fffaf5;
+  text-align: left;
+  cursor: pointer;
+}
+
+.petbook-calendar-day.is-selected {
+  border-color: rgba(201, 107, 59, 0.42);
+  box-shadow: inset 0 0 0 1px rgba(201, 107, 59, 0.16);
+}
+
+.petbook-calendar-day.is-outside {
+  opacity: 0.46;
+}
+
+.petbook-calendar-day__number {
+  display: block;
+  margin-bottom: 14px;
+  font-weight: 800;
+}
+
+.petbook-calendar-day__dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.petbook-calendar-day__dots .petbook-event-dot {
+  width: 10px;
+  height: 10px;
+  font-size: 0;
+}
+
+.petbook-calendar-mobile {
+  display: none;
+}
+
+.petbook-calendar-mobile__day {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 18px;
+  background: #fbf4ec;
+}
+
+.petbook-notifications {
+  position: relative;
+}
+
+.petbook-notification-trigger {
+  position: relative;
+  padding: 10px 16px;
+  border: 1px solid rgba(130, 88, 40, 0.16);
+  border-radius: 999px;
+  background: #fffaf5;
+  color: var(--petbook-primary-dark);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.petbook-notification-count {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--petbook-danger);
+  color: #fffaf5;
+  font-size: 0.78rem;
+  line-height: 22px;
+}
+
+.petbook-notification-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: min(420px, 90vw);
+  padding: 18px;
+  border: 1px solid var(--petbook-border);
+  border-radius: 22px;
+  background: var(--petbook-panel);
+  box-shadow: var(--petbook-shadow);
+}
+
+.petbook-notification-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.petbook-notification-list {
+  display: grid;
+  gap: 10px;
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.petbook-notification-item {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 16px;
+  background: #fbf4ec;
+}
+
+.petbook-notification-item span,
+.petbook-notification-empty {
+  color: var(--petbook-muted);
+}
+
 .petbook-timeline {
   display: grid;
   gap: 14px;
@@ -669,11 +951,23 @@
   cursor: pointer;
 }
 
+@keyframes petbook-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(176, 73, 60, 0.12);
+  }
+
+  50% {
+    box-shadow: 0 0 0 12px rgba(176, 73, 60, 0);
+  }
+}
+
 @media (max-width: 900px) {
   .petbook-shell__body,
   .petbook-landing,
   .petbook-form--two-columns,
-  .petbook-profile {
+  .petbook-profile,
+  .petbook-grid--calendar {
     grid-template-columns: 1fr;
   }
 
@@ -684,6 +978,11 @@
   .petbook-table__head,
   .petbook-table__row {
     grid-template-columns: 1fr;
+  }
+
+  .petbook-notification-panel {
+    left: 0;
+    right: auto;
   }
 }
 
@@ -704,14 +1003,31 @@
   .petbook-definition-list,
   .petbook-page-header,
   .petbook-timeline__item,
-  .petbook-note {
+  .petbook-note,
+  .petbook-calendar-filters,
+  .petbook-quick-actions,
+  .petbook-event-list__item {
     grid-template-columns: 1fr;
   }
 
   .petbook-page-header,
   .petbook-note,
-  .petbook-timeline__item {
+  .petbook-timeline__item,
+  .petbook-event-list__item {
     display: grid;
+  }
+
+  .petbook-calendar-grid {
+    display: none;
+  }
+
+  .petbook-calendar-mobile {
+    display: grid;
+    gap: 12px;
+  }
+
+  .petbook-horizontal-list {
+    grid-auto-columns: minmax(240px, 1fr);
   }
 
   .petbook-fab {

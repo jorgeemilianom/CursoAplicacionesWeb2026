@@ -1,4 +1,19 @@
-import { differenceInCalendarDays, format, intervalToDuration, isBefore, isToday, parseISO } from 'date-fns'
+import {
+  addDays,
+  differenceInCalendarDays,
+  eachDayOfInterval,
+  endOfMonth,
+  endOfWeek,
+  format,
+  intervalToDuration,
+  isBefore,
+  isSameDay,
+  isSameMonth,
+  isToday,
+  parseISO,
+  startOfMonth,
+  startOfWeek,
+} from 'date-fns'
 import { es } from 'date-fns/locale'
 
 function parseDate(fecha) {
@@ -62,6 +77,47 @@ export function diasHasta(fecha) {
     return differenceInCalendarDays(parseDate(fecha), new Date())
   } catch {
     return null
+  }
+}
+
+export function esMismoDia(fechaA, fechaB) {
+  if (!fechaA || !fechaB) return false
+
+  try {
+    return isSameDay(parseDate(fechaA), parseDate(fechaB))
+  } catch {
+    return false
+  }
+}
+
+export function esMismoMes(fechaA, fechaB) {
+  if (!fechaA || !fechaB) return false
+
+  try {
+    return isSameMonth(parseDate(fechaA), parseDate(fechaB))
+  } catch {
+    return false
+  }
+}
+
+export function obtenerDiasDelMes(fechaReferencia = new Date()) {
+  try {
+    const inicio = startOfWeek(startOfMonth(parseDate(fechaReferencia)), { weekStartsOn: 1 })
+    const fin = endOfWeek(endOfMonth(parseDate(fechaReferencia)), { weekStartsOn: 1 })
+    return eachDayOfInterval({ start: inicio, end: fin })
+  } catch {
+    return []
+  }
+}
+
+export function obtenerRangoProximosDias(cantidad = 7, desde = new Date()) {
+  try {
+    return eachDayOfInterval({
+      start: parseDate(desde),
+      end: addDays(parseDate(desde), Math.max(0, cantidad - 1)),
+    })
+  } catch {
+    return []
   }
 }
 

@@ -10,6 +10,11 @@ export async function obtenerVacunas() {
   return data
 }
 
+export async function obtenerDesparasitaciones() {
+  const { data } = await axiosConfig.get('/desparasitaciones')
+  return data
+}
+
 export async function crearVacuna(payload) {
   const { data } = await axiosConfig.post('/vacunas', payload)
   return data

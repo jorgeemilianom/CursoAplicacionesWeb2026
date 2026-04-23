@@ -5,6 +5,11 @@ export async function obtenerConsultasPorMascota(mascotaId) {
   return data
 }
 
+export async function obtenerConsultas() {
+  const { data } = await axiosConfig.get('/consultas?_sort=fecha&_order=asc')
+  return data
+}
+
 export async function crearConsulta(payload) {
   const { data } = await axiosConfig.post('/consultas', payload)
   return data
