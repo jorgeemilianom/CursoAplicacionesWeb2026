@@ -1,0 +1,103 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "nombre": "Maria Gonzalez",
+      "email": "maria@email.com",
+      "password": "1234",
+      "telefono": "3764000000",
+      "ubicacion": "Posadas, Misiones",
+      "foto": ""
+    }
+  ],
+  "mascotas": [
+    {
+      "id": 1,
+      "usuarioId": 1,
+      "nombre": "Firulais",
+      "especie": "perro",
+      "raza": "Labrador",
+      "sexo": "macho",
+      "fechaNacimiento": "2021-03-15",
+      "color": "amarillo",
+      "peso": 25,
+      "foto": "",
+      "veterinario": "Dr. Perez",
+      "telefonoVet": "3764111111",
+      "microchip": "123456789",
+      "esterilizado": false,
+      "activo": true
+    }
+  ],
+  "vacunas": [
+    {
+      "id": 1,
+      "mascotaId": 1,
+      "nombre": "Antirrabica",
+      "fecha": "2024-01-10",
+      "proxima": "2025-01-10",
+      "veterinario": "Dr. Perez",
+      "lote": "ABC123",
+      "notas": ""
+    }
+  ],
+  "desparasitaciones": [
+    {
+      "id": 1,
+      "mascotaId": 1,
+      "tipo": "interna",
+      "producto": "Milbemax",
+      "fecha": "2024-06-01",
+      "proxima": "2024-09-01",
+      "notas": ""
+    }
+  ],
+  "gestaciones": [
+    {
+      "id": 1,
+      "mascotaId": 1,
+      "fechaCruce": "2024-11-01",
+      "fechaPartoProbable": "2025-01-03",
+      "cantidadCriasEsperadas": 5,
+      "veterinarioSeguimiento": "Dr. Perez",
+      "estado": "en_curso",
+      "notas": "",
+      "crias": []
+    }
+  ],
+  "consultas": [
+    {
+      "id": 1,
+      "mascotaId": 1,
+      "fecha": "2024-05-20",
+      "motivo": "Control anual",
+      "diagnostico": "Saludable",
+      "tratamiento": "Ninguno",
+      "veterinario": "Dr. Perez",
+      "peso": 24.5,
+      "notas": "",
+      "costo": 3500
+    }
+  ],
+  "notasSalud": [
+    {
+      "id": 1,
+      "mascotaId": 1,
+      "fecha": "2026-04-12",
+      "texto": "Buen apetito y energia estable durante la semana.",
+      "foto": ""
+    }
+  ],
+  "recordatorios": [
+    {
+      "id": 1,
+      "mascotaId": 1,
+      "usuarioId": 1,
+      "titulo": "Vacuna antirrabica",
+      "fecha": "2025-01-10",
+      "tipo": "vacuna",
+      "notificado": false,
+      "notas": ""
+    }
+  ]
+}

@@ -42,11 +42,13 @@ import './App.css'
 function App() {
   const location = useLocation()
   const isCardBattleRoute = location.pathname.startsWith('/apps/CardBattle-J&G')
+  const isPetBookRoute = location.pathname.startsWith('/apps/gabyapps/petbook-agenda-digital')
+  const hideSiteChrome = isCardBattleRoute || isPetBookRoute
 
   return (
     <div className="site-shell">
-      {!isCardBattleRoute && <Navbar />}
-      <main className={`site-main ${isCardBattleRoute ? 'site-main--fullscreen' : ''}`}>
+      {!hideSiteChrome && <Navbar />}
+      <main className={`site-main ${hideSiteChrome ? 'site-main--fullscreen' : ''}`}>
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/apps" element={<AppsIndex />} />
@@ -64,7 +66,7 @@ function App() {
           <Route path="/apps/monopoly-santafe" element={<MonopolySantaFe />} />
           <Route path="/apps/CardBattle-J&G" element={<CardBattleJG />} />
           <Route path="/apps/gabyapps" element={<GabyAppsIndex />} />
-          <Route path="/apps/gabyapps/petbook-agenda-digital" element={<PetBookAgendaDigital />} />
+          <Route path="/apps/gabyapps/petbook-agenda-digital/*" element={<PetBookAgendaDigital />} />
           <Route path="/apps/react-router-demo/*" element={<ReactRouterDemo />} />
           <Route path="/docs" element={<DocsIndex />} />
           <Route path="/docs/instalar-docker" element={<InstallarDocker />} />
@@ -87,7 +89,7 @@ function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
-      {!isCardBattleRoute && <Footer />}
+      {!hideSiteChrome && <Footer />}
     </div>
   )
 }
