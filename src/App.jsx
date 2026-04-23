@@ -37,6 +37,7 @@ import TeoriaReactRouter from './pages/teoria/TeoriaReactRouter'
 import TeoriaCustomHooks from './pages/teoria/TeoriaCustomHooks'
 import ReactRouterDemo from './apps/react-router-demo/ReactRouterDemo'
 import CustomHooks from './apps/custom-hooks/CustomHooks'
+import ContactosBugueados from './apps/contactos-bugueados/ContactosBugueados'
 import './App.css'
 
 function App() {
@@ -65,6 +66,7 @@ function App() {
           <Route path="/apps/CardBattle-J&G" element={<CardBattleJG />} />
           <Route path="/apps/react-router-demo/*" element={<ReactRouterDemo />} />
           <Route path="/apps/custom-hooks" element={<CustomHooks />} />
+          <Route path="/apps/contactos-bugueados" element={<ContactosBugueados />} />
           <Route path="/docs" element={<DocsIndex />} />
           <Route path="/docs/instalar-docker" element={<InstallarDocker />} />
           <Route path="/docs/ollama-docker" element={<OllamaDocker />} />

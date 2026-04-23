@@ -112,6 +112,12 @@ const apps = [
     descripcion: 'Probá cuatro hooks en vivo: useCounter, useLocalStorage, useDebounce y useFetch. Cada uno muestra el código del hook junto al demo interactivo.',
     etiquetas: ['Custom Hooks', 'useEffect', 'Composición', 'Buenas prácticas'],
   },
+  {
+    id: 'contactos-bugueados',
+    titulo: 'Gestor de Contactos — Bugueado',
+    descripcion: 'Esta app tiene errores intencionales de React Avanzado. Encontrá qué está mal y corregí el código.',
+    etiquetas: ['useEffect', 'useMemo', 'useCallback', 'memo', 'Bugs'],
+  },
 ]
 
 function AppsIndex() {
