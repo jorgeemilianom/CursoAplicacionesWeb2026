@@ -1,8 +1,9 @@
 import { createContext, useCallback, useEffect, useMemo, useState } from 'react'
+import { enviarRecordatorioPorEmail } from '../../ArchivosJS/api/externalApis'
 import { obtenerGestaciones } from '../../ArchivosJS/api/gestacionApi'
 import { obtenerRecordatoriosPorUsuario } from '../../ArchivosJS/api/recordatoriosApi'
 import { obtenerDesparasitaciones, obtenerVacunas } from '../../ArchivosJS/api/vacunasApi'
-import { ALERT_PRIORITY_ORDER } from '../../ArchivosJS/utils/constants'
+import { ALERT_PRIORITY_ORDER, STORAGE_KEYS } from '../../ArchivosJS/utils/constants'
 import { diasHasta, estaVencida, esMismoDia } from '../../ArchivosJS/utils/fechas'
 import { calcularDiasRestantes, generarAlertasGestacion } from '../../ArchivosJS/utils/gestacionUtils'
 import { useMascota } from '../../ArchivosJS/hooks/useMascota'
@@ -184,6 +185,41 @@ export function AlertasProvider({ children }) {
   useEffect(() => {
     chequearVencimientos()
   }, [chequearVencimientos])
+
+  useEffect(() => {
+    async function notificarPorEmail() {
+      if (!user?.email) return
+
+      const enabled = localStorage.getItem(STORAGE_KEYS.emailNotifications) === 'true'
+      if (!enabled) return
+
+      const enviados = JSON.parse(localStorage.getItem('petbook_email_alertas_enviadas') || '[]')
+      const pendientes = alertas.filter(
+        (alerta) =>
+          ['vacuna_vencida', 'vacuna_proxima', 'recordatorio', 'gestacion'].includes(alerta.tipo) &&
+          !enviados.includes(alerta.id),
+      )
+
+      for (const alerta of pendientes) {
+        const resultado = await enviarRecordatorioPorEmail({
+          emailDestino: user.email,
+          nombreDuenio: user.nombre,
+          nombreMascota: alerta.mascotaNombre,
+          tipoEvento: alerta.tipo,
+          fechaEvento: alerta.fecha,
+          descripcion: alerta.mensaje,
+        })
+
+        if (resultado?.status === 200 || resultado?.ok === false) {
+          enviados.push(alerta.id)
+        }
+      }
+
+      localStorage.setItem('petbook_email_alertas_enviadas', JSON.stringify(enviados))
+    }
+
+    notificarPorEmail()
+  }, [alertas, user?.email, user?.nombre])
 
   function agregarAlerta(alerta) {
     setAlertas((prev) => ordenarAlertas([{ leida: false, ...alerta }, ...prev]))

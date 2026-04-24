@@ -14,7 +14,7 @@ import { formatearFechaCorta } from '../../ArchivosJS/utils/fechas'
 
 function Dashboard() {
   const { user } = useUser()
-  const clima = useClima()
+  const { clima, consejoMascota } = useClima(user?.ubicacion?.split(',')[0] || 'Posadas')
   const { mascotas } = useMascota()
   const { alertasNoLeidas, descartarAlerta, marcarLeida } = useAlertas()
   const { proximosEventos } = useCalendarioEventos()
@@ -61,6 +61,23 @@ function Dashboard() {
                 </div>
               ))}
             </div>
+          )}
+        </Card>
+
+        <Card title="Clima pet friendly" subtitle={clima?.ciudad || 'Widget de clima'}>
+          {clima?.ok ? (
+            <div className="petbook-stack">
+              <strong>{clima.temperatura}°C</strong>
+              <span>{clima.condicion} - Humedad {clima.humedad}%</span>
+              {consejoMascota && (
+                <div className={`petbook-weather-tip petbook-weather-tip--${consejoMascota.alerta}`}>
+                  <strong>{consejoMascota.icono}</strong>
+                  <p>{consejoMascota.mensaje}</p>
+                </div>
+              )}
+            </div>
+          ) : (
+            <p>{clima?.message || 'Configura OpenWeather para habilitar este widget.'}</p>
           )}
         </Card>
 

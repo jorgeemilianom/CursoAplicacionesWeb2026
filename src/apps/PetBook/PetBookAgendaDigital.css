@@ -877,6 +877,81 @@
   color: var(--petbook-muted);
 }
 
+.petbook-weather-tip {
+  padding: 16px;
+  border-radius: 18px;
+  background: #fbf4ec;
+}
+
+.petbook-weather-tip--alta {
+  border-left: 4px solid var(--petbook-danger);
+}
+
+.petbook-weather-tip--media {
+  border-left: 4px solid #d2872f;
+}
+
+.petbook-weather-tip--baja,
+.petbook-weather-tip--ninguna {
+  border-left: 4px solid #4e89d8;
+}
+
+.petbook-map {
+  overflow: hidden;
+  min-height: 420px;
+  border-radius: 24px;
+  border: 1px solid var(--petbook-border);
+}
+
+.petbook-vet-item {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 18px;
+  background: #fbf4ec;
+}
+
+.petbook-chat {
+  display: grid;
+  gap: 12px;
+  max-height: 460px;
+  padding: 16px;
+  overflow-y: auto;
+  border: 1px solid var(--petbook-border);
+  border-radius: 24px;
+  background: rgba(255, 250, 244, 0.9);
+}
+
+.petbook-chat__message {
+  max-width: 82%;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: #fbf4ec;
+}
+
+.petbook-chat__message--assistant {
+  justify-self: start;
+}
+
+.petbook-chat__message--user {
+  justify-self: end;
+  background: #f0dcc5;
+}
+
+.petbook-chat__message p {
+  margin: 6px 0 0;
+}
+
+.petbook-chat__input {
+  flex: 1 1 280px;
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid rgba(120, 89, 55, 0.18);
+  border-radius: 14px;
+  background: #fffaf5;
+  color: var(--petbook-text);
+}
+
 .petbook-grid--gestacion-summary {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }

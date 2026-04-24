@@ -4,6 +4,7 @@ export const STORAGE_KEYS = {
   user: 'petbook_user',
   token: 'petbook_token',
   activePetId: 'petbook_active_pet_id',
+  emailNotifications: 'petbook_email_notifications',
 }
 
 export const ESPECIES = [

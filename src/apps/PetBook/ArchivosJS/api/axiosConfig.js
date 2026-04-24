@@ -2,7 +2,7 @@ import axios from 'axios'
 import { STORAGE_KEYS } from '../utils/constants'
 
 const axiosConfig = axios.create({
-  baseURL: 'http://localhost:3001',
+  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001',
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
