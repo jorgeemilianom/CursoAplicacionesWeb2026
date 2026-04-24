@@ -218,3 +218,79 @@ export function construirDatosMascotaIA(mascota) {
 export function asistenteDisponible() {
   return Boolean(ANTHROPIC_API_KEY)
 }
+
+// ─── APIs DE PAGO — FUNCIONES PREPARADAS ──────────────────────────────────────
+
+export const enviarWhatsApp = async ({ numero, mensaje }) => {
+  // ⚠️ FUNCIÓN PREPARADA — REQUIERE PLAN PRO
+  // Activar cuando se cuente con credenciales Twilio
+
+  if (!import.meta.env.VITE_TWILIO_ACCOUNT_SID ||
+      import.meta.env.VITE_TWILIO_ACCOUNT_SID === "pendiente") {
+    console.warn("Twilio no configurado. Función reservada para plan Pro.")
+    return { success: false, reason: "not_configured" }
+  }
+
+  // Código listo para cuando se active:
+  // const twilio = require('twilio')
+  // const client = twilio(ACCOUNT_SID, AUTH_TOKEN)
+  // return await client.messages.create({
+  //   body: mensaje,
+  //   from: "whatsapp:+14155238886",
+  //   to: `whatsapp:${numero}`
+  // })
+}
+
+export const enviarSMS = async ({ numero, mensaje }) => {
+  // ⚠️ FUNCIÓN PREPARADA — REQUIERE PLAN PRO
+  // Activar cuando se cuente con credenciales Twilio
+
+  if (!import.meta.env.VITE_TWILIO_ACCOUNT_SID ||
+      import.meta.env.VITE_TWILIO_ACCOUNT_SID === "pendiente") {
+    console.warn("Twilio no configurado. Función reservada para plan Pro.")
+    return { success: false, reason: "not_configured" }
+  }
+
+  // Código listo para cuando se active:
+  // const twilio = require('twilio')
+  // const client = twilio(ACCOUNT_SID, AUTH_TOKEN)
+  // return await client.messages.create({
+  //   body: mensaje,
+  //   from: VITE_TWILIO_PHONE_NUMBER,
+  //   to: numero
+  // })
+}
+
+export const obtenerVeterinariasGoogle = async (lat, lng, radio = 5000) => {
+  // ⚠️ FUNCIÓN PREPARADA — REQUIERE PLAN PRO
+  // Activar cuando se cuente con Google Maps API key
+
+  if (!import.meta.env.VITE_GOOGLE_MAPS_API_KEY ||
+      import.meta.env.VITE_GOOGLE_MAPS_API_KEY === "pendiente") {
+    console.warn("Google Maps no configurado. Función reservada para plan Pro.")
+    return { success: false, reason: "not_configured" }
+  }
+
+  // Código listo para cuando se active:
+  // const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=${radio}&type=veterinary&key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}`
+  // const { data } = await axios.get(url)
+  // return data.results.map(item => ({
+  //   id: item.place_id,
+  //   nombre: item.name,
+  //   lat: item.geometry.location.lat,
+  //   lng: item.geometry.location.lng,
+  //   direccion: item.vicinity,
+  //   rating: item.rating,
+  //   abierto: item.opening_hours?.open_now
+  // }))
+}
+
+export const sincronizarConGoogleCalendar = async (eventos) => {
+  // ⚠️ FUNCIÓN PREPARADA — REQUIERE PLAN PRO + OAuth configurado
+  if (import.meta.env.VITE_GOOGLE_CALENDAR_CLIENT_ID === "pendiente") {
+    return { success: false, reason: "not_configured" }
+  }
+  // Código listo para activar con OAuth 2.0:
+  // Autenticar con Google
+  // Por cada evento: POST a Google Calendar API
+}

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Alert from '../components/ui/Alert'
 import Button from '../components/ui/Button'
 import Card from '../components/ui/Card'
+import ProBadge from '../components/ui/ProBadge'
 import { useAsistenteIA } from '../../ArchivosJS/hooks/useAsistenteIA'
 import { useMascota } from '../../ArchivosJS/hooks/useMascota'
 
@@ -14,6 +15,7 @@ const quickPrompts = [
 function AsistenteIA() {
   const { mascotas, mascotaActiva, seleccionarMascota } = useMascota()
   const [texto, setTexto] = useState('')
+  const [modoAsistente, setModoAsistente] = useState('basico')
   const { mensajes, loading, enviarMensaje, limpiarChat, disponible, scrollRef } = useAsistenteIA(mascotaActiva)
 
   async function handleSubmit(event) {
@@ -40,6 +42,36 @@ function AsistenteIA() {
               ))}
             </select>
           </label>
+
+          <div className="petbook-assistant-mode">
+            <span>Modo: </span>
+            <label className="petbook-toggle-inline">
+              <input
+                type="radio"
+                name="modoAsistente"
+                value="basico"
+                checked={modoAsistente === 'basico'}
+                onChange={(e) => setModoAsistente(e.target.value)}
+              />
+              Básico (claude-haiku)
+            </label>
+            <label className="petbook-toggle-inline">
+              <input
+                type="radio"
+                name="modoAsistente"
+                value="pro"
+                checked={modoAsistente === 'pro'}
+                onChange={(e) => setModoAsistente(e.target.value)}
+                disabled
+              />
+              Pro (claude-opus) <ProBadge />
+            </label>
+          </div>
+
+          <p className="petbook-text-small">
+            Básico → Respuestas rápidas<br />
+            Pro → Análisis más profundo, historial clínico completo ✨ Plan Pro
+          </p>
 
           {!disponible && (
             <Alert tone="info">

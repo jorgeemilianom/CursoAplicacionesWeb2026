@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css'
 import Alert from '../components/ui/Alert'
 import Button from '../components/ui/Button'
 import Card from '../components/ui/Card'
+import ProBadge from '../components/ui/ProBadge'
 import { useMascota } from '../../ArchivosJS/hooks/useMascota'
 import { useVeterinarias } from '../../ArchivosJS/hooks/useVeterinarias'
 
@@ -15,6 +16,7 @@ function Veterinarias() {
   const { mascotaActiva, actualizarMascota } = useMascota()
   const [radio, setRadio] = useState(5000)
   const [ciudadManual, setCiudadManual] = useState('')
+  const [modoMapa, setModoMapa] = useState('openstreetmap')
   const { veterinarias, posicion, loading, error, buscarPorCiudad } = useVeterinarias(null, null, radio)
 
   const center = useMemo(() => [posicion.lat, posicion.lng], [posicion.lat, posicion.lng])
@@ -50,6 +52,35 @@ function Veterinarias() {
       <div className="petbook-grid petbook-grid--calendar">
         <Card title="Mapa" subtitle={loading ? 'Buscando resultados...' : `${veterinarias.length} resultados`}>
           <div className="petbook-stack">
+            <div className="petbook-map-toggle">
+              <span>Mapa: </span>
+              <label className="petbook-toggle-inline">
+                <input
+                  type="radio"
+                  name="modoMapa"
+                  value="openstreetmap"
+                  checked={modoMapa === 'openstreetmap'}
+                  onChange={(e) => setModoMapa(e.target.value)}
+                />
+                OpenStreetMap
+              </label>
+              <label className="petbook-toggle-inline">
+                <input
+                  type="radio"
+                  name="modoMapa"
+                  value="google"
+                  checked={modoMapa === 'google'}
+                  onChange={(e) => setModoMapa(e.target.value)}
+                  disabled
+                />
+                Google Maps <ProBadge />
+              </label>
+            </div>
+
+            <p className="petbook-text-small">
+              OpenStreetMap → Gratuito, activo ahora<br />
+              Google Maps → Mayor precisión + Street View ✨ Disponible en plan PetBook Pro
+            </p>
             <label>
               Radio de busqueda
               <input

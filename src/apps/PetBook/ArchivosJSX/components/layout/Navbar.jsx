@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Button from '../ui/Button'
+import ProBadge from '../ui/ProBadge'
 import { useAlertas } from '../../../ArchivosJS/hooks/useAlertas'
 import { useUser } from '../../../ArchivosJS/hooks/useUser'
 import { PETBOOK_BASE_PATH } from '../../../ArchivosJS/utils/constants'
@@ -10,6 +11,7 @@ function Navbar() {
   const { user, isAuthenticated, logout } = useUser()
   const { alertas, cantidadNoLeidas, marcarLeida, marcarTodasLeidas } = useAlertas()
   const [openNotifications, setOpenNotifications] = useState(false)
+  const [openUserMenu, setOpenUserMenu] = useState(false)
 
   return (
     <header className="petbook-topbar">
@@ -72,9 +74,55 @@ function Navbar() {
             </div>
 
             <span className="petbook-user-chip">{user?.nombre}</span>
-            <Button variant="ghost" onClick={logout}>
-              Cerrar sesion
-            </Button>
+            <div className="petbook-user-menu">
+              <button
+                className="petbook-user-menu__trigger"
+                type="button"
+                onClick={() => setOpenUserMenu((prev) => !prev)}
+                aria-expanded={openUserMenu}
+                aria-label="Menú de usuario"
+              >
+                <span className="petbook-user-avatar">{user?.nombre?.[0]?.toUpperCase() || 'U'}</span>
+                <span className="petbook-user-menu__arrow">▼</span>
+              </button>
+
+              {openUserMenu && (
+                <div className="petbook-user-menu__dropdown">
+                  <Link
+                    className="petbook-user-menu__item"
+                    to={`${PETBOOK_BASE_PATH}/configuracion`}
+                    onClick={() => setOpenUserMenu(false)}
+                  >
+                    👤 Mi perfil
+                  </Link>
+                  <Link
+                    className="petbook-user-menu__item"
+                    to={`${PETBOOK_BASE_PATH}/configuracion`}
+                    onClick={() => setOpenUserMenu(false)}
+                  >
+                    ⚙️ Configuración
+                  </Link>
+                  <button
+                    className="petbook-user-menu__item petbook-user-menu__item--pro"
+                    type="button"
+                    onClick={() => setOpenUserMenu(false)}
+                  >
+                    💎 Conocer plan Pro <ProBadge />
+                  </button>
+                  <hr className="petbook-user-menu__divider" />
+                  <button
+                    className="petbook-user-menu__item"
+                    type="button"
+                    onClick={() => {
+                      logout()
+                      setOpenUserMenu(false)
+                    }}
+                  >
+                    🚪 Cerrar sesión
+                  </button>
+                </div>
+              )}
+            </div>
           </>
         ) : (
           <>

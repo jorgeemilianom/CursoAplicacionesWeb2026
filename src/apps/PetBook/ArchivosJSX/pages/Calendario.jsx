@@ -6,6 +6,7 @@ import Button from '../components/ui/Button'
 import Card from '../components/ui/Card'
 import Loader from '../components/ui/Loader'
 import Modal from '../components/ui/Modal'
+import ProBadge from '../components/ui/ProBadge'
 import { useCalendarioEventos } from '../../ArchivosJS/hooks/useCalendarioEventos'
 import { useMascota } from '../../ArchivosJS/hooks/useMascota'
 import { useRecordatorios } from '../../ArchivosJS/hooks/useRecordatorios'
@@ -156,6 +157,9 @@ function Calendario() {
             <p>Vista mensual consolidada con vacunas, consultas, gestacion y pendientes personales.</p>
           </div>
           <div className="petbook-inline petbook-inline--stretch">
+            <Button variant="outline" disabled>
+              Sincronizar con Google Calendar <ProBadge />
+            </Button>
             <Button variant="secondary" onClick={() => setMesActual(new Date())}>
               Hoy
             </Button>
