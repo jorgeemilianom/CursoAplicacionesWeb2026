@@ -1,8 +1,8 @@
-# README4 — PetBook: Módulo Completo de Gestación
+# SPEC-04 — PetBook: Módulo Completo de Gestación
 
 ## 🎯 PROMPT PARA CLAUDE CODE — ETAPA 4
 
-> ⚠️ Esta etapa asume que README1, README2 y README3 están completamente implementados y funcionando.
+> ⚠️ Esta etapa asume que SPEC-01, SPEC-02 y SPEC-03 están completamente implementados y funcionando.
 
 ---
 

@@ -11,7 +11,12 @@ export const ESPECIES = [
   { value: 'gato', label: 'Gato' },
   { value: 'conejo', label: 'Conejo' },
   { value: 'hamster', label: 'Hamster' },
+  { value: 'cobayo', label: 'Cobayo' },
   { value: 'ave', label: 'Ave' },
+  { value: 'vaca', label: 'Vaca' },
+  { value: 'oveja', label: 'Oveja' },
+  { value: 'cabra', label: 'Cabra' },
+  { value: 'cerdo', label: 'Cerdo' },
   { value: 'otro', label: 'Otro' },
 ]
 
@@ -30,12 +35,17 @@ export const LINKS_PRIVADOS = [
 ]
 
 export const SPECIES_AVATARS = {
-  perro: '🐶',
-  gato: '🐱',
-  conejo: '🐰',
-  hamster: '🐹',
-  ave: '🐦',
-  otro: '🐾',
+  perro: 'P',
+  gato: 'G',
+  conejo: 'C',
+  hamster: 'H',
+  cobayo: 'Co',
+  ave: 'A',
+  vaca: 'V',
+  oveja: 'O',
+  cabra: 'Ca',
+  cerdo: 'Ce',
+  otro: 'M',
 }
 
 export const FALLBACK_RAZAS = {
@@ -43,7 +53,12 @@ export const FALLBACK_RAZAS = {
   gato: ['Mestizo', 'Siames', 'Persa', 'Maine Coon', 'Bengala'],
   conejo: ['Enano', 'Belier', 'Cabeza de leon'],
   hamster: ['Sirio', 'Ruso', 'Roborovski'],
+  cobayo: ['Americano', 'Peruano', 'Abisinio'],
   ave: ['Canario', 'Periquito', 'Cacatua'],
+  vaca: ['Holando', 'Jersey', 'Angus'],
+  oveja: ['Merino', 'Corriedale', 'Texel'],
+  cabra: ['Saanen', 'Angora', 'Boer'],
+  cerdo: ['Yorkshire', 'Duroc', 'Landrace'],
   otro: ['Mi mascota'],
 }
 
@@ -54,6 +69,7 @@ export const RECORDATORIO_TIPOS = [
   { value: 'peluqueria', label: 'Peluqueria' },
   { value: 'control', label: 'Control' },
   { value: 'medicacion', label: 'Medicacion' },
+  { value: 'gestacion', label: 'Gestacion' },
   { value: 'otro', label: 'Otro' },
 ]
 

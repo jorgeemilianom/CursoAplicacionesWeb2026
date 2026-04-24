@@ -4,7 +4,7 @@ import { obtenerRecordatoriosPorUsuario } from '../../ArchivosJS/api/recordatori
 import { obtenerDesparasitaciones, obtenerVacunas } from '../../ArchivosJS/api/vacunasApi'
 import { ALERT_PRIORITY_ORDER } from '../../ArchivosJS/utils/constants'
 import { diasHasta, estaVencida, esMismoDia } from '../../ArchivosJS/utils/fechas'
-import { calcularSemanasGestacion } from '../../ArchivosJS/utils/gestacionUtils'
+import { calcularDiasRestantes, generarAlertasGestacion } from '../../ArchivosJS/utils/gestacionUtils'
 import { useMascota } from '../../ArchivosJS/hooks/useMascota'
 import { useUser } from '../../ArchivosJS/hooks/useUser'
 
@@ -122,20 +122,36 @@ export function AlertasProvider({ children }) {
           })),
         ...gestaciones
           .filter((item) => mascotaIds.has(item.mascotaId))
-          .map((item) => {
-            const mascotaNombre = mascotasPorId.get(item.mascotaId)?.nombre || 'Mascota'
-            const semana = calcularSemanasGestacion(item.fechaCruce)
-            return {
-              id: `gestacion-${item.id}`,
-              tipo: 'gestacion',
-              prioridad: 'media',
+          .filter((item) => item.estado === 'en_curso')
+          .flatMap((item) => {
+            const mascota = mascotasPorId.get(item.mascotaId)
+            const mascotaNombre = mascota?.nombre || 'Mascota'
+            const diasRestantes = calcularDiasRestantes(item.fechaPartoProbable)
+
+            const baseAlerts = generarAlertasGestacion(item, mascota?.especie).map((alerta) => ({
+              ...alerta,
               mascotaId: item.mascotaId,
               mascotaNombre,
-              mensaje: `${mascotaNombre} cursa la semana ${semana} de gestacion.`,
-              fecha: item.fechaPartoProbable,
               leida: false,
               destino: `/gestacion/${item.mascotaId}`,
+              mensaje: `${mascotaNombre}: ${alerta.mensaje}`,
+            }))
+
+            if (diasRestantes !== null && diasRestantes <= 7) {
+              baseAlerts.unshift({
+                id: `gestacion-parto-${item.id}`,
+                tipo: 'gestacion',
+                prioridad: 'alta',
+                mascotaId: item.mascotaId,
+                mascotaNombre,
+                mensaje: `${mascotaNombre} esta en los ultimos ${Math.max(diasRestantes, 0)} dias antes del parto.`,
+                fecha: item.fechaPartoProbable,
+                leida: false,
+                destino: `/gestacion/${item.mascotaId}`,
+              })
             }
+
+            return baseAlerts
           }),
         ...recordatorios
           .filter((item) => mascotaIds.has(item.mascotaId))

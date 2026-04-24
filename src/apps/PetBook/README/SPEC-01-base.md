@@ -1,4 +1,4 @@
-# README1 — PetBook: Setup del Proyecto y Arquitectura Base
+# SPEC-01 — PetBook: Setup del Proyecto y Arquitectura Base
 
 ## 🎯 PROMPT PARA CLAUDE CODE — ETAPA 1
 

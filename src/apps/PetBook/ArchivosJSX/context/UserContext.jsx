@@ -29,10 +29,10 @@ export function UserProvider({ children }) {
     setError('')
 
     try {
-      const { data } = await axiosConfig.get(`/usuarios?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`)
+      const { data } = await axiosConfig.get(`/usuarios?email=${encodeURIComponent(email)}`)
       const foundUser = data[0]
 
-      if (!foundUser) {
+      if (!foundUser || foundUser.password !== password) {
         throw new Error('Credenciales invalidas.')
       }
 

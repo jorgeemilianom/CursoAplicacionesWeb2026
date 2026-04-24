@@ -289,6 +289,11 @@ function FichaMascota() {
                       Llamar al veterinario
                     </a>
                   )}
+                  {mascota.sexo === 'hembra' && (
+                    <Link className="petbook-link" to={`${PETBOOK_BASE_PATH}/gestacion/${mascota.id}`}>
+                      Ver gestacion
+                    </Link>
+                  )}
                   <Button
                     variant="secondary"
                     onClick={() => {

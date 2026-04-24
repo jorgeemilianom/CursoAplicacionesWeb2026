@@ -1,8 +1,8 @@
-# README6 — PetBook: APIs de Pago (Futuras), UI Final y Deploy
+# SPEC-06 — PetBook: APIs de Pago (Futuras), UI Final y Deploy
 
 ## 🎯 PROMPT PARA CLAUDE CODE — ETAPA 6
 
-> ⚠️ Esta es la etapa final. Asume que README1 al README5 están completamente implementados.
+> ⚠️ Esta es la etapa final. Asume que SPEC-01 a SPEC-05 están completamente implementados.
 
 ---
 
@@ -102,7 +102,7 @@ const useVeterinarias = (lat, lng, modo = "openstreetmap") => {
       //   &key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}`
     } else {
       // Usar Overpass API (OpenStreetMap) — activo y gratuito
-      // ... lógica ya implementada en README5
+      // ... lógica ya implementada en SPEC-05
     }
   }
 }

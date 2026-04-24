@@ -17,7 +17,7 @@
       "nombre": "Firulais",
       "especie": "perro",
       "raza": "Labrador",
-      "sexo": "macho",
+      "sexo": "hembra",
       "fechaNacimiento": "2021-03-15",
       "color": "amarillo",
       "peso": 25,
@@ -58,11 +58,51 @@
       "mascotaId": 1,
       "fechaCruce": "2024-11-01",
       "fechaPartoProbable": "2025-01-03",
+      "tipoCruce": "natural",
+      "machoReproductor": "Toby",
       "cantidadCriasEsperadas": 5,
       "veterinarioSeguimiento": "Dr. Perez",
-      "estado": "en_curso",
-      "notas": "",
-      "crias": []
+      "estado": "finalizada",
+      "notas": "Seguimiento completo registrado en PetBook.",
+      "fechaPartoReal": "2025-01-03",
+      "horaParto": "03:20",
+      "tipoParto": "natural",
+      "cantidadCriasNacidas": 5,
+      "cantidadCriasVivas": 5,
+      "cantidadCriasSinVida": 0,
+      "pesoPromedioCrias": 360,
+      "complicaciones": "",
+      "veterinarioPresente": "Dr. Perez"
+    }
+  ],
+  "crias": [
+    {
+      "id": 1,
+      "gestacionId": 1,
+      "mascotaMadreId": 1,
+      "numero": 1,
+      "nombre": "Cria #1",
+      "sexo": "macho",
+      "color": "marron",
+      "pesoNacimiento": 350,
+      "fechaNacimiento": "2025-01-03",
+      "estado": "vivo",
+      "mascotaId": null,
+      "observaciones": ""
+    },
+    {
+      "id": 2,
+      "gestacionId": 1,
+      "mascotaMadreId": 1,
+      "numero": 2,
+      "nombre": "Cria #2",
+      "sexo": "hembra",
+      "color": "crema",
+      "pesoNacimiento": 360,
+      "fechaNacimiento": "2025-01-03",
+      "estado": "vivo",
+      "mascotaId": null,
+      "observaciones": ""
     }
   ],
   "consultas": [
@@ -98,6 +138,17 @@
       "tipo": "vacuna",
       "notificado": false,
       "notas": ""
+    },
+    {
+      "id": 2,
+      "mascotaId": 1,
+      "usuarioId": 1,
+      "titulo": "[CAMADA] Destete sugerido - Firulais",
+      "fecha": "2025-03-04",
+      "tipo": "gestacion",
+      "notificado": false,
+      "notas": "Seguimiento post-parto para la camada.",
+      "repetir": "no"
     }
   ]
 }

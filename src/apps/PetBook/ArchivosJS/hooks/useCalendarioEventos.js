@@ -86,7 +86,7 @@ export function useCalendarioEventos() {
           ...gestaciones
             .filter((item) => mascotaIds.has(item.mascotaId))
             .flatMap((item) =>
-              obtenerHitosGestacion(item).map((hito) => ({
+              obtenerHitosGestacion(item, mascotasPorId.get(item.mascotaId)?.especie).map((hito) => ({
                 id: `gest-${hito.id}`,
                 refId: item.id,
                 fecha: hito.fecha,

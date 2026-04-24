@@ -1,8 +1,8 @@
-# README3 — PetBook: Módulo de Calendario y Sistema de Alertas
+# SPEC-03 — PetBook: Módulo de Calendario y Sistema de Alertas
 
 ## 🎯 PROMPT PARA CLAUDE CODE — ETAPA 3
 
-> ⚠️ Esta etapa asume que README1 y README2 están completamente implementados y funcionando.
+> ⚠️ Esta etapa asume que SPEC-01 y SPEC-02 están completamente implementados y funcionando.
 
 ---
 

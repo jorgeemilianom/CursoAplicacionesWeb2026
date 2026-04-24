@@ -1,8 +1,8 @@
-# README5 — PetBook: Integración de APIs Externas Gratuitas
+# SPEC-05 — PetBook: Integración de APIs Externas Gratuitas
 
 ## 🎯 PROMPT PARA CLAUDE CODE — ETAPA 5
 
-> ⚠️ Esta etapa asume que README1 al README4 están completamente implementados y funcionando.
+> ⚠️ Esta etapa asume que SPEC-01 a SPEC-04 están completamente implementados y funcionando.
 
 ---
 
@@ -350,4 +350,4 @@ Agregar en Configuracion.jsx una sección "Notificaciones" donde el usuario acti
 
 ---
 
-> ⚠️ IMPORTANTE: El asistente de IA (Anthropic) tiene costo por uso. Si no se desea gastar en esta etapa, dejar la página AsistenteIA.jsx implementada visualmente pero con el botón de envío deshabilitado y un mensaje: "Función disponible próximamente". Esto se conecta con el README6 que muestra cómo dejar las APIs pagas preparadas para el futuro.
+> ⚠️ IMPORTANTE: El asistente de IA (Anthropic) tiene costo por uso. Si no se desea gastar en esta etapa, dejar la página AsistenteIA.jsx implementada visualmente pero con el botón de envío deshabilitado y un mensaje: "Función disponible próximamente". Esto se conecta con la SPEC-06 que muestra cómo dejar las APIs pagas preparadas para el futuro.

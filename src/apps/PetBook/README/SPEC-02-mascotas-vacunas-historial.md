@@ -1,8 +1,8 @@
-# README2 — PetBook: Módulo de Mascotas, Vacunas e Historial de Salud
+# SPEC-02 — PetBook: Módulo de Mascotas, Vacunas e Historial de Salud
 
 ## 🎯 PROMPT PARA CLAUDE CODE — ETAPA 2
 
-> ⚠️ Esta etapa asume que README1 está completamente implementado y funcionando.
+> ⚠️ Esta etapa asume que SPEC-01 está completamente implementado y funcionando.
 
 ---
 
