@@ -10,7 +10,7 @@
 
 .card-battle .menu-screen__content {
   text-align: center;
-  max-width: 500px;
+  width: min(100%, 980px);
 }
 
 .card-battle .menu-screen__title {
@@ -41,32 +41,73 @@
 .card-battle .menu-screen__rules {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid #333;
-  border-radius: 12px;
-  padding: 20px 30px;
-  margin-bottom: 40px;
+  border-radius: 18px;
+  padding: 22px 24px;
+  margin-bottom: 32px;
   text-align: left;
 }
 
 .card-battle .menu-screen__rules h3 {
-  margin: 0 0 15px;
+  margin: 0 0 18px;
   color: #ffd700;
-  font-size: 16px;
+  font-size: 20px;
 }
 
-.card-battle .menu-screen__rules ul {
+.card-battle .menu-screen__guide-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.card-battle .menu-screen__guide-card {
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: rgba(12, 18, 31, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.card-battle .menu-screen__guide-card h4,
+.card-battle .menu-screen__tips h4 {
+  margin: 0 0 10px;
+  font-size: 15px;
+  color: #fff;
+}
+
+.card-battle .menu-screen__guide-card p,
+.card-battle .menu-screen__guide-card li,
+.card-battle .menu-screen__tips li {
+  font-size: 14px;
+  color: #ccc;
+  line-height: 1.45;
+}
+
+.card-battle .menu-screen__guide-card ul,
+.card-battle .menu-screen__tips ul {
   margin: 0;
-  padding-left: 20px;
+  padding-left: 18px;
   list-style: disc;
 }
 
-.card-battle .menu-screen__rules li {
-  margin-bottom: 8px;
-  font-size: 14px;
-  color: #ccc;
+.card-battle .menu-screen__guide-card li + li,
+.card-battle .menu-screen__tips li + li {
+  margin-top: 6px;
 }
 
-.card-battle .menu-screen__rules strong {
+.card-battle .menu-screen__guide-card strong,
+.card-battle .menu-screen__tips strong {
   color: #4ecdc4;
+}
+
+.card-battle .menu-screen__guide-card p {
+  margin: 0;
+}
+
+.card-battle .menu-screen__tips {
+  margin-top: 14px;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: rgba(255, 215, 0, 0.06);
+  border: 1px solid rgba(255, 215, 0, 0.14);
 }
 
 .card-battle .menu-screen__start-btn {
@@ -96,9 +137,14 @@
   gap: 10px;
 }
 
+/* ===== FIX: height fijo para que el juego no desborde el viewport ===== */
 .card-battle__game-screen {
-  min-height: calc(100vh - 64px);
+  min-height: calc(100vh - 64px); /* cambio clave */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
   background: #0a0a1a;
+  padding: 10px 0; /* mejora visual */
 }
 
 .card-battle .result-screen {
@@ -171,6 +217,7 @@
   border: 2px solid #333;
   border-radius: 15px;
   padding: 20px 30px;
+  min-width: 180px;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -187,14 +234,28 @@
 }
 
 .card-battle .result-screen__stat-label {
-  font-size: 14px;
-  color: #888;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #f3e8c2;
+}
+
+.card-battle .result-screen__stat-caption {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #a7abc2;
 }
 
 .card-battle .result-screen__stat-value {
-  font-size: 28px;
-  font-weight: 700;
+  font-size: 2.4rem;
+  line-height: 1;
+  font-weight: 900;
   color: #fff;
+}
+
+.card-battle .result-screen__stat-max {
+  font-size: 0.88rem;
+  color: #c5c9da;
 }
 
 .card-battle .result-screen__stat-badge {
@@ -258,4 +319,33 @@
 
 .card-battle .result-screen__btn--secondary:hover {
   border-color: #fff;
+}
+
+.card-battle .battle-board__main {
+  justify-content: center;
+}
+
+.card-battle .battle-field {
+  margin: 0;
+}
+.menu-screen__input {
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: 1px solid #444;
+  background: #111;
+  color: #fff;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 250px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .card-battle .menu-screen__guide-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-battle .menu-screen__rules {
+    padding: 18px 16px;
+  }
 }

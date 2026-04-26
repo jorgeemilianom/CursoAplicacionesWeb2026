@@ -141,6 +141,14 @@ const teoria = [
     tipo: 'teoria',
     icono: '🧭',
   },
+  {
+    id: 'teoria-custom-hooks',
+    titulo: 'Custom Hooks',
+    descripcion: 'Extraé lógica reutilizable con custom hooks. useCounter, useLocalStorage, useDebounce, useFetch y buenas prácticas.',
+    etiquetas: ['React', 'Custom Hooks', 'Composición', 'Trimestre 2'],
+    tipo: 'teoria',
+    icono: '🪝',
+  },
 ]
 
 const tipoLabel = {

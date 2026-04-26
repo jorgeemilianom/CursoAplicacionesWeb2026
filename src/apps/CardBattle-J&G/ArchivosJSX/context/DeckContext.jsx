@@ -2,6 +2,32 @@ import { createContext, useState, useCallback, useContext } from 'react'
 import { cardData, shuffleDeck } from '../../ArchivosJS/cardData'
 
 const DeckContext = createContext(null)
+const REQUIRED_CARD_FIELDS = ['id', 'name', 'attack', 'defense', 'effectType', 'effectValue', 'rarity']
+
+function validateCardData(cards) {
+  const duplicateIds = cards.reduce((acc, card) => {
+    if (!card?.id) return acc
+    acc[card.id] = (acc[card.id] || 0) + 1
+    return acc
+  }, {})
+
+  const repeatedIds = Object.entries(duplicateIds)
+    .filter(([, count]) => count > 1)
+    .map(([id]) => id)
+
+  if (repeatedIds.length > 0) {
+    console.warn(`Hay cartas con id repetido: ${repeatedIds.join(', ')}`)
+  }
+
+  cards.forEach((card, index) => {
+    const missingFields = REQUIRED_CARD_FIELDS.filter((field) => card?.[field] === undefined || card?.[field] === null || card?.[field] === '')
+    if (missingFields.length > 0) {
+      console.warn(
+        `La carta en la posicion ${index} (${card?.name || card?.id || 'sin nombre'}) tiene campos faltantes: ${missingFields.join(', ')}`
+      )
+    }
+  })
+}
 
 export function DeckProvider({ children }) {
   // Mazo barajado (se genera al iniciar partida)
@@ -12,13 +38,15 @@ export function DeckProvider({ children }) {
 
   // Crear y barajar un nuevo mazo
   const createShuffledDeck = useCallback(() => {
+    validateCardData(cardData)
+
     // Duplicamos las cartas para tener un mazo más grande
-    // 4 copias de cada carta = 48 cartas total
+    // 4 copias de cada carta = total dinamico segun cardData.length
     const fullDeck = []
     for (let i = 0; i < 4; i++) {
-      fullDeck.push(...cardData.map(card => ({
+      fullDeck.push(...cardData.map((card, index) => ({
         ...card,
-        uniqueId: `${card.id}_${i}` // ID único para cada copia
+        uniqueId: `${card.id || 'card'}_${index}_${i}` // Evita colisiones si se repiten ids
       })))
     }
     const shuffled = shuffleDeck(fullDeck)
