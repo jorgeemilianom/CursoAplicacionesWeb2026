@@ -1,6 +1,6 @@
-function Card({ title, subtitle, children, actions }) {
+function Card({ title, subtitle, children, actions, className = '' }) {
   return (
-    <article className="petbook-card">
+    <article className={`petbook-card ${className}`}>
       {(title || subtitle || actions) && (
         <header className="petbook-card__header">
           <div>

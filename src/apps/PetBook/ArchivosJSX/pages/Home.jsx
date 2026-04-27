@@ -1,9 +1,26 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Button from '../components/ui/Button'
 import Card from '../components/ui/Card'
 import { PETBOOK_BASE_PATH } from '../../ArchivosJS/utils/constants'
 
 function Home() {
+  const carouselImages = [
+    new URL('../../ImgPet/PetCarrusel01.png', import.meta.url).href,
+    new URL('../../ImgPet/PetCarrusel02.png', import.meta.url).href,
+    new URL('../../ImgPet/PetCarrusel03.png', import.meta.url).href,
+    new URL('../../ImgPet/PetCarrusel04.png', import.meta.url).href,
+  ]
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((current) => (current + 1) % carouselImages.length)
+    }, 4500)
+
+    return () => clearInterval(interval)
+  }, [carouselImages.length])
+
   return (
     <div className="petbook-landing">
       {/* Hero Section */}
@@ -25,6 +42,27 @@ function Home() {
             </Link>
             <Button variant="outline" size="large">Ver demo</Button>
           </div>
+          <div className="petbook-hero__carousel">
+            {carouselImages.map((src, index) => (
+              <div
+                key={index}
+                className={`petbook-carousel__item ${index === activeIndex ? 'is-active' : ''}`}
+              >
+                <img src={src} alt={`Pet carrusel ${index + 1}`} />
+              </div>
+            ))}
+            <div className="petbook-carousel__dots">
+              {carouselImages.map((_, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  className={`petbook-carousel__dot ${index === activeIndex ? 'is-active' : ''}`}
+                  onClick={() => setActiveIndex(index)}
+                  aria-label={`Mostrar imagen ${index + 1}`}
+                />
+              ))}
+            </div>
+          </div>
         </div>
         <div className="petbook-hero__image">
           {/* Placeholder para imagen hero */}
@@ -40,37 +78,37 @@ function Home() {
         <div className="petbook-container">
           <h2>Todo lo que necesitas para cuidar mejor a tu mascota</h2>
           <div className="petbook-features__grid">
-            <Card className="petbook-feature-card">
+            <Card className="petbook-feature-card petbook-feature-card--vacunas">
               <div className="petbook-feature-card__icon">💉</div>
               <h3>Historial de vacunas</h3>
               <p>Seguimiento completo de todas las vacunas aplicadas y próximas.</p>
             </Card>
 
-            <Card className="petbook-feature-card">
+            <Card className="petbook-feature-card petbook-feature-card--calendario">
               <div className="petbook-feature-card__icon">📅</div>
               <h3>Calendario inteligente</h3>
               <p>Recordatorios automáticos de vacunas, consultas y tratamientos.</p>
             </Card>
 
-            <Card className="petbook-feature-card">
+            <Card className="petbook-feature-card petbook-feature-card--gestacion">
               <div className="petbook-feature-card__icon">🤰</div>
               <h3>Seguimiento de gestación</h3>
               <p>Línea de tiempo completa para el embarazo de tu mascota.</p>
             </Card>
 
-            <Card className="petbook-feature-card">
+            <Card className="petbook-feature-card petbook-feature-card--veterinarias">
               <div className="petbook-feature-card__icon">🗺️</div>
               <h3>Veterinarias cercanas</h3>
               <p>Encuentra clínicas veterinarias cerca de tu ubicación.</p>
             </Card>
 
-            <Card className="petbook-feature-card">
+            <Card className="petbook-feature-card petbook-feature-card--asistente">
               <div className="petbook-feature-card__icon">🤖</div>
               <h3>Asistente con IA</h3>
               <p>Consultas sobre salud, alimentación y comportamiento.</p>
             </Card>
 
-            <Card className="petbook-feature-card">
+            <Card className="petbook-feature-card petbook-feature-card--alertas">
               <div className="petbook-feature-card__icon">🔔</div>
               <h3>Alertas automáticas</h3>
               <p>Notificaciones por email y recordatorios personalizados.</p>
