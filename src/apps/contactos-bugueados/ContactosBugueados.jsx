@@ -2,7 +2,7 @@ import { memo, useState, useEffect, useMemo, useCallback } from 'react'
 import './ContactosBugueados.css'
 
 const CONTACTOS_INICIALES = [
-  { id: 1, nombre: 'Ana García',       email: 'ana@ejemplo.com',    telefono: '555-0101', favorito: false },
+  { id: 1, nombre: 'Ana García',      email: 'ana@ejemplo.com',    telefono: '555-0101', favorito: false },
   { id: 2, nombre: 'Carlos López',     email: 'carlos@ejemplo.com', telefono: '555-0102', favorito: true  },
   { id: 3, nombre: 'María Rodríguez',  email: 'maria@ejemplo.com',  telefono: '555-0103', favorito: false },
   { id: 4, nombre: 'Juan Martínez',    email: 'juan@ejemplo.com',   telefono: '555-0104', favorito: false },
@@ -57,34 +57,38 @@ export default function ContactosBugueados() {
   const [mostrarForm, setMostrarForm]   = useState(false)
   const [nuevoContacto, setNuevoContacto] = useState({ nombre: '', email: '', telefono: '' })
 
+  // FIX: Uso de setTiempoSesion funcional para evitar el "stale closure"
   useEffect(() => {
     const id = setInterval(() => {
-      setTiempoSesion(tiempoSesion + 1)
+      setTiempoSesion(prev => prev + 1)
     }, 1000)
     return () => clearInterval(id)
   }, [])
 
+  // FIX: Se agregó 'busqueda' a las dependencias para que el filtro funcione al escribir
   const contactosFiltrados = useMemo(() => {
     return contactos.filter(c =>
       c.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
       c.email.toLowerCase().includes(busqueda.toLowerCase())
     )
-  }, [contactos])
+  }, [contactos, busqueda])
 
+  // FIX: useCallback para evitar re-renders innecesarios de las tarjetas
   const handleEliminar = useCallback((id) => {
-    setContactos(contactos.filter(c => c.id !== id))
+    setContactos(prev => prev.filter(c => c.id !== id))
   }, [])
 
-  const handleToggleFavorito = (id) => {
-    const contacto = contactos.find(c => c.id === id)
-    contacto.favorito = !contacto.favorito
-    setContactos([...contactos])
-  }
+  // FIX: Se eliminó la mutación directa. Ahora creamos un objeto nuevo.
+  const handleToggleFavorito = useCallback((id) => {
+    setContactos(prev => prev.map(c =>
+      c.id === id ? { ...c, favorito: !c.favorito } : c
+    ))
+  }, [])
 
   const handleAgregar = (e) => {
     e.preventDefault()
     if (!nuevoContacto.nombre.trim() || !nuevoContacto.email.trim()) return
-    setContactos([...contactos, {
+    setContactos(prev => [...prev, {
       id: Date.now(),
       ...nuevoContacto,
       favorito: false,
@@ -159,9 +163,9 @@ export default function ContactosBugueados() {
             <p>No se encontraron contactos.</p>
           </div>
         )}
-        {contactosFiltrados.map((contacto, index) => (
+        {contactosFiltrados.map((contacto) => (
           <TarjetaContacto
-            key={index}
+            key={contacto.id} // FIX: Usar ID en lugar de index
             contacto={contacto}
             onEliminar={handleEliminar}
             onToggleFavorito={handleToggleFavorito}
