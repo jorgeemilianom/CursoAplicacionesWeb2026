@@ -1,4 +1,4 @@
-﻿import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './AppsIndex.css'
 
 /*
@@ -94,6 +94,13 @@ const apps = [
     modulo: '05',
   },
   {
+    id: 'pagina-ferreteria',
+    titulo: 'Página Ferretería',
+    descripcion: 'Landing con catálogo conectado a MockAPI, carrusel dinámico, carrito y chatbot para consultas rápidas.',
+    etiquetas: ['React', 'MockAPI', 'Fetch', 'Carrito'],
+    modulo: '05',
+  },
+  {
     id: 'react-router-demo',
     titulo: 'React Router — Navegación',
     descripcion: 'Explorador de destinos con rutas dinámicas, filtros por query string, navegación programática y página 404.',
@@ -105,7 +112,18 @@ const apps = [
     titulo: 'CardBattle-J&G',
     descripcion: 'Nuevo juego de cartas para practicar componentes, estado e interacciones dentro de una app React.',
     etiquetas: ['React', 'Juego', 'Cartas'],
-    modulo: '06',
+  },
+  {
+    id: 'custom-hooks',
+    titulo: 'Custom Hooks',
+    descripcion: 'Probá cuatro hooks en vivo: useCounter, useLocalStorage, useDebounce y useFetch. Cada uno muestra el código del hook junto al demo interactivo.',
+    etiquetas: ['Custom Hooks', 'useEffect', 'Composición', 'Buenas prácticas'],
+  },
+  {
+    id: 'contactos-bugueados',
+    titulo: 'Gestor de Contactos — Bugueado',
+    descripcion: 'Esta app tiene errores intencionales de React Avanzado. Encontrá qué está mal y corregí el código.',
+    etiquetas: ['useEffect', 'useMemo', 'useCallback', 'memo', 'Bugs'],
   },
   {
     id: 'gabyapps',
@@ -161,4 +179,3 @@ function AppsIndex() {
 }
 
 export default AppsIndex
-

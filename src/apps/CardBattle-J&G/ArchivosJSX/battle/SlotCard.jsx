@@ -8,8 +8,9 @@ import './Battle.css'
  * @param {string} playerId - 'player1' | 'player2'
  * @param {function} onClick - Callback al hacer click
  * @param {boolean} isActive - Si el slot está activo
+ * @param {boolean} compact - Modo compacto para la banda horizontal
  */
-function SlotCard({ card, playerId, onClick, onDropCard, isActive = false, canDrop = false }) {
+function SlotCard({ card, playerId, onClick, onDropCard, isActive = false, canDrop = false, compact = false }) {
   const [isDragOver, setIsDragOver] = useState(false)
 
   const handleDragOver = (event) => {
@@ -39,16 +40,18 @@ function SlotCard({ card, playerId, onClick, onDropCard, isActive = false, canDr
     }
   }
 
+  const className = `slot-card ${card ? 'slot-card--filled' : 'slot-card--empty'} ${isActive ? 'slot-card--active' : ''} ${isDragOver ? 'slot-card--drag-over' : ''} ${compact ? 'slot-card--compact' : ''}`.trim()
+
   return (
     <div
-      className={`slot-card ${card ? 'slot-card--filled' : 'slot-card--empty'} ${isActive ? 'slot-card--active' : ''} ${isDragOver ? 'slot-card--drag-over' : ''}`}
+      className={className}
       onClick={onClick}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
       {card ? (
-        <Card card={card} size="large" clickable={false} />
+        <Card card={card} size={compact ? 'slot' : 'large'} clickable={false} />
       ) : (
         <div className="slot-card__placeholder">
           <span className="slot-card__icon">+</span>

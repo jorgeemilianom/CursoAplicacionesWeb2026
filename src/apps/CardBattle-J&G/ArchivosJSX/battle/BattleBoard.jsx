@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import useCardGame from '../../ArchivosJS/useCardGame'
-import PlayerZone from './PlayerZone'
 import BattleField from './BattleField'
+import PlayerHand from '../hand/PlayerHand'
 import DeckPile from '../hand/DeckPile'
 import GameLog from '../hud/GameLog'
 import TurnIndicator from '../hud/TurnIndicator'
@@ -10,13 +10,14 @@ import './Battle.css'
 
 function BattleBoard() {
   const {
-    player1HP, player2HP, currentTurn, turnPhase,
+    player1HP, player2HP, player1Name, player2Name, currentTurn, turnPhase,
     player1Hand, player2Hand, fieldCards, battleLog,
     remainingDeck, activeEffect, player1Shield, player2Shield,
     canDraw, canResolve, addLog, handleDrawCard, handlePlayCard, handleResolveCombat
   } = useCardGame()
 
   const [selectedCard, setSelectedCard] = useState(null)
+  const battleFieldRef = useRef(null)
   const playerPatternRef = useRef({
     byEffect: {
       damage: 0,
@@ -202,6 +203,15 @@ function BattleBoard() {
       : null
     const success = handlePlayCard(targetCardId, playerId)
     if (success) {
+      const battleFieldElement = battleFieldRef.current
+      if (battleFieldElement) {
+        const top = battleFieldElement.getBoundingClientRect().top + window.scrollY - 24
+        window.scrollTo({
+          top: Math.max(0, top),
+          behavior: 'smooth'
+        })
+      }
+
       if (playedCard) {
         registerPlayerPattern(playedCard)
       }
@@ -248,42 +258,49 @@ function BattleBoard() {
       <EffectNotification effect={activeEffect} />
 
       <div className="battle-board__sidebar">
-        <TurnIndicator currentTurn={currentTurn} turnPhase={turnPhase} />
+        <TurnIndicator
+          currentTurn={currentTurn}
+          turnPhase={turnPhase}
+          player1Name={player1Name}
+          player2Name={player2Name}
+        />
         <DeckPile count={remainingDeck.length} onClick={canDraw ? handleDrawCard : undefined} />
         <GameLog logs={battleLog} />
       </div>
 
       <div className="battle-board__main">
-        <PlayerZone
-          playerId="player2"
-          player={player2Data}
-          isCurrentTurn={currentTurn === 'player2'}
-          selectedCardId={selectedCard?.ownerId === 'player2' ? selectedCard.card.uniqueId : null}
-          canPlay={false}
-          showHand={false}
-          onCardSelect={(card) => handleCardSelect(card, 'player2')}
-          onCardDragStart={(card) => handleCardDragStart(card, 'player2')}
-          onPlayCard={(cardUniqueId) => handleCardPlayFromButton('player2', cardUniqueId)}
-        />
+        {/* BANDA DE BATALLA: Stats + Slots integrados */}
+        <div ref={battleFieldRef}>
+          <BattleField
+            player1Card={fieldCards.player1}
+            player2Card={fieldCards.player2}
+            player1Data={player1Data}
+            player2Data={player2Data}
+            player1Name={player1Name}
+            player2Name={player2Name}
+            player1Active={currentTurn === 'player1'}
+            player2Active={currentTurn === 'player2'}
+            canResolve={canResolve}
+            onResolve={handleResolveCombat}
+            onSlotClick={handleSlotClick}
+            onSlotDrop={handleSlotDrop}
+            canPlayP1={currentTurn === 'player1' && turnPhase === 'play' && !fieldCards.player1}
+            canPlayP2={false}
+          />
+        </div>
 
-        <BattleField
-          player1Card={fieldCards.player1}
-          player2Card={fieldCards.player2}
-          canResolve={canResolve}
-          onResolve={handleResolveCombat}
-        />
-
-        <PlayerZone
-          playerId="player1"
-          player={player1Data}
-          isCurrentTurn={currentTurn === 'player1'}
-          selectedCardId={selectedCard?.ownerId === 'player1' ? selectedCard.card.uniqueId : null}
-          canPlay={currentTurn === 'player1' && turnPhase === 'play' && !fieldCards.player1}
-          showHand
-          onCardSelect={(card) => handleCardSelect(card, 'player1')}
-          onCardDragStart={(card) => handleCardDragStart(card, 'player1')}
-          onPlayCard={(cardUniqueId) => handleCardPlayFromButton('player1', cardUniqueId)}
-        />
+        {/* MANO DEL JUGADOR (debajo de la banda) */}
+        <div className="battle-board__hand">
+          <PlayerHand
+            hand={player1Hand}
+            playerId="player1"
+            onCardClick={(card) => handleCardSelect(card, 'player1')}
+            onCardDragStart={(card) => handleCardDragStart(card, 'player1')}
+            onPlayCard={(cardUniqueId) => handleCardPlayFromButton('player1', cardUniqueId)}
+            selectedCardId={selectedCard?.ownerId === 'player1' ? selectedCard.card.uniqueId : null}
+            canPlay={currentTurn === 'player1' && turnPhase === 'play' && !fieldCards.player1}
+          />
+        </div>
       </div>
     </div>
   )

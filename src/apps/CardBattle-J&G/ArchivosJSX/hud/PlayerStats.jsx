@@ -1,37 +1,40 @@
 import HealthBar from './HealthBar'
 import './HUD.css'
 
-/**
- * PlayerStats - Panel de estadísticas de un jugador
- * @param {string} playerName - Nombre del jugador
- * @param {number} hp - Puntos de vida
- * @param {number} shield - Puntos de escudo
- * @param {number} handCount - Cantidad de cartas en mano
- * @param {boolean} isCurrentTurn - Si es su turno
- */
-function PlayerStats({ playerName, hp, shield = 0, handCount = 0, isCurrentTurn = false }) {
+function PlayerStats({
+  playerName,
+  hp,
+  shield = 0,
+  handCount = 0,
+  isCurrentTurn = false,
+  compact = false
+}) {
+  const className = `player-stats ${isCurrentTurn ? 'player-stats--active' : ''} ${compact ? 'player-stats--compact' : ''}`.trim()
   const turnLabel = playerName === 'Jugador 1' ? 'TU TURNO' : 'EN TURNO'
 
   return (
-    <div className={`player-stats ${isCurrentTurn ? 'player-stats--active' : ''}`}>
+    <div className={className}>
       <div className="player-stats__header">
         <span className="player-stats__name">{playerName}</span>
-        {isCurrentTurn && <span className="player-stats__turn-badge">{turnLabel}</span>}
+        {isCurrentTurn && !compact && <span className="player-stats__turn-badge">{turnLabel}</span>}
       </div>
 
-      <HealthBar current={hp} max={20} />
+      <HealthBar current={hp} max={20} compact={compact} />
 
       <div className="player-stats__extras">
         {shield > 0 && (
           <div className="player-stats__shield">
-            <span className="player-stats__shield-icon">🛡️</span>
+            <span className="player-stats__shield-icon">S</span>
             <span className="player-stats__shield-value">{shield}</span>
           </div>
         )}
-        <div className="player-stats__hand">
-          <span className="player-stats__hand-icon">🃏</span>
-          <span className="player-stats__hand-value">{handCount}</span>
-        </div>
+
+        {!compact && (
+          <div className="player-stats__hand">
+            <span className="player-stats__hand-icon">H</span>
+            <span className="player-stats__hand-value">{handCount}</span>
+          </div>
+        )}
       </div>
     </div>
   )

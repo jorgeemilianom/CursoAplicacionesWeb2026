@@ -1,28 +1,40 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useGame } from '../context/GameContext'
-import { useBattle } from '../context/BattleContext'
 import BattleBoard from '../battle/BattleBoard'
 import './Screens.css'
 
-/**
- * GameScreen - Pantalla principal donde se juega la batalla
- */
 function GameScreen() {
-  const { player1HP, player2HP, endGame } = useGame()
-  const { resetBattle } = useBattle()
+  const { player1HP, player2HP, endGame, gameStatus } = useGame()
+
+  const gameEndedRef = useRef(false)
 
   useEffect(() => {
-    if (player1HP <= 0 && player2HP <= 0) {
-      endGame('draw')
-      resetBattle()
-    } else if (player1HP <= 0) {
+    // 🚫 si no estamos jugando, no hacer nada
+    if (gameStatus !== 'playing') return
+
+    // 🚫 evitar múltiples ejecuciones
+    if (gameEndedRef.current) return
+
+    // 🟢 condiciones reales
+    if (player1HP <= 0 && player2HP > 0) {
+      gameEndedRef.current = true
       endGame('player2')
-      resetBattle()
-    } else if (player2HP <= 0) {
-      endGame('player1')
-      resetBattle()
+      return
     }
-  }, [player1HP, player2HP, endGame, resetBattle])
+
+    if (player2HP <= 0 && player1HP > 0) {
+      gameEndedRef.current = true
+      endGame('player1')
+      return
+    }
+
+    if (player1HP <= 0 && player2HP <= 0) {
+      gameEndedRef.current = true
+      endGame('draw')
+      return
+    }
+
+  }, [player1HP, player2HP, gameStatus, endGame])
 
   return (
     <div className="card-battle__game-screen">

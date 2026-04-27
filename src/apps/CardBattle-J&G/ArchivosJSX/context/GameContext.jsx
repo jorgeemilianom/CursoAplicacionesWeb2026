@@ -5,6 +5,8 @@ const GameContext = createContext(null)
 export function GameProvider({ children }) {
   const [player1HP, setPlayer1HP] = useState(20)
   const [player2HP, setPlayer2HP] = useState(20)
+  const [player1Name, setPlayer1Name] = useState('Jugador 1')
+  const [player2Name] = useState('Jugador 2')
   const [currentTurn, setCurrentTurn] = useState('player1')
   const [gameStatus, setGameStatus] = useState('menu')
   const [turnPhase, setTurnPhase] = useState('draw')
@@ -31,9 +33,10 @@ export function GameProvider({ children }) {
     setTurnPhase('draw')
   }, [])
 
-  const startGame = useCallback(() => {
+  const startGame = useCallback((nextPlayer1Name) => {
     setPlayer1HP(20)
     setPlayer2HP(20)
+    setPlayer1Name(nextPlayer1Name?.trim() || 'Jugador 1')
     setCurrentTurn('player1')
     setGameStatus('playing')
     setTurnPhase('draw')
@@ -58,6 +61,8 @@ export function GameProvider({ children }) {
   const value = {
     player1HP,
     player2HP,
+    player1Name,
+    player2Name,
     currentTurn,
     gameStatus,
     turnPhase,
@@ -68,7 +73,8 @@ export function GameProvider({ children }) {
     setTurnPhase,
     startGame,
     endGame,
-    resetGame
+    resetGame,
+    setPlayer1Name
   }
 
   return (

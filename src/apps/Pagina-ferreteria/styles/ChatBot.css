@@ -1,0 +1,209 @@
+.ferreteria-chatbot {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1200;
+}
+
+.ferreteria-chatbot__toggle {
+  width: 64px;
+  height: 64px;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f59e0b 0%, #fb923c 100%);
+  box-shadow: 0 18px 35px rgba(245, 158, 11, 0.35);
+  color: #111827;
+  cursor: pointer;
+  font-size: 26px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ferreteria-chatbot__toggle:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 22px 40px rgba(245, 158, 11, 0.42);
+}
+
+.ferreteria-chatbot__window {
+  width: 360px;
+  height: 540px;
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at top left, rgba(251, 191, 36, 0.18), transparent 32%),
+    linear-gradient(180deg, #fffdf8 0%, #ffffff 100%);
+  box-shadow: 0 28px 55px rgba(15, 23, 42, 0.18);
+  backdrop-filter: blur(8px);
+}
+
+.ferreteria-chatbot__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 18px 16px;
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  color: #f9fafb;
+}
+
+.ferreteria-chatbot__header-content {
+  min-width: 0;
+}
+
+.ferreteria-chatbot__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(245, 158, 11, 0.18);
+  color: #fcd34d;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.ferreteria-chatbot__title {
+  margin: 10px 0 4px;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.ferreteria-chatbot__subtitle {
+  margin: 0;
+  color: rgba(249, 250, 251, 0.74);
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.ferreteria-chatbot__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: #f9fafb;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.ferreteria-chatbot__close:hover {
+  background: rgba(255, 255, 255, 0.16);
+  transform: rotate(90deg);
+}
+
+.ferreteria-chatbot__messages {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px;
+  overflow-y: auto;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 248, 235, 0.9)),
+    repeating-linear-gradient(
+      180deg,
+      transparent 0,
+      transparent 27px,
+      rgba(148, 163, 184, 0.05) 28px
+    );
+}
+
+.ferreteria-chatbot__message {
+  display: flex;
+}
+
+.ferreteria-chatbot__message--bot {
+  justify-content: flex-start;
+}
+
+.ferreteria-chatbot__message--user {
+  justify-content: flex-end;
+}
+
+.ferreteria-chatbot__message-text {
+  max-width: 82%;
+  padding: 12px 14px;
+  border-radius: 18px;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+}
+
+.ferreteria-chatbot__message--bot .ferreteria-chatbot__message-text {
+  background: #ffffff;
+  color: #1f2937;
+  border-top-left-radius: 6px;
+}
+
+.ferreteria-chatbot__message--user .ferreteria-chatbot__message-text {
+  background: linear-gradient(135deg, #f59e0b 0%, #fb923c 100%);
+  color: #111827;
+  border-top-right-radius: 6px;
+  font-weight: 600;
+}
+
+.ferreteria-chatbot__composer {
+  display: flex;
+  gap: 10px;
+  padding: 14px;
+  border-top: 1px solid rgba(226, 232, 240, 0.9);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.ferreteria-chatbot__field {
+  flex: 1;
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 14px;
+  background: #f8fafc;
+  color: #111827;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.ferreteria-chatbot__field:focus {
+  border-color: #f59e0b;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.16);
+}
+
+.ferreteria-chatbot__send {
+  padding: 0 18px;
+  border: none;
+  border-radius: 14px;
+  background: #111827;
+  color: #f9fafb;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.ferreteria-chatbot__send:hover {
+  background: #1f2937;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 480px) {
+  .ferreteria-chatbot {
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+  }
+
+  .ferreteria-chatbot__window {
+    width: 100%;
+    height: min(70vh, 520px);
+  }
+
+  .ferreteria-chatbot__toggle {
+    margin-left: auto;
+  }
+}

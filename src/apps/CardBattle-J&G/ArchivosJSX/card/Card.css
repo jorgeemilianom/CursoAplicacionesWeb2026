@@ -1,4 +1,4 @@
-/* --- Estructura Base (Tu diseño original) --- */
+/* --- Estructura Base (Tu diseño original) coiado --- */
 .card-battle .card-view {
   display: inline-block;
 }
@@ -21,6 +21,11 @@
 .card-battle .card--small {
   --card-width: 80px;
   --card-height: 120px;
+}
+
+.card-battle .card--slot {
+  --card-width: 138px;
+  --card-height: 200px;
 }
 
 .card-battle .card--large {
@@ -167,16 +172,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 9px;
   margin-bottom: 8px;
-  padding: 28px 8px 10px;
+  padding: 18px 4px 8px;
   background:
     radial-gradient(circle at 50% 28%, rgba(255, 216, 136, 0.2), transparent 32%),
     linear-gradient(180deg, rgba(132, 88, 45, 0.34), rgba(81, 54, 34, 0.62) 22%, rgba(17, 19, 28, 0.82));
   border: 2px solid rgba(204, 155, 83, 0.42);
   position: relative;
   z-index: 1;
+  overflow: hidden;
+}
+
+.card-front__image--with-art {
+  justify-content: space-between;
 }
 
 .card-front__image::before {
@@ -349,6 +359,87 @@
 .card-battle .card--medium .card-front__footer-type,
 .card-battle .card--medium .card-front__stats-inline {
   padding: 2px 4px;
+}
+
+/* ===== SLOT SIZE (para banda horizontal) ===== */
+.card-battle .card--slot .card-front {
+  padding: 6px;
+  border-width: 2px;
+  border-radius: 12px;
+}
+
+.card-battle .card--slot .card-front__frame {
+  inset: 4px;
+  border-radius: 10px;
+}
+
+.card-battle .card--slot .card-front__header {
+  margin-bottom: 4px;
+}
+
+.card-battle .card--slot .card-front__name {
+  padding: 3px 5px;
+  font-size: 0.58rem;
+}
+
+.card-battle .card--slot .card-front__rarity {
+  width: 18px;
+  height: 18px;
+  font-size: 10px;
+}
+
+.card-battle .card--slot .card-front__image {
+  margin-bottom: 4px;
+  padding: 16px 4px 6px;
+  gap: 4px;
+  border-width: 1px;
+}
+
+.card-battle .card--slot .card-front__element-chip {
+  top: 4px;
+  left: 4px;
+  padding: 1px 4px;
+  font-size: 0.4rem;
+}
+
+.card-battle .card--slot .card-front__image-badge {
+  width: 36px;
+  height: 36px;
+  font-size: 1.4rem;
+}
+
+.card-battle .card--slot .card-front__effect-line {
+  padding: 3px 4px;
+  gap: 4px;
+}
+
+.card-battle .card--slot .card-front__effect-label {
+  font-size: 0.42rem;
+}
+
+.card-battle .card--slot .card-front__effect-value {
+  font-size: 0.56rem;
+}
+
+.card-battle .card--slot .card-front__description {
+  min-height: 2em;
+  padding: 3px 4px;
+  font-size: 0.42rem;
+  line-height: 1.1;
+  -webkit-line-clamp: 2;
+}
+
+.card-battle .card--slot .card-front__stats-line {
+  margin-top: 3px;
+  gap: 2px;
+  font-size: 0.34rem;
+  letter-spacing: 0.02em;
+}
+
+.card-battle .card--slot .card-front__footer-rarity,
+.card-battle .card--slot .card-front__footer-type,
+.card-battle .card--slot .card-front__stats-inline {
+  padding: 1px 3px;
 }
 
 .card-battle .card--small .card-front {
@@ -670,4 +761,17 @@
   background:
     radial-gradient(circle at 50% 25%, rgba(255, 158, 245, 0.24), transparent 32%),
     linear-gradient(180deg, rgba(154, 42, 131, 0.3), rgba(83, 19, 74, 0.6) 22%, rgba(20, 8, 19, 0.88));
+}
+.card-front__img {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  max-height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 8px;
+  margin: 0;
+  display: block;
+  position: relative;
+  z-index: 1;
 }
