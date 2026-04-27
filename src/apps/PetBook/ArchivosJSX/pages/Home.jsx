@@ -1,35 +1,42 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Button from '../components/ui/Button'
-import Card from '../components/ui/Card'
 import { PETBOOK_BASE_PATH } from '../../ArchivosJS/utils/constants'
+import img1 from '../../ImgPet/PetCarrusel01.png'
+import img2 from '../../ImgPet/PetCarrusel02.png'
+import img3 from '../../ImgPet/PetCarrusel03.png'
+import img4 from '../../ImgPet/PetCarrusel04.png'
+import imgVacunas from '../../ImgPet/PetCuidar01.png'
+import imgCalendario from '../../ImgPet/PetCuidar02.png'
+import imgGestacion from '../../ImgPet/PetCuidar03.png'
+import imgVeterinarias from '../../ImgPet/PetCuidar04.png'
+import imgAsistente from '../../ImgPet/PetCuidar05.png'
+import imgAlertas from '../../ImgPet/PetCuidar06.png'
 
 function Home() {
-  const carouselImages = [
-    new URL('../../ImgPet/PetCarrusel01.png', import.meta.url).href,
-    new URL('../../ImgPet/PetCarrusel02.png', import.meta.url).href,
-    new URL('../../ImgPet/PetCarrusel03.png', import.meta.url).href,
-    new URL('../../ImgPet/PetCarrusel04.png', import.meta.url).href,
-  ]
-  const [activeIndex, setActiveIndex] = useState(0)
+  const imagenes = [img1, img2, img3, img4]
+  const [indiceActivo, setIndiceActivo] = useState(0)
+  const [fadeIn, setFadeIn] = useState(true)
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((current) => (current + 1) % carouselImages.length)
-    }, 4500)
-
-    return () => clearInterval(interval)
-  }, [carouselImages.length])
+    const intervalo = setInterval(() => {
+      setFadeIn(false)
+      setTimeout(() => {
+        setIndiceActivo((prev) => (prev + 1) % imagenes.length)
+        setFadeIn(true)
+      }, 600)
+    }, 5000)
+    return () => clearInterval(intervalo)
+  }, [])
 
   return (
     <div className="petbook-landing">
       {/* Hero Section */}
-      <section className="petbook-hero">
-        <div className="petbook-hero__content">
-          <div className="petbook-hero__logo">
-            <span className="petbook-hero__emoji">🐾</span>
-            <h1 className="petbook-hero__title">PetBook</h1>
-          </div>
+      <section className="hero-section">
+        <div className="hero-card-oscura">
+          <h1 className="hero-titulo">
+            <span className="hero-titulo-icono">🐾</span> PetBook
+          </h1>
           <h2 className="petbook-hero__tagline">
             La salud de tu mascota, siempre organizada
           </h2>
@@ -40,167 +47,142 @@ function Home() {
             <Link to={`${PETBOOK_BASE_PATH}/registro`}>
               <Button size="large">Crear cuenta gratis</Button>
             </Link>
-            <Button variant="outline" size="large">Ver demo</Button>
-          </div>
-          <div className="petbook-hero__carousel">
-            {carouselImages.map((src, index) => (
-              <div
-                key={index}
-                className={`petbook-carousel__item ${index === activeIndex ? 'is-active' : ''}`}
-              >
-                <img src={src} alt={`Pet carrusel ${index + 1}`} />
-              </div>
-            ))}
-            <div className="petbook-carousel__dots">
-              {carouselImages.map((_, index) => (
-                <button
-                  key={index}
-                  type="button"
-                  className={`petbook-carousel__dot ${index === activeIndex ? 'is-active' : ''}`}
-                  onClick={() => setActiveIndex(index)}
-                  aria-label={`Mostrar imagen ${index + 1}`}
-                />
-              ))}
-            </div>
+            <Link to={`${PETBOOK_BASE_PATH}/login`}>
+              <Button variant="outline" size="large">Ver demo</Button>
+            </Link>
           </div>
         </div>
-        <div className="petbook-hero__image">
-          {/* Placeholder para imagen hero */}
-          <div className="petbook-hero__placeholder">
-            <span>🐕‍🦺</span>
-            <p>Ilustración de mascota con dueño feliz</p>
-          </div>
+
+        <div className="carrusel-wrapper">
+          <img
+            src={imagenes[indiceActivo]}
+            alt={`Slide ${indiceActivo + 1}`}
+            className={`carrusel-imagen ${fadeIn ? 'visible' : 'oculta'}`}
+          />
+        </div>
+
+        <div className="carrusel-indicadores">
+          {imagenes.map((_, i) => (
+            <button
+              key={i}
+              className={`indicador ${i === indiceActivo ? 'activo' : ''}`}
+              onClick={() => {
+                setFadeIn(false)
+                setTimeout(() => {
+                  setIndiceActivo(i)
+                  setFadeIn(true)
+                }, 300)
+              }}
+              aria-label={`Ir a imagen ${i + 1}`}
+            />
+          ))}
+        </div>
+
+        <div className="hero-ola">
+          <svg
+            viewBox="0 0 1440 80"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z"
+              fill="#ffffff"
+            />
+          </svg>
         </div>
       </section>
 
       {/* Features Section */}
       <section className="petbook-features">
         <div className="petbook-container">
-          <h2>Todo lo que necesitas para cuidar mejor a tu mascota</h2>
+          <h3 className="petbook-features__title">Todo lo que necesitas para cuidar mejor a tu mascota</h3>
           <div className="petbook-features__grid">
-            <Card className="petbook-feature-card petbook-feature-card--vacunas">
-              <div className="petbook-feature-card__icon">💉</div>
-              <h3>Historial de vacunas</h3>
-              <p>Seguimiento completo de todas las vacunas aplicadas y próximas.</p>
-            </Card>
+            <div
+              className="feature-card"
+              style={{ backgroundImage: `url(${imgVacunas})` }}
+            >
+              <div className="feature-card-overlay">
+                <span className="feature-card-icono">💉</span>
+                <h3 className="feature-card-titulo">Historial de vacunas</h3>
+                <p className="feature-card-descripcion">
+                  Seguimiento completo de todas las vacunas
+                  aplicadas y próximas.
+                </p>
+              </div>
+            </div>
 
-            <Card className="petbook-feature-card petbook-feature-card--calendario">
-              <div className="petbook-feature-card__icon">📅</div>
-              <h3>Calendario inteligente</h3>
-              <p>Recordatorios automáticos de vacunas, consultas y tratamientos.</p>
-            </Card>
+            <div
+              className="feature-card"
+              style={{ backgroundImage: `url(${imgCalendario})` }}
+            >
+              <div className="feature-card-overlay">
+                <span className="feature-card-icono">📅</span>
+                <h3 className="feature-card-titulo">Calendario inteligente</h3>
+                <p className="feature-card-descripcion">
+                  Recordatorios automáticos de vacunas,
+                  consultas y tratamientos.
+                </p>
+              </div>
+            </div>
 
-            <Card className="petbook-feature-card petbook-feature-card--gestacion">
-              <div className="petbook-feature-card__icon">🤰</div>
-              <h3>Seguimiento de gestación</h3>
-              <p>Línea de tiempo completa para el embarazo de tu mascota.</p>
-            </Card>
+            <div
+              className="feature-card"
+              style={{ backgroundImage: `url(${imgGestacion})` }}
+            >
+              <div className="feature-card-overlay">
+                <span className="feature-card-icono">🤰</span>
+                <h3 className="feature-card-titulo">Seguimiento de gestación</h3>
+                <p className="feature-card-descripcion">
+                  Línea de tiempo completa para el
+                  embarazo de tu mascota.
+                </p>
+              </div>
+            </div>
 
-            <Card className="petbook-feature-card petbook-feature-card--veterinarias">
-              <div className="petbook-feature-card__icon">🗺️</div>
-              <h3>Veterinarias cercanas</h3>
-              <p>Encuentra clínicas veterinarias cerca de tu ubicación.</p>
-            </Card>
+            <div
+              className="feature-card"
+              style={{ backgroundImage: `url(${imgVeterinarias})` }}
+            >
+              <div className="feature-card-overlay">
+                <span className="feature-card-icono">🗺️</span>
+                <h3 className="feature-card-titulo">Veterinarias cercanas</h3>
+                <p className="feature-card-descripcion">
+                  Encuentra clínicas veterinarias
+                  cerca de tu ubicación.
+                </p>
+              </div>
+            </div>
 
-            <Card className="petbook-feature-card petbook-feature-card--asistente">
-              <div className="petbook-feature-card__icon">🤖</div>
-              <h3>Asistente con IA</h3>
-              <p>Consultas sobre salud, alimentación y comportamiento.</p>
-            </Card>
+            <div
+              className="feature-card"
+              style={{ backgroundImage: `url(${imgAsistente})` }}
+            >
+              <div className="feature-card-overlay">
+                <span className="feature-card-icono">🤖</span>
+                <h3 className="feature-card-titulo">Asistente con IA</h3>
+                <p className="feature-card-descripcion">
+                  Consultas sobre salud, alimentación
+                  y comportamiento.
+                </p>
+              </div>
+            </div>
 
-            <Card className="petbook-feature-card petbook-feature-card--alertas">
-              <div className="petbook-feature-card__icon">🔔</div>
-              <h3>Alertas automáticas</h3>
-              <p>Notificaciones por email y recordatorios personalizados.</p>
-            </Card>
+            <div
+              className="feature-card"
+              style={{ backgroundImage: `url(${imgAlertas})` }}
+            >
+              <div className="feature-card-overlay">
+                <span className="feature-card-icono">🔔</span>
+                <h3 className="feature-card-titulo">Alertas automáticas</h3>
+                <p className="feature-card-descripcion">
+                  Notificaciones por email y
+                  recordatorios personalizados.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
-
-      {/* How it works */}
-      <section className="petbook-how-it-works">
-        <div className="petbook-container">
-          <h2>¿Cómo funciona?</h2>
-          <div className="petbook-steps">
-            <div className="petbook-step">
-              <div className="petbook-step__number">1</div>
-              <h3>Registra a tu mascota</h3>
-              <p>Crea el perfil de tu compañero con toda su información básica.</p>
-            </div>
-
-            <div className="petbook-step">
-              <div className="petbook-step__number">2</div>
-              <h3>Carga su historial de salud</h3>
-              <p>Agrega vacunas, consultas veterinarias y tratamientos previos.</p>
-            </div>
-
-            <div className="petbook-step">
-              <div className="petbook-step__number">3</div>
-              <h3>Recibe alertas automáticas</h3>
-              <p>PetBook te avisa cuando llegue el momento de vacunar o consultar.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="petbook-cta">
-        <div className="petbook-container">
-          <h2>¿Listo para cuidar mejor a tu mascota?</h2>
-          <p>Únete a miles de dueños que ya confían en PetBook para la salud de sus compañeros.</p>
-          <Link to={`${PETBOOK_BASE_PATH}/registro`}>
-            <Button size="large">Comenzar gratis</Button>
-          </Link>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="petbook-footer">
-        <div className="petbook-container">
-          <div className="petbook-footer__content">
-            <div className="petbook-footer__brand">
-              <span className="petbook-footer__logo">🐾 PetBook</span>
-              <p>La agenda digital de salud para mascotas</p>
-            </div>
-
-            <div className="petbook-footer__links">
-              <div className="petbook-footer__section">
-                <h4>Producto</h4>
-                <a href="#features">Funciones</a>
-                <a href="#pricing">Precios</a>
-                <a href="#demo">Demo</a>
-              </div>
-
-              <div className="petbook-footer__section">
-                <h4>Soporte</h4>
-                <a href="#help">Ayuda</a>
-                <a href="#contact">Contacto</a>
-                <a href="#faq">Preguntas frecuentes</a>
-              </div>
-
-              <div className="petbook-footer__section">
-                <h4>Legal</h4>
-                <a href="#privacy">Privacidad</a>
-                <a href="#terms">Términos</a>
-                <a href="#cookies">Cookies</a>
-              </div>
-            </div>
-
-            <div className="petbook-footer__social">
-              <h4>Síguenos</h4>
-              <div className="petbook-footer__social-links">
-                <a href="#facebook">📘 Facebook</a>
-                <a href="#instagram">📷 Instagram</a>
-                <a href="#twitter">🐦 Twitter</a>
-              </div>
-            </div>
-          </div>
-
-          <div className="petbook-footer__bottom">
-            <p>&copy; 2024 PetBook. Todos los derechos reservados.</p>
-          </div>
-        </div>
-      </footer>
     </div>
   )
 }
