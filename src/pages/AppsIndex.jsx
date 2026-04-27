@@ -125,6 +125,13 @@ const apps = [
     descripcion: 'Esta app tiene errores intencionales de React Avanzado. Encontrá qué está mal y corregí el código.',
     etiquetas: ['useEffect', 'useMemo', 'useCallback', 'memo', 'Bugs'],
   },
+  {
+    id: 'gabyapps',
+    titulo: 'GabyApps',
+    descripcion: 'Coleccion de apps personales con nuevas ideas y proyectos propios para expandir el laboratorio del curso.',
+    etiquetas: ['React', 'Proyectos', 'Portfolio'],
+    modulo: '06',
+  },
 ]
 
 function AppsIndex() {

@@ -10,12 +10,13 @@ function PlayerStats({
   compact = false
 }) {
   const className = `player-stats ${isCurrentTurn ? 'player-stats--active' : ''} ${compact ? 'player-stats--compact' : ''}`.trim()
+  const turnLabel = playerName === 'Jugador 1' ? 'TU TURNO' : 'EN TURNO'
 
   return (
     <div className={className}>
       <div className="player-stats__header">
         <span className="player-stats__name">{playerName}</span>
-        {isCurrentTurn && !compact && <span className="player-stats__turn-badge">TU TURNO</span>}
+        {isCurrentTurn && !compact && <span className="player-stats__turn-badge">{turnLabel}</span>}
       </div>
 
       <HealthBar current={hp} max={20} compact={compact} />

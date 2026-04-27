@@ -1,7 +1,7 @@
 .card-battle .health-bar {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   width: 100%;
 }
 
@@ -14,7 +14,7 @@
 
 .card-battle .health-bar__container {
   flex: 1;
-  height: 20px;
+  height: 16px;
   background: #1a1a2a;
   border-radius: 10px;
   overflow: hidden;
@@ -29,7 +29,7 @@
 }
 
 .card-battle .health-bar__value {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   color: #fff;
   min-width: 40px;
@@ -40,7 +40,7 @@
   background: linear-gradient(145deg, #2a2a3a, #1a1a2a);
   border: 2px solid #333;
   border-radius: 12px;
-  padding: 15px;
+  padding: 12px;
   transition: all 0.3s ease;
 }
 
@@ -53,11 +53,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .card-battle .player-stats__name {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
   color: #fff;
 }
@@ -144,9 +144,9 @@
 .card-battle .player-stats__turn-badge {
   background: linear-gradient(135deg, #ffd700, #ffaa00);
   color: #000;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
-  padding: 4px 8px;
+  padding: 3px 7px;
   border-radius: 4px;
   animation: turnPulse 1s ease-in-out infinite;
 }
@@ -163,9 +163,12 @@
 
 .card-battle .player-stats__extras {
   display: flex;
-  gap: 15px;
-  margin-top: 10px;
-  padding-top: 10px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+  padding-top: 8px;
   border-top: 1px solid #333;
 }
 
@@ -174,8 +177,9 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 14px;
+  font-size: 13px;
   color: #fff;
+  min-width: 0;
 }
 
 .card-battle .player-stats__shield-icon,
@@ -192,17 +196,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   width: 100%;
-  max-width: 250px;
-  padding: 10px 16px;
+  max-width: 220px;
+  padding: 8px 12px;
   background: linear-gradient(135deg, #2a2a3a, #1a1a2a);
-  border-radius: 25px;
+  border-radius: 20px;
   border: 2px solid #444;
 }
 
 .card-battle .turn-indicator__arrow {
-  font-size: 20px;
+  font-size: 18px;
   transition: transform 0.3s ease;
 }
 
@@ -216,7 +220,7 @@
 }
 
 .card-battle .turn-indicator__text {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   color: #fff;
   text-align: center;
@@ -227,16 +231,16 @@
   border: 2px solid #333;
   border-radius: 12px;
   width: 100%;
-  max-width: 260px;
-  max-height: 320px;
+  max-width: 232px;
+  max-height: 270px;
   display: flex;
   flex-direction: column;
 }
 
 .card-battle .game-log__header {
-  padding: 10px;
+  padding: 8px 10px;
   border-bottom: 1px solid #333;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   color: #fff;
 }
@@ -244,10 +248,10 @@
 .card-battle .game-log__content {
   flex: 1;
   overflow-y: auto;
-  padding: 10px;
+  padding: 8px;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
 }
 
 .card-battle .game-log__content::-webkit-scrollbar {
@@ -264,9 +268,9 @@
 }
 
 .card-battle .game-log__entry {
-  font-size: 11px;
+  font-size: 10px;
   color: #aaa;
-  padding: 4px 8px;
+  padding: 4px 6px;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 4px;
   animation: logEntry 0.3s ease;
